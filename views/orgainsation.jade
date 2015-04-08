@@ -1,0 +1,140 @@
+extends layout
+block content
+  div.container
+    div.header
+      ul.nav.nav-pills.pull-right
+        li.active
+            if level == 0
+              a(href="/cpanel")
+                span.glyphicon.h5 لـوحـــة الـتـحــكــم
+            else if level == 1
+              a(href="/cpanel/cpanelAdmin")
+                span.glyphicon.h5 لـوحـــة الـتـحــكــم
+        li
+          .dropdown
+            button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='true') مـرحـبـا 
+              span.caret
+            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
+              li(role='presentation')
+                a(role='menuitem', tabindex='-1', href='#') | مـرحـبـا 
+              li(role='presentation')
+                a(role='menuitem', tabindex='-1', href='/users/logout') تـسـجـيـل الخـروج
+      h3.text-muted.text-left 
+        a(href="/")
+          img(src="/../../images/hnec_logo.png")
+      .col-md-12
+        .col-md-2
+        a.btn.btn-primary.col-md-3(href='', role='button') المنظـمات
+        a.btn.btn-success.col-md-3(href='', role='button') مؤسسة إعلامية 
+        a.btn.btn-info.col-md-3(href='', role='button') متـرشح 
+    .row 
+      br
+      .well.well-sm
+        legend
+          a(href='#')
+            i.glyphicon.glyphicon-globe
+          |  Add Admin!
+        form.form(action='#', method='post', role='form')
+          input.form-control#form-control(name='name', placeholder='Full Name', type='text', required='', autofocus='')
+          input.form-control#form-control(name='email', placeholder='Your Email', type='email')
+          input.form-control#form-control(name='reEnterEmail', placeholder='Re-enter Email', type='email')
+          input.form-control#form-control(name='password', placeholder='New Password', type='password')
+          input.form-control#form-control(name='confirmPassword', placeholder='Confirm Password', type='password')
+          .form-group
+            select.form-control#form-control
+              option(value='',selected='', disabled='', style='color: grey; display:none;') Please Select Level
+              option(value='1') Administration
+              option(value='2') Seller 
+          .row
+            .col-xs-8.col-md-8
+              button.btn.btn-primary.btn-block(type='submit') Registration Admin 
+            .col-xs-4.col-md-4
+              button.btn.btn-danger.btn-block(type='reset') Cancel
+
+    .row
+      .panel.col-md-3
+        .nav.nav-pills.nav-stacked
+          li.active
+            a(href="/office")
+              span.glyphicon الدائرة الفرعية 
+          //- for i < 10    
+          //-   li
+          //-     a(href="") 
+          //-       span 
+      //- .input-group.col-md-6-left
+      .col-md-9   
+        .panel.panel-info
+          .row
+            .col-md-6
+              .input-group
+                input.form-control(type="text",name="idcenter",id = "idcenter")
+                .input-group-btn
+                  .btn.btn-default(type="button") 
+                    spen.glyphicon.glyphicon-search
+            .pull-left
+              .col-md-6
+                a.btn.btn-primary(href='', role='button') الـمـوظفيــن
+
+        //- .panel
+        //-   .panel-heading.clearfix
+        //-     .btn-group.pull-left
+        //-       a.btn.btn-success(href='/office/#{sub[0].office_idoffice}/EmployeeOffice', role='button',data-toggle='modal') إضافة موضف
+        //-         span.glyphicon.glyphicon-plus 
+
+        div.table-responsive  
+        table#off.table.table-striped.table-bordered.table-condensed.table-hover
+          thead
+            th  رقم المنظمة 
+            th  اسم المنظمة
+            th   نوع المنظمة 
+            th  عرض|تعديل  
+          tbody#centers
+              //- for i in 10
+              tr
+                td 1
+                td منظمة الأولى 
+                td دولي
+                td 
+                  a.btn.btn.btn-primary.btn-xs(href="") 
+                    span.glyphicon.glyphicon-eye-open
+              tr
+                td 2
+                td المنظمة التانية  
+                td محلية 
+                td 
+                  a.btn.btn.btn-primary.btn-xs(href="") 
+                    span.glyphicon.glyphicon-eye-open
+              tr
+                td 3
+                td منظمة الثالثة 
+                td محلي 
+                td 
+                  a.btn.btn.btn-primary.btn-xs(href="") 
+                    span.glyphicon.glyphicon-eye-open
+              tr
+                td 4
+                td منظمة الرابعة 
+                td دولي
+                td 
+                  a.btn.btn.btn-primary.btn-xs(href="") 
+                    span.glyphicon.glyphicon-eye-open
+              tr
+                td 5
+                td منظمة الخامسة 
+                td دولي
+                td 
+                  a.btn.btn.btn-primary.btn-xs(href="") 
+                    span.glyphicon.glyphicon-eye-open
+        if pagination
+          div.text-center
+            ul.pagination
+              li(class='')
+                a(href='') السابق
+              for i in 10
+                li(class="")
+                  a(href='') }
+              li(class="")
+                a(href='') التالي 
+  script(src="/javascripts/jquery-1.11.1.min.js")
+  script(src="/javascripts/bootstrap.min.js")
+  script(src="/javascripts/office.js")
