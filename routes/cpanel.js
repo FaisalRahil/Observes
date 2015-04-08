@@ -18,5 +18,15 @@ router.get('/cpanelAdmin', function(req, res) {
 router.get('/cpanelManager', function(req, res) {
     res.render('cpanelManager',{title:'cpanelManager'});
 });
+ 
+/* GET COMPNEY   */
+router.get('/orgainsation', function(req, res) {
+    res.render('orgainsation',{title:''});
+});
+
+/*  observers */ 
+router.get('/observers', function(req, res) {
+    res.render('observers',{title:''});
+});
 
 module.exports = router;
