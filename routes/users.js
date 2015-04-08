@@ -10,7 +10,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-    res.send('users',{title: 'الــمأســتـخـدمـيـــن'});
+    res.send('users',{title:'الــمأســتـخـدمـيـــن'});
 });
 
 module.exports = router;
