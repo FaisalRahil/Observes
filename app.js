@@ -6,9 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var root = require('./routes/root');
-var cpanel = require('./routes/cpanel');
+var admin = require('./routes/admin');
+var manager = require('./routes/manager');
 var passport = require('passport');
 var app = express();
 
@@ -26,9 +25,8 @@ app.use(session({secret: 'HnecDev',resave: true,saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', routes);
-app.use('/users', users);
-app.use('/root', root);
-app.use('/cpanel',cpanel);
+app.use('/admin', admin);
+app.use('/manager',manager);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
