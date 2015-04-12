@@ -3,71 +3,71 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.redirect('manager');
+  res.render('manager');
 });
 
 /* GET home page. */
-router.get('/manager/org', function(req, res) {
-  res.redirect('org');
+router.get('/org', function(req, res) {
+  res.render('org');
 });
 
 /* GET home page. */
-router.get('/manager/obs', function(req, res) {
-  res.redirect('obs');
+router.get('/obs', function(req, res) {
+  res.render('obs');
 });
 
 /* GET home page. */
-router.get('/manager/report', function(req, res) {
-  res.redirect('report');
+router.get('/report', function(req, res) {
+  res.render('report');
 });
 
 /* GET home page. */
-router.get('/manager/org/locMedia', function(req, res) {
-  res.redirect('natMedia');
+router.get('/org/locMedia', function(req, res) {
+  res.render('natMedia');
 });
 
 /* GET home page. */
-router.get('/manager/org/locOrg', function(req, res) {
-  res.redirect('natOrg');
+router.get('/org/locOrg', function(req, res) {
+  res.render('natOrg');
 });
 
 /* GET home page. */
-router.get('/manager/org/candidate', function(req, res) {
-  res.redirect('candidate');
+router.get('/org/candidate', function(req, res) {
+  res.render('candidate');
 });
 
 /* GET home page. */
-router.get('/manager/editOrg/:id', function(req, res) {
-  res.redirect('editOrg');
+router.get('/editOrg/:id', function(req, res) {
+  res.render('editOrg');
 });
 
 /* GET home page. */
-router.get('/manager/obs/locOrg', function(req, res) {
-  res.redirect('locOrg');
+router.get('/obs/locOrg', function(req, res) {
+  res.render('locOrg');
 });
 
 /* GET home page. */
-router.get('/manager/obs/locMedia', function(req, res) {
-  res.redirect('locMedia');
+router.get('/obs/locMedia', function(req, res) {
+  res.render('locMedia');
 });
 
 /* GET home page. */
-router.get('/manager/obs/agent', function(req, res) {
-  res.redirect('agent');
+router.get('/obs/agent', function(req, res) {
+  res.render('agent');
 });
 
 /* GET home page. */
-router.get('/manager/editObs/:id', function(req, res) {
-  res.redirect('editObs');
+router.get('/editObs/:id', function(req, res) {
+  res.render('editObs');
 });
 
 /* GET home page. */
-router.get('/manager/delObs/:id', function(req, res) {
-  res.redirect('delObs');
+router.get('/delObs/:id', function(req, res) {
+  res.render('delObs');
 });
 
 /* GET home page. */
-router.get('/manager/delOrg/:id', function(req, res) {
+router.get('/delOrg/:id', function(req, res) {
   res.send('delOrg');
 });
 

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.redirect('/logIn');
+  res.render('login', { title: 'تسجيل الدخول' });
 });
 
 module.exports = router;
