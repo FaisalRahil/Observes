@@ -7,6 +7,12 @@ router.get('/', function(req, res) {
 });
 
 /* GET home page. */
+router.get('/moveOrg', function(req, res) {
+  console.log("got here moveOrg");
+  res.render('admin/moveOrg');
+});
+
+/* GET home page. */
 router.get('/org', function(req, res) {
   console.log("got here");
   res.render('admin/org');

@@ -1,0 +1,89 @@
+extends ../layout
+block content
+  header.navbar.navbar-blue.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
+
+  .row
+    .col-md-10.col-md-offset-1
+      .panel.panel-info
+        .panel-heading
+          h3.panel-title
+            | Panel Default
+        br
+        .row
+          .col-md-4.col-md-offset-1.dual-list.list-left
+            .well.text-right
+              .row
+                .col-md-10
+                  .input-group
+                    span.input-group-addon.glyphicon.glyphicon-search
+                    input.form-control(type='text', name='SearchDualList', placeholder='search')
+                .col-md-2
+                  .btn-group
+                    a.btn.btn-default.selector(title='select all')
+                      i.glyphicon.glyphicon-unchecked
+              ul.list-group
+                li.list-group-item
+                  | bootstrap-duallist 
+                  a(href='https://github.com/bbilginn/bootstrap-duallist', target='_blank') github
+                li.list-group-item Dapibus ac facilisis in
+                li.list-group-item Morbi leo risus
+                li.list-group-item Porta ac consectetur ac
+                li.list-group-item Vestibulum at eros
+          .list-arrows.col-md-2.text-center
+            button.btn.btn-default.btn-sm.move-left
+              span.glyphicon.glyphicon-chevron-right
+            p
+            button.btn.btn-default.btn-sm.move-right
+              span.glyphicon.glyphicon-chevron-left
+          .dual-list.list-right.col-md-4
+            .well
+              .row
+                .col-md-2
+                  .btn-group
+                    a.btn.btn-default.selector(title='select all')
+                      i.glyphicon.glyphicon-unchecked
+                .col-md-10
+                  .input-group
+                    input.form-control(type='text', name='SearchDualList', placeholder='search')
+                    span.input-group-addon.glyphicon.glyphicon-search
+              ul.list-group
+                li.list-group-item Cras justo odio
+                li.list-group-item Dapibus ac facilisis in
+                li.list-group-item Morbi leo risus
+                li.list-group-item Porta ac consectetur ac
+                li.list-group-item Vestibulum at eros
+
+  //- ,lnml
+
+  script(src="/js/jquery-1.11.1.min.js")
+  script(src="/js/bootstrap.min.js")
+  script(src="/js/admin/moveOrg.js")
