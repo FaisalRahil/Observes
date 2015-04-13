@@ -1,39 +1,35 @@
 extends ../layout
 block content
-  nav.navbar
-    //- // Brand and toggle get grouped for better mobile display
-    .navbar-header
-      button.navbar-toggle(type='button', data-target='#navbarCollapse', data-toggle='collapse')
+  header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
         span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      //- a.navbar-brand(href='#') Brand
-    //- // Collection of nav links, forms, and other content for toggling
-    #navbarCollapse.collapse.navbar-collapse
-      ul.nav.navbar-nav
-        
-        li.dropdown
-          a.btn.btn-success.btn-sm.dropdown-toggle(data-toggle='dropdown', href='#')
-            | الـمــستـخدم 
-            b.caret
-          ul.dropdown-menu(role='menu')
-            li
-              a(href='#') بــيـانـات الـمــستـخدم
-            li.divider
-            li
-              a.btn.btn-danger(href='#') خــروج
-        li
-          a.btn.btn-primary(href='#') الاعـــتـماد
-        li
-          a.btn.btn-info(href='#') الـــمراقــبين
-        li
-          a.btn.btn-warning.btn-sm(href='#') الـــتقارير
-
       h3.text-muted.text-left 
         a(href="/")
           img(src="/images/hnec_logo.png")
-    //- div.container
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
   .row
     .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
       .panel.panel-primary
@@ -44,30 +40,30 @@ block content
         .panel-body
           .row
             .col-xs-6.col-sm-6.col-md-6.col-lg-6  
-              a.btn-lg.btn.btn-danger.btn-block(href="/office/mahallaViews", role="button")
+              a.btn-lg.btn.btn-danger.btn-block(href="/", role="button")
                 span.glyphicon.glyphicon-user
                 br
-                | الـــوكــلاء
+                | المرشحين
               p
-              a.btn-lg.btn.btn-warning.btn-block(href="/office/villageViews", role="button")
+              a.btn-lg.btn.btn-warning.btn-block(href="/", role="button")
                 span.glyphicon.glyphicon-th
                 br
                 | المنظمات المحلية
               p
             .col-xs-6.col-sm-6.col-md-6.col-lg-6  
-              a.btn-lg.btn.btn-primary.btn-block(href="/office/subconstituencyViews", role="button")
+              a.btn-lg.btn.btn-info.btn-block(href="/", role="button")
                 span.glyphicon.glyphicon-th
                 br
                 | مـــــثـال
               p
-              a.btn-lg.btn.btn-success.btn-block(href="/root", role="button")
+              a.btn-lg.btn.btn-success.btn-block(href="/", role="button")
                 span.glyphicon.glyphicon-user
                 br
                 | الاعلام المحلي
               p
           br
-          a.btn.btn-info.btn-lg.btn-block(href="/office", role="button")
+          a.btn.btn-primary.btn-lg.btn-block(href="/", role="button")
             span.glyphicon.glyphicon-th-list
-            | الـلــجـان و الــمــراكــز
+            | مـــــثـال
   script(src="/js/jquery-1.11.1.min.js")
   script(src="/js/bootstrap.min.js")

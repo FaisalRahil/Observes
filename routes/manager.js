@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 
 /* GET home page. */
 router.get('/org', function(req, res) {
-  res.render('org');
+  res.render('manager/org');
 });
 
 /* GET home page. */

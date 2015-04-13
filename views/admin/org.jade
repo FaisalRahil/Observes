@@ -1,61 +1,69 @@
 extends ../layout
 block content
-  div.container
-    div.header
-      ul.nav.nav-pills.pull-right
-        li.active
-          a(href="#") Home
-        li
-          a(href="#") About
-        li
-          a(href="#") Contact
-      h3.text-muted.text-left 
+  header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
         a(href="/")
-          img(src="../images/hnec_logo.png")
-    div.container    
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+  
+  .row
+    .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
       .panel.panel-primary
         .panel-heading
           h3.panel-title
             span.glyphicon.glyphicon-bookmark
-            |    لـوحـــة الـتـحــكــم
+            |   لـوحـــة الـتـحــكــم
         .panel-body
           .row
-            .col-xs-6.col-md-6  
-              a.btn.btn-danger.btn-block(href="#", role="button")
-                span.glyphicon.glyphicon-th
-                br
-                | الــمـحـلـه
-              p
-              a.btn.btn-primary.btn-block(href="/admin/phoneEmployeeAll", role="button")
-                span.glyphicon.glyphicon-earphone
-                br
-                | هـواتـــف الـــمـوظــفــيـن
-              p
-              a.btn.btn-primary.btn-block(href="#", role="button")
-                span.glyphicon.glyphicon-th
-                br
-                | الـدوائـــر الــفـرعــيـه
-              p
-            .col-xs-6.col-md-6
-              a.btn.btn-warning.btn-block(href="#", role="button")
-                span.glyphicon.glyphicon-th
-                br
-                | الـقــريـه / المــديــنـه
-              p
-              a.btn.btn-primary.btn-block(href="/employee", role="button")
+            .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              a.btn-lg.btn.btn-danger.btn-block(href="/admin/org/natOrg", role="button")
                 span.glyphicon.glyphicon-user
                 br
-                | الـــمـوظــفــيـن
+                | مـنـظـمـة دولــيـة
               p
-            .col-xs-6.col-md-6
-              a.btn.btn-primary.btn-block(href="/admin/phoneManager", role="button")
-                span.glyphicon.glyphicon-earphone
+              a.btn-lg.btn.btn-warning.btn-block(href="/admin/org/natMedia", role="button")
+                span.glyphicon.glyphicon-th
                 br
-                | هـواتـــف الـــمــــدراء
+                | اعـلام دولـي
               p
-          br
-          a.btn.btn-success.btn-lg.btn-block(href="http://www.jquery2dotnet.com/", role="button")
-            span.glyphicon.glyphicon-globe
-            | Website
+            .col-xs-6.col-sm-6.col-md-6.col-lg-6  
+              a.btn-lg.btn.btn-info.btn-block(href="/", role="button")
+                span.glyphicon.glyphicon-th
+                br
+                | مـــــثـال
+              p
+              a.btn-lg.btn.btn-success.btn-block(href="/admin/org/guest", role="button")
+                span.glyphicon.glyphicon-user
+                br
+                | ضــيــف
+              p
+          //- br
+          //- a.btn.btn-primary.btn-lg.btn-block(href="/", role="button")
+          //-   span.glyphicon.glyphicon-th-list
+          //-   | مـــــثـال
   script(src="/js/jquery-1.11.1.min.js")
   script(src="/js/bootstrap.min.js")
