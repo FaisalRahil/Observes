@@ -1,0 +1,31 @@
+extends ../layout
+block content
+  header.navbar.navbar-green.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
