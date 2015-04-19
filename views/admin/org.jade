@@ -9,10 +9,10 @@ block content
           a(href="#") About
         li
           a(href="#") Contact
-      h3.text-muted.text-left 
+      h3.text-muted.text-left
         a(href="/")
           img(src="../images/hnec_logo.png")
-    div.container    
+    div.container
       .panel.panel-primary
         .panel-heading
           h3.panel-title
@@ -20,7 +20,7 @@ block content
             |    لـوحـــة الـتـحــكــم
         .panel-body
           .row
-            .col-xs-6.col-md-6  
+            .col-xs-6.col-md-6
               a.btn.btn-danger.btn-block(href="#", role="button")
                 span.glyphicon.glyphicon-th
                 br
@@ -57,5 +57,16 @@ block content
           a.btn.btn-success.btn-lg.btn-block(href="http://www.jquery2dotnet.com/", role="button")
             span.glyphicon.glyphicon-globe
             | Website
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المنظمات
+        .panel-body
+          table#table
+
+
   script(src="/js/jquery-1.11.1.min.js")
   script(src="/js/bootstrap.min.js")
+  script(src="/js/bootstrap-table.min.js")
+  script(src="/js/org.js")
