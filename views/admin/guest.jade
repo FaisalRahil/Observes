@@ -29,3 +29,75 @@ block content
           a(href='#') المراقبين
         li
           a(href='#') الـمنظمات
+
+  .row
+    .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
+        .nav.nav-pills.nav-stacked
+          li
+              a.btn.btn-default.btn-block(href="/office/mahallaViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | مـــــثـال
+          li
+              a.btn.btn-default.btn-block(href="/office/villageViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | مـنـظـمـة دولــيـة
+          li
+              a.btn.btn-default.btn-block(href="/office/officeViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | اعـلام دولـي
+          li
+              a.btn.btn-success.btn-block(href="/office/subconstituencyViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | ضــيــف
+          li
+              a.btn.btn-default.btn-block(href="/office/constituencyViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | مـــــثـال
+
+    .col-sm-7.col-md-7.col-lg-7
+      .row
+        .panel.panel-success
+          .panel-heading Panel heading without title
+          .panel-body
+            form#natOrg(role='form')
+              .form-group
+                input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
+              .form-group
+                input.form-control#name_director(name='name_director', placeholder='name_director', type='text')
+              .form-group
+                input.form-control#phone(name='phone', placeholder='phone', type='text')
+              .form-group
+                input.form-control#address(name='address', placeholder='Address', type='text')
+              .form-group
+                input.form-control#registration_no(name='registration_no', placeholder='registration_no', type='text')
+              .form-group
+                input.form-control#email(name='email', placeholder='email', type='email')
+              //- .form-group
+              //-   select.form-control#level(name='level',type='text')
+              //-     option(value='', style='color: grey; display:none;') Please Select Level
+              //-     option(value='1') Administration
+              //-     option(value='2') Seller  
+              .row
+                .col-xs-8.col-md-8
+                  button#btnSubmit.btn.btn-success.btn-block(type='submit') Registration Admin 
+                .col-xs-4.col-md-4
+                  button.btn.btn-default.btn-block(type='reset') Cancel
+
+  .row
+    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+      .panel.panel-success
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المنظمات
+        .panel-body
+          table#table
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/jquery.validate.min.js")
+  script(src="/js/bootstrap-table.min.js")
+  script(src="/js/admin/org.js")
+  script(src='/js/admin/natOrg.js')
+  script(src='/js/admin/sb-admin-2.js')
+  script(src='/js/admin/bootstrap-notify.min.js')
+  script(src='/js/admin/metisMenu.min.js')
