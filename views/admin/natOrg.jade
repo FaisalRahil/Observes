@@ -29,3 +29,73 @@ block content
           a(href='#') المراقبين
         li
           a(href='#') الـمنظمات
+
+  .row
+    .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
+        .nav.nav-pills.nav-stacked
+          li
+              a.btn.btn-default.btn-block(href="/office/mahallaViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | الــمـحـلـه
+          li.active
+              a.btn.btn-primary.btn-block(href="/office/villageViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | القـريـه / المـدينـه
+          li
+              a.btn.btn-default.btn-block(href="/office/officeViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | الـلــجـنـه
+          li
+              a.btn.btn-default.btn-block(href="/office/subconstituencyViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | الدوائـر الـفرعـيـه
+          li
+              a.btn.btn-default.btn-block(href="/office/constituencyViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | الدوائر الرئـيـسـيه
+          li
+              a.btn.btn-default.btn-block(href="/employee", role="button")
+                span.glyphicon.glyphicon-user.pull-right
+                | المـوظـفـيـن
+          li
+              a.btn.btn-default.btn-block(href="/admin", role="button")
+                span.glyphicon.glyphicon-user.pull-right
+                | الـمـدراء
+
+    .col-sm-8.col-md-8.col-lg-8
+          //- .container-fluid
+          .row
+            .col-xs-10.col-xs-offset-1.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3.well.well-sm
+              .panel.panel-default
+                .panel-heading Panel heading without title
+                .panel-body
+                  form#natOrg(role='form')
+                    .form-group
+                      input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
+                    .form-group
+                      input.form-control#name_director(name='name_director', placeholder='name_director', type='text')
+                    .form-group
+                      input.form-control#phone(name='phone', placeholder='phone', type='text')
+                    .form-group
+                      input.form-control#address(name='address', placeholder='Address', type='text')
+                    .form-group
+                      input.form-control#registration_no(name='registration_no', placeholder='registration_no', type='text')
+                    .form-group
+                      input.form-control#email(name='email', placeholder='email', type='email')
+                    //- .form-group
+                    //-   select.form-control#level(name='level',type='text')
+                    //-     option(value='', style='color: grey; display:none;') Please Select Level
+                    //-     option(value='1') Administration
+                    //-     option(value='2') Seller  
+                    .row
+                      .col-xs-8.col-md-8
+                        button#btnSubmit.btn.btn-primary.btn-block(type='submit') Registration Admin 
+                      .col-xs-4.col-md-4
+                        button.btn.btn-danger.btn-block(type='reset') Cancel
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/jquery.validate.min.js")
+  script(src='/js/admin/natOrg.js')
+  script(src='/js/admin/sb-admin-2.js')
+  script(src='/js/admin/bootstrap-notify.min.js')
+  script(src='/js/admin/metisMenu.min.js')
