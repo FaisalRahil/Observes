@@ -1,0 +1,107 @@
+extends ../layout
+block content
+  header.navbar.navbar-red.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
+  .row
+    .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
+        .nav.nav-pills.nav-stacked
+          li
+              a.btn.btn-default.btn-block(href="/office/mahallaViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | مـــــثـال
+          li
+              a.btn.btn-danger.btn-block(href="/office/villageViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | مـنـظـمـة دولــيـة
+          li
+              a.btn.btn-default.btn-block(href="/office/officeViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | اعـلام دولـي
+          li
+              a.btn.btn-default.btn-block(href="/office/subconstituencyViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | ضــيــف
+          li
+              a.btn.btn-default.btn-block(href="/office/constituencyViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | مـــــثـال
+
+ 
+
+    .col-sm-7.col-md-7.col-lg-7
+      .row.centered-form
+        .panel.panel-danger.red-form
+          .panel-heading Panel heading without title
+          .panel-body
+            form#natOrg(role='form')
+              .form-group.
+                input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
+              .form-group
+                input.form-control#name_director(name='name_director', placeholder='name_director', type='text')
+              .form-group
+                input.form-control#phone(name='phone', placeholder='phone', type='text')
+              .form-group
+                input.form-control#address(name='address', placeholder='Address', type='text')
+              .form-group
+                input.form-control#registration_no(name='registration_no', placeholder='registration_no', type='text')
+              .form-group
+                input.form-control#email(name='email', placeholder='email', type='email')
+              //- .form-group
+              //-   select.form-control#level(name='level',type='text')
+              //-     option(value='', style='color: grey; display:none;') Please Select Level
+              //-     option(value='1') Administration
+              //-     option(value='2') Seller  
+              .row
+                .col-xs-8.col-md-8
+                  button#btnSubmit.btn.btn-primary.btn-block(type='submit') Registration Admin 
+                .col-xs-4.col-md-4
+                  button.btn.btn-danger.btn-block(type='reset') Cancel
+
+  .row
+    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+      .panel.panel-danger
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المنظمات
+        .panel-body
+          table#table
+  link(rel='stylesheet', href='/css/form.css')
+
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/jquery.validate.min.js")
+  script(src="/js/bootstrap-table.min.js")
+  script(src="/js/admin/org.js")
+  script(src='/js/admin/natOrg.js')
+  script(src='/js/admin/sb-admin-2.js')
+  script(src='/js/admin/bootstrap-notify.min.js')
+  script(src='/js/admin/metisMenu.min.js')

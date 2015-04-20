@@ -23,12 +23,12 @@ router.get('/report', function(req, res) {
 
 /* GET home page. */
 router.get('/org/locMedia', function(req, res) {
-  res.render('natMedia');
+  res.render('manager/locMedia');
 });
 
 /* GET home page. */
 router.get('/org/locOrg', function(req, res) {
-  res.render('natOrg');
+  res.render('manager/locOrg');
 });
 
 /* GET home page. */
