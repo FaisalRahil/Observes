@@ -26,9 +26,7 @@ block content
         li
           a(href='#') التقارير
         li
-          a(href='#') المراقبين
-        li
-          a(href='#') الـمنظمات
+          a(href="#") Contact
   
   .row
     .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
@@ -61,10 +59,16 @@ block content
                 br
                 | ضــيــف
               p
-          //- br
-          //- a.btn.btn-primary.btn-lg.btn-block(href="/", role="button")
-          //-   span.glyphicon.glyphicon-th-list
-          //-   | مـــــثـال
+
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المنظمات
+        .panel-body
+          table#table
 
   script(src="/js/jquery-1.11.1.min.js")
   script(src="/js/bootstrap.min.js")
+  script(src="/js/bootstrap-table.min.js")
+  script(src="/js/org.js")

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+var customer=[{"idcustomer":10000000,"first_name":"abdoo","last_name":"ageel"}]
+var obsMgr = require('../app/obs').obsMgr;
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('admin/admin');
@@ -14,10 +15,13 @@ router.get('/moveOrg', function(req, res) {
 
 /* GET home page. */
 router.get('/org', function(req, res) {
-  console.log("got here");
   res.render('admin/org');
 });
-
+router.get('/get', function(req, res) {
+  obsMgr.getOrg(function(result){
+    res.send(result);
+  })
+});
 /* GET home page. */
 router.get('/obs', function(req, res) {
   res.render('admin/obs');
