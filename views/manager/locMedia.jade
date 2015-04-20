@@ -1,0 +1,76 @@
+extends ../layout
+block content
+  header.navbar.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
+
+  .row
+    .col-md-10.col-md-offset-1
+      .panel.panel-primary
+        .panel-heading
+          #loginModal(dir='ltr')
+      .container
+        .row.centered-form
+            .panel.panel-primary
+              .panel-heading
+                h3.panel-title
+                  | تسجيل مركز أعلامي 
+              .panel-body
+                form#addAdmin(role='form')
+                  .form-group
+                    input.form-control#registration_no(name='registration_no', placeholder='الرقم الإشاري', type='text', autofocus='')
+                  .form-group
+                    input.form-control#name_org(name='name_org', placeholder='أسم المركز', type='text', autofocus='')
+                  .form-group
+                    input.form-control#name_director(name='name_director', placeholder='أسم مدير المركز', type='text', autofocus='')
+                  .form-group
+                    input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text', autofocus='')
+                  .form-group
+                    input.form-control#email(name='email', placeholder='البريد الأكتروني', type='email')
+                  .form-group
+                    input.form-control#address(name='address', placeholder='عنوان المركز', type='text', autofocus='')
+                  .form-group
+                    input.hide.form-control#type(name='type',type='text') 
+                  .row
+                    .col-xs-8.col-md-8
+                      button#btnSubmit.btn.btn-primary.btn-block(type='submit') تسجيل المركز 
+                    .col-xs-4.col-md-4
+                      button.btn.btn-danger.btn-block(type='reset') إلغاء
+  
+
+  link(rel='stylesheet', href='/css/form.css')
+
+  script(src='/../js/jquery-1.11.1.min.js')
+  script(src='/../js/bootstrap.min.js')
+  script(src="/../js/jquery.validate.min.js")
+  script(src='/../js/metisMenu.min.js')
+  script(src='/../js/sb-admin-2.js')
+  script(src='/../js/bootstrap-notify.min.js')
+  script(src='/../js/addAdmin.js')
