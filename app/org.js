@@ -12,5 +12,19 @@ exports.orgMgr = {
         }
       });
     });
-  }
+  },
+
+  addOrg : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('INSERT INTO `organisaition` SET ?',body,  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
 };

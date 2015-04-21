@@ -1,0 +1,90 @@
+extends ../layout
+block content
+  header.navbar.navbar-red.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
+  .row
+    .col-md-8.col-md-offset-2
+      div.form-group
+        .btn-group.btn-toggle
+          button.btn.btn-sm.btn-info Edit
+          button.btn.btn-sm.btn-primary.active View
+        table#user.table.table-bordered.table-striped(style='clear: both')
+          tbody
+            tr
+              td(width='35%') registration_no 
+              td(width='65%')
+                a.editable.editable-click(id='#',href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') registration_no id_org
+            tr
+              td(width='35%') name_org 
+              td(width='65%')
+                a.editable.editable-click(id='#',href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_org
+            tr
+              td(width='35%') name_director
+              td(width='65%')
+                a.editable.editable-click(id='#',href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
+            tr
+              td(width='35%') name_director
+              td(width='65%')
+                a.editable.editable-click(id='#',href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
+            tr
+              td(width='35%') name_director
+              td(width='65%')
+                a.editable.editable-click(id='#',href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
+            tr
+              td(width='35%') name_director
+              td(width='65%')
+                a.editable.editable-click(id='#',href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
+            tr
+              td(width='35%') اسم البنك
+              td(width='65%')
+                //- a#bank_name(href='#', data-type='text', data-pk='#{employee[0].id_emp_office}', data-title='اسم البنك', data-value='#{employee[0].bank_name}') #{employee[0].bank_name}
+            tr
+              td(width='35%') رقم الحساب
+              td(width='65%')
+                //- a#acount_number(href='#', data-type='text', data-pk='#{employee[0].id_emp_office}', data-title='رقم الحساب', data-value='#{employee[0].acount_number} ') #{employee[0].acount_number}
+            tr
+              td(width='35%') الصفة
+              td(width='65%') 
+                //- for ty,id in type.hnec       
+                //-   if id == employee[0].type           
+                //-     a#type(href='#', data-type='select', data-pk='#{employee[0].id_emp_office}', data-title='الصفة', data-value='#{employee[0].type} ') #{ty}
+        
+
+      
+
+
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/jquery.validate.min.js")
+  script(src="/js/bootstrap-editable.min.js")
+  script(src="/js/admin/editOrg.js")
+  script(src='/js/admin/backToTop.js')
+  script(src='/js/admin/bootstrap-notify.min.js')
