@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var customer=[{"idcustomer":10000000,"first_name":"abdoo","last_name":"ageel"}]
 var orgMgr = require('../app/org').orgMgr;
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('admin/admin');
@@ -10,6 +11,16 @@ router.get('/', function(req, res) {
 /* GET home page. */
 router.get('/moveOrg', function(req, res) {
   res.render('admin/moveOrg');
+});
+
+
+
+router.post('/addOrg', function(req, res) {
+  console.log(req.body);
+  orgMgr.addOrg(req.body, function (results){
+    console.log(req.body);
+    res.redirect('org/natOrg');
+  });
 });
 
 /* GET home page. */
@@ -38,7 +49,9 @@ router.get('/org/natMedia', function(req, res) {
 
 /* GET home page. */
 router.get('/org/natOrg', function(req, res) {
-  res.render('admin/natOrg');
+  orgMgr.getOrg(function(result){
+    res.render('admin/natOrg',{ title: 'المنظمات', org : result });
+  });
 });
 
 /* GET home page. */

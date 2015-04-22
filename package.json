@@ -1,5 +1,5 @@
 {
-  "name": "centers",
+  "name": "observes",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
     "passport-local": "^1.0.0",
     "password-generator": "^0.2.2",
     "static-favicon": "~1.0.0",
-    "step": "0.0.5"
+    "step": "0.0.5",
+    "sailor-module-validator": "~0.1.1"
   }
 }

@@ -59,7 +59,7 @@ block content
         .panel.red-form.panel-danger
           .panel-heading Panel heading without title
           .panel-body
-            form#natOrg(role='form')
+            form#natOrg(role='form',method="post",action="/admin/addOrg")
               .form-group
                 input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
               .form-group

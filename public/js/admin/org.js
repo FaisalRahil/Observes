@@ -16,13 +16,13 @@ $(document).ready(function() {
       minimumCountColumns: 2,
       clickToSelect: true,
       columns: [{
-          field: 'center_id',
+          field: 'name_org',
           sortable:true,
-          title: 'Item ID'
+          title: 'اسم المنظمه'
       }, {
-          field: 'name',
+          field: 'name_director:',
           sortable:true,
-          title: 'Item Name'
+          title: 'اسم الرئيس'
       }, {
           field: 'center_type',
           sortable:true,

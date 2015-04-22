@@ -8,12 +8,24 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
 var manager = require('./routes/manager');
+// var expressValidator = require('express-validator');
 var passport = require('passport');
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// app.use(expressValidator({
+//   customValidators: {
+//     isArray: function(value) {
+//       return value.match(/ain/g);
+//     }, 
+//     gte: function(param, num) {
+//       return param >= num;
+//     }
+//   }   
+// }));
 
 app.use(favicon());
 app.use(logger('dev'));
