@@ -59,19 +59,11 @@ block content
         .panel.green-form.panel-success
           .panel-heading Panel heading without title
           .panel-body
-            form#natOrg(role='form')
+            form#guest(role='form',method="post",action="/admin/addOrg")
               .form-group
                 input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
-              .form-group
-                input.form-control#name_director(name='name_director', placeholder='name_director', type='text')
-              .form-group
-                input.form-control#phone(name='phone', placeholder='phone', type='text')
-              .form-group
-                input.form-control#address(name='address', placeholder='Address', type='text')
-              .form-group
-                input.form-control#registration_no(name='registration_no', placeholder='registration_no', type='text')
-              .form-group
-                input.form-control#email(name='email', placeholder='email', type='email')
+
+              input#type(name='type', type='hidden',value='2')
               //- .form-group
               //-   select.form-control#level(name='level',type='text')
               //-     option(value='', style='color: grey; display:none;') Please Select Level
@@ -96,8 +88,7 @@ block content
   script(src='/js/bootstrap.min.js')
   script(src="/js/jquery.validate.min.js")
   script(src="/js/bootstrap-table.min.js")
-  script(src="/js/admin/org.js")
-  script(src='/js/admin/natOrg.js')
+  script(src="/js/admin/guest.js")
   script(src='/js/admin/backToTop.js')
   script(src='/js/admin/bootstrap-notify.min.js')
   script(src='/js/admin/metisMenu.min.js')

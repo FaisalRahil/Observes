@@ -13,25 +13,63 @@ router.get('/moveOrg', function(req, res) {
   res.render('admin/moveOrg');
 });
 
-
+///////////////////////////////////////////
 
 router.post('/addOrg', function(req, res) {
-  console.log(req.body);
   orgMgr.addOrg(req.body, function (results){
     console.log(req.body);
-    res.redirect('org/natOrg');
+    if (req.body["type"] == 1) {
+      res.redirect('org/natOrg');
+    
+    } else if (req.body["type"] == 2){
+      res.redirect('org/guest');
+    
+    } else {
+      res.redirect('org/natMedia');
+    
+    } 
+
+  });
+});
+//*************************************************
+router.get('/getNatOrg', function(req, res) {
+  orgMgr.getOrg(1,function(result){
+    res.send(result);
+  })
+});
+
+router.get('/getGuest', function(req, res) {
+  orgMgr.getOrg(2,function(result){
+    res.send(result);
+  })
+});
+
+router.get('/getNatMedia', function(req, res) {
+  orgMgr.getOrg(3,function(result){
+    res.send(result);
+  })
+});
+//*************************************************
+router.get('/getOrg', function(req, res) {
+  orgMgr.getOrgs(function(result){
+    res.send(result);
+  })
+});
+router.get('/org/natOrg', function(req, res) {
+  orgMgr.getOrg(function(result){
+    res.render('admin/natOrg',{ title: 'المنظمات', org : result });
   });
 });
 
 /* GET home page. */
 router.get('/org', function(req, res) {
-  res.render('admin/org');
+  orgMgr.getOrgs(function(result){
+    res.render('admin/org',{ title: 'المنظمات', org : result });
+  });
 });
-router.get('/get', function(req, res) {
-  orgMgr.getOrg(function(result){
-    res.send(result);
-  })
-});
+
+//////////////////////////////////////////////
+
 /* GET home page. */
 router.get('/obs', function(req, res) {
   res.render('admin/obs');
@@ -45,13 +83,6 @@ router.get('/report', function(req, res) {
 /* GET home page. */
 router.get('/org/natMedia', function(req, res) {
   res.render('admin/natMedia');
-});
-
-/* GET home page. */
-router.get('/org/natOrg', function(req, res) {
-  orgMgr.getOrg(function(result){
-    res.render('admin/natOrg',{ title: 'المنظمات', org : result });
-  });
 });
 
 /* GET home page. */

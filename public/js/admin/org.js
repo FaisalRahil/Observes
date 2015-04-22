@@ -1,8 +1,8 @@
 $(document).ready(function() {
-  $.get('/admin/get',function(result){
+  $.get('/admin/getOrg',function(result){
     $('#table').bootstrapTable({
       method: 'get',
-      url: '/admin/get',
+      url: '/admin/getOrg',
       cache: false,
       height: 400,
       striped: true,
@@ -20,13 +20,25 @@ $(document).ready(function() {
           sortable:true,
           title: 'اسم المنظمه'
       }, {
-          field: 'name_director:',
+          field: 'name_director',
           sortable:true,
           title: 'اسم الرئيس'
       }, {
-          field: 'center_type',
+          field: 'address',
           sortable:true,
-          title: 'Item Price'
+          title: 'العنوان'
+      }, {
+          field: 'registration_no',
+          sortable:true,
+          title: 'رقم الاشهار'
+      }, {
+          field: 'email',
+          sortable:true,
+          title: 'الباريد الالكتروني'
+      }, {
+          field: 'phone',
+          sortable:true,
+          title: 'رقم الهاتف'
       }],
       data: result,
     });
