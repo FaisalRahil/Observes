@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  $.get('/admin/getNatOrg',function(result){
     $('#table').bootstrapTable({
       method: 'get',
       url: '/admin/getNatOrg',
@@ -41,59 +40,47 @@ $(document).ready(function() {
           title: 'رقم الهاتف'
       }, {
           field: 'id_org',
-          sortable:true,
           align: 'center',
           valign: 'middle',
           title: 'عرض',
           formatter: operateFormatter
       }, {
           field: 'id_org',
-          sortable:true,
           align: 'center',
           valign: 'middle',
-          clickToSelect: false,
           title: 'مسح',
           formatter: operateFormatter1
       }],
-      data: result,
     });
-  });
+  
 
   function operateFormatter(value, row, index) {
     return  [
-              '<button id="deleteOrg" class="btn btn-xs btn-primary" value="'+value+'"><i class="glyphicon glyphicon-eye-open"></i></button>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/admin/editOrg/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
-  // $('body').on('click', '#deleteOrg ', function () {
-  //   var id = $(this).data("value"); //  /admin/editOrg/4
-  //   $.get('/admin/getPhoneManager/'+id, function(result){
-  //     $('#body').empty();
-  //     $('#emaill').empty();
-  //     $('#emaill').append("<tr><td><strong>البريد الالكتروني </strong></td><td>"+result[0].email+"</td></tr>");
-  //     for ( var i = 0; i < result.length;  i++ ) {
-  //       $('#body').append("<tr><td>"+result[i].phone_number+"</td><td>"+result[i].type+"</td><td>"+result[i].p_type+"</td></tr>");
-  //     } 
-  //   });
-  // });
+  
 
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="viewOrg" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteOrg" data-toggle="modal" href="#deleteOrgModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
-  // $('body').on('click', '#viewOrg ', function () {
-    // var id = $(this).data("value");  //  /admin/editOrg/4
-  //   $.get('/admin/getPhoneManager/'+id, function(result){
-  //     $('#body').empty();
-  //     $('#emaill').empty();
-  //     $('#emaill').append("<tr><td><strong>البريد الالكتروني </strong></td><td>"+result[0].email+"</td></tr>");
-  //     for ( var i = 0; i < result.length;  i++ ) {
-  //       $('#body').append("<tr><td>"+result[i].phone_number+"</td><td>"+result[i].type+"</td><td>"+result[i].p_type+"</td></tr>");
-  //     } 
-  //   });
-  // });
+  /* Go to user needs view or edit */
+  $('body').on('click', '#deleteOrg ', function () {
+    var id = $(this).val();
+    $('#confdelete').val(id);
+  });
+
+  /* Go to user needs view or edit */
+  $('#confdelete').click(function() {
+    var id = $(this).val();
+    $.get('/admin/delOrg/'+id, function(result){
+      window.location.href="/admin/org/natOrg";
+    });
+  });
 
 ////////////////////////////
 
