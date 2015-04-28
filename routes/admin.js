@@ -31,42 +31,44 @@ router.post('/addOrg', function(req, res) {
 
   });
 });
+
 //*************************************************
+// 
 router.get('/getNatOrg', function(req, res) {
+  console.log("adsasd");
   orgMgr.getOrg(1,function(result){
     res.send(result);
   })
 });
-
+// 
 router.get('/getGuest', function(req, res) {
   orgMgr.getOrg(2,function(result){
     res.send(result);
   })
 });
-
+// 
 router.get('/getNatMedia', function(req, res) {
   orgMgr.getOrg(3,function(result){
     res.send(result);
   })
 });
+
 //*************************************************
+// Get all organisation .  
 router.get('/getOrg', function(req, res) {
   orgMgr.getOrgs(function(result){
     res.send(result);
   })
 });
+//******************************************
 router.get('/org/natOrg', function(req, res) {
-  orgMgr.getOrg(function(result){
-    res.render('admin/natOrg',{ title: 'المنظمات', org : result });
-  });
+    res.render('admin/natOrg',{ title: 'المنظمات'});
 });
 
 /* GET home page. */
 router.get('/org', function(req, res) {
-  orgMgr.getOrgs(function(result){
-    res.render('admin/org',{ title: 'المنظمات', org : result });
+    res.render('admin/org',{ title: 'المنظمات' });
   });
-});
 
 //////////////////////////////////////////////
 
@@ -122,7 +124,9 @@ router.get('/delObs/:id', function(req, res) {
 
 /* GET home page. */
 router.get('/delOrg/:id', function(req, res) {
-  res.send('delOrg');
+  orgMgr.delOrg(req.params.id,function(result){
+    res.send('result');
+  })
 });
 
 module.exports = router;
