@@ -63,14 +63,13 @@ block content
               .form-group
                 input.form-control#registration_org(name='registration_org', placeholder='إسم المنظمة', type='text')
               .form-group
-                input.form-control#gender(name='address', placeholder='Address', type='text')
+                input.form-control#gender(name='gender', placeholder='الجس', type='text')
               .form-group
-                input.form-control#phone(name='registration_no', placeholder='registration_no', type='text')
+                input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
               .form-group
-                input.form-control#email(name='email', placeholder='email', type='email')
-              .form-group
-                | مديـــر
-                input.form-control.checkbox-inline#director(name='director', placeholder='الوظيفة', type='checkbox')
+                input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+              .form-group  
+                input.form-control#director(name='director', placeholder='الوظيفة', type='Text')
 
               input#type(name='type', type='hidden',value='3')
               //- .form-group
@@ -80,9 +79,9 @@ block content
               //-     option(value='2') Seller  
               .row
                 .col-xs-8.col-md-8
-                  button#btnSubmit.btn.btn-warning.btn-block(type='submit') Registration Admin 
+                  button#btnSubmit.btn.btn-warning.btn-block(type='submit') تسجيــــل 
                 .col-xs-4.col-md-4
-                  button.btn.btn-default.btn-block(type='reset') Cancel
+                  button.btn.btn-default.btn-block(type='reset') إلغاء
 
   .row
     .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
