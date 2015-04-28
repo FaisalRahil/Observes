@@ -1,6 +1,6 @@
 extends ../layout
 block content
-  header.navbar.navbar-fixed-top.bs-docs-nav(role='banner')
+  header.navbar.navbar-orange.navbar-fixed-top.bs-docs-nav(role='banner')
     .navbar-header.pull-left
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
         span.sr-only Toggle navigation
@@ -30,47 +30,73 @@ block content
         li
           a(href='#') الـمنظمات
 
+  .row
+    .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
+        .nav.nav-pills.nav-stacked
+          li
+              a.btn.btn-default.btn-block(href="/admin/org/natOrg", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | مـنـظـمـة محلــيـة
+          li
+              a.btn.btn-warning.btn-block(href="/admin/org/natMedia", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | اعـلام محلـي
+          li
+              a.btn.btn-default.btn-block(href="/admin/org/guest", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | وكيــــل
+          li
+              a.btn.btn-default.btn-block(href="/office/constituencyViews", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | ضــيــف
+
+    .col-sm-7.col-md-7.col-lg-7
+      .row
+        .panel.orange-form.panel-warning
+          .panel-heading إدخال مراقب إعلامي
+          .panel-body
+            form#natMedia(role='form',method="post",action="/manager/addObs")
+              .form-group
+                input.form-control#name(name='name', placeholder='اﻹسم', type='text')
+              .form-group
+                input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
+              .form-group
+                input.form-control#registration_org(name='registration_org', placeholder='إسم المنظمة', type='text')
+              .form-group
+                input.form-control#gender(name='address', placeholder='Address', type='text')
+              .form-group
+                input.form-control#phone(name='registration_no', placeholder='registration_no', type='text')
+              .form-group
+                input.form-control#email(name='email', placeholder='email', type='email')
+              .form-group
+                | مديـــر
+                input.form-control.checkbox-inline#director(name='director', placeholder='الوظيفة', type='checkbox')
+
+              input#type(name='type', type='hidden',value='3')
+              //- .form-group
+              //-   select.form-control#level(name='level',type='text')
+              //-     option(value='', style='color: grey; display:none;') Please Select Level
+              //-     option(value='1') Administration
+              //-     option(value='2') Seller  
+              .row
+                .col-xs-8.col-md-8
+                  button#btnSubmit.btn.btn-warning.btn-block(type='submit') Registration Admin 
+                .col-xs-4.col-md-4
+                  button.btn.btn-default.btn-block(type='reset') Cancel
 
   .row
-    .col-md-10.col-md-offset-1
-      .panel.panel-primary
+    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+      .panel.panel-warning
         .panel-heading
-          #loginModal(dir='ltr')
-      .container
-        .row.centered-form
-            .panel.panel-primary
-              .panel-heading
-                h3.panel-title
-                  | تسجيل مركز أعلامي 
-              .panel-body
-                form#addAdmin(role='form')
-                  .form-group
-                    input.form-control#registration_no(name='registration_no', placeholder='الرقم الإشاري', type='text', autofocus='')
-                  .form-group
-                    input.form-control#name_org(name='name_org', placeholder='أسم المركز', type='text', autofocus='')
-                  .form-group
-                    input.form-control#name_director(name='name_director', placeholder='أسم مدير المركز', type='text', autofocus='')
-                  .form-group
-                    input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text', autofocus='')
-                  .form-group
-                    input.form-control#email(name='email', placeholder='البريد الأكتروني', type='email')
-                  .form-group
-                    input.form-control#address(name='address', placeholder='عنوان المركز', type='text', autofocus='')
-                  .form-group
-                    input.hide.form-control#type(name='type',type='text') 
-                  .row
-                    .col-xs-8.col-md-8
-                      button#btnSubmit.btn.btn-primary.btn-block(type='submit') تسجيل المركز 
-                    .col-xs-4.col-md-4
-                      button.btn.btn-danger.btn-block(type='reset') إلغاء
-  
-
-  link(rel='stylesheet', href='/css/form.css')
-
-  script(src='/../js/jquery-1.11.1.min.js')
-  script(src='/../js/bootstrap.min.js')
-  script(src="/../js/jquery.validate.min.js")
-  script(src='/../js/metisMenu.min.js')
-  script(src='/../js/sb-admin-2.js')
-  script(src='/../js/bootstrap-notify.min.js')
-  script(src='/../js/addAdmin.js')
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المنظمات
+        .panel-body
+          table#table
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/jquery.validate.min.js")
+  script(src="/js/bootstrap-table.min.js")
+  script(src="/js/manager/locMedia.js")
+  script(src='/js/admin/backToTop.js')
+  script(src='/js/admin/bootstrap-notify.min.js')

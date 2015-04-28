@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var customer=[{"idcustomer":10000000,"first_name":"abdoo","last_name":"ageel"}]
 var orgMgr = require('../app/org').orgMgr;
 
 /* GET home page. */
