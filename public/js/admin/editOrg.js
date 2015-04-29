@@ -113,7 +113,7 @@ $(document).ready(function(){
     name: 'email',
     title: 'Enter center email',
   });
-
+  
   $('#nid').editable({
     url: '/office/editEmployeeOfficeUpdate/',
     type: 'text',

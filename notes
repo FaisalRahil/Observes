@@ -1,0 +1,8 @@
+Types of organisation .
+Table on database name's organisation field name is type and value is 1 to 6
+natOrg = 1
+guest = 2
+natMedia = 3
+locOrg = 4
+locMedia = 5
+agent = 6
