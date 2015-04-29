@@ -22,6 +22,7 @@ router.get('/testN', function(req, res) {
 });
 /* GET home page. */
 router.get('/moveOrg', function(req, res) {
+  console.log("Hello world");
   res.render('admin/moveOrg');
 });
 
