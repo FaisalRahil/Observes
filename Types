@@ -1,0 +1,6 @@
+natOrg   = 1
+guest    = 2
+natMedia = 3
+locOrg   = 4
+locMedia = 5
+agent    = 6
