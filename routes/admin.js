@@ -9,6 +9,9 @@ router.get('/', function(req, res) {
 
 /* GET home page.   */
 router.get('/moveOrg', function(req, res) {
+
+
+  console.log("hhhhhhhh");
   res.render('admin/moveOrg');
 });
 
