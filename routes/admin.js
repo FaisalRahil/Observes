@@ -9,6 +9,15 @@ router.get('/', function(req, res) {
 });
 
 /* GET home page. */
+router.get('/testMarge', function(req, res) {
+  res.render('marge');
+});
+
+/* GET home page. */
+router.get('/testM', function(req, res) {
+  res.render('m');
+});
+/* GET home page. */
 router.get('/moveOrg', function(req, res) {
   res.render('admin/moveOrg');
 });
