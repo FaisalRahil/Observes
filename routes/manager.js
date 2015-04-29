@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var obsMgr = require('../app/obs').obsMgr;
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('manager/manager');
@@ -69,6 +69,17 @@ router.get('/delObs/:id', function(req, res) {
 /* GET home page. */
 router.get('/delOrg/:id', function(req, res) {
   res.send('delOrg');
+});
+
+/* GET home page. */
+router.get('/getOb', function(req, res) {
+  obsMgr.getOb(5,function(result){
+    res.send(result);
+  });
+});
+
+router.post('/addObs', function(req, res) {
+  console.log("YES :D !")
 });
 
 module.exports = router;
