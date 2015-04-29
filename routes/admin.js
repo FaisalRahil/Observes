@@ -17,6 +17,10 @@ router.get('/testM', function(req, res) {
   res.render('m');
 });
 /* GET home page. */
+router.get('/testN', function(req, res) {
+  res.render('n');
+});
+/* GET home page. */
 router.get('/moveOrg', function(req, res) {
   res.render('admin/moveOrg');
 });
