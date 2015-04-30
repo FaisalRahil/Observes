@@ -94,12 +94,12 @@ $(document).ready(function(){
     }
   });
   
-  $('#emp_office_name').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+  $('#registration_no').editable({
+    url: '#',
     type: 'text',
     pk: 1,
-    name: 'emp_office_name',
-    title: 'Enter center emp_office_name',
+    name: 'registration_no',
+    title: 'Enter center registration_no',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال اسم الموظف';
       if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";
@@ -107,7 +107,7 @@ $(document).ready(function(){
   });
 
   $('#email').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'email',
@@ -115,7 +115,7 @@ $(document).ready(function(){
   });
   
   $('#nid').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'nid',
@@ -129,7 +129,7 @@ $(document).ready(function(){
   });
 
   $('#bank_name').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'bank_name',
@@ -140,7 +140,7 @@ $(document).ready(function(){
   });
 
   $('#acount_number').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'acount_number',
