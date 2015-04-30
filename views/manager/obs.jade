@@ -1,0 +1,81 @@
+extends ../layout
+block content
+  header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
+  .row
+    .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            |   لـوحـــة الـتـحــكــم
+        .panel-body
+          .row
+            .col-xs-6.col-sm-6.col-md-6.col-lg-6  
+              a.btn-lg.btn.btn-danger.btn-block(href="obs/agents", role="button")
+                span.glyphicon.glyphicon-user
+                br
+                | الوكلاء
+              p
+              a.btn-lg.btn.btn-warning.btn-block(href="/", role="button")
+                span.glyphicon.glyphicon-th
+                br
+                | المنظمات المحلية
+              p
+            .col-xs-6.col-sm-6.col-md-6.col-lg-6  
+              a.btn-lg.btn.btn-info.btn-block(href="/", role="button")
+                span.glyphicon.glyphicon-th
+                br
+                | مـــــثـال
+              p
+              a.btn-lg.btn.btn-success.btn-block(href="/", role="button")
+                span.glyphicon.glyphicon-user
+                br
+                | الاعلام المحلي
+              p
+          br
+          a.btn.btn-primary.btn-lg.btn-block(href="/", role="button")
+            span.glyphicon.glyphicon-th-list
+            | مـــــثـال
+       .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المراقبين
+        .panel-body
+          table#table
+  
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/bootstrap-table.min.js")
+  script(src='/js/manager/obs.js')
+  script(src='/js/admin/backToTop.js')
+  script(src='/js/admin/bootstrap-notify.min.js')

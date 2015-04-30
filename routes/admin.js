@@ -96,7 +96,10 @@ router.get('/org/guest', function(req, res) {
 
 /* GET home page. */
 router.get('/editOrg/:id', function(req, res) {
-  res.render('admin/editOrg');
+  orgMgr.getOrg_Id(req.params.id,function(err,result){
+    res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
+  });
+  
 });
 
 /* GET home page. */
