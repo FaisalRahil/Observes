@@ -41,11 +41,11 @@ block content
             tr
               td(width='35%') رقم التسجيل 
               td(width='65%')
-                a#registration_no.editable.editable-click(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم التسجيل' data-value='#{org[0].registration_no}') #{org[0].registration_no}
+                a#registration_no(href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') registration_no id_org
             tr
               td(width='35%') الاسم 
               td(width='65%')
-                a#name_org.editable.editable-click(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم' data-value='#{org[0].name_org}') #{org[0].name_org}
+                a#name_org(href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_org
             tr
               td(width='35%') اسم المدير
               td(width='65%')
@@ -53,15 +53,22 @@ block content
             tr
               td(width='35%') رقم الهاتف
               td(width='65%')
-                 a#phone.editable.editable-click(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم الهاتف' data-value='#') '#{org[0].phone_org}') #{org[0].phone}
+                a#phone.editable.editable-click(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم الهاتف' data-value='#') '#{org[0].phone_org}') #{org[0].phone}
+                //- a#name_director(href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
+            tr
+              td(width='35%') 
+              td(width='65%')
+                a#(href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
             tr
               td(width='35%') البريد الاكتروني
               td(width='65%')
                 a#email.editable.editable-click(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='البريد الاكتروني' data-value='#') '#{org[0].email_org}') #{org[0].email}
+                //- a#registration_no(href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
             tr
               td(width='35%') العنوان
               td(width='65%')
                 a#address.editable.editable-click(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='العنوان' data-value='#') '#{org[0].address}') #{org[0].address}
+                //- a#registration_no(href='#', data-type='text', data-pk='#', data-title='الاسم' data-value='#') id_org name_director
             tr
               td(width='35%') اسم البنك
               td(width='65%')
