@@ -8,10 +8,8 @@ router.get('/', function(req, res) {
 });
 
 /* GET home page.   */
-router.get('/moveorg', function(req, res) {
-
-  console.log("test branch merge");
-  console.log("test");
+router.get('/moveOrg', function(req, res) {
+  console.log("developer merge");
   res.render('admin/moveOrg');
 });
 
