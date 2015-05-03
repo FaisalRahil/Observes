@@ -1,101 +1,16 @@
 $(document).ready(function(){
-
-  $('.btn-toggle').click(function() {
-      
-      $(this).find('.btn').toggleClass('active');  
-      
-      if ($(this).find('.btn-primary').size()>0) {
-        $(this).find('.btn').toggleClass('btn-primary');
-      }
-      if ($(this).find('.btn-danger').size()>0) {
-        $(this).find('.btn').toggleClass('btn-danger');
-      }
-      if ($(this).find('.btn-success').size()>0) {
-        $(this).find('.btn').toggleClass('btn-success');
-      }
-      if ($(this).find('.btn-info').size()>0) {
-        $(this).find('.btn').toggleClass('btn-info');
-      }
-      
-      $(this).find('.btn').toggleClass('btn-default');
-         
-  });
-
   var defaults = {
     disabled: true,
   };
-
-  $('body').on('click', '#radioBtn a', function () {
-    var sel = $(this).data('title');
-    var tog = $(this).data('toggle');
-    var a=$(this).siblings("#p_type" );
-    a.val(sel);
-    $(this).siblings("a").removeClass('active').addClass('notActive');
-    $(this).removeClass('notActive').addClass('active');
-  })
-
-  $.extend($.fn.editable.defaults, defaults);
-  $('body').on('click', '#enable', function () {
+  $("[name='discount_flag']").bootstrapSwitch('state', false);
+  $("[name='discount_flag']").on('switchChange.bootstrapSwitch', function (e, data) {
     $('#user .editable').editable('toggleDisabled');
   });
-
-  $.getJSON("/employee/employee_type", function( json ) {
-    var type=json.hnec;
-    var i = 0;
-    for(key in json.hnec){
-      var k = new Object({id : i,value : key, text : json.hnec[key]});
-      i++;
-      $.type_h.push(k);
-    }
-      
-    $('#type').editable({
-        url: '',
-        source:$.type_h,
-        pk: 1,
-        name: 'type',
-        validate: function(v) {
-          if(!v) return 'الرجاء اختيار صفة الموظف';
-        }
-    }); 
-       
-  });
-
-  $('body').on('click', '#deletePhone ', function () {
-    var id = $(this).val();
-    $('#confphone').val(id);
-  }); 
-  $('#confphone').click(function() {
-    var id = $(this).val();
-    var idEmp = $(this).data("id");
-    $.get('/root/deletePhone/'+id, function(result){
-      window.location.href="/office/editEmployeeOffice/"+idEmp;
-    });
-  });
-
-  $('a[id^="p_type"]').editable({
-    url: '/office/editEmpOfficeTypePhone/',
-    source:[
-      {value:"المفوضية",text:"المفوضية"},
-      {value:"شخصي",text:"شخصي"},
-    ]
-  });
   
-  $("a[id^='phone_number']" ).editable({
-    url: '/office/editEmpOfficeTypePhone/',
-    type: 'text',
-    pk: 1,
-    name: 'phone_number',
-    title: 'Enter phone',
-    validate: function(v) { 
-      var flag = /^[0-9\b]+$/.test(v);
-      if(!v) return 'الرجاء ادخال رقم الهاتف';
-      if(v.length<10) return "يجب أن يكون الهاتف  لا يقل عن 10 ارقام";
-      if(!flag) return "هذا ليس رقم هاتف";
-    }
-  });
+  
   
   $('#registration_no').editable({
-    url: '#',
+    url: '/admin/editOrg_registration_no/',
     type: 'text',
     pk: 1,
     name: 'registration_no',
@@ -105,73 +20,53 @@ $(document).ready(function(){
       if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";
     }
   });
-
+  
+  $('#name_org').editable({
+    url: '/admin/editOrg_name_org/',
+    type: 'text',
+    pk: 1,
+    name: 'name_org',
+    title: 'Enter center name_org',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال اسم الموظف';
+      if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";
+    }
+  });
+  
+  $('#name_director').editable({
+    url: '/admin/editOrg_name_director/',
+    type: 'text',
+    pk: 1,
+    name: 'name_director',
+    title: 'Enter center name_director',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال اسم الموظف';
+      if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";
+    }
+  });
+  
   $('#email').editable({
-    url: '#',
+    url: '/admin/editOrg_email/',
     type: 'text',
     pk: 1,
     name: 'email',
     title: 'Enter center email',
   });
   
-  $('#nid').editable({
-    url: '#',
+  $('#address').editable({
+    url: '/admin/editOrg_address/',
     type: 'text',
     pk: 1,
-    name: 'nid',
-    title: 'Enter center nid',
-    validate: function(v) {
-      var flag = /^[0-9\b]+$/.test(v);
-      if(!v) return 'الرجاء ادخال الرقم الوطني';
-      if(v.length<12) return "يجب أن يكون الرقم الوطني أكثر من 12 رقم";
-      if(!flag) return "هذا ليس رقم وطني";
-    }
+    name: 'address',
+    title: 'Enter center address',
   });
-
-  $('#bank_name').editable({
-    url: '#',
+  
+  $('#phone').editable({
+    url: '/admin/editOrg_phone/',
     type: 'text',
     pk: 1,
-    name: 'bank_name',
-    title: 'Enter center bank_name',
-    validate: function(v) {
-      if(!v) return 'الرجاء ادخال اسم المصرف';
-    }
+    name: 'phone',
+    title: 'Enter center phone',
   });
-
-  $('#acount_number').editable({
-    url: '#',
-    type: 'text',
-    pk: 1,
-    name: 'acount_number',
-    title: 'Enter center acount_number',
-    validate: function(v) {
-      if(!v) return 'الرجاء ادخال رقم الحساب';
-      if(v.length<4) return "يجب أن يكون رقم الحساب أكثر من 4 رقم";
-    }
-  });
-
-  $('#deleteemployee').click(function() {
-    var id = $(this).val();
-    var center = $(this).data("value");
-    $.get('/office/deleteemployee/'+id, function(result){
-      window.location.href="/office/"+center+"/EmployeeOffice";
-    });
-  });
-
-  /* email valedation */
-  // $('#email').editable('option', 'validate', function(v) {
-  //   if(!v) return 'الرجاء ادخال البريد الالكتروني';
-  //   var emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-  //   var valid = emailReg.test(v);
-  //   if(!valid) return 'هذا ليس البريد الالكتروني';
-  //     $.post("/office/employeeoffice/checkEmail",
-  //       {
-  //         email:v,
-  //       },
-  //       function(data,status){
-  //         if(!data) alert("هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر");
-  //     });
-  // });
 
 });
