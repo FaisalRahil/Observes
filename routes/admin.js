@@ -9,7 +9,6 @@ router.get('/', function(req, res) {
 
 /* GET home page.   */
 router.get('/moveOrg', function(req, res) {
-  console.log("developer merge");
   res.render('admin/moveOrg');
 });
 
@@ -17,7 +16,6 @@ router.get('/moveOrg', function(req, res) {
 
 router.post('/addOrg', function(req, res) {
   orgMgr.addOrg(req.body, function (results){
-    console.log(req.body);
     if (req.body["type"] == 1) {
       res.redirect('org/natOrg');
     
