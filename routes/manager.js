@@ -48,7 +48,7 @@ router.get('/obs/locOrg', function(req, res) {
 
 /* GET home page. */
 router.get('/obs/locMedia', function(req, res) {
-  res.render('locMedia');
+  res.render('manager/locMediaObs');
 });
 
 /* GET home page. */
