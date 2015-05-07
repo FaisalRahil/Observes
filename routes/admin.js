@@ -8,7 +8,22 @@ router.get('/', function(req, res) {
 });
 
 /* GET home page. */
+router.get('/testMarge', function(req, res) {
+  console.log("edit something");
+  res.render('marge');
+});
+
+/* GET home page. */
+router.get('/testM', function(req, res) {
+  res.render('m');
+});
+/* GET home page. */
+router.get('/testN', function(req, res) {
+  res.render('n');
+});
+/* GET home page. */
 router.get('/moveOrg', function(req, res) {
+  console.log("Hello world");
   res.render('admin/moveOrg');
 });
 
@@ -93,7 +108,10 @@ router.get('/org/guest', function(req, res) {
 
 /* GET home page. */
 router.get('/editOrg/:id', function(req, res) {
-  res.render('admin/editOrg');
+  orgMgr.getOrg_Id(req.params.id,function(err,result){
+    res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
+  });
+  
 });
 
 /* GET home page. */

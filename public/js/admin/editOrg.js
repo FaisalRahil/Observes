@@ -95,7 +95,7 @@ $(document).ready(function(){
   });
   
   $('#emp_office_name').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'emp_office_name',
@@ -107,15 +107,15 @@ $(document).ready(function(){
   });
 
   $('#email').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
-    type: 'text',
+    url: '#',
+    type: 'email',
     pk: 1,
     name: 'email',
     title: 'Enter center email',
   });
-
+  
   $('#nid').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'nid',
@@ -129,7 +129,7 @@ $(document).ready(function(){
   });
 
   $('#bank_name').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'bank_name',
@@ -140,7 +140,7 @@ $(document).ready(function(){
   });
 
   $('#acount_number').editable({
-    url: '/office/editEmployeeOfficeUpdate/',
+    url: '#',
     type: 'text',
     pk: 1,
     name: 'acount_number',
@@ -160,18 +160,18 @@ $(document).ready(function(){
   });
 
   /* email valedation */
-  $('#email').editable('option', 'validate', function(v) {
-    if(!v) return 'الرجاء ادخال البريد الالكتروني';
-    var emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-    var valid = emailReg.test(v);
-    if(!valid) return 'هذا ليس البريد الالكتروني';
-      $.post("/office/employeeoffice/checkEmail",
-        {
-          email:v,
-        },
-        function(data,status){
-          if(!data) alert("هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر");
-      });
-  });
+  // $('#email').editable('option', 'validate', function(v) {
+  //   if(!v) return 'الرجاء ادخال البريد الالكتروني';
+  //   var emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+  //   var valid = emailReg.test(v);
+  //   if(!valid) return 'هذا ليس البريد الالكتروني';
+  //     $.post("/office/employeeoffice/checkEmail",
+  //       {
+  //         email:v,
+  //       },
+  //       function(data,status){
+  //         if(!data) alert("هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر");
+  //     });
+  // });
 
 });

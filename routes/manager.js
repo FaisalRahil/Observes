@@ -3,7 +3,7 @@ var router = express.Router();
 var obsMgr = require('../app/obs').obsMgr;
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('manager');
+  res.render('manager/manager');
 });
 
 /* GET home page. */
@@ -13,7 +13,7 @@ router.get('/org', function(req, res) {
 
 /* GET home page. */
 router.get('/obs', function(req, res) {
-  res.render('obs');
+  res.render('manager/obs');
 });
 
 /* GET home page. */
@@ -52,8 +52,8 @@ router.get('/obs/locMedia', function(req, res) {
 });
 
 /* GET home page. */
-router.get('/obs/agent', function(req, res) {
-  res.render('agent');
+router.get('/obs/agents', function(req, res) {
+  res.render('manager/agent');
 });
 
 /* GET home page. */

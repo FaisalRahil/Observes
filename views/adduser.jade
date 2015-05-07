@@ -1,0 +1,75 @@
+extends layout
+block content
+  header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+  
+  .row
+    .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
+      .panel-body
+        .table-responsive
+          .panel-body
+            form#form(role='form', action='/addUser/', method='post')
+              .form-group
+                input#user_name.form-control.input-sm(type='text', name='user_name', placeholder='اسم المستخدم', data-params='{{csrf_token}}', value='')
+              .row
+                .col-xs-6.col-sm-6.col-md-6
+                  .form-group
+                    input#first_name.form-control.input-sm(type='text', name='first_name', placeholder='الأسم')
+                .col-xs-6.col-sm-6.col-md-6
+                  .form-group
+                    input#last_name.form-control.input-sm(type='text', name='last_name', placeholder='اللقب')
+              .row
+                .col-xs-6.col-sm-6.col-md-6
+                  .form-group
+                    input#email.form-control.input-sm(type='email', name='email', placeholder='البريد الأكتروني ')
+                .col-xs-6.col-sm-6.col-md-6
+                  .form-group
+                    input#phone_no.form-control.input-sm(type='text', name='phone_no', placeholder='رقم الهاتف')
+              .row
+                .col-xs-6.col-sm-6.col-md-6
+                  .form-group
+                    input#password.form-control.input-sm(type='password', name='password', placeholder='الرقم السري')
+                .col-xs-6.col-sm-6.col-md-6
+                  .form-group
+                    input#password_confirmation.form-control.input-sm(type='password', name='password_confirmation', placeholder='إعادة الرقم السري ')
+                .col-xs-6.col-sm-6.col-md-6
+                  .form-group
+                    select#id_office.form-control.input-sm(name='id_office', placeholder='الأدارة')
+                      option(value="")
+                      for office in offices
+                        option(value="#{office.idoffice}") #{office.office_name_ar}
+              .row
+                input.btn.btn-primary.btn-block(type='submit', value='تســــــجيل')
+
+      
+  script(src="/js/jquery-1.11.1.min.js") 
+  script(src="/js/bootstrap.min.js")
+  script(src="/js/jquery.validate.min.js")
+  script(src="/js/adduser.js")

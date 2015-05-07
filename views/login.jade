@@ -15,7 +15,7 @@ block content
     div.panel-heading.text-right
       h1.panel-title الرجاء تسجيل الدخول
     div.panel-body
-      form#form.form-signin(role="form",action="/users/login", method="post")
+      form#form.form-signin(role="form",action="/login", method="post")
         div.form-group
           lable اسم المستخدم
           input#username.form-control(type="text",name="username", placeholder="اسم المستخدم", required="",autofocus="")
@@ -28,4 +28,3 @@ block content
   script(src="/js/bootstrap.min.js")
   script(src="/js/jquery-1.11.1.min.js") 
   script(src="/js/jquery.validate.min.js")
-  script(src="/js/login.js")
