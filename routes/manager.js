@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var obsMgr = require('../app/obs').obsMgr;
+var orgMgr = require('../app/org').orgMgr;
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('manager/manager');
@@ -48,7 +49,9 @@ router.get('/obs/locOrg', function(req, res) {
 
 /* GET home page. */
 router.get('/obs/locMedia', function(req, res) {
-  res.render('manager/locMediaObs');
+  orgMgr.getOrg(5,function(result){
+    res.render('manager/locMediaObs',{ title: 'المنظمات',orgs:result });
+  });
 });
 
 /* GET home page. */
