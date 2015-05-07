@@ -9,7 +9,6 @@ router.get('/', function(req, res) {
 
 /* GET home page. */
 router.get('/testMarge', function(req, res) {
-  console.log("edit something");
   res.render('marge');
 });
 
