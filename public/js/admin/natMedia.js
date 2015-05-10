@@ -53,7 +53,6 @@ $(document).ready(function() {
       }],
   });
   
-  alert("Hello test");
 
   function operateFormatter(value, row, index) {
     return  [
