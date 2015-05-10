@@ -137,6 +137,15 @@ router.post('/editOrg_phone', function(req, res) {
     res.send(result);
   });
 });
+/////////////////////////////////////////////////////
+
+/* GET home page. */
+router.get('/editMedia/:id', function(req, res) {
+  orgMgr.getOrg_Id(req.params.id,function(err,result){
+    res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
+  });
+});
+
 
 /* GET home page. */
 router.get('/obs/natOrg', function(req, res) {
@@ -166,6 +175,13 @@ router.get('/delObs/:id', function(req, res) {
 /* GET home page. */
 router.get('/delOrg/:id', function(req, res) {
   orgMgr.delOrg(req.params.id,function(result){
+    res.send('result');
+  })
+});
+
+/* GET home page. */
+router.get('/delMedia/:id', function(req, res) {
+  orgMgr.delMedia(req.params.id,function(result){
     res.send('result');
   })
 });

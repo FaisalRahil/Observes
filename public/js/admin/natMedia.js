@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  $.get('/admin/getNatMedia',function(result){
-    $('#table').bootstrapTable({
+  $('#table').bootstrapTable({
       method: 'get',
       url: '/admin/getNatMedia',
       cache: false,
@@ -39,12 +38,50 @@ $(document).ready(function() {
           field: 'phone',
           sortable:true,
           title: 'رقم الهاتف'
+      }, {
+          field: 'id_org',
+          align: 'center',
+          valign: 'middle',
+          title: 'عرض',
+          formatter: operateFormatter
+      }, {
+          field: 'id_org',
+          align: 'center',
+          valign: 'middle',
+          title: 'مسح',
+          formatter: operateFormatter1
       }],
-      data: result,
-    });
+  });
+  
+  alert("Hello test");
+
+  function operateFormatter(value, row, index) {
+    return  [
+              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/admin/editMedia/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+            ].join('');
+  }
+
+  
+
+  function operateFormatter1(value, row, index) {
+    return  [
+              '<button id="deleteMedia" data-toggle="modal" href="#deleteMediaModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
+            ].join('');
+  }
+
+  /* Go to media needs view or edit */
+  $('body').on('click', '#deleteMedia ', function () {
+    var id = $(this).val();
+    $('#confdelete').val(id);
   });
 
-
+  /* Go to media needs view or edit */
+  $('#confdelete').click(function() {
+    var id = $(this).val();
+    $.get('/admin/delMedia/'+id, function(result){
+      window.location.href="/admin/org/natMedia";
+    });
+  });
 
 ////////////////////////////
 
@@ -97,8 +134,5 @@ $(document).ready(function() {
       });
     },
   });
-///////////////////////
-
-
 
 });

@@ -1,6 +1,6 @@
 extends ../layout
 block content
-  header.navbar.navbar-red.navbar-fixed-top.bs-docs-nav(role='banner')
+  header.navbar.navbar-orange.navbar-fixed-top.bs-docs-nav(role='banner')
     .navbar-header.pull-left
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
         span.sr-only Toggle navigation
@@ -29,45 +29,43 @@ block content
           a(href='#') المراقبين
         li
           a(href='#') الـمنظمات
-          
+
   .row
     .col-md-8.col-md-offset-2
       .form-group
         input#discount_flag(type='checkbox', name='discount_flag')
-      table#orgTable.table.table-bordered.table-striped(style='clear: both')
+      table#media.table.table-bordered.table-striped(style='clear: both')
         tbody
           tr
             td(width='35%') رقم التسجيل 
             td(width='65%')
-              a#registration_no(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم' ,data-value='#{org[0].registration_no}') #{org[0].registration_no}
+              a#registration_no(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='الاسم' ,data-value='#{media[0].registration_no}') #{media[0].registration_no}
           tr
             td(width='35%') الاسم 
             td(width='65%')
-              a#name_org(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم', data-value='#{org[0].name_org}') #{org[0].name_org}
+              a#name_org(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='الاسم', data-value='#{media[0].name_org}') #{media[0].name_org}
           tr
             td(width='35%') اسم المدير
             td(width='65%')
-              a#name_director(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم المدير' ,data-value='#{org[0].name_director}') #{org[0].name_director}
+              a#name_director(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='الاسم المدير' ,data-value='#{media[0].name_director}') #{media[0].name_director}
           tr
             td(width='35%') رقم الهاتف
             td(width='65%')
-              a#phone(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم الهاتف' ,data-value='#{org[0].phone}') #{org[0].phone}
+              a#phone(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='رقم الهاتف' ,data-value='#{media[0].phone}') #{media[0].phone}
           tr
             td(width='35%') البريد الاكتروني
             td(width='65%')
-              a#email(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='البريد الاكتروني', data-value='#{org[0].email}') #{org[0].email}
+              a#email(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='البريد الاكتروني', data-value='#{media[0].email}') #{media[0].email}
           tr
             td(width='35%') العنوان
             td(width='65%')
-              a#address(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='العنوان', data-value='#{org[0].address}') #{org[0].address}
+              a#address(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='العنوان', data-value='#{media[0].address}') #{media[0].address}
 
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/bootstrap-editable.min.js")
   script(src="/js/jquery.validate.min.js")
   script(src='/js/bootstrap-switch.min.js')
-  script(src="/js/admin/editOrg.js")
+  script(src="/js/admin/editMedia.js")
   script(src='/js/admin/backToTop.js')
   
-
-
