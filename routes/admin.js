@@ -7,9 +7,8 @@ router.get('/', function(req, res) {
   res.render('admin/admin');
 });
 
-/* GET home page.   */
+/* GET home page. */
 router.get('/moveOrg', function(req, res) {
-  console.log("developer merge");
   res.render('admin/moveOrg');
 });
 
