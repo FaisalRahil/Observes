@@ -1,0 +1,21 @@
+
+[
+  {"idoffice": -1,"office_id": -1,"office_name": "hnec","office_name_ar": "المفوظية العليا للإنتخبات"},
+  {"idoffice": 1,"office_id": 1,"office_name": "Sirt","office_name_ar": "سرت"},
+  {"idoffice": 2,"office_id": 2,"office_name": "Musrata","office_name_ar": "مصراته"},
+  {"idoffice": 3,"office_id": 3,"office_name": "Al Khoms","office_name_ar": "الخمس"}, 
+  {"idoffice": 4,"office_id": 4,"office_name": "Tripoli","office_name_ar": "طرابلس"},
+  {"idoffice": 5,"office_id": 5,"office_name": "Al Azizya","office_name_ar": "العزيزيه"}, 
+  {"idoffice": 6,"office_id": 6,"office_name": "Al Zawyia","office_name_ar": "الزاويه"}, 
+  {"idoffice": 7,"office_id": 7,"office_name": "Al Jabal 1","office_name_ar": "الجبل 1"},
+  {"idoffice": 8,"office_id": 8,"office_name": "Al Jabal 2","office_name_ar": "الجبل 2"},
+  {"idoffice": 9,"office_id": 9,"office_name": "Sabha","office_name_ar": "سبها"},
+  {"idoffice": 10,"office_id": 10,"office_name": "Aubari","office_name_ar": "أوباري"}, 
+  {"idoffice": 11,"office_id": 11,"office_name": "Ghadames","office_name_ar": "غدامس"}, 
+  {"idoffice": 12,"office_id": 12,"office_name": "Tubruq","office_name_ar": "طبرق"}, 
+  {"idoffice": 13,"office_id": 13,"office_name": "Derna","office_name_ar": "درنه"},
+  {"idoffice": 14,"office_id": 14,"office_name": "Al Baida","office_name_ar": "البيضاء"},
+  {"idoffice": 15,"office_id": 15,"office_name": "Benghazi","office_name_ar": "بنغازي"},
+  {"idoffice": 16,"office_id": 16,"office_name": "Ajdabia","office_name_ar": "اجدابيا"}, 
+  {"idoffice": 17,"office_id": 17,"office_name": "Al Kufra","office_name_ar": "الكفره"}
+]

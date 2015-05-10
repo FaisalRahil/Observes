@@ -8,7 +8,21 @@ router.get('/', function(req, res) {
 });
 
 /* GET home page. */
+router.get('/testMarge', function(req, res) {
+  res.render('marge');
+});
+
+/* GET home page. */
+router.get('/testM', function(req, res) {
+  res.render('m');
+});
+/* GET home page. */
+router.get('/testN', function(req, res) {
+  res.render('n');
+});
+/* GET home page. */
 router.get('/moveOrg', function(req, res) {
+  console.log("Hello world");
   res.render('admin/moveOrg');
 });
 
