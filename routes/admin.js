@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var orgMgr = require('../app/org').orgMgr;
+var obsMgr = require('../app/obs').obsMgr;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -32,7 +33,12 @@ router.post('/addOrg', function(req, res) {
 });
 
 //*************************************************
-// 
+//
+router.get('/getObs',function(req , res ){
+  obsMgr.getOb(3,function(result){
+    res.send(result);
+  });
+});
 router.get('/getNatOrg', function(req, res) {
   console.log("adsasd");
   orgMgr.getOrg(1,function(result){

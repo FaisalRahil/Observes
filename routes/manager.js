@@ -44,7 +44,10 @@ router.get('/editOrg/:id', function(req, res) {
 
 /* GET home page. */
 router.get('/obs/locOrg', function(req, res) {
-  res.render('locOrg');
+  orgMgr.getOrg(4,function(result){
+   res.render('manager/locOrgObs',{ title: 'مراقب محلي',orgs:result }); 
+  })
+  
 });
 
 /* GET home page. */
@@ -77,6 +80,13 @@ router.get('/delOrg/:id', function(req, res) {
 /* GET home page. */
 router.get('/getOb', function(req, res) {
   obsMgr.getOb(5,function(result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.get('/getOb4', function(req, res) {
+  obsMgr.getOb(4,function(result){
     res.send(result);
   });
 });
