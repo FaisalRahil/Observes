@@ -44,7 +44,10 @@ router.get('/editOrg/:id', function(req, res) {
 
 /* GET home page. */
 router.get('/obs/locOrg', function(req, res) {
-  res.render('locOrg');
+  orgMgr.getOrg(4,function(result){
+   res.render('manager/locOrgObs',{ title: 'مراقب محلي',orgs:result }); 
+  })
+  
 });
 
 /* GET home page. */
@@ -59,9 +62,41 @@ router.get('/obs/agents', function(req, res) {
   res.render('manager/agent');
 });
 
+/* EDIT. */
+router.get('/editMediaObs/:id', function(req, res) {
+  obsMgr.getObs_Id(req.params.id,function(err,result){
+    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result});
+    console.log("hi "+req.params.id+"result "+result);
+  });
+});
+
+
 /* GET home page. */
-router.get('/editObs/:id', function(req, res) {
-  res.render('editObs');
+router.post('/editMediaObs_name', function(req, res) {
+  obsMgr.editObs_name(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editMediaObs_pass_nid', function(req, res) {
+  obsMgr.editObs_pass_nid(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editMediaObs_email', function(req, res) {
+  obsMgr.editObs_email(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editMediaObs_phone_obs', function(req, res) {
+  obsMgr.editObs_phone_obs(req.body,function(err,result){
+    res.send(result);
+  });
 });
 
 /* GET home page. */
@@ -77,6 +112,13 @@ router.get('/delOrg/:id', function(req, res) {
 /* GET home page. */
 router.get('/getOb', function(req, res) {
   obsMgr.getOb(5,function(result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.get('/getOb4', function(req, res) {
+  obsMgr.getOb(4,function(result){
     res.send(result);
   });
 });
@@ -97,7 +139,6 @@ router.post('/addObs', function(req, res) {
     req.body['director']=1;
   }
   obsMgr.addOb(req.body,function(err,result){
-    console.log(result);
     res.redirect('/manager/obs/locMedia');
   });
 });

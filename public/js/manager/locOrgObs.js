@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#table').bootstrapTable({
       method: 'get',
-      url: '/manager/getOb',
+      url: '/manager/getOb4',
       cache: false,
       height: 400,
       striped: true,
@@ -59,7 +59,7 @@ $(document).ready(function() {
   
     function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editMediaObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 

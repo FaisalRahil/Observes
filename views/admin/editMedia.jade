@@ -60,9 +60,18 @@ block content
             td(width='35%') العنوان
             td(width='65%')
               a#address(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='العنوان', data-value='#{media[0].address}') #{media[0].address}
-
+  .row
+    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+      .panel.panel-warning
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | 
+        .panel-body
+          table#table
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-table.min.js')
   script(src="/js/bootstrap-editable.min.js")
   script(src="/js/jquery.validate.min.js")
   script(src='/js/bootstrap-switch.min.js')
