@@ -148,6 +148,16 @@ router.get('/editMedia/:id', function(req, res) {
 
 
 /* GET home page. */
+router.get('/editGuest/:id', function(req, res) {
+  orgMgr.getOrg_Id(req.params.id,function(err,result){
+    res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
+  });
+});
+
+
+////////////////////////////////////////////
+
+/* GET home page. */
 router.get('/obs/natOrg', function(req, res) {
   res.render('admin/natOrg');
 });
@@ -182,6 +192,13 @@ router.get('/delOrg/:id', function(req, res) {
 /* GET home page. */
 router.get('/delMedia/:id', function(req, res) {
   orgMgr.delMedia(req.params.id,function(result){
+    res.send('result');
+  })
+});
+
+/* GET home page. */
+router.get('/delGuest/:id', function(req, res) {
+  orgMgr.delGuest(req.params.id,function(result){
     res.send('result');
   })
 });

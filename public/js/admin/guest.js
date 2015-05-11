@@ -19,8 +19,47 @@ $(document).ready(function() {
           field: 'name_org',
           sortable:true,
           title: 'اسم الضيف'
+      }, {
+          field: 'id_org',
+          align: 'center',
+          valign: 'middle',
+          title: 'عرض',
+          formatter: operateFormatter
+      }, {
+          field: 'id_org',
+          align: 'center',
+          valign: 'middle',
+          title: 'مسح',
+          formatter: operateFormatter1
       }],
-      data: result,
+  });
+  
+
+  function operateFormatter(value, row, index) {
+    return  [
+              '<a id="viewGuest" class="btn btn-xs btn-primary" href="/admin/editGuest/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+            ].join('');
+  }
+
+  
+
+  function operateFormatter1(value, row, index) {
+    return  [
+              '<button id="deleteGuest" data-toggle="modal" href="#deleteMediaGuest" class="btn btn-xs btn-danger" value="'+value+'" href="deleteGuest"><i class="glyphicon glyphicon-trash"></i></button>'
+            ].join('');
+  }
+
+  /* Go to media needs view or edit */
+  $('body').on('click', '#deleteGuest ', function () {
+    var id = $(this).val();
+    $('#confdelete').val(id);
+  });
+
+  /* Go to media needs view or edit */
+  $('#confdelete').click(function() {
+    var id = $(this).val();
+    $.get('/admin/delGuest/'+id, function(result){
+      window.location.href="/admin/org/guest";
     });
   });
 
