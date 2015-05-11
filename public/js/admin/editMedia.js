@@ -18,8 +18,8 @@ $(document).ready(function() {
     name: 'registration_no',
     title: 'Enter center registration_no',
     validate: function(v) {
-      if(!v) return 'الرجاء ادخال اسم الموظف';
-      if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";
+      if(!v) return 'الرجاء ادخال رقم الاشهار';
+      if(v.length<5) return "يجب أن يكون رقم الاشهار اكثر من رقمين";
     }
   });
   
@@ -61,6 +61,10 @@ $(document).ready(function() {
     pk: 1,
     name: 'address',
     title: 'Enter center address',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال العنوان';
+      if(v.length<5) return "يجب أن يكون العنوان أكثر من 5 حروف";
+    }
   });
   
   $('#phone').editable({
@@ -69,6 +73,10 @@ $(document).ready(function() {
     pk: 1,
     name: 'phone',
     title: 'Enter center phone',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال رقم الهاتف';
+      if(v.length<10) return "يجب أن يكون رقم الهاتف على الاقل 10 ارقام";
+    }
   });
   
 });

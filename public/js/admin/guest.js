@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  $.get('/admin/getGuest',function(result){
-    $('#table').bootstrapTable({
+  $('#table').bootstrapTable({
       method: 'get',
       url: '/admin/getGuest',
       cache: false,
@@ -34,18 +33,15 @@ $(document).ready(function() {
       }],
   });
   
-
   function operateFormatter(value, row, index) {
     return  [
               '<a id="viewGuest" class="btn btn-xs btn-primary" href="/admin/editGuest/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
-  
-
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deleteGuest" data-toggle="modal" href="#deleteMediaGuest" class="btn btn-xs btn-danger" value="'+value+'" href="deleteGuest"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteGuest" data-toggle="modal" href="#deleteGuest_href" class="btn btn-xs btn-danger" value="'+value+'" href="deleteGuest"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
@@ -62,7 +58,6 @@ $(document).ready(function() {
       window.location.href="/admin/org/guest";
     });
   });
-
 ////////////////////////////
 
   $("#guest").validate({

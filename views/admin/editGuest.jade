@@ -1,0 +1,51 @@
+extends ../layout
+block content
+  header.navbar.navbar-orange.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
+  .row
+    .col-md-8.col-md-offset-2
+      .form-group
+        input#discount_flag(type='checkbox', name='discount_flag')
+      table#guest.table.table-bordered.table-striped(style='clear: both')
+        tbody
+          tr
+            td(width='35%') رقم التسجيل 
+            td(width='65%')
+              a#name_org(href='#', data-type='text', data-pk='#{guest[0].id_org}', data-title='الاسم' ,data-value='#{guest[0].name_org}') #{guest[0].name_org}
+          
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/bootstrap-editable.min.js")
+  script(src="/js/jquery.validate.min.js")
+  script(src='/js/bootstrap-switch.min.js')
+  script(src="/js/admin/editGuest.js")
+  script(src='/js/admin/backToTop.js')
+  

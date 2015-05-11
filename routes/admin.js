@@ -16,7 +16,6 @@ router.get('/moveOrg', function(req, res) {
 
 router.post('/addOrg', function(req, res) {
   orgMgr.addOrg(req.body, function (results){
-    console.log(req.body);
     if (req.body["type"] == 1) {
       res.redirect('org/natOrg');
     
@@ -34,7 +33,6 @@ router.post('/addOrg', function(req, res) {
 //*************************************************
 // 
 router.get('/getNatOrg', function(req, res) {
-  console.log("adsasd");
   orgMgr.getOrg(1,function(result){
     res.send(result);
   })
