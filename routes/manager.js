@@ -82,7 +82,24 @@ router.get('/getOb', function(req, res) {
 });
 
 router.post('/addObs', function(req, res) {
-  console.log("YES :D !")
+  req.body['id_office']=1;
+  req.body['nationality']=1;
+  if(req.body['gender']){
+    req.body['gender']=0;
+  }
+  else{
+    req.body['gender']=1;
+  }
+  if(req.body['director']){
+    req.body['director']=0;
+  }
+  else{
+    req.body['director']=1;
+  }
+  obsMgr.addOb(req.body,function(err,result){
+    console.log(result);
+    res.redirect('/manager/obs/locMedia');
+  });
 });
 
 module.exports = router;

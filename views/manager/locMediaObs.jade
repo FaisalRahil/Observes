@@ -68,7 +68,7 @@ block content
                     option(value="#{org.registration_no}") #{org.name_org}
               .form-group.col-sm-6.col-md-6.col-lg-6
                 | الجنس :   
-                input.form-control#gender(name='gender', placeholder='الجس', type='checkbox')
+                input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
               .form-group.col-sm-6.col-md-6.col-lg-6  
                 | مدير  : 
                 input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
@@ -78,7 +78,6 @@ block content
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
 
 
-              input#type(name='type', type='hidden',value='3')
               //- .form-group
               //-   select.form-control#level(name='level',type='text')
               //-     option(value='', style='color: grey; display:none;') Please Select Level

@@ -1,7 +1,7 @@
 {
 	"host" : "localhost",
-	"user" : "",
-	"password" : "",
-	"database" : "",
+	"user" : "root",
+	"password" : "0214772710",
+	"database" : "obs",
 	"epassword" : ""
 }

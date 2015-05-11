@@ -43,6 +43,7 @@ exports.obsMgr = {
 
   addOb : function(body,cb){
     mysqlMgr.connect(function (conn) {
+      console.log(body);
       conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
         conn.release();
         if(err) {
