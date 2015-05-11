@@ -1,12 +1,14 @@
-$(document).ready(function(){
+$(document).ready(function() {
+
   var defaults = {
     disabled: true,
   };
+
+  
   $("[name='discount_flag']").bootstrapSwitch('state', false);
   $("[name='discount_flag']").on('switchChange.bootstrapSwitch', function (e, data) {
-    $('#orgTable .editable').editable('toggleDisabled');
+    $('#media .editable').editable('toggleDisabled');
   });
-  
   
   
   $('#registration_no').editable({
@@ -68,5 +70,5 @@ $(document).ready(function(){
     name: 'phone',
     title: 'Enter center phone',
   });
-
+  
 });

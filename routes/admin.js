@@ -8,21 +8,7 @@ router.get('/', function(req, res) {
 });
 
 /* GET home page. */
-router.get('/testMarge', function(req, res) {
-  res.render('marge');
-});
-
-/* GET home page. */
-router.get('/testM', function(req, res) {
-  res.render('m');
-});
-/* GET home page. */
-router.get('/testN', function(req, res) {
-  res.render('n');
-});
-/* GET home page. */
 router.get('/moveOrg', function(req, res) {
-  console.log("Hello world");
   res.render('admin/moveOrg');
 });
 
@@ -110,8 +96,56 @@ router.get('/editOrg/:id', function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
     res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
   });
-  
 });
+
+/* GET home page. */
+router.post('/editOrg_registration_no', function(req, res) {
+  orgMgr.editOrg_registration_no(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editOrg_name_org', function(req, res) {
+  orgMgr.editOrg_name_org(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editOrg_name_director', function(req, res) {
+  orgMgr.editOrg_name_director(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editOrg_email', function(req, res) {
+  orgMgr.editOrg_email(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+router.post('/editOrg_address', function(req, res) {
+  orgMgr.editOrg_address(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+router.post('/editOrg_phone', function(req, res) {
+  orgMgr.editOrg_phone(req.body,function(err,result){
+    res.send(result);
+  });
+});
+/////////////////////////////////////////////////////
+
+/* GET home page. */
+router.get('/editMedia/:id', function(req, res) {
+  orgMgr.getOrg_Id(req.params.id,function(err,result){
+    res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
+  });
+});
+
 
 /* GET home page. */
 router.get('/obs/natOrg', function(req, res) {
@@ -141,6 +175,13 @@ router.get('/delObs/:id', function(req, res) {
 /* GET home page. */
 router.get('/delOrg/:id', function(req, res) {
   orgMgr.delOrg(req.params.id,function(result){
+    res.send('result');
+  })
+});
+
+/* GET home page. */
+router.get('/delMedia/:id', function(req, res) {
+  orgMgr.delMedia(req.params.id,function(result){
     res.send('result');
   })
 });

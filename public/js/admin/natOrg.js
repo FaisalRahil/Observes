@@ -68,13 +68,13 @@ $(document).ready(function() {
             ].join('');
   }
 
-  /* Go to user needs view or edit */
+  /* Go to orgTable needs view or edit */
   $('body').on('click', '#deleteOrg ', function () {
     var id = $(this).val();
     $('#confdelete').val(id);
   });
 
-  /* Go to user needs view or edit */
+  /* Go to orgTable needs view or edit */
   $('#confdelete').click(function() {
     var id = $(this).val();
     $.get('/admin/delOrg/'+id, function(result){
