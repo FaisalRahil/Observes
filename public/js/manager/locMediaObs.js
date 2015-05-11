@@ -27,7 +27,7 @@ $(document).ready(function() {
           sortable:true,
           title: 'اسم المنظمة'
       }, {
-          field: 'phone',
+          field: 'phone_obs',
           sortable:true,
           title: 'رقم الهاتف'
       }, {

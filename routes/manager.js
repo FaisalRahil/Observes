@@ -97,7 +97,6 @@ router.post('/addObs', function(req, res) {
     req.body['director']=1;
   }
   obsMgr.addOb(req.body,function(err,result){
-    console.log(result);
     res.redirect('/manager/obs/locMedia');
   });
 });
