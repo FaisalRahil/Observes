@@ -59,9 +59,41 @@ router.get('/obs/agents', function(req, res) {
   res.render('manager/agent');
 });
 
+/* EDIT. */
+router.get('/editMediaObs/:id', function(req, res) {
+  obsMgr.getObs_Id(req.params.id,function(err,result){
+    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result});
+    console.log("hi "+req.params.id+"result "+result);
+  });
+});
+
+
 /* GET home page. */
-router.get('/editObs/:id', function(req, res) {
-  res.render('editObs');
+router.post('/editMediaObs_name', function(req, res) {
+  obsMgr.editObs_name(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editMediaObs_pass_nid', function(req, res) {
+  obsMgr.editObs_pass_nid(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editMediaObs_email', function(req, res) {
+  obsMgr.editObs_email(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editMediaObs_phone_obs', function(req, res) {
+  obsMgr.editObs_phone_obs(req.body,function(err,result){
+    res.send(result);
+  });
 });
 
 /* GET home page. */
