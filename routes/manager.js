@@ -101,7 +101,9 @@ router.post('/editMediaObs_phone_obs', function(req, res) {
 
 /* GET home page. */
 router.get('/delObs/:id', function(req, res) {
-  res.render('delObs');
+  obsMgr.delObs(req.params.id,function(result){
+    res.send('result');
+  })
 });
 
 /* GET home page. */
