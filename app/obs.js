@@ -4,7 +4,7 @@ exports.obsMgr = {
   
   getOb : function(id,cb){ //sort by organisaition type
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` = ? ', id, function(err, result) {
+      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` = ? AND obs.`registration_org` = org.`registration_no`', id, function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
@@ -56,7 +56,6 @@ exports.obsMgr = {
 
   addOb : function(body,cb){
     mysqlMgr.connect(function (conn) {
-      console.log(body);
       conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
         conn.release();
         if(err) {

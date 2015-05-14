@@ -12,7 +12,7 @@ $(document).ready(function() {
   
   
   $('#name').editable({
-    url: '/manager/editMediaObs_name/',
+    url: '/manager/editObs_name/',
     type: 'text',
     pk: 1,
     name: 'name',
@@ -24,7 +24,7 @@ $(document).ready(function() {
   });
   
   $('#pass_nid').editable({
-    url: '/manager/editMediaObs_pass_nid/',
+    url: '/manager/editObs_pass_nid/',
     type: 'text',
     pk: 1,
     name: 'pass_nid',
@@ -36,7 +36,7 @@ $(document).ready(function() {
   });
   
   $('#email').editable({
-    url: '/manager/editMediaObs_email/',
+    url: '/manager/editObs_email/',
     type: 'text',
     pk: 1,
     name: 'email',
@@ -48,7 +48,7 @@ $(document).ready(function() {
   });
   
   $('#phone_obs').editable({
-    url: '/manager/editMediaObs_phone_obs/',
+    url: '/manager/editObs_phone_obs/',
     type: 'text',
     pk: 1,
     name: 'phone_obs',
