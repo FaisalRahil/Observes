@@ -59,13 +59,13 @@ $(document).ready(function() {
   
     function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editOrgObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deleteOrg" data-toggle="modal" href="#deleteOrgModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteObs" data-toggle="modal" href="#deleteObsModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
@@ -82,7 +82,20 @@ $(document).ready(function() {
       }
   }
 
-  
+  /* Go to orgTable needs view or edit */
+  $('body').on('click', '#deleteObs ', function () {
+    var id = $(this).val();
+    $('#confdelete').val(id);
+  });
+
+  /* Go to orgTable needs view or edit */
+  $('#confdelete').click(function() {
+    var id = $(this).val();
+    $.get('/manager/delObs/'+id, function(result){
+      window.location.href="/manager/obs/locOrg";
+    });
+  });
+
   // $(':checkbox').checkboxpicker();
   $('#director').checkboxpicker({
     onLabel:"لا", offLabel:"نعم"
@@ -92,7 +105,7 @@ $(document).ready(function() {
     onLabel:"أنثى", offLabel:"ذكر"
   });
   
-  $("#natMediaObs").validate({
+  $("#natOrgObs").validate({
     rules:{
       name:{
         required: true,

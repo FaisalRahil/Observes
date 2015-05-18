@@ -76,7 +76,7 @@ block content
                 input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
-
+              input(type='hidden', name='Type', value='4')
 
               //- .form-group
               //-   select.form-control#level(name='level',type='text')
@@ -98,6 +98,19 @@ block content
             | المنظمات
         .panel-body
           table#table
+
+  #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body
+          p.h2 هل انت متأكد 
+          p 
+        .modal-footer
+          button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء
+
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/jquery.validate.min.js")
