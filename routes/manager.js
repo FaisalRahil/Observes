@@ -34,9 +34,10 @@ router.get('/org/locOrg', function(req, res) {
 
 /* GET home page. */
 router.get('/org/candidate', function(req, res) {
-  res.render('candidate');
+  orgMgr.getOrg(6,function(result){
+   res.render('manager/candidate',{ title: 'مراقب محلي',orgs:result });
 });
-
+});
 /* GET home page. */
 router.get('/editOrg/:id', function(req, res) {
   res.render('editOrg');
@@ -125,6 +126,16 @@ router.get('/getOb4', function(req, res) {
   });
 });
 
+router.get('/getOb6', function(req, res) {
+  obsMgr.getOb(6,function(result){
+    res.send(result);
+  });
+});
+router.get('/getOrg6', function(req, res) {
+  orgMgr.getOrg(6,function(result){
+    res.send(result);
+  });
+});
 router.post('/addObs', function(req, res) {
   req.body['id_office']=1;
   req.body['nationality']=1;

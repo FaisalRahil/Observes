@@ -2,8 +2,10 @@ var mysqlMgr = require('./mysql').mysqlMgr,
   util=require('util');
 exports.orgMgr = {
   getOrg : function(id,cb){
+    console.log(id);
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `type`= ? ',id,  function(err, result) {
+      conn.query('SELECT * FROM `organisaition`  WHERE  `status` = 1 AND `type`= ?',id,  function(err, result) {
+        console.log(result);
         conn.release();
         if(err) {
           util.log(err);
