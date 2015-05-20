@@ -1,5 +1,6 @@
 extends ../layout
 block content
+
   header.navbar.navbar-red.navbar-fixed-top.bs-docs-nav(role='banner')
     .navbar-header.pull-left
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
@@ -34,42 +35,49 @@ block content
     .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
         .nav.nav-pills.nav-stacked
           li
-              a.btn.btn-danger.btn-block(href="/admin/org/natOrg", role="button")
+              a.btn.btn-default.btn-block(href="/admin/org/natOrg", role="button")
                 span.glyphicon.glyphicon-th.pull-right
-                | الوكلاء
+                | مـنـظـمـة محلــيـة
           li
               a.btn.btn-default.btn-block(href="/admin/org/natMedia", role="button")
                 span.glyphicon.glyphicon-th.pull-right
-                | اعـلام دولـي
+                | اعـلام محلـي
           li
-              a.btn.btn-default.btn-block(href="/admin/org/guest", role="button")
+              a.btn.btn-danger.btn-block(href="/admin/org/guest", role="button")
+                span.glyphicon.glyphicon-th.pull-right
+                | وكيــــل
+          li
+              a.btn.btn-default.btn-block(href="/office/constituencyViews", role="button")
                 span.glyphicon.glyphicon-th.pull-right
                 | ضــيــف
-          li
-              a.btn.btn-default.btn-block(href="#", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | مـــــثـال
 
     .col-sm-7.col-md-7.col-lg-7
       .row
         .panel.red-form.panel-danger
-          .panel-heading Panel heading without title
+          .panel-heading إدخال وكيل
           .panel-body
-            form#natOrg(role='form',method="post",action="/admin/addOrg")
+            form#natMediaObs(role='form',method="post",action="/manager/addObs")
               .form-group
-                input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
+                input.form-control#name(name='name', placeholder='اﻹسم', type='text')
               .form-group
-                input.form-control#name_director(name='name_director', placeholder='name_director', type='text')
+                input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
               .form-group
-                input.form-control#phone(name='phone', placeholder='phone', type='text')
+                select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
+                  option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
+                  for org in orgs
+                    option(value="#{org.registration_no}") #{org.name_org}
+              .form-group.col-sm-6.col-md-6.col-lg-6
+                | الجنس :   
+                input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
+              .form-group.col-sm-6.col-md-6.col-lg-6  
+                | مدير  : 
+                input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
               .form-group
-                input.form-control#address(name='address', placeholder='Address', type='text')
+                input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
               .form-group
-                input.form-control#registration_no(name='registration_no', placeholder='registration_no', type='text')
-              .form-group
-                input.form-control#email(name='email', placeholder='email', type='email')
+                input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+              input(type='hidden', name='Type', value='6')
 
-              input#type(name='type', type='hidden',value='1')
               //- .form-group
               //-   select.form-control#level(name='level',type='text')
               //-     option(value='', style='color: grey; display:none;') Please Select Level
@@ -77,9 +85,9 @@ block content
               //-     option(value='2') Seller  
               .row
                 .col-xs-8.col-md-8
-                  button#btnSubmit.btn.btn-danger.btn-block(type='submit') Registration Admin 
+                  button#btnSubmit.btn.btn-danger.btn-block(type='submit') تسجيــــل 
                 .col-xs-4.col-md-4
-                  button.btn.btn-default.btn-block(type='reset') Cancel
+                  button.btn.btn-default.btn-block(type='reset') إلغاء
 
   .row
     .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
@@ -90,10 +98,25 @@ block content
             | المنظمات
         .panel-body
           table#table
+
+  #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body
+          p.h2 هل انت متأكد 
+          p 
+        .modal-footer
+          button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء
+
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/jquery.validate.min.js")
   script(src="/js/bootstrap-table.min.js")
-  script(src='/js/admin/natOrg.js')
+  script(src="/js/manager/agent.js")
   script(src='/js/admin/backToTop.js')
   script(src='/js/admin/bootstrap-notify.min.js')
+  script(src="/js/manager/bootstrap-checkbox.min.js")
+  script(src='/js/bootstrap-select.min.js')

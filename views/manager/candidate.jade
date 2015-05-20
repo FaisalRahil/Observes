@@ -51,7 +51,7 @@ block content
         .panel.red-form.panel-danger
           .panel-heading Panel heading without title
           .panel-body
-            form#natOrg(role='form')
+            form#natOrg(role='form',method="post",action="/manager/addOrg")
               .form-group
                 input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
               .form-group
@@ -64,6 +64,8 @@ block content
                 input.form-control#registration_no(name='registration_no', placeholder='registration_no', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='email', type='email')
+                input(name='type',type='hidden',value='6')
+
               //- .form-group
               //-   select.form-control#level(name='level',type='text')
               //-     option(value='', style='color: grey; display:none;') Please Select Level

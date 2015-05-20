@@ -58,8 +58,10 @@ router.get('/obs/locMedia', function(req, res) {
 });
 
 /* GET home page. */
-router.get('/obs/agents', function(req, res) {
-  res.render('manager/agent');
+router.get('/obs/agent', function(req, res) {
+  orgMgr.getOrg(6,function(result){
+   res.render('manager/agent',{ title: 'الوكيل',orgs:result });
+});
 });
 
 /* EDIT. */
@@ -68,7 +70,19 @@ router.get('/editMediaObs/:id', function(req, res) {
     res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result});
   });
 });
-
+/* EDIT. */
+router.get('/editAgentObs/:id', function(req, res) {
+  obsMgr.getObs_Id(req.params.id,function(err,result){
+    res.render('manager/editAgentObs',{ title: 'المراقبين' ,obs:result});
+  });
+});
+/* EDIT. */
+router.get('/editCandidateOrg/:id', function(req, res) {
+  orgMgr.getOrg_Id(req.params.id,function(err,result){
+    console.log(result);
+    res.render('manager/editCandidateOrg',{ title: 'المراقبين' ,org:result});
+  });
+});
 router.get('/editOrgObs/:id', function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
     res.render('manager/editOrgObs',{ title: 'المراقبين' ,obs:result});
@@ -103,6 +117,43 @@ router.post('/editObs_phone_obs', function(req, res) {
   });
 });
 
+// ====================== edit org
+
+/* GET home page. */
+router.post('/editOrg_name_org', function(req, res) {
+  orgMgr.editOrg_name_org(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editOrg_name_director', function(req, res) {
+  orgMgr.editOrg_name_director(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editOrg_email', function(req, res) {
+  orgMgr.editOrg_email(req.body,function(err,result){
+    res.send(result);
+  });
+});
+/* GET home page. */
+router.post('/editOrg_phone', function(req, res) {
+  orgMgr.editOrg_phone(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/* GET home page. */
+router.post('/editOrg_address', function(req, res) {
+  orgMgr.editOrg_address(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+// ====================== end edit org
 /* GET home page. */
 router.get('/delObs/:id', function(req, res) {
   obsMgr.delObs(req.params.id,function(result){
@@ -167,6 +218,23 @@ router.post('/addObs', function(req, res) {
     if(type==6){
       res.redirect('/manager/obs/agent');
     }
+  });
+});
+
+router.post('/addOrg', function(req, res) {
+  req.body['id_office']=1;
+  orgMgr.addOrg(req.body, function (results){
+    if (req.body["type"] == 6) {
+      res.redirect('org/candidate');
+    }
+    // } else if (req.body["type"] == 2){
+    //   res.redirect('org/guest');
+    
+    // } else {
+    //   res.redirect('org/natMedia');
+    
+    // } 
+
   });
 });
 

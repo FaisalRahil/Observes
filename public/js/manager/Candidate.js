@@ -60,7 +60,7 @@ $(document).ready(function() {
 
   function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/admin/editMedia/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/manager/editCandidateOrg/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
