@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#table').bootstrapTable({
       method: 'get',
-      url: '/manager/getOb',
+      url: '/manager/getOb6',
       cache: false,
       height: 400,
       striped: true,
@@ -59,7 +59,7 @@ $(document).ready(function() {
   
     function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editMediaObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editAgentObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
@@ -81,67 +81,5 @@ $(document).ready(function() {
             ].join('');
       }
   }
-
-  /* Go to orgTable needs view or edit */
-  $('body').on('click', '#deleteObs ', function () {
-    var id = $(this).val();
-    $('#confdelete').val(id);
-  });
-
-  /* Go to orgTable needs view or edit */
-  $('#confdelete').click(function() {
-    var id = $(this).val();
-    $.get('/manager/delObs/'+id, function(result){
-      window.location.href="/manager/obs/locMedia";
-    });
-  });
-
-  // $(':checkbox').checkboxpicker();
-  $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
-
-  $('#gender').checkboxpicker({
-    onLabel:"أنثى", offLabel:"ذكر"
-  });
-  
-  $("#natMediaObs").validate({
-    rules:{
-      name:{
-        required: true,
-      },
-      pass_nid:{
-        required: true,
-      },
-      registration_no:{
-        required: true,
-      },
-      phone:{
-        required: true,
-      },
-      email:{
-        required : true,
-        email : true
-      }
-    },
-    messages:{
-      name:{
-        required: "الرجاء إدخال اﻹسم !",
-      },
-      pass_nid:{
-        required: "الرجاء إدخال رقم الهوية !",
-      },
-      email:{
-        required: "الرجاء إدخال البريد اﻹلكتروني !",
-        email: "هذا ليس بريد إلكتروني !",
-      },
-      phone:{
-        required: "الرجاء إدخال رقم الهاتف !",
-      },
-      registration_no:{
-        required: "الرجاء إدخال الرقم اﻹشهار !",
-      }  
-    },
-  });
 
 });

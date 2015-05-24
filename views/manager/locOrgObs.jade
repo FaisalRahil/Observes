@@ -35,15 +35,15 @@ block content
     .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
         .nav.nav-pills.nav-stacked
           li
-              a.btn.btn-default.btn-block(href="/admin/org/natOrg", role="button")
+              a.btn.btn-info.btn-block(href="/manager/obs/locOrg", role="button")
                 span.glyphicon.glyphicon-th.pull-right
-                | مـنـظـمـة محلــيـة
+                | مــراقب محلي
           li
-              a.btn.btn-info.btn-block(href="/admin/org/natMedia", role="button")
+              a.btn.btn-default.btn-block(href="/manager/obs/locMedia", role="button")
                 span.glyphicon.glyphicon-th.pull-right
-                | اعـلام محلـي
+                | اعـلامي محلـي
           li
-              a.btn.btn-default.btn-block(href="/admin/org/guest", role="button")
+              a.btn.btn-default.btn-block(href="/manager/obs/agent", role="button")
                 span.glyphicon.glyphicon-th.pull-right
                 | وكيــــل
           li
@@ -54,7 +54,7 @@ block content
     .col-sm-7.col-md-7.col-lg-7
       .row
         .panel.blue-form.panel-info
-          .panel-heading إدخال مراقب إعلامي
+          .panel-heading إدخال مراقب محلي
           .panel-body
             form#natMediaObs(role='form',method="post",action="/manager/addObs")
               .form-group
@@ -76,7 +76,7 @@ block content
                 input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
-
+              input(type='hidden', name='Type', value='4')
 
               //- .form-group
               //-   select.form-control#level(name='level',type='text')
@@ -98,6 +98,19 @@ block content
             | المنظمات
         .panel-body
           table#table
+
+  #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body
+          p.h2 هل انت متأكد 
+          p 
+        .modal-footer
+          button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء
+
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/jquery.validate.min.js")

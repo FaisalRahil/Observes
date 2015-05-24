@@ -11,11 +11,11 @@ $(document).ready(function() {
   });
   
   
-  $('#name').editable({
-    url: '/manager/editMediaObs_name/',
+  $('#name_org').editable({
+    url: '/manager/editOrg_name_org/',
     type: 'text',
     pk: 1,
-    name: 'name',
+    name: 'name_org',
     title: 'Enter name',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال اﻹسم';
@@ -23,12 +23,12 @@ $(document).ready(function() {
     }
   });
   
-  $('#pass_nid').editable({
-    url: '/manager/editMediaObs_pass_nid/',
+  $('#name_director').editable({
+    url: '/manager/editOrg_name_director/',
     type: 'text',
     pk: 1,
-    name: 'pass_nid',
-    title: 'Enter pass_nid',
+    name: 'name_director',
+    title: 'Enter name director',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال الرقم الوطني / جواز سفر';
       if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 ارقام";
@@ -36,7 +36,7 @@ $(document).ready(function() {
   });
   
   $('#email').editable({
-    url: '/manager/editMediaObs_email/',
+    url: '/manager/editOrg_email/',
     type: 'text',
     pk: 1,
     name: 'email',
@@ -47,12 +47,24 @@ $(document).ready(function() {
     }
   });
   
-  $('#phone_obs').editable({
-    url: '/manager/editMediaObs_phone_obs/',
+  $('#phone').editable({
+    url: '/manager/editObs_phone/',
     type: 'text',
     pk: 1,
-    name: 'phone_obs',
+    name: 'phone',
     title: 'Enter phone',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال رقم الهاتف';
+      if(v.length<10) return "يجب أن يكون رقم الهاتف أكثر من 9 أرقام ";
+    }
+  });
+
+  $('#address').editable({
+    url: '/manager/editOrg_address/',
+    type: 'text',
+    pk: 1,
+    name: 'address',
+    title: 'Enter address',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال رقم الهاتف';
       if(v.length<10) return "يجب أن يكون رقم الهاتف أكثر من 9 أرقام ";
