@@ -49,11 +49,11 @@ block content
     .col-sm-7.col-md-7.col-lg-7
       .row
         .panel.green-form.panel-success
-          .panel-heading Panel heading without title
+          .panel-heading تـسـجـيـل الضيف
           .panel-body
             form#guest(role='form',method="post",action="/admin/addOrg")
               .form-group
-                input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
+                input.form-control#name_org(name='name_org', placeholder='أسم الضيف', type='text')
 
               input#type(name='type', type='hidden',value='2')
               //- .form-group
@@ -63,9 +63,9 @@ block content
               //-     option(value='2') Seller  
               .row
                 .col-xs-8.col-md-8
-                  button#btnSubmit.btn.btn-success.btn-block(type='submit') Registration Admin 
+                  button#btnSubmit.btn.btn-success.btn-block(type='submit') تـسـجـيـل
                 .col-xs-4.col-md-4
-                  button.btn.btn-default.btn-block(type='reset') Cancel
+                  button.btn.btn-default.btn-block(type='reset') إلغاء
 
   .row
     .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1

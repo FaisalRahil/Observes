@@ -50,21 +50,21 @@ block content
     .col-sm-7.col-md-7.col-lg-7
       .row
         .panel.orange-form.panel-warning
-          .panel-heading Panel heading without title
+          .panel-heading تـسـجـيـل بيانات المنظمات الاعلاميه الدولية
           .panel-body
             form#natMedia(role='form',method="post",action="/admin/addOrg")
               .form-group
-                input.form-control#name_org(name='name_org', placeholder='name_org', type='text')
+                input.form-control#name_org(name='name_org', placeholder='اسم المنظمه', type='text')
               .form-group
-                input.form-control#name_director(name='name_director', placeholder='name_director', type='text')
+                input.form-control#name_director(name='name_director', placeholder='اسم مدير المنظمه', type='text')
               .form-group
-                input.form-control#phone(name='phone', placeholder='phone', type='text')
+                input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
               .form-group
-                input.form-control#address(name='address', placeholder='Address', type='text')
+                input.form-control#address(name='address', placeholder='العنوان', type='text')
               .form-group
-                input.form-control#registration_no(name='registration_no', placeholder='registration_no', type='text')
+                input.form-control#registration_no(name='registration_no', placeholder='رقم الاشهار', type='text')
               .form-group
-                input.form-control#email(name='email', placeholder='email', type='email')
+                input.form-control#email(name='email', placeholder='الباريد الالكتروني', type='email')
 
               input#type(name='type', type='hidden',value='3')
               //- .form-group
@@ -74,9 +74,9 @@ block content
               //-     option(value='2') Seller  
               .row
                 .col-xs-8.col-md-8
-                  button#btnSubmit.btn.btn-warning.btn-block(type='submit') Registration Admin 
+                  button#btnSubmit.btn.btn-warning.btn-block(type='submit') تـسـجـيـل
                 .col-xs-4.col-md-4
-                  button.btn.btn-default.btn-block(type='reset') Cancel
+                  button.btn.btn-default.btn-block(type='reset') إلغاء
 
   .row
     .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1

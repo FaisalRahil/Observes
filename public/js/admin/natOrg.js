@@ -64,7 +64,7 @@ $(document).ready(function() {
 
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deleteOrg" data-toggle="modal" href="#deleteOrgModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteOrg" data-toggle="modal" href="#deleteOrgModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
@@ -95,9 +95,12 @@ $(document).ready(function() {
       },
       phone:{
         required: true,
+        minlength: 10,
+        number: true,
       },
       registration_no:{
         required : true,
+        number: true,
       },
       name_director:{
         required : true,
@@ -108,23 +111,26 @@ $(document).ready(function() {
     },
     messages:{
       name_org:{
-        required: "Please enter the full name_org !",
+        required: "الرجاء ادخال اسم المنظمه",
       },
       email:{
-        required: "Please enter the email !",
-        email: "Please enter the email true !",
+        required: "الرجاء إدخال الباريد الالكتروني",
+        email: "الرجاء إدخال الباريد الالكتروني بصورته الصحيحه",
       },
       phone:{
-        required: "Please enter your phone !",
+        required: "الرجاء إدخال رقم الهاتف",
+        minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام",
+        number: "يجب أن تكون المدخلات أرقام",
       },
       registration_no:{
-        required: "Please enter the registration_no !",
+        required: "الرجاء إدخال رقم الاشهار",
+        number: "يجب أن تكون المدخلات أرقام",
       },
       name_director:{
-        required: "Please enter the name_director !",
+        required: "الرجاء إدخال اسم مدير المنظمه",
       },
       address:{
-        required: "Please enter your address !",
+        required: "الرجاء إدخال عنوان المنظمه ",
       },
     },
     highlight: function(element) {

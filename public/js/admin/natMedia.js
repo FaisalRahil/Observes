@@ -95,9 +95,12 @@ $(document).ready(function() {
       },
       phone:{
         required: true,
+        minlength: 10,
+        number: true,
       },
       registration_no:{
         required : true,
+        number: true,
       },
       name_director:{
         required : true,
@@ -108,23 +111,26 @@ $(document).ready(function() {
     },
     messages:{
       name_org:{
-        required: "Please enter the full name_org !",
+        required: "الرجاء إدخال اسم المنظمه",
       },
       email:{
-        required: "Please enter the email !",
-        email: "Please enter the email true !",
+        required: "الرجاء إدخال الباريد الالكتروني",
+        email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
       },
       phone:{
-        required: "Please enter your phone !",
+        required: "يجب إدخال رقم الهاتف",
+        minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
+        number: "يجب أن تكون المدخلات أرقام ",
       },
       registration_no:{
-        required: "Please enter the registration_no !",
+        required: "الرجاء إدخال رقم الاشهار",
+        number: "يجب أن تكون المدخلات أرقام ",
       },
       name_director:{
-        required: "Please enter the name_director !",
+        required: "الرجاء إدخال أسم مدير المنظمه ",
       },
       address:{
-        required: "Please enter your address !",
+        required: "الرجاء إدخال عنوان المنظمه  ",
       },
     },
     highlight: function(element) {

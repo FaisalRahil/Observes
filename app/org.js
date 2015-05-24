@@ -39,20 +39,7 @@ exports.orgMgr = {
       });
     });
   },
-
-  delOrg : function(id,cb){
-    mysqlMgr.connect(function (conn) {
-      conn.query('UPDATE `organisaition` SET `status` = 0 WHERE `id_org` = ?',id,  function(err, result) {
-        conn.release();
-        if(err) {
-          cb(err,null);
-        } else {
-          cb(null,result);
-        }
-      });
-    });
-  },
-
+  
   getOrg_Id : function(id,cb){
     mysqlMgr.connect(function (conn) {
       conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `id_org` = ?',id,  function(err, result) {
@@ -164,6 +151,19 @@ exports.orgMgr = {
   },
 
   delGuest : function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('UPDATE `organisaition` SET `status` = 0 WHERE `id_org` = ?',id,  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  delOrg : function(id,cb){
     mysqlMgr.connect(function (conn) {
       conn.query('UPDATE `organisaition` SET `status` = 0 WHERE `id_org` = ?',id,  function(err, result) {
         conn.release();
