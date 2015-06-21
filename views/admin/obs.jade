@@ -29,3 +29,49 @@ block content
           a(href='#') المراقبين
         li
           a(href='#') الـمنظمات
+  
+  .row
+    .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            |   لـوحـــة الـتـحــكــم
+        .panel-body
+          .row
+            .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              a.btn-lg.btn.btn-danger.btn-block(href="/admin/org/natOrg", role="button")
+                span.glyphicon.glyphicon-user
+                br
+                | مـنـظـمـة دولــيـة
+              p
+              a.btn-lg.btn.btn-warning.btn-block(href="/admin/org/natMedia", role="button")
+                span.glyphicon.glyphicon-th
+                br
+                | اعـلام دولـي
+              p
+            .col-xs-6.col-sm-6.col-md-6.col-lg-6  
+              a.btn-lg.btn.btn-info.btn-block(href="/admin//moveOrg", role="button")
+                span.glyphicon.glyphicon-th
+                br
+                | نـقـل مراقبين المنظمة
+              p
+              a.btn-lg.btn.btn-success.btn-block(href="/admin/org/guest", role="button")
+                span.glyphicon.glyphicon-user
+                br
+                | ضــيــف
+              p
+
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المنظمات
+        .panel-body
+          table#table
+
+  script(src="/js/jquery-1.11.1.min.js")
+  script(src="/js/bootstrap.min.js")
+  script(src="/js/bootstrap-table.min.js")
+  script(src="/js/admin/org.js")
+  script(src='/js/admin/backToTop.js')
