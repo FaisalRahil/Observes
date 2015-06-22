@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
+var report = require('./routes/report');
 var manager = require('./routes/manager');
 // var expressValidator = require('express-validator');
 var passport = require('passport');
@@ -39,6 +40,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/admin', admin);
 app.use('/manager',manager);
+app.use('/report',report);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

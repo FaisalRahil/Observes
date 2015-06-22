@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    
+    <!-- <script src="http://code.highcharts.com/highcharts.js"></script> -->
+    <!-- <script src="http://code.highcharts.com/highcharts-3d.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    
+    <style type="text/css">
+      .ddddd{
+        background-color: #CC9559;
+        /*color: black;*/
+      }
+    </style>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+          <div class="panel-heading ddddd">
+            <h3 class="panel-title ">Users</h3>
+          </div>
+          
+          <!-- table-condensed -->
+          <!-- table-hover -->
+          <!-- table-striped -->
+          <!-- table-bordered -->
+          <table class="table table-bordered">
+            <thead>
+              <tr class="ddddd">
+                <th> aa </th>
+                <th> ss </th>
+                <th> dd </th>
+                <th> ff </th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each re}}
+                <tr>
+                  <td> {{id_org}} </td>
+                  <td class="info"> {{name_org}} </td>
+                  <td class="info"> {{email}} </td>
+                  <td> {{phone}} </td>
+                </tr>
+              {{/each}}  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- 
+
+<tr class="active">...</tr>
+<tr class="success">...</tr>
+<tr class="warning">...</tr>
+<tr class="danger">...</tr>
+<tr class="info">...</tr>
+
+<tr>
+  <td class="active">...</td>
+  <td class="success">...</td>
+  <td class="warning">...</td>
+  <td class="danger">...</td>
+  <td class="info">...</td>
+</tr>
+ -->
