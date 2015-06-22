@@ -52,7 +52,7 @@ block content
         .panel.orange-form.panel-warning
           .panel-heading إدخال إعلام محلي
           .panel-body
-            form#natOrg(role='form',method="post",action="/admin/addOrg")
+            form#natOrg(role='form',method="post",action="/manager/addOrg")
               .form-group
                 input.form-control#name_org(name='name_org', placeholder='اسم المنظمة', type='text')
               .form-group
@@ -66,7 +66,7 @@ block content
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
 
-              input#type(name='type', type='hidden',value='1')
+              input#type(name='type', type='hidden',value='5')
               //- .form-group
               //-   select.form-control#level(name='level',type='text')
               //-     option(value='', style='color: grey; display:none;') Please Select Level
@@ -105,6 +105,6 @@ block content
   script(src='/js/bootstrap.min.js')
   script(src="/js/jquery.validate.min.js")
   script(src="/js/bootstrap-table.min.js")
-  script(src='/js/admin/natOrg.js')
+  script(src='/js/manager/locMedia.js')
   script(src='/js/admin/backToTop.js')
   script(src='/js/admin/bootstrap-notify.min.js')

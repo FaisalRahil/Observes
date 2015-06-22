@@ -34,7 +34,7 @@ $(document).ready(function() {
       }, {
           field: 'email',
           sortable:true,
-          title: 'الباريد الالكتروني'
+          title: 'البريد الالكتروني'
       }, {
           field: 'phone',
           sortable:true,
