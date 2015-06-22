@@ -1,43 +1,44 @@
 $(document).ready(function() {
-  $('#table').bootstrapTable({
-    method: 'get',
-    url: '/admin/getOrg',
-    cache: false,
-    height: 400,
-    striped: true,
-    pagination: true,
-    pageSize: 50,
-    silent: true,
-    pageList: [10, 25, 50, 100],
-    search: true,
-    showColumns: true,
-    showRefresh: true,
-    minimumCountColumns: 2,
-    clickToSelect: true,
-    columns: [{
-        field: 'name_org',
-        sortable:true,
-        title: 'اسم المنظمه'
-    }, {
-        field: 'name_director',
-        sortable:true,
-        title: 'اسم الرئيس'
-    }, {
-        field: 'address',
-        sortable:true,
-        title: 'العنوان'
-    }, {
-        field: 'registration_no',
-        sortable:true,
-        title: 'رقم الاشهار'
-    }, {
-        field: 'email',
-        sortable:true,
-        title: 'الباريد الالكتروني'
-    }, {
-        field: 'phone',
-        sortable:true,
-        title: 'رقم الهاتف'
+    console.log(result);
+    $('#table').bootstrapTable({
+      method: 'get',
+      url: '/admin/getAllObs',
+      cache: false,
+      height: 400,
+      striped: true,
+      pagination: true,
+      pageSize: 50,
+      silent: true,
+      pageList: [10, 25, 50, 100],
+      search: true,
+      showColumns: true,
+      showRefresh: true,
+      minimumCountColumns: 2,
+      clickToSelect: true,
+      columns: [{
+          field: 'name',
+          sortable:true,
+          title: 'اسم المنظمه'
+      }, {
+          field: 'nationality',
+          sortable:true,
+          title: 'الجنسيه'
+      }, {
+          field: 'pass_nid',
+          sortable:true,
+          title: 'رقم الجواز'
+      }, {
+          field: 'registration_org',
+          sortable:true,
+          title: 'المنظمه'
+      }, {
+          field: 'email',
+          sortable:true,
+          title: 'الباريد الالكتروني'
+      }, {
+          field: 'phone',
+          sortable:true,
+          title: 'رقم الهاتف'
     }, {
         field: 'id_org',
         align: 'center',
@@ -77,8 +78,8 @@ $(document).ready(function() {
   /* Go to orgTable needs view or edit */
   $('#confdelete').click(function() {
     var id = $(this).val();
-    $.get('/admin/delOrg/'+id, function(result){
-      window.location.href="/admin/org/";
+    $.get('/admin/delObs/'+id, function(result){
+      window.location.href="/admin/obs/";
     });
   });
 

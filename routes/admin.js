@@ -19,18 +19,25 @@ router.post('/addOrg', function(req, res) {
   orgMgr.addOrg(req.body, function (results){
     if (req.body["type"] == 1) {
       res.redirect('org/natOrg');
-    
     } else if (req.body["type"] == 2){
       res.redirect('org/guest');
-    
     } else {
       res.redirect('org/natMedia');
-    
-    } 
-
+    }
   });
 });
-
+// bhuvhvihybuvbiobuo
+router.post('/addOb', function(req, res) {
+  obsMgr.addOb(req.body,function(err,result){
+    if (req.body["type"] == 1) {
+      res.redirect('org/natOrgObs');
+    } else if (req.body["type"] == 2){
+      res.redirect('org/guestObs');
+    } else {
+      res.redirect('org/natMediaObs');
+    } 
+  });
+});
 //*************************************************
 //
 router.get('/getObs',function(req , res ){
@@ -80,6 +87,12 @@ router.get('/obs', function(req, res) {
   res.render('admin/obs');
 });
 
+router.get('/getAllObs',function(req , res ){
+  obsMgr.getObs(function(result){
+    res.send(result);
+  });
+});
+
 /* GET home page. */
 router.get('/report', function(req, res) {
   res.render('admin/report');
@@ -93,6 +106,11 @@ router.get('/org/natMedia', function(req, res) {
 /* GET home page. */
 router.get('/org/guest', function(req, res) {
   res.render('admin/guest');
+});
+
+/* GET home page. */
+router.get('/obs/natMediaObs', function(req, res) {
+  res.render('admin/natMediaObs');
 });
 
 /* GET home page. */
@@ -201,9 +219,23 @@ router.get('/delMedia/:id', function(req, res) {
 });
 
 /* GET home page. */
+router.get('/delMediaObs/:id', function(req, res) {
+  obsMgr.delMediaObs(req.params.id,function(result){
+    res.send('result');
+  })
+});
+
+/* GET home page. */
 router.get('/delGuest/:id', function(req, res) {
   orgMgr.delGuest(req.params.id,function(result){
     res.send('result');
+  })
+});
+
+// 
+router.get('/getNatMediaObs', function(req, res) {
+  obsMgr.getObs(3,function(result){
+    res.send(result);
   })
 });
 
