@@ -77,9 +77,13 @@ router.get('/editAgentObs/:id', function(req, res) {
   });
 });
 /* EDIT. */
+router.get('/editlocMeadia/:id', function(req, res) {
+  orgMgr.getOrg_Id(req.params.id,function(err,result){
+    res.render('manager/editlocMeadia',{ title: 'الاعلام المحلي' ,org:result});
+  });
+});
 router.get('/editCandidateOrg/:id', function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
-    console.log(result);
     res.render('manager/editCandidateOrg',{ title: 'المراقبين' ,org:result});
   });
 });
@@ -168,7 +172,9 @@ router.get('/delOrg/:id', function(req, res) {
 
 /* GET home page. */
 router.get('/getOb', function(req, res) {
+  console.log("im in");
   obsMgr.getOb(5,function(result){
+    console.log(result);
     res.send(result);
   });
 });
@@ -190,10 +196,14 @@ router.get('/getOrg6', function(req, res) {
     res.send(result);
   });
 });
+router.get('/getOrg5', function(req, res) {
+  orgMgr.getOrg(5,function(result){
+    res.send(result);
+  });
+});
 router.post('/addObs', function(req, res) {
   type=req.body["Type"];
   delete req.body["Type"];
-  console.log(req.body);
   req.body['id_office']=1;
   req.body['nationality']=1;
   if(req.body['gender']){
@@ -208,6 +218,7 @@ router.post('/addObs', function(req, res) {
   else{
     req.body['director']=1;
   }
+
   obsMgr.addOb(req.body,function(err,result){
     if(type==4){
       res.redirect('/manager/obs/locOrg');
@@ -226,10 +237,9 @@ router.post('/addOrg', function(req, res) {
   orgMgr.addOrg(req.body, function (results){
     if (req.body["type"] == 6) {
       res.redirect('org/candidate');
+    } else if (req.body["type"] == 5){
+      res.redirect('org/locMedia');
     }
-    // } else if (req.body["type"] == 2){
-    //   res.redirect('org/guest');
-    
     // } else {
     //   res.redirect('org/natMedia');
     

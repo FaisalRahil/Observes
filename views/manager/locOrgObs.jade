@@ -46,17 +46,12 @@ block content
               a.btn.btn-default.btn-block(href="/manager/obs/agent", role="button")
                 span.glyphicon.glyphicon-th.pull-right
                 | وكيــــل
-          li
-              a.btn.btn-default.btn-block(href="/office/constituencyViews", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | ضــيــف
-
     .col-sm-7.col-md-7.col-lg-7
       .row
         .panel.blue-form.panel-info
           .panel-heading إدخال مراقب محلي
           .panel-body
-            form#natMediaObs(role='form',method="post",action="/manager/addObs")
+            form#natOrgObs(role='form',method="post",action="/manager/addObs")
               .form-group
                 input.form-control#name(name='name', placeholder='اﻹسم', type='text')
               .form-group
@@ -76,13 +71,7 @@ block content
                 input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
-              input(type='hidden', name='Type', value='4')
-
-              //- .form-group
-              //-   select.form-control#level(name='level',type='text')
-              //-     option(value='', style='color: grey; display:none;') Please Select Level
-              //-     option(value='1') Administration
-              //-     option(value='2') Seller  
+              input(type='hidden', name='Type', value='4') 
               .row
                 .col-xs-8.col-md-8
                   button#btnSubmit.btn.btn-info.btn-block(type='submit') تسجيــــل 
@@ -95,7 +84,7 @@ block content
         .panel-heading
           h3.panel-title
             span.glyphicon.glyphicon-bookmark
-            | المنظمات
+            | المراقبين
         .panel-body
           table#table
 

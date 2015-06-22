@@ -81,5 +81,64 @@ $(document).ready(function() {
             ].join('');
       }
   }
+    $('#director').checkboxpicker({
+    onLabel:"لا", offLabel:"نعم"
+  });
 
+  $('#gender').checkboxpicker({
+    onLabel:"أنثى", offLabel:"ذكر"
+  });
+
+  $("#agent").validate({
+    rules:{
+      name:{
+        required: true,
+      },
+      pass_nid:{
+        required: true,
+      },
+      registration_org:{
+        required: true,
+      },
+      phone_obs:{
+        required: true,
+        number: true,
+      },
+      email:{
+        required : true,
+        email : true
+      }
+    },
+    messages:{
+      name:{
+        required: "الرجاء إدخال اﻹسم !",
+      },
+      pass_nid:{
+        required: "الرجاء إدخال رقم الهوية !",
+      },
+      email:{
+        required: "الرجاء إدخال البريد اﻹلكتروني !",
+        email: "هذا ليس بريد إلكتروني !",
+      },
+      phone_obs:{
+        required: "الرجاء إدخال رقم الهاتف !",
+        number: "الرجاء ادخال رقم الهاتف ",
+      },
+      registration_org:{
+        required: "الرجاء اختيار المرشح !",
+      }  
+    },
+  });
+  $('body').on('click', '#deleteObs ', function () {
+    var id = $(this).val();
+    $('#confdelete').val(id);
+  });
+
+  /* Go to orgTable needs view or edit */
+  $('#confdelete').click(function() {
+    var id = $(this).val();
+    $.get('/manager/delObs/'+id, function(result){
+      window.location.href="/manager/obs/agent";
+    });
+  });
 });

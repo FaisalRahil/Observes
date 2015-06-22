@@ -3,19 +3,19 @@ $(document).ready(function() {
   var defaults = {
     disabled: true,
   };
-
   $.extend($.fn.editable.defaults, defaults);
+  
   $("[name='discount_flag']").bootstrapSwitch('state', false);
   $("[name='discount_flag']").on('switchChange.bootstrapSwitch', function (e, data) {
-    $('#obs .editable').editable('toggleDisabled');
+    $('#orgTable .editable').editable('toggleDisabled');
   });
   
   
-  $('#name').editable({
-    url: '/manager/editObs_name/',
+  $('#name_org').editable({
+    url: '/manager/editOrg_name_org/',
     type: 'text',
     pk: 1,
-    name: 'name',
+    name: 'name_org',
     title: 'Enter name',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال اﻹسم';
@@ -23,19 +23,19 @@ $(document).ready(function() {
     }
   });
   
-  $('#pass_nid').editable({
-    url: '/manager/editObs_pass_nid/',
+  $('#name_director').editable({
+    url: '/manager/editOrg_name_director/',
     type: 'text',
     pk: 1,
-    name: 'pass_nid',
-    title: 'Enter pass_nid',
+    name: 'name_director',
+    title: 'Enter name director',
     validate: function(v) {
-      if(!v) return 'الرجاء ادخال الرقم الوطني / جواز سفر';
+      if(!v) return 'الرجاء ادخال اﻹسم';
     }
   });
   
   $('#email').editable({
-    url: '/manager/editObs_email/',
+    url: '/manager/editOrg_email/',
     type: 'text',
     pk: 1,
     name: 'email',
@@ -48,17 +48,28 @@ $(document).ready(function() {
     }
   });
   
-  $('#phone_obs').editable({
-    url: '/manager/editObs_phone_obs/',
+  $('#phone').editable({
+    url: '/manager/editOrg_phone/',
     type: 'text',
     pk: 1,
-    name: 'phone_obs',
+    name: 'phone',
     title: 'Enter phone',
     validate: function(v) {
-      var flag = /^[0-9\b]+$/.test(v);
+     var flag = /^[0-9\b]+$/.test(v);
       if(!v) return 'الرجاء ادخال رقم الهاتف';
       if(v.length<10) return "يجب أن يكون الهاتف  لا يقل عن 10 ارقام";
       if(!flag) return "هذا ليس رقم هاتف";
+    }
+  });
+
+  $('#address').editable({
+    url: '/manager/editOrg_address/',
+    type: 'text',
+    pk: 1,
+    name: 'address',
+    title: 'Enter address',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال العنوان';
     }
   });
   

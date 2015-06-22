@@ -13,6 +13,12 @@ router.get('/moveOrg', function(req, res) {
   res.render('admin/moveOrg');
 });
 
+router.get('/ww', function(req, res) {
+  orgMgr.getser(function(result){
+    console.log("sdadddd");
+  });
+});
+
 ///////////////////////////////////////////
 
 router.post('/addOrg', function(req, res) {

@@ -2,6 +2,7 @@ $(document).ready(function(){
   var defaults = {
     disabled: true,
   };
+  $.extend($.fn.editable.defaults, defaults);
   $("[name='discount_flag']").bootstrapSwitch('state', false);
   $("[name='discount_flag']").on('switchChange.bootstrapSwitch', function (e, data) {
     $('#orgTable .editable').editable('toggleDisabled');

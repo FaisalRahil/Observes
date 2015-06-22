@@ -1,0 +1,71 @@
+extends ../layout
+block content
+  header.navbar.navbar-orange.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='/manager/obs') المراقبين
+        li
+          a(href='/manager/org') الـمنظمات
+
+  row
+    .col-md-8.col-md-offset-2
+      .form-group
+        input#discount_flag(type='checkbox', name='discount_flag')
+      table#orgTable.table.table-bordered.table-striped(style='clear: both')
+        tbody
+          //- tr
+          //-   td(width='35%') رقم التسجيل 
+          //-   td(width='65%')
+          //-     a#id_org(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم' ,data-value='#{org[0].id_org}') #{org[0].id_org}
+          tr
+            td(width='35%') الاسم 
+            td(width='65%')
+              a#name_org(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم', data-value='#{org[0].name_org}') #{org[0].name_org}
+          tr
+            td(width='35%') اسم المدير
+            td(width='65%')
+              a#name_director(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم المدير' ,data-value='#{org[0].name_director}') #{org[0].name_director}
+          tr
+            td(width='35%') رقم الهاتف
+            td(width='65%')
+              a#phone(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم الهاتف' ,data-value='#{org[0].phone}') #{org[0].phone}
+          tr
+            td(width='35%') البريد الاكتروني
+            td(width='65%')
+              a#email(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='البريد الاكتروني', data-value='#{org[0].email}') #{org[0].email}
+          tr
+            td(width='35%') العنوان
+            td(width='65%')
+              a#address(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='العنوان', data-value='#{org[0].address}') #{org[0].address}
+
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src="/js/bootstrap-editable.min.js")
+  script(src="/js/jquery.validate.min.js")
+  script(src='/js/bootstrap-switch.min.js')
+  script(src="/js/manager/editlocMeadia.js")
+  script(src='/js/admin/backToTop.js')
+  

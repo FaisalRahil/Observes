@@ -116,8 +116,9 @@ $(document).ready(function() {
       registration_no:{
         required: true,
       },
-      phone:{
+      phone_obs:{
         required: true,
+        number: true,
       },
       email:{
         required : true,
@@ -135,8 +136,9 @@ $(document).ready(function() {
         required: "الرجاء إدخال البريد اﻹلكتروني !",
         email: "هذا ليس بريد إلكتروني !",
       },
-      phone:{
+      phone_obs:{
         required: "الرجاء إدخال رقم الهاتف !",
+        number: "الرجاء ادخال رقم الهاتف ",
       },
       registration_no:{
         required: "الرجاء إدخال الرقم اﻹشهار !",
