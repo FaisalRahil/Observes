@@ -1,59 +1,58 @@
 $(document).ready(function() {
-    console.log(result);
-    $('#table').bootstrapTable({
-      method: 'get',
-      url: '/admin/getAllObs',
-      cache: false,
-      height: 400,
-      striped: true,
-      pagination: true,
-      pageSize: 50,
-      silent: true,
-      pageList: [10, 25, 50, 100],
-      search: true,
-      showColumns: true,
-      showRefresh: true,
-      minimumCountColumns: 2,
-      clickToSelect: true,
-      columns: [{
-          field: 'name',
-          sortable:true,
-          title: 'اسم المنظمه'
-      }, {
-          field: 'nationality',
-          sortable:true,
-          title: 'الجنسيه'
-      }, {
-          field: 'pass_nid',
-          sortable:true,
-          title: 'رقم الجواز'
-      }, {
-          field: 'registration_org',
-          sortable:true,
-          title: 'المنظمه'
-      }, {
-          field: 'email',
-          sortable:true,
-          title: 'الباريد الالكتروني'
-      }, {
-          field: 'phone',
-          sortable:true,
-          title: 'رقم الهاتف'
+  $('#table').bootstrapTable({
+    method: 'get',
+    url: '/admin/getAllObs',
+    cache: false,
+    height: 400,
+    striped: true,
+    pagination: true,
+    pageSize: 50,
+    silent: true,
+    pageList: [10, 25, 50, 100],
+    search: true,
+    showColumns: true,
+    showRefresh: true,
+    minimumCountColumns: 2,
+    clickToSelect: true,
+    columns: [{
+        field: 'name',
+        sortable:true,
+        title: 'اسم المنظمه'
     }, {
-        field: 'id_org',
+        field: 'nationality',
+        sortable:true,
+        title: 'الجنسيه'
+    }, {
+        field: 'pass_nid',
+        sortable:true,
+        title: 'رقم الجواز'
+    }, {
+        field: 'registration_org',
+        sortable:true,
+        title: 'المنظمه'
+    }, {
+        field: 'email',
+        sortable:true,
+        title: 'الباريد الالكتروني'
+    }, {
+        field: 'phone',
+        sortable:true,
+        title: 'رقم الهاتف'
+    }, {
+        field: 'id_ob',
         align: 'center',
         valign: 'middle',
         title: 'عرض',
         formatter: operateFormatter
     }, {
-        field: 'id_org',
+        field: 'id_ob',
         align: 'center',
         valign: 'middle',
         title: 'مسح',
         formatter: operateFormatter1
     }],
   });
-  
+
 
   function operateFormatter(value, row, index) {
     return  [

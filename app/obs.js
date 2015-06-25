@@ -15,13 +15,14 @@ exports.obsMgr = {
     });
   },
 
-  getObs : function(cb){ //get all observers
+  getAllObs : function(cb){ //get all observers
     mysqlMgr.connect(function (conn) {
       conn.query('SELECT * FROM `observers` WHERE `status`= 1 ',  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
         } else {
+          console.log(result);
           cb(result);
         }
       });

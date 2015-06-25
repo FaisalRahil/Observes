@@ -32,15 +32,38 @@ router.post('/addOrg', function(req, res) {
     }
   });
 });
+
 // bhuvhvihybuvbiobuo
 router.post('/addOb', function(req, res) {
+  console.log("insid addOb");
+  console.log(req.body);
+  
+  type=req.body["type"];
+  delete req.body["type"];
+  req.body['id_office']=1;
+  req.body['nationality']=1;
+  if(req.body['gender']){
+    req.body['gender']=0;
+  }
+  else{
+    req.body['gender']=1;
+  }
+  if(req.body['director']){
+    req.body['director']=0;
+  }
+  else{
+    req.body['director']=1;
+  }
+  
+  console.log(req.body);
+  
   obsMgr.addOb(req.body,function(err,result){
-    if (req.body["type"] == 1) {
-      res.redirect('org/natOrgObs');
-    } else if (req.body["type"] == 2){
-      res.redirect('org/guestObs');
+    if (type == 1) {
+      res.redirect('obs/natOrgObs');
+    } else if (type == 2){
+      res.redirect('obs/guestObs');
     } else {
-      res.redirect('org/natMediaObs');
+      res.redirect('obs/natMediaObs');
     } 
   });
 });
@@ -94,7 +117,9 @@ router.get('/obs', function(req, res) {
 });
 
 router.get('/getAllObs',function(req , res ){
-  obsMgr.getObs(function(result){
+  console.log("gggggggggggggggggggggggg");
+  obsMgr.getAllObs(function(result){
+    console.log(result);
     res.send(result);
   });
 });
@@ -240,7 +265,7 @@ router.get('/delGuest/:id', function(req, res) {
 
 // 
 router.get('/getNatMediaObs', function(req, res) {
-  obsMgr.getObs(3,function(result){
+  obsMgr.getOb(3,function(result){
     res.send(result);
   })
 });

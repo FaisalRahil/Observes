@@ -88,7 +88,7 @@ $(document).ready(function() {
 
 ////////////////////////////
 
-  $("#natMedia").validate({
+  $("#natMediaObsId").validate({
     rules:{
       name:{
         required: true,
@@ -103,6 +103,13 @@ $(document).ready(function() {
         number: true,
       },
       registration_org:{
+        required : true,
+        number: true,
+      },
+      nationality:{
+        required: true,
+      },
+      pass_nid:{
         required : true,
         number: true,
       },
@@ -121,6 +128,13 @@ $(document).ready(function() {
         number: "يجب أن تكون المدخلات أرقام ",
       },
       registration_no:{
+        required: "الرجاء إدخال رقم الاشهار",
+        number: "يجب أن تكون المدخلات أرقام ",
+      },
+      nationality:{
+        required: "يجب إدخال رقم الهاتف",
+      },
+      pass_nid:{
         required: "الرجاء إدخال رقم الاشهار",
         number: "يجب أن تكون المدخلات أرقام ",
       },
