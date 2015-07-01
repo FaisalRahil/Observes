@@ -1,0 +1,65 @@
+extends ../layout
+block content
+  header.navbar.navbar-orange.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='#') المراقبين
+        li
+          a(href='#') الـمنظمات
+
+  .row
+    .col-md-8.col-md-offset-2
+      .form-group
+        input#discount_flag(type='checkbox', name='discount_flag')
+      table#mediaObs.table.table-bordered.table-striped(style='clear: both')
+        tbody
+          tr
+            td(width='35%') الرقم الوطني / جواز سفر
+            td(width='65%')
+              a#pass_nid(href='#', data-type='text', data-pk='#{mediaObs[0].id_ob}', data-title='الرقم الوطني / جواز سفر' ,data-value='#{mediaObs[0].pass_nid}') #{mediaObs[0].pass_nid}
+          tr
+            td(width='35%') الاسم
+            td(width='65%')
+              a#name(href='#', data-type='text', data-pk='#{mediaObs[0].id_ob}', data-title='الاسم' ,data-value='#{mediaObs[0].name}') #{mediaObs[0].name}
+          tr
+            td(width='35%') رقم الهاتف
+            td(width='65%')
+              a#phone(href='#', data-type='text', data-pk='#{mediaObs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{mediaObs[0].phone}') #{mediaObs[0].phone}
+          tr
+            td(width='35%') البريد الاكتروني
+            td(width='65%')
+              a#email(href='#', data-type='text', data-pk='#{mediaObs[0].id_ob}', data-title='البريد الاكتروني', data-value='#{mediaObs[0].email}') #{mediaObs[0].email}
+
+  
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-table.min.js')
+  script(src="/js/bootstrap-editable.min.js")
+  script(src="/js/jquery.validate.min.js")
+  script(src='/js/bootstrap-switch.min.js')
+  script(src="/js/admin/editNatMediaObs.js")
+  script(src='/js/admin/backToTop.js')
+  

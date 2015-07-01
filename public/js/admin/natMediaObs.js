@@ -39,17 +39,17 @@ $(document).ready(function() {
           sortable:true,
           title: 'رقم الهاتف'
       }, {
-          field: 'gendr',
+          field: 'gender',
           sortable:true,
           title: 'الجنس'
       }, {
-          field: 'id_org',
+          field: 'id_ob',
           align: 'center',
           valign: 'middle',
           title: 'عرض',
           formatter: operateFormatter
       }, {
-          field: 'id_org',
+          field: 'id_ob',
           align: 'center',
           valign: 'middle',
           title: 'مسح',
@@ -60,11 +60,9 @@ $(document).ready(function() {
 
   function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/admin/editMedia/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/admin/editNatMediaObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
-
-  
 
   function operateFormatter1(value, row, index) {
     return  [
@@ -82,8 +80,21 @@ $(document).ready(function() {
   $('#confdelete').click(function() {
     var id = $(this).val();
     $.get('/admin/delMediaObs/'+id, function(result){
-      window.location.href="/admin/org/natMediaObs";
+      window.location.href="/admin/obs/natMediaObs";
     });
+  });
+  ///////////////////////////////////
+
+  // $(':checkbox').checkboxpicker();
+  $('#director').checkboxpicker({
+    onLabel:"لا", offLabel:"نعم"
+  });
+
+  $('#gender').checkboxpicker({
+    onLabel:"أنثى", offLabel:"ذكر"
+  });
+  $.validator.addMethod("selectValidat", function (value) {
+    return (value != '-1');
   });
 
 ////////////////////////////

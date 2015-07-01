@@ -46,38 +46,41 @@ block content
                 span.glyphicon.glyphicon-th.pull-right
                 | ضــيــف
                 
-
     .col-sm-7.col-md-7.col-lg-7
       .row
         .panel.orange-form.panel-warning
-          .panel-heading تـسـجـيـل بيانات المنظمات الاعلاميه الدولية
+          .panel-heading إدخال مراقب إعلامي
           .panel-body
-            form#natMediaObsId(role='form',method="post",action="/admin/addOb")
+            form#natMediaObs(role='form',method="post",action="/admin/addOb")
               .form-group
-                input.form-control#name(name='name', placeholder='اسم المراقب', type='text')
+                input.form-control#name(name='name', placeholder='اﻹسم', type='text')
               .form-group
-                input.form-control#nationality(name='nationality', placeholder='الجنسيه', type='text')
+                input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
+              .form-group
+                select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
+                  option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
+                  for org in orgs
+                    option(value="#{org.registration_no}") #{org.name_org}
+              .form-group.col-sm-6.col-md-6.col-lg-6
+                | الجنس :   
+                input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
+              .form-group.col-sm-6.col-md-6.col-lg-6  
+                | مدير  : 
+                input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
               .form-group
                 input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
               .form-group
-                input.form-control#gendr(name='gendr', placeholder='الجنس', type='text')
-              .form-group
-                input.form-control#registration_org(name='registration_org', placeholder='رقم الاشهار', type='text')
-              .form-group
-                input.form-control#email(name='email', placeholder='الباريد الالكتروني', type='email')
-
+                input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+              
               input#type(name='type', type='hidden',value='3')
-              //- .form-group
-              //-   select.form-control#level(name='level',type='text')
-              //-     option(value='', style='color: grey; display:none;') Please Select Level
-              //-     option(value='1') Administration
-              //-     option(value='2') Seller  
+
               .row
                 .col-xs-8.col-md-8
-                  button#btnSubmit.btn.btn-warning.btn-block(type='submit') تـسـجـيـل
+                  button#btnSubmit.btn.btn-warning.btn-block(type='submit') تسجيــــل 
                 .col-xs-4.col-md-4
                   button.btn.btn-default.btn-block(type='reset') إلغاء
 
+    
   .row
     .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
       .panel.panel-warning
@@ -107,4 +110,5 @@ block content
   script(src="/js/bootstrap-table.min.js")
   script(src="/js/admin/natMediaObs.js")
   script(src='/js/admin/backToTop.js')
-  script(src='/js/admin/bootstrap-notify.min.js')
+  script(src="/js/manager/bootstrap-checkbox.min.js")
+  script(src='/js/bootstrap-select.min.js')

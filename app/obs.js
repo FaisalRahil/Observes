@@ -22,7 +22,6 @@ exports.obsMgr = {
         if(err) {
           util.log(err);
         } else {
-          console.log(result);
           cb(result);
         }
       });
@@ -57,7 +56,27 @@ exports.obsMgr = {
 
   addOb : function(body,cb){
     mysqlMgr.connect(function (conn) {
+      console.log("inside  addOb bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+      console.log(body);
+      console.log("inside  addOb bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
       conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
+        conn.release();
+        if(err) {
+          console.log("query null null null null null null ");
+          cb(err,null);
+        } else {
+          console.log("query result result result result result result result start");
+          console.log(result);
+          console.log("Query result result result result result result result end");
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  delMediaObs : function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('UPDATE `observers` SET `status` = 0 WHERE `id_ob` = ?',id,  function(err, result) {
         conn.release();
         if(err) {
           cb(err,null);
@@ -136,4 +155,61 @@ exports.obsMgr = {
       });
     });
   },
+
+  editMediaObs_pass_nid : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  editMediaObs_name : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  editMediaObs_email : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  editMediaObs_phone : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
 };
