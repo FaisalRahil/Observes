@@ -17,7 +17,7 @@ $(document).ready(function() {
       columns: [{
           field: 'name',
           sortable:true,
-          title: 'اسم المراقب'
+          title: 'الاسم'
       }, {
           field: 'nationality',
           sortable:true,
@@ -25,7 +25,7 @@ $(document).ready(function() {
       }, {
           field: 'pass_nid',
           sortable:true,
-          title: 'رقم الجواز'
+          title: 'رقم الهويه'
       }, {
           field: 'registration_org',
           sortable:true,

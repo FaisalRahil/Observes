@@ -10,7 +10,6 @@ $(document).ready(function() {
     $('#mediaObs .editable').editable('toggleDisabled');
   });
   
-  
   $('#pass_nid').editable({
     url: '/admin/editMediaObs_pass_nid/',
     type: 'text',
@@ -23,12 +22,12 @@ $(document).ready(function() {
     }
   });
   
-  $('#name').editable({
-    url: '/admin/editMediaObs_name/',
+  $('#name_obs').editable({
+    url: '/admin/editMediaObs_name_obs/',
     type: 'text',
     pk: 1,
-    name: 'name',
-    title: 'Enter center name',
+    name: 'name_obs',
+    title: 'Enter center name_obs',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال اسم المراقب';
       if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";

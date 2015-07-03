@@ -170,10 +170,10 @@ exports.obsMgr = {
     });
   },
 
-  editMediaObs_name : function(body,cb){
+  editMediaObs_name_obs : function(body,cb){
     mysqlMgr.connect(function (conn) {
       var date = new Date();
-      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+      conn.query('UPDATE `observers` SET `name_obs` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
         conn.release();
         if(err) {
           cb(err,null);
@@ -187,7 +187,7 @@ exports.obsMgr = {
   editMediaObs_email : function(body,cb){
     mysqlMgr.connect(function (conn) {
       var date = new Date();
-      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+      conn.query('UPDATE `observers` SET `email` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
         conn.release();
         if(err) {
           cb(err,null);
@@ -201,7 +201,7 @@ exports.obsMgr = {
   editMediaObs_phone : function(body,cb){
     mysqlMgr.connect(function (conn) {
       var date = new Date();
-      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+      conn.query('UPDATE `observers` SET `phone` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
         conn.release();
         if(err) {
           cb(err,null);

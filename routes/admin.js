@@ -247,9 +247,9 @@ router.post('/editMediaObs_pass_nid', function(req, res) {
   });
 });
 
-/*    editMediaObs_name  . */
-router.post('/editMediaObs_name', function(req, res) {
-  obsMgr.editMediaObs_name(req.body,function(err,result){
+/*    editMediaObs_name_obs  . */
+router.post('/editMediaObs_name_obs', function(req, res) {
+  obsMgr.editMediaObs_name_obs(req.body,function(err,result){
     res.send(result);
   });
 });
