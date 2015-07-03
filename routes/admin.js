@@ -35,9 +35,6 @@ router.post('/addOrg', function(req, res) {
 
 // bhuvhvihybuvbiobuo
 router.post('/addOb', function(req, res) {
-  console.log("insid addOb kkkkkkkkkkkkkkkkkkkkk");
-  console.log(req.body);
-  console.log("insid addOb kkkkkkkkkkkkkkkkkkkkk");
   
   type=req.body["type"];
   delete req.body["type"];
@@ -137,6 +134,22 @@ router.get('/org/natMedia', function(req, res) {
 router.get('/org/guest', function(req, res) {
   res.render('admin/guest');
 });
+/////////////////////////////////////////////////
+// start
+
+/* GET home page. */
+router.get('/obs/natOrgObs', function(req, res) {
+  orgMgr.getOrg(1,function(result){
+    res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+  })
+});
+
+/* GET home page. */
+router.get('/obs/guestObs', function(req, res) {
+  orgMgr.getOrg(2,function(result){
+    res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+  })
+});
 
 /* GET home page. */
 router.get('/obs/natMediaObs', function(req, res) {
@@ -144,6 +157,9 @@ router.get('/obs/natMediaObs', function(req, res) {
     res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
   })
 });
+
+// end
+//////////////////////////////////////////////////////////////////
 
 /* GET home page. */
 router.get('/editOrg/:id', function(req, res) {
@@ -232,7 +248,8 @@ router.get('/editObs/:id', function(req, res) {
     res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result});
   });
 });
-
+// //////////////////////////////////////////////////////
+// start
 /* GET home page. */
 router.get('/editNatMediaObs/:id', function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
@@ -267,7 +284,49 @@ router.post('/editMediaObs_phone', function(req, res) {
     res.send(result);
   });
 });
+// end
+// //////////////////////////////////////////////////
 
+// //////////////////////////////////////////////////
+// start 
+
+/* GET home page. */
+router.get('/editNatOrgObs/:id', function(req, res) {
+  obsMgr.getObs_Id(req.params.id,function(err,result){
+    res.render('admin/editNatOrgObs',{ title: 'تعديل المراقبين' ,OrgObs:result});
+  });
+});
+
+/*    editMediaObs_pass_nid  . */
+router.post('/editOrgObs_pass_nid', function(req, res) {
+  obsMgr.editOrgObs_pass_nid(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/*    editMediaObs_name_obs  . */
+router.post('/editOrgObs_name_obs', function(req, res) {
+  obsMgr.editOrgObs_name_obs(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/*    editMediaObs_email  . */
+router.post('/editOrgObs_email', function(req, res) {
+  obsMgr.editOrgObs_email(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+/*   editMediaObs_phone  . */
+router.post('/editOrgObs_phone', function(req, res) {
+  obsMgr.editOrgObs_phone(req.body,function(err,result){
+    res.send(result);
+  });
+});
+
+// end
+// //////////////////////////////////////////////////
 // ***************************************************
 /* GET home page. */
 router.get('/delObs/:id', function(req, res) {
@@ -289,6 +348,16 @@ router.get('/delMedia/:id', function(req, res) {
 });
 
 /* GET home page. */
+router.get('/delGuest/:id', function(req, res) {
+  orgMgr.delGuest(req.params.id,function(result){
+    res.send('result');
+  })
+});
+
+// ///////////////////////////////////////////////////////
+// start
+
+/* GET home page. */
 router.get('/delMediaObs/:id', function(req, res) {
   obsMgr.delMediaObs(req.params.id,function(result){
     res.send('result');
@@ -296,17 +365,42 @@ router.get('/delMediaObs/:id', function(req, res) {
 });
 
 /* GET home page. */
-router.get('/delGuest/:id', function(req, res) {
-  orgMgr.delGuest(req.params.id,function(result){
+router.get('/delOrgObs/:id', function(req, res) {
+  obsMgr.delOrgObs(req.params.id,function(result){
     res.send('result');
   })
 });
 
-// 
+
+/* GET home page. */
+// router.get('/delOrgObs/:id', function(req, res) {
+//   obsMgr.delGObs(req.params.id,function(result){
+//     res.send('result');
+//   })
+// });
+// end
+// ///////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////// 
+// start
+
+router.get('/getNatOrgObs', function(req, res) {
+  obsMgr.getOb(1,function(result){
+    res.send(result);
+  })
+});
+
+router.get('/getGuestObs', function(req, res) {
+  obsMgr.getOb(2,function(result){
+    res.send(result);
+  })
+});
+
 router.get('/getNatMediaObs', function(req, res) {
   obsMgr.getOb(3,function(result){
     res.send(result);
   })
 });
-
+// end
+// //////////////////////////////////////////////////////
 module.exports = router;

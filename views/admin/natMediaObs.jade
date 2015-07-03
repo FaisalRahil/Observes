@@ -51,9 +51,9 @@ block content
         .panel.orange-form.panel-warning
           .panel-heading إدخال مراقب إعلامي
           .panel-body
-            form#natMediaObs(role='form',method="post",action="/admin/addOb")
+            form#natMediaObsId(role='form',method="post",action="/admin/addOb")
               .form-group
-                input.form-control#name(name='name', placeholder='اﻹسم', type='text')
+                input.form-control#name_obs(name='name_obs', placeholder='اﻹسم', type='text')
               .form-group
                 input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
               .form-group

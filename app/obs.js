@@ -56,25 +56,31 @@ exports.obsMgr = {
 
   addOb : function(body,cb){
     mysqlMgr.connect(function (conn) {
-      console.log("inside  addOb bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-      console.log(body);
-      console.log("inside  addOb bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
       conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
         conn.release();
         if(err) {
-          console.log("query null null null null null null ");
-          cb(err,null);
+          cb(err);
         } else {
-          console.log("query result result result result result result result start");
-          console.log(result);
-          console.log("Query result result result result result result result end");
-          cb(null,result);
+          cb(result);
         }
       });
     });
   },
 
   delMediaObs : function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('UPDATE `observers` SET `status` = 0 WHERE `id_ob` = ?',id,  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  delOrgObs : function(id,cb){
     mysqlMgr.connect(function (conn) {
       conn.query('UPDATE `observers` SET `status` = 0 WHERE `id_ob` = ?',id,  function(err, result) {
         conn.release();
@@ -211,5 +217,62 @@ exports.obsMgr = {
       });
     });
   },
+
+  editOrgObs_pass_nid : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `pass_nid` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  editOrgObs_name_obs : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `name_obs` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  editOrgObs_email : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `email` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
+  editOrgObs_phone : function(body,cb){
+    mysqlMgr.connect(function (conn) {
+      var date = new Date();
+      conn.query('UPDATE `observers` SET `phone` = ? , `modify_date` = ? WHERE `status`= 1 AND `id_ob` = ?',[body.value,date,body.pk],  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err,null);
+        } else {
+          cb(null,result);
+        }
+      });
+    });
+  },
+
 
 };

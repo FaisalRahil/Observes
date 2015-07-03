@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('#table').bootstrapTable({
       method: 'get',
-      url: '/admin/getNatMediaObs',
+      url: '/admin/getNatOrgObs',
       cache: false,
       height: 400,
       striped: true,
@@ -60,18 +60,18 @@ $(document).ready(function() {
 
   function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/admin/editNatMediaObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/admin/editNatOrgObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deleteMedia" data-toggle="modal" href="#deleteMediaObsModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteOrg" data-toggle="modal" href="#deleteOrgObsModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
   /* Go to media needs view or edit */
-  $('body').on('click', '#deleteMedia ', function () {
+  $('body').on('click', '#deleteOrg ', function () {
     var id = $(this).val();
     $('#confdelete').val(id);
   });
@@ -79,8 +79,8 @@ $(document).ready(function() {
   /* Go to media needs view or edit */
   $('#confdelete').click(function() {
     var id = $(this).val();
-    $.get('/admin/delMediaObs/'+id, function(result){
-      window.location.href="/admin/obs/natMediaObs";
+    $.get('/admin/delOrgObs/'+id, function(result){
+      window.location.href="/admin/obs/natOrgObs";
     });
   });
   ///////////////////////////////////
@@ -99,7 +99,7 @@ $(document).ready(function() {
 
 ////////////////////////////
 
-  $("#natMediaObsId").validate({
+  $("#natOrgObsId").validate({
     rules:{
       name_obs:{
         required: true,
