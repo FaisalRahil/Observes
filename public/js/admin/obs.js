@@ -15,7 +15,7 @@ $(document).ready(function() {
     minimumCountColumns: 2,
     clickToSelect: true,
     columns: [{
-        field: 'name',
+        field: 'name_obs',
         sortable:true,
         title: 'اسم المنظمه'
     }, {
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
   function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/admin/editOrg/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/admin/editObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
@@ -64,12 +64,12 @@ $(document).ready(function() {
 
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deleteOrg" data-toggle="modal" href="#deleteOrgModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteObs" data-toggle="modal" href="#deleteObsModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
   /* Go to orgTable needs view or edit */
-  $('body').on('click', '#deleteOrg ', function () {
+  $('body').on('click', '#deleteObs ', function () {
     var id = $(this).val();
     $('#confdelete').val(id);
   });

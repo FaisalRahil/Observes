@@ -134,98 +134,6 @@ router.get('/org/natMedia', function(req, res) {
 router.get('/org/guest', function(req, res) {
   res.render('admin/guest');
 });
-/////////////////////////////////////////////////
-// start
-
-/* GET home page. */
-router.get('/obs/natOrgObs', function(req, res) {
-  orgMgr.getOrg(1,function(result){
-    res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
-  })
-});
-
-/* GET home page. */
-router.get('/obs/guestObs', function(req, res) {
-  orgMgr.getOrg(2,function(result){
-    res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
-  })
-});
-
-/* GET home page. */
-router.get('/obs/natMediaObs', function(req, res) {
-  orgMgr.getOrg(3,function(result){
-    res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
-  })
-});
-
-// end
-//////////////////////////////////////////////////////////////////
-
-/* GET home page. */
-router.get('/editOrg/:id', function(req, res) {
-  orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
-  });
-});
-
-/* GET home page. */
-router.post('/editOrg_registration_no', function(req, res) {
-  orgMgr.editOrg_registration_no(req.body,function(err,result){
-    res.send(result);
-  });
-});
-
-/* GET home page. */
-router.post('/editOrg_name_org', function(req, res) {
-  orgMgr.editOrg_name_org(req.body,function(err,result){
-    res.send(result);
-  });
-});
-
-/* GET home page. */
-router.post('/editOrg_name_director', function(req, res) {
-  orgMgr.editOrg_name_director(req.body,function(err,result){
-    res.send(result);
-  });
-});
-
-/* GET home page. */
-router.post('/editOrg_email', function(req, res) {
-  orgMgr.editOrg_email(req.body,function(err,result){
-    res.send(result);
-  });
-});
-
-router.post('/editOrg_address', function(req, res) {
-  orgMgr.editOrg_address(req.body,function(err,result){
-    res.send(result);
-  });
-});
-
-router.post('/editOrg_phone', function(req, res) {
-  orgMgr.editOrg_phone(req.body,function(err,result){
-    res.send(result);
-  });
-});
-/////////////////////////////////////////////////////
-
-/* GET home page. */
-router.get('/editMedia/:id', function(req, res) {
-  orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
-  });
-});
-
-
-/* GET home page. */
-router.get('/editGuest/:id', function(req, res) {
-  orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
-  });
-});
-
-
-////////////////////////////////////////////
 
 /* GET home page. */
 router.get('/obs/natOrg', function(req, res) {
@@ -241,96 +149,279 @@ router.get('/obs/natMedia', function(req, res) {
 router.get('/obs/guest', function(req, res) {
   res.render('admin/guest');
 });
-// ***************************************************
-/* Edit general observers . */
-router.get('/editObs/:id', function(req, res) {
-  obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result});
-  });
-});
-// //////////////////////////////////////////////////////
+/////////////////////////////////////////////////
 // start
-/* GET home page. */
-router.get('/editNatMediaObs/:id', function(req, res) {
-  obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('admin/editNatMediaObs',{ title: 'تعديل المراقبين' ,mediaObs:result});
-  });
-});
 
-/*    editMediaObs_pass_nid  . */
-router.post('/editMediaObs_pass_nid', function(req, res) {
-  obsMgr.editMediaObs_pass_nid(req.body,function(err,result){
-    res.send(result);
+  /* GET home page. */
+  router.get('/obs/natOrgObs', function(req, res) {
+    orgMgr.getOrg(1,function(result){
+      res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+    })
   });
-});
 
-/*    editMediaObs_name_obs  . */
-router.post('/editMediaObs_name_obs', function(req, res) {
-  obsMgr.editMediaObs_name_obs(req.body,function(err,result){
-    res.send(result);
+  /* GET home page. */
+  router.get('/obs/guestObs', function(req, res) {
+    orgMgr.getOrg(2,function(result){
+      res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+    })
   });
-});
 
-/*    editMediaObs_email  . */
-router.post('/editMediaObs_email', function(req, res) {
-  obsMgr.editMediaObs_email(req.body,function(err,result){
-    res.send(result);
+  /* GET home page. */
+  router.get('/obs/natMediaObs', function(req, res) {
+    orgMgr.getOrg(3,function(result){
+      res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+    })
   });
-});
 
-/*   editMediaObs_phone  . */
-router.post('/editMediaObs_phone', function(req, res) {
-  obsMgr.editMediaObs_phone(req.body,function(err,result){
-    res.send(result);
+// end
+//////////////////////////////////////////////////////////////////
+// start edit 
+  /* GET home page. */
+  router.post('/editOrg_registration_no', function(req, res) {
+    orgMgr.editOrg_registration_no(req.body,function(err,result){
+      res.send(result);
+    });
   });
-});
+
+  /* GET home page. */
+  router.post('/editOrg_name_org', function(req, res) {
+    orgMgr.editOrg_name_org(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /* GET home page. */
+  router.post('/editOrg_name_director', function(req, res) {
+    orgMgr.editOrg_name_director(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /* GET home page. */
+  router.post('/editOrg_email', function(req, res) {
+    orgMgr.editOrg_email(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  router.post('/editOrg_address', function(req, res) {
+    orgMgr.editOrg_address(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  router.post('/editOrg_phone', function(req, res) {
+    orgMgr.editOrg_phone(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+// end edit
+/////////////////////////////////////////////////////
+// start edit methods
+
+  /* GET home page. */
+  router.get('/editOrg/:id', function(req, res) {
+    orgMgr.getOrg_Id(req.params.id,function(err,result){
+      res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
+    });
+  });
+
+  /* GET home page. */
+  router.get('/editMedia/:id', function(req, res) {
+    orgMgr.getOrg_Id(req.params.id,function(err,result){
+      res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
+    });
+  });
+
+
+  /* GET home page. */
+  router.get('/editGuest/:id', function(req, res) {
+    orgMgr.getOrg_Id(req.params.id,function(err,result){
+      res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
+    });
+  });
+
+// end edit methods
+////////////////////////////////////////////
+
+// ///////////////////////////////////////////////////
+// ***************************************************
+// start
+
+  /* Edit general observers . */
+  router.get('/editObs/:id', function(req, res) {
+    obsMgr.getObs_Id(req.params.id,function(err,result){
+      res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result});
+    });
+  });
+
+  /*    editObs_pass_nid  . */
+  router.post('/editObs_pass_nid', function(req, res) {
+    obsMgr.editObs_pass_nid(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*    editObs_name_obs  . */
+  router.post('/editObs_name_obs', function(req, res) {
+    obsMgr.editObs_name_obs(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*    editObs_email  . */
+  router.post('/editObs_email', function(req, res) {
+    obsMgr.editObs_email(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*   editObs_phone  . */
+  router.post('/editObs_phone', function(req, res) {
+    obsMgr.editObs_phone(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+// end
+// *****************************************************
+// /////////////////////////////////////////////////////
+
+// //////////////////////////////////////////////////////
+// ******************************************************
+// start
+  /* GET home page. */
+  router.get('/editNatMediaObs/:id', function(req, res) {
+    obsMgr.getObs_Id(req.params.id,function(err,result){
+      res.render('admin/editNatMediaObs',{ title: 'تعديل المراقبين' ,mediaObs:result});
+    });
+  });
+
+  /*    editMediaObs_pass_nid  . */
+  router.post('/editMediaObs_pass_nid', function(req, res) {
+    obsMgr.editMediaObs_pass_nid(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*    editMediaObs_name_obs  . */
+  router.post('/editMediaObs_name_obs', function(req, res) {
+    obsMgr.editMediaObs_name_obs(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*    editMediaObs_email  . */
+  router.post('/editMediaObs_email', function(req, res) {
+    obsMgr.editMediaObs_email(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*   editMediaObs_phone  . */
+  router.post('/editMediaObs_phone', function(req, res) {
+    obsMgr.editMediaObs_phone(req.body,function(err,result){
+      res.send(result);
+    });
+  });
 // end
 // //////////////////////////////////////////////////
 
 // //////////////////////////////////////////////////
 // start 
 
-/* GET home page. */
-router.get('/editNatOrgObs/:id', function(req, res) {
-  obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('admin/editNatOrgObs',{ title: 'تعديل المراقبين' ,OrgObs:result});
+  /* GET home page. */
+  router.get('/editNatOrgObs/:id', function(req, res) {
+    obsMgr.getObs_Id(req.params.id,function(err,result){
+      res.render('admin/editNatOrgObs',{ title: 'تعديل المراقبين' ,OrgObs:result});
+    });
   });
-});
 
-/*    editMediaObs_pass_nid  . */
-router.post('/editOrgObs_pass_nid', function(req, res) {
-  obsMgr.editOrgObs_pass_nid(req.body,function(err,result){
-    res.send(result);
+  /*    editMediaObs_pass_nid  . */
+  router.post('/editOrgObs_pass_nid', function(req, res) {
+    obsMgr.editOrgObs_pass_nid(req.body,function(err,result){
+      res.send(result);
+    });
   });
-});
 
-/*    editMediaObs_name_obs  . */
-router.post('/editOrgObs_name_obs', function(req, res) {
-  obsMgr.editOrgObs_name_obs(req.body,function(err,result){
-    res.send(result);
+  /*    editMediaObs_name_obs  . */
+  router.post('/editOrgObs_name_obs', function(req, res) {
+    obsMgr.editOrgObs_name_obs(req.body,function(err,result){
+      res.send(result);
+    });
   });
-});
 
-/*    editMediaObs_email  . */
-router.post('/editOrgObs_email', function(req, res) {
-  obsMgr.editOrgObs_email(req.body,function(err,result){
-    res.send(result);
+  /*    editMediaObs_email  . */
+  router.post('/editOrgObs_email', function(req, res) {
+    obsMgr.editOrgObs_email(req.body,function(err,result){
+      res.send(result);
+    });
   });
-});
 
-/*   editMediaObs_phone  . */
-router.post('/editOrgObs_phone', function(req, res) {
-  obsMgr.editOrgObs_phone(req.body,function(err,result){
-    res.send(result);
+  /*   editMediaObs_phone  . */
+  router.post('/editOrgObs_phone', function(req, res) {
+    obsMgr.editOrgObs_phone(req.body,function(err,result){
+      res.send(result);
+    });
   });
-});
 
 // end
 // //////////////////////////////////////////////////
 // ***************************************************
+
+// //////////////////////////////////////////////////
+// start 
+
+  
+  /* GET home page. */
+  router.get('/editGuestObs/:id', function(req, res) {
+    obsMgr.getObs_Id(req.params.id,function(err,result){
+      res.render('admin/editGuestObs',{ title: 'المنظمات' ,guestObs:result});
+    });
+  });
+
+  /*    editGuestObs_pass_nid  . */
+  router.post('/editGuestObs_pass_nid', function(req, res) {
+    obsMgr.editGuestObs_pass_nid(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*    editGuestObs_name_obs  . */
+  router.post('/editGuestObs_name_obs', function(req, res) {
+    obsMgr.editGuestObs_name_obs(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*    editGuestObs_email  . */
+  router.post('/editGuestObs_email', function(req, res) {
+    obsMgr.editGuestObs_email(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+  /*   editGuestObs_phone  . */
+  router.post('/editGuestObs_phone', function(req, res) {
+    obsMgr.editGuestObs_phone(req.body,function(err,result){
+      res.send(result);
+    });
+  });
+
+// end
+// //////////////////////////////////////////////////
+// ***************************************************
+
+
+// ///////////////////////////////////////////////////
+// ***************************************************
+// start
+
 /* GET home page. */
 router.get('/delObs/:id', function(req, res) {
-  res.render('admin/delObs');
+  obsMgr.delObs(req.params.id,function(result){
+    res.send('result');
+  })
 });
 
 /* GET home page. */
@@ -355,30 +446,31 @@ router.get('/delGuest/:id', function(req, res) {
 });
 
 // ///////////////////////////////////////////////////////
-// start
+// start delete control
 
-/* GET home page. */
-router.get('/delMediaObs/:id', function(req, res) {
-  obsMgr.delMediaObs(req.params.id,function(result){
-    res.send('result');
-  })
-});
+  /* GET home page. */
+  router.get('/delMediaObs/:id', function(req, res) {
+    obsMgr.delMediaObs(req.params.id,function(result){
+      res.send('result');
+    })
+  });
 
-/* GET home page. */
-router.get('/delOrgObs/:id', function(req, res) {
-  obsMgr.delOrgObs(req.params.id,function(result){
-    res.send('result');
-  })
-});
+  /* GET home page. */
+  router.get('/delOrgObs/:id', function(req, res) {
+    obsMgr.delOrgObs(req.params.id,function(result){
+      res.send('result');
+    })
+  });
 
 
-/* GET home page. */
-// router.get('/delOrgObs/:id', function(req, res) {
-//   obsMgr.delGObs(req.params.id,function(result){
-//     res.send('result');
-//   })
-// });
-// end
+  /* GET delGuestObs page. */
+  router.get('/delGuestObs/:id', function(req, res) {
+    obsMgr.delGuestObs(req.params.id,function(result){
+      res.send('result');
+    })
+  });
+
+// end delete control
 // ///////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////// 

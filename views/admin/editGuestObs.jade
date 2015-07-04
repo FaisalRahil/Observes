@@ -1,6 +1,6 @@
 extends ../layout
 block content
-  header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+  header.navbar.navbar-green.navbar-fixed-top.bs-docs-nav(role='banner')
     .navbar-header.pull-left
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
         span.sr-only Toggle navigation
@@ -34,24 +34,24 @@ block content
     .col-md-8.col-md-offset-2
       .form-group
         input#discount_flag(type='checkbox', name='discount_flag')
-      table#obs.table.table-bordered.table-striped(style='clear: both')
+      table#guestObs.table.table-bordered.table-striped(style='clear: both')
         tbody
           tr
             td(width='35%') الرقم الوطني / جواز سفر
             td(width='65%')
-              a#pass_nid(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الرقم الوطني / جواز سفر' ,data-value='#{obs[0].pass_nid}') #{obs[0].pass_nid}
+              a#pass_nid(href='#', data-type='text', data-pk='#{guestObs[0].id_ob}', data-title='الرقم الوطني / جواز سفر' ,data-value='#{guestObs[0].pass_nid}') #{guestObs[0].pass_nid}
           tr
             td(width='35%') الاسم
             td(width='65%')
-              a#name_obs(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الاسم' ,data-value='#{obs[0].name_obs}') #{obs[0].name_obs}
+              a#name_obs(href='#', data-type='text', data-pk='#{guestObs[0].id_ob}', data-title='الاسم' ,data-value='#{guestObs[0].name_obs}') #{guestObs[0].name_obs}
           tr
             td(width='35%') رقم الهاتف
             td(width='65%')
-              a#phone(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{obs[0].phone}') #{obs[0].phone}
+              a#phone(href='#', data-type='text', data-pk='#{guestObs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{guestObs[0].phone}') #{guestObs[0].phone}
           tr
             td(width='35%') البريد الاكتروني
             td(width='65%')
-              a#email(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='البريد الاكتروني', data-value='#{obs[0].email}') #{obs[0].email}
+              a#email(href='#', data-type='text', data-pk='#{guestObs[0].id_ob}', data-title='البريد الاكتروني', data-value='#{guestObs[0].email}') #{guestObs[0].email}
 
   
   script(src='/js/jquery-1.11.1.min.js')
@@ -60,6 +60,6 @@ block content
   script(src="/js/bootstrap-editable.min.js")
   script(src="/js/jquery.validate.min.js")
   script(src='/js/bootstrap-switch.min.js')
-  script(src="/js/admin/editObs.js")
+  script(src="/js/admin/editGuestObs.js")
   script(src='/js/admin/backToTop.js')
   
