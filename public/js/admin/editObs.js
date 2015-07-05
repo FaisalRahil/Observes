@@ -22,12 +22,12 @@ $(document).ready(function() {
     }
   });
   
-  $('#name_obs').editable({
-    url: '/admin/editObs_name_obs/',
+  $('#name').editable({
+    url: '/admin/editObs_name/',
     type: 'text',
     pk: 1,
-    name: 'name_obs',
-    title: 'Enter center name_obs',
+    name: 'name',
+    title: 'Enter center name',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال اسم المراقب';
       if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";
@@ -53,5 +53,30 @@ $(document).ready(function() {
       if(v.length<10) return "يجب أن يكون رقم الهاتف على الاقل 10 ارقام";
     }
   });
+
+  $('#nationality').editable({
+    url: '/admin/editObs_nationality/',
+    type: 'text',
+    pk: 1,
+    name: 'nationality',
+    title: 'Enter center nationality'
+  });
+
+  $('#director').editable({
+    url: '/admin/editObs_director/',
+    type: 'text',
+    pk: 1,
+    name: 'director',
+    title: 'Enter center director'
+  });
+
+  $('#gender').editable({
+    url: '/admin/editObs_gender/',
+    type: 'text',
+    pk: 1,
+    name: 'gender',
+    title: 'Enter center gender'
+  });
+
 
 });

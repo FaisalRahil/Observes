@@ -1,6 +1,6 @@
 extends ../layout
 block content
-  header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+  header.navbar.navbar-fixed-top.bs-docs-nav(class='#{nav}' ,role='banner')
     .navbar-header.pull-left
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
         span.sr-only Toggle navigation
@@ -43,7 +43,7 @@ block content
           tr
             td(width='35%') الاسم
             td(width='65%')
-              a#name_obs(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الاسم' ,data-value='#{obs[0].name_obs}') #{obs[0].name_obs}
+              a#name(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الاسم' ,data-value='#{obs[0].name}') #{obs[0].name}
           tr
             td(width='35%') رقم الهاتف
             td(width='65%')
@@ -52,6 +52,18 @@ block content
             td(width='35%') البريد الاكتروني
             td(width='65%')
               a#email(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='البريد الاكتروني', data-value='#{obs[0].email}') #{obs[0].email}
+          tr
+            td(width='35%') الجنسية
+            td(width='65%')
+              a#nationality(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الجنسية', data-value='#{obs[0].nationality}') #{obs[0].nationality}
+          tr
+            td(width='35%') مدير
+            td(width='65%')
+              a#director(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='مدير', data-value='#{obs[0].director}') #{obs[0].director}
+          tr
+            td(width='35%') الجنس
+            td(width='65%')
+              a#gender(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الجنس', data-value='#{obs[0].gender}') #{obs[0].gender}
 
   
   script(src='/js/jquery-1.11.1.min.js')

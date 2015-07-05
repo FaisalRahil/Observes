@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('#table').bootstrapTable({
     method: 'get',
-    url: '/admin/getAllObs',
+    url: '/admin/getAllObsAndNameOrg',
     cache: false,
     height: 400,
     striped: true,
@@ -15,29 +15,37 @@ $(document).ready(function() {
     minimumCountColumns: 2,
     clickToSelect: true,
     columns: [{
-        field: 'name_obs',
+        field: 'name',
         sortable:true,
-        title: 'اسم المنظمه'
+        title: 'الاسم'
+    }, {
+        field: 'name_org',
+        sortable:true,
+        title: 'أسم المنظمة'
     }, {
         field: 'nationality',
         sortable:true,
-        title: 'الجنسيه'
+        title: 'الجنسية'
     }, {
-        field: 'pass_nid',
+        field: 'gender',
         sortable:true,
-        title: 'رقم الجواز'
-    }, {
-        field: 'registration_org',
-        sortable:true,
-        title: 'المنظمه'
-    }, {
-        field: 'email',
-        sortable:true,
-        title: 'الباريد الالكتروني'
+        title: 'الجنس'
     }, {
         field: 'phone',
         sortable:true,
         title: 'رقم الهاتف'
+    }, {
+        field: 'director',
+        align: 'center',
+        valign: 'middle',
+        title: 'مدير',
+        formatter: status
+    }, {
+        field: 'print',
+        align: 'center',
+        valign: 'middle',
+        title: 'حالة الطباعة',
+        formatter: status
     }, {
         field: 'id_ob',
         align: 'center',
@@ -81,5 +89,18 @@ $(document).ready(function() {
       window.location.href="/admin/obs/";
     });
   });
+
+  function status(value, row, index) {
+    if (value == 1){
+      return  [
+            '<i class="glyphicon glyphicon-ok"></i>'
+          ].join('');
+    } 
+    else {
+      return  [
+            ''
+          ].join('');
+    }
+  }
 
 });

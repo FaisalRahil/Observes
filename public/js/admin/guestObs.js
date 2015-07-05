@@ -15,47 +15,48 @@ $(document).ready(function() {
       minimumCountColumns: 2,
       clickToSelect: true,
       columns: [{
-          field: 'name_obs',
-          sortable:true,
-          title: 'الاسم'
-      }, {
-          field: 'nationality',
-          sortable:true,
-          title: 'الجنسيه'
-      }, {
-          field: 'pass_nid',
-          sortable:true,
-          title: 'رقم الهويه'
-      }, {
-          field: 'registration_org',
-          sortable:true,
-          title: 'رقم الاشهار'
-      }, {
-          field: 'email',
-          sortable:true,
-          title: 'الباريد الالكتروني'
-      }, {
-          field: 'phone',
-          sortable:true,
-          title: 'رقم الهاتف'
-      }, {
-          field: 'gender',
-          sortable:true,
-          title: 'الجنس'
-      }, {
-          field: 'id_ob',
-          align: 'center',
-          valign: 'middle',
-          title: 'عرض',
-          formatter: operateFormatter
-      }, {
-          field: 'id_ob',
-          align: 'center',
-          valign: 'middle',
-          title: 'مسح',
-          formatter: operateFormatter1
-      }],
+        field: 'name',
+        sortable:true,
+        title: 'الاسم'
+    }, {
+        field: 'name_org',
+        sortable:true,
+        title: 'أسم المنظمة'
+    }, {
+        field: 'nationality',
+        sortable:true,
+        title: 'الجنسية'
+    }, {
+        field: 'phone',
+        sortable:true,
+        title: 'رقم الهاتف'
+    }, {
+        field: 'director',
+        align: 'center',
+        valign: 'middle',
+        title: 'مدير',
+        formatter: status
+    }, {
+        field: 'print',
+        align: 'center',
+        valign: 'middle',
+        title: 'حالة الطباعة',
+        formatter: status
+    }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        title: 'عرض',
+        formatter: operateFormatter
+    }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        title: 'مسح',
+        formatter: operateFormatter1
+    }],
   });
+
   
 
   function operateFormatter(value, row, index) {
@@ -79,11 +80,25 @@ $(document).ready(function() {
   /* Go to media needs view or edit */
   $('#confdelete').click(function() {
     var id = $(this).val();
-    $.get('/admin/delGuestObs/'+id, function(result){
+    $.get('/admin/delObs/'+id, function(result){
       window.location.href="/admin/obs/guestObs";
     });
   });
   ///////////////////////////////////
+
+  function status(value, row, index) {
+    if (value == 1){
+      return  [
+            '<i class="glyphicon glyphicon-ok"></i>'
+          ].join('');
+    } 
+    else {
+      return  [
+            ''
+          ].join('');
+    }
+  }
+
 
   // $(':checkbox').checkboxpicker();
   $('#director').checkboxpicker({
@@ -101,7 +116,7 @@ $(document).ready(function() {
 
   $("#guestObsId").validate({
     rules:{
-      name_obs:{
+      name:{
         required: true,
       },
       email:{

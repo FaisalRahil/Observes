@@ -80,14 +80,15 @@ $(document).ready(function() {
               ''
             ].join('');
       }
-  }
+    }
+    
     $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
+      onLabel:"لا", offLabel:"نعم"
+    });
 
-  $('#gender').checkboxpicker({
-    onLabel:"أنثى", offLabel:"ذكر"
-  });
+    $('#gender').checkboxpicker({
+      onLabel:"أنثى", offLabel:"ذكر"
+    });
 
   $("#agent").validate({
     rules:{
