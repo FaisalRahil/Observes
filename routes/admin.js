@@ -112,7 +112,7 @@ router.get('/org', function(req, res) {
 
 /* GET home page. */
 router.get('/obs', function(req, res) {
-  res.render('admin/obs');
+  res.render('admin/obs',{ title: 'مراقبين'});
 });
 
 router.get('/getAllObs',function(req , res ){

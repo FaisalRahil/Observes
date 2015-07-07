@@ -64,18 +64,18 @@ $(document).ready(function() {
 
   $('#director').editable({
     url: '/admin/editObs_director/',
-    type: 'text',
-    pk: 1,
-    name: 'director',
-    title: 'Enter center director'
+    source:[
+      {value:0,text:"لا"},
+      {value:1,text:"نعم"}
+    ]
   });
 
   $('#gender').editable({
     url: '/admin/editObs_gender/',
-    type: 'text',
-    pk: 1,
-    name: 'gender',
-    title: 'Enter center gender'
+    source:[
+      {value:0,text:"أنثى"},
+      {value:1,text:"ذكر"}
+    ]
   });
 
 

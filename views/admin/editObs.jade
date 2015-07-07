@@ -59,11 +59,11 @@ block content
           tr
             td(width='35%') مدير
             td(width='65%')
-              a#director(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='مدير', data-value='#{obs[0].director}') #{obs[0].director}
+              a#director(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='مدير', data-value='#{obs[0].director}') 
           tr
             td(width='35%') الجنس
             td(width='65%')
-              a#gender(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الجنس', data-value='#{obs[0].gender}') #{obs[0].gender}
+              a#gender(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='الجنس', data-value='#{obs[0].gender}')
 
   
   script(src='/js/jquery-1.11.1.min.js')
