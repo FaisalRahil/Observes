@@ -65,6 +65,14 @@ router.post('/addOb', function(req, res) {
     }
   });
 });
+
+//---- Get all obs by org -----------------------
+router.get('/getOrgObs/:id',function(req , res ){
+  obsMgr.getOrgObs(req.params.id,function(result){
+    res.send(result);
+  });
+});
+
 //*************************************************
 //
 router.get('/getObs',function(req , res ){

@@ -61,13 +61,34 @@ block content
             td(width='65%')
               a#address(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='العنوان', data-value='#{org[0].address}') #{org[0].address}
 
+
+  .row
+    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+      .panel.panel-warning
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | 
+        .panel-body
+          table#table
+
+  #deleteObsOnOrg.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body
+          p.h2 هل انت متأكد 
+          p
+        .modal-footer
+          button#confdelete.btn.btn-danger(data-id_or='#{org[0].id_org}',type='button',data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء 
+
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-table.min.js')
   script(src="/js/bootstrap-editable.min.js")
   script(src="/js/jquery.validate.min.js")
   script(src='/js/bootstrap-switch.min.js')
   script(src="/js/admin/editOrg.js")
   script(src='/js/admin/backToTop.js')
-  
-
-
