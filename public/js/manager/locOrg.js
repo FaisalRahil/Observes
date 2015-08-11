@@ -1,11 +1,7 @@
 $(document).ready(function() {
-
-  $('#gender').checkboxpicker({
-    onLabel:"أنثى", offLabel:"ذكر"
-  });
-  $('#table').bootstrapTable({
+    $('#table').bootstrapTable({
       method: 'get',
-      url: '/manager/getOrg6',
+      url: '/manager/getOrg4',
       cache: false,
       height: 400,
       striped: true,
@@ -21,7 +17,7 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم الرشح'
+          title: 'اسم المنظمه'
       }, {
           field: 'name_director',
           sortable:true,
@@ -37,7 +33,7 @@ $(document).ready(function() {
       }, {
           field: 'email',
           sortable:true,
-          title: 'البريد الالكتروني'
+          title: 'الباريد الالكتروني'
       }, {
           field: 'phone',
           sortable:true,
@@ -55,12 +51,12 @@ $(document).ready(function() {
           title: 'مسح',
           formatter: operateFormatter1
       }],
-  });
+    });
   
 
   function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/manager/editCandidateOrg/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editLocOrg/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
@@ -68,11 +64,12 @@ $(document).ready(function() {
 
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deletecan" data-toggle="modal" href="#deletecandidate" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteOrg" data-toggle="modal" href="#deleteOrgModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
-  $('body').on('click', '#deletecan ', function () {
+  /* Go to orgTable needs view or edit */
+  $('body').on('click', '#deleteOrg ', function () {
     var id = $(this).val();
     $.get('/manager/checkOrg/'+id, function(result){
       if(result){
@@ -89,55 +86,58 @@ $(document).ready(function() {
   $('#confdelete').click(function() {
     var id = $(this).val();
     $.get('/manager/delOrg/'+id, function(result){
-      window.location.href="/manager/org/candidate";
+      window.location.href="/manager/org/locOrg";
     });
   });
 
+////////////////////////////
 
-$("#candidate").validate({
+  $("#natOrg").validate({
     rules:{
       name_org:{
         required: true,
       },
-      name_director:{
+      email:{
         required: true,
-      },
-      registration_no:{
-        required: true,
-      },
-      address:{
-        required: true,
+        email: true,
       },
       phone:{
         required: true,
+        minlength: 10,
         number: true,
       },
-      email:{
+      registration_no:{
         required : true,
-        email : true
-      }
+      },
+      name_director:{
+        required : true,
+      },
+      address: {
+        required: true,
+      },
     },
     messages:{
       name_org:{
-        required: "الرجاء إدخال اﻹسم !",
-      },
-      name_director:{
-        required: "الرجاء إدخال اسم المدير !",
+        required: "الرجاء ادخال اسم المنظمه",
       },
       email:{
-        required: "الرجاء إدخال البريد اﻹلكتروني !",
-        email: "هذا ليس بريد إلكتروني !",
-      },
-      address:{
-        required: "الرجاء إدخال العنوان !",
+        required: "الرجاء إدخال الباريد الالكتروني",
+        email: "الرجاء إدخال الباريد الالكتروني بصورته الصحيحه",
       },
       phone:{
-        required: "الرجاء إدخال رقم الهاتف !",
-        number: "الرجاء ادخال رقم الهاتف ",
+        required: "الرجاء إدخال رقم الهاتف",
+        minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام",
+        number: "يجب أن تكون المدخلات أرقام",
       },
       registration_no:{
-        required: "الرجاء ادخال رقم المترشح !",
-      }  
+        required: "الرجاء إدخال رقم الاشهار",
+      },
+      name_director:{
+        required: "الرجاء إدخال اسم مدير المنظمه",
+      },
+      address:{
+        required: "الرجاء إدخال عنوان المنظمه ",
+      },
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -145,4 +145,8 @@ $("#candidate").validate({
       });
     },
   });
+///////////////////////
+
+
+
 });

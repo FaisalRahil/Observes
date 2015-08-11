@@ -61,6 +61,26 @@ block content
             td(width='65%')
               a#address(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='العنوان', data-value='#{org[0].address}') #{org[0].address}
 
+    .row
+      .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+        .panel.panel-danger
+          .panel-heading
+            h3.panel-title
+              span.glyphicon.glyphicon-bookmark
+              | المراقبين
+          .panel-body
+            table#table
+    #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body
+          p.h2 هل انت متأكد 
+          p 
+        .modal-footer
+          button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء        
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/bootstrap-editable.min.js")

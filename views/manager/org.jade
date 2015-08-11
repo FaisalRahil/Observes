@@ -26,9 +26,9 @@ block content
         li
           a(href='#') التقارير
         li
-          a(href='#') المراقبين
+          a(href='/manager/obs') المراقبين
         li
-          a(href='#') الـمنظمات
+          a(href='/manager/org') الـمنظمات
 
   .row
     .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
@@ -40,12 +40,12 @@ block content
         .panel-body
           .row
             .col-xs-6.col-sm-6.col-md-6.col-lg-6  
-              a.btn-lg.btn.btn-danger.btn-block(href="/", role="button")
+              a.btn-lg.btn.btn-danger.btn-block(href="/manager/org/candidate", role="button")
                 span.glyphicon.glyphicon-user
                 br
                 | المرشحين
               p
-              a.btn-lg.btn.btn-info.btn-block(href="/", role="button")
+              a.btn-lg.btn.btn-info.btn-block(href="/manager/org/locOrg", role="button")
                 span.glyphicon.glyphicon-th
                 br
                 | المنظمات المحلية
@@ -56,7 +56,7 @@ block content
                 br
                 | مـــــثـال
               p
-              a.btn-lg.btn.btn-success.btn-block(href="/", role="button")
+              a.btn-lg.btn.btn-success.btn-block(href="/manager/org/locMedia", role="button")
                 span.glyphicon.glyphicon-user
                 br
                 | الاعلام المحلي
@@ -65,6 +65,28 @@ block content
           a.btn.btn-primary.btn-lg.btn-block(href="/", role="button")
             span.glyphicon.glyphicon-th-list
             | مـــــثـال
-  
+  .row
+    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            span.glyphicon.glyphicon-bookmark
+            | المنظمات
+        .panel-body
+          table#table
+  #deleteorgModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body#mbody
+          p.h2 هل انت متأكد 
+          p 
+        .modal-footer
+          button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء
+          
   script(src="/js/jquery-1.11.1.min.js")
   script(src="/js/bootstrap.min.js")
+  script(src="/js/bootstrap-table.min.js")
+  script(src="/js/manager/org.js")

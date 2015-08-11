@@ -3,14 +3,26 @@ $(document).ready(function() {
   var defaults = {
     disabled: true,
   };
-
+  $.extend($.fn.editable.defaults, defaults);
   
   $("[name='discount_flag']").bootstrapSwitch('state', false);
   $("[name='discount_flag']").on('switchChange.bootstrapSwitch', function (e, data) {
-    $('#obs .editable').editable('toggleDisabled');
+    $('#orgTable .editable').editable('toggleDisabled');
   });
   
-  
+  registration_no
+   $('#registration_no').editable({
+    url: '/manager/editOrg_registration_no/',
+    type: 'text',
+    pk: 1,
+    name: 'name_org',
+    title: 'Enter name',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال اﻹسم';
+      if(v.length<2) return "يجب أن يكون الاسم أكثر من حرفين";
+    }
+  });
+   
   $('#name_org').editable({
     url: '/manager/editOrg_name_org/',
     type: 'text',
@@ -30,8 +42,7 @@ $(document).ready(function() {
     name: 'name_director',
     title: 'Enter name director',
     validate: function(v) {
-      if(!v) return 'الرجاء ادخال الرقم الوطني / جواز سفر';
-      if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 ارقام";
+      if(!v) return 'الرجاء ادخال اﻹسم';
     }
   });
   
@@ -43,19 +54,23 @@ $(document).ready(function() {
     title: 'Enter email',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال البريد اﻹلكتروني';
-      if(v.length<5) return "يجب أن يكون البريد اﻹلكتروني أكثر من 7 حروف";
+      var emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      var valid = emailReg.test(v);
+      if(!valid) return 'هذا ليس بريد اليكتروني';
     }
   });
   
   $('#phone').editable({
-    url: '/manager/editObs_phone/',
+    url: '/manager/editOrg_phone/',
     type: 'text',
     pk: 1,
     name: 'phone',
     title: 'Enter phone',
     validate: function(v) {
+     var flag = /^[0-9\b]+$/.test(v);
       if(!v) return 'الرجاء ادخال رقم الهاتف';
-      if(v.length<10) return "يجب أن يكون رقم الهاتف أكثر من 9 أرقام ";
+      if(v.length<10) return "يجب أن يكون الهاتف  لا يقل عن 10 ارقام";
+      if(!flag) return "هذا ليس رقم هاتف";
     }
   });
 
@@ -66,14 +81,12 @@ $(document).ready(function() {
     name: 'address',
     title: 'Enter address',
     validate: function(v) {
-      if(!v) return 'الرجاء ادخال رقم الهاتف';
-      if(v.length<10) return "يجب أن يكون رقم الهاتف أكثر من 9 أرقام ";
+      if(!v) return 'الرجاء ادخال العنوان';
     }
   });
-
   $('#table').bootstrapTable({
       method: 'get',
-      url: '/manager/getOb6',
+      url: '/manager/getObsIdOrg/'+$('#confdelete').data('id_o'),
       cache: false,
       height: 400,
       striped: true,
@@ -85,7 +98,6 @@ $(document).ready(function() {
       showColumns: true,
       showRefresh: true,
       minimumCountColumns: 2,
-      clickToSelect: true,
       columns: [{
           field: 'name',
           sortable:true,
@@ -131,13 +143,13 @@ $(document).ready(function() {
   
     function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editAgentObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editOrgObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deleteObs" data-toggle="modal" href="#deleteObsModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteObs" data-toggle="modal" href="#" class="remove btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
 
@@ -153,65 +165,18 @@ $(document).ready(function() {
             ].join('');
       }
   }
-    $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
-
-  $('#gender').checkboxpicker({
-    onLabel:"أنثى", offLabel:"ذكر"
-  });
-
-  $("#agent").validate({
-    rules:{
-      name:{
-        required: true,
-      },
-      pass_nid:{
-        required: true,
-      },
-      registration_org:{
-        required: true,
-      },
-      phone_obs:{
-        required: true,
-        number: true,
-      },
-      email:{
-        required : true,
-        email : true
-      }
-    },
-    messages:{
-      name:{
-        required: "الرجاء إدخال اﻹسم !",
-      },
-      pass_nid:{
-        required: "الرجاء إدخال رقم الهوية !",
-      },
-      email:{
-        required: "الرجاء إدخال البريد اﻹلكتروني !",
-        email: "هذا ليس بريد إلكتروني !",
-      },
-      phone_obs:{
-        required: "الرجاء إدخال رقم الهاتف !",
-        number: "الرجاء ادخال رقم الهاتف ",
-      },
-      registration_org:{
-        required: "الرجاء اختيار المرشح !",
-      }  
-    },
-  });
-  $('body').on('click', '#deleteObs ', function () {
-    var id = $(this).val();
-    $('#confdelete').val(id);
-  });
-
+ var ids;
   /* Go to orgTable needs view or edit */
-  $('#confdelete').click(function() {
-    var id = $(this).val();
-    $.get('/manager/delObs/'+id, function(result){
-      window.location.href="/manager/org/candidate";
+  $('body').on('click', '#deleteObs ', function () {
+    var id = $(this);
+    $('#confdelete').val(id.val());
+    var id_o=$('#confdelete').data('id_o');
+    $('#deleteObsModule').modal('show');
+    $('#confdelete').click(function() {
+      $.get('/manager/delObs/'+id.val(), function(result){
+        id.parents('tr').remove();        
+      });
     });
   });
-  
+
 });

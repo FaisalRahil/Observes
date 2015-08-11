@@ -4,7 +4,7 @@ exports.obsMgr = {
   
   getOb : function(id,cb){ //sort by organisaition type
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` = ? AND obs.`registration_org` = org.`registration_no`', id, function(err, result) {
+      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` = ? AND obs.`registration_org` = org.`id_org`', id, function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
@@ -28,9 +28,9 @@ exports.obsMgr = {
     });
   },
 
-  getOrgObs : function(cb){ //get observers in organisaitions
+  getOrgObs : function(id_org,cb){ //get observers in organisaitions
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`id_org` = ? ', id_org,  function(err, result) {
+      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE `org`.`status` =1 AND obs.`status` =1 AND `org`.`id_org` = `obs`.`registration_org` AND org.`id_org` = ? ', id_org,  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
@@ -40,7 +40,18 @@ exports.obsMgr = {
       });
     });
   },
-
+  getObsIdOrg : function(id_org,cb){ //get observers in organisaitions
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT * FROM  `observers`  WHERE `status` =1 AND `registration_org` = ? ', id_org,  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
   getObs_Id : function(id,cb){ // get observer by id
     mysqlMgr.connect(function (conn) {
       conn.query('SELECT * FROM `observers` WHERE `status`= 1 AND `id_ob` = ?',id,  function(err, result) {
@@ -56,6 +67,7 @@ exports.obsMgr = {
 
   addOb : function(body,cb){
     mysqlMgr.connect(function (conn) {
+      body['id_ob']=new Date().getTime();
       conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
         conn.release();
         if(err) {

@@ -44,7 +44,7 @@ block content
           li
               a.btn.btn-default.btn-block(href="/manager/org/candidate", role="button")
                 span.glyphicon.glyphicon-th.pull-right
-                | مــرشح
+                | مــرشحين
 
 
     .col-sm-7.col-md-7.col-lg-7
@@ -60,18 +60,13 @@ block content
               .form-group
                 input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
               .form-group
-                input.form-control#address(name='address', placeholder='المحلة / المدينة', type='text')
+                input.form-control#address(name='address', placeholder='العنوان', type='text')
               .form-group
                 input.form-control#registration_no(name='registration_no', placeholder='رقم اﻹشهار', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
 
               input#type(name='type', type='hidden',value='5')
-              //- .form-group
-              //-   select.form-control#level(name='level',type='text')
-              //-     option(value='', style='color: grey; display:none;') Please Select Level
-              //-     option(value='1') Administration
-              //-     option(value='2') Seller  
               .row
                 .col-xs-8.col-md-8
                   button.btn.btn-warning.btn-block(type='submit') تسجيـــل 

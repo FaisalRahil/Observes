@@ -5,7 +5,6 @@ exports.orgMgr = {
     console.log(id);
     mysqlMgr.connect(function (conn) {
       conn.query('SELECT * FROM `organisaition`  WHERE  `status` = 1 AND `type`= ?',id,  function(err, result) {
-        console.log(result);
         conn.release();
         if(err) {
           util.log(err);
@@ -15,6 +14,27 @@ exports.orgMgr = {
       });
     });
   },
+
+  getser : function(cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 ',  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          console.log(result);
+          mysqlMgr.conserver(function (connw) {
+            console.log(result);
+            for(i in result){
+              connw.query('INSERT INTO `organisaition` SET ?',result[i]);
+            }
+          });
+          cb(result);
+        }
+      });
+    });
+  },
+
 
   getOrgs : function(cb){
     mysqlMgr.connect(function (conn) {
@@ -31,6 +51,7 @@ exports.orgMgr = {
 
   addOrg : function(body,cb){
     mysqlMgr.connect(function (conn) {
+      body['id_org']=new Date().getTime();
       conn.query('INSERT INTO `organisaition` SET ?',body,  function(err, result) {
         conn.release();
         if(err) {

@@ -9,7 +9,13 @@ var pool = mysql.createPool({
   database : config.database,
   multipleStatements: true
 });
-
+var servire =  mysql.createPool({
+  host     : "192.168.0.86",
+  user     : "root",
+  password : "102030",
+  database : "obs",
+  multipleStatements: true
+});
 var util = require("util");
 /************************************************************************/
 exports.mysqlMgr = {
@@ -17,7 +23,12 @@ exports.mysqlMgr = {
   	pool.getConnection(function(err, connection) {
   	  callback(connection);
   	});
+  },
 
+  conserver : function (callback){
+    servire.getConnection(function(err, connecti) {
+      callback(connecti);
+    });
   },
   
 }

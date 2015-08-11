@@ -60,7 +60,7 @@ block content
                 select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
                   option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
                   for org in orgs
-                    option(value="#{org.registration_no}") #{org.name_org}
+                    option(value="#{org.id_org}") #{org.name_org}
               .form-group.col-sm-6.col-md-6.col-lg-6
                 | الجنس :   
                 input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
