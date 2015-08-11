@@ -77,7 +77,7 @@ $(document).ready(function() {
   /* Go to media needs view or edit */
   $('#confdelete').click(function() {
     var id = $(this).val();
-    $.get('/admin/delMedia/'+id, function(result){
+    $.get('/admin/delOrg/'+id, function(result){
       window.location.href="/admin/org/natMedia";
     });
   });

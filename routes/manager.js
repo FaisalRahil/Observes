@@ -200,20 +200,23 @@ router.get('/getObsIdOrg/:id', function(req, res) {
 
 /* GET home page. */
 router.get('/getOb', function(req, res) {
-  obsMgr.getOb(5,function(result){
+
+  console.log("im in");
+  obsMgr.getAllObsAndNameOrgByType(5,function(result){
+    console.log(result);
     res.send(result);
   });
 });
 
 /* GET home page. */
 router.get('/getOb4', function(req, res) {
-  obsMgr.getOb(4,function(result){
+  obsMgr.getAllObsAndNameOrgByType(4,function(result){
     res.send(result);
   });
 });
 
 router.get('/getOb6', function(req, res) {
-  obsMgr.getOb(6,function(result){
+  obsMgr.getAllObsAndNameOrgByType(6,function(result){
     res.send(result);
   });
 });
