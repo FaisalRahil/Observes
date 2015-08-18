@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 11, 2015 at 10:59 AM
--- Server version: 5.5.43-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.9
+-- Generation Time: Aug 18, 2015 at 01:46 PM
+-- Server version: 5.5.44-0ubuntu0.14.04.1-log
+-- PHP Version: 5.5.9-1ubuntu4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `log` (
 --
 
 CREATE TABLE IF NOT EXISTS `observers` (
-  `id_ob` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ob` bigint(11) NOT NULL,
   `name` varchar(500) CHARACTER SET utf8 NOT NULL,
   `nationality` int(11) DEFAULT NULL,
   `pass_nid` varchar(300) CHARACTER SET utf8 NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `observers` (
   `print` tinyint(2) NOT NULL DEFAULT '0',
   `id_office` int(11) NOT NULL,
   PRIMARY KEY (`id_ob`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `observers` (
 --
 
 CREATE TABLE IF NOT EXISTS `organisaition` (
-  `id_org` int(11) NOT NULL AUTO_INCREMENT,
-  `registration_no` varchar(300) NOT NULL,
+  `id_org` bigint(11) NOT NULL,
+  `registration_no` text CHARACTER SET latin1 NOT NULL,
   `name_org` varchar(300) NOT NULL,
   `name_director` varchar(300) NOT NULL,
   `type` int(2) NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `organisaition` (
   `upload_date` datetime DEFAULT NULL,
   `id_office` int(11) NOT NULL,
   PRIMARY KEY (`id_org`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
