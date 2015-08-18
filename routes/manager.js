@@ -239,7 +239,7 @@ router.post('/addObs', function(req, res) {
   type=req.body["Type"];
   delete req.body["Type"];
   req.body['id_office']=1;
-  req.body['nationality']=1;
+  req.body['nationality']=210;
   if(req.body['gender']){
     req.body['gender']=0;
   }

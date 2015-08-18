@@ -69,10 +69,9 @@ $(document).ready(function(){
     name: 'phone',
     title: 'Enter center phone',
   });
-
   $('#table').bootstrapTable({
     method: 'get',
-    url: '/admin/getOrgObs/'+$(this).data('id_or'),
+    url: '/admin/getOrgObs/'+$('#confdelete').data('id_or'),
     cache: false,
     height: 400,
     striped: true,
@@ -151,7 +150,7 @@ $(document).ready(function(){
     var id = $(this).val();
     var mm   = $(this).data('id_or');
     $.get('/admin/delObs/'+id, function(result){
-      window.location.href="/admin/editOrg/"+mm;
+      window.location.href="/admin/editOrgs/"+mm;
     });
   });
 ////////////////////////////

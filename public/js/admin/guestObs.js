@@ -1,4 +1,14 @@
 $(document).ready(function() {
+  $.nat = new Array();
+  $.get('/admin/nationality/', function(result){
+      i=0;
+      for(key in result){
+      var k = new Object({id : i,value : key, text : result[key]});
+      i++;
+      $.nat.push(k);
+    }
+
+    });
   $('#table').bootstrapTable({
       method: 'get',
       url: '/admin/getGuestObs',
@@ -25,9 +35,10 @@ $(document).ready(function() {
     }, {
         field: 'nationality',
         sortable:true,
-        title: 'الجنسية'
+        title: 'الجنسية',
+        formatter:nationality
     }, {
-        field: 'phone',
+        field: 'phone_obs',
         sortable:true,
         title: 'رقم الهاتف'
     }, {
@@ -97,6 +108,12 @@ $(document).ready(function() {
             ''
           ].join('');
     }
+  }
+  function nationality(value, row, index) {
+    console.log($.nat);
+    return  [
+            $.nat[value-1].text.country_name
+          ].join('');
   }
 
 

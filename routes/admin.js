@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var orgMgr = require('../app/org').orgMgr;
 var obsMgr = require('../app/obs').obsMgr;
-
+var nationality = require('../country.json');
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('admin/admin');
@@ -13,10 +13,8 @@ router.get('/moveOrg', function(req, res) {
   res.render('admin/moveOrg');
 });
 
-router.get('/ww', function(req, res) {
-  orgMgr.getser(function(result){
-    console.log("sdadddd");
-  });
+router.get('/nationality', function(req, res) {
+  res.send(nationality);
 });
 
 ///////////////////////////////////////////
@@ -39,7 +37,7 @@ router.post('/addOb', function(req, res) {
   type=req.body["type"];
   delete req.body["type"];
   req.body['id_office']=1;
-  req.body['nationality']=1;
+  // req.body['nationality']=1;
   
   if(req.body['gender']){
     req.body['gender']=0;
@@ -54,7 +52,6 @@ router.post('/addOb', function(req, res) {
   else{
     req.body['director']=1;
   }
-  
   obsMgr.addOb(req.body,function(err,result){
     if (type == 1) {
       res.redirect('obs/natOrgObs');
@@ -106,6 +103,13 @@ router.get('/getOrg', function(req, res) {
     res.send(result);
   })
 });
+
+router.get('/getOrgsAdmin', function(req, res) {
+  orgMgr.getOrgsAdmin(function(result){
+    res.send(result);
+  })
+});
+
 //******************************************
 router.get('/org/natOrg', function(req, res) {
     res.render('admin/natOrg',{ title: 'المنظمات'});
@@ -130,7 +134,7 @@ router.get('/getAllObs',function(req , res ){
 });
 ///////////////////////////////////////////////////////////////////////////
 router.get('/getAllObsAndNameOrg',function(req , res ){
-  obsMgr.getAllObsAndNameOrg(function(result){
+  obsMgr.getAllObsAndNameOrg([1,2,3],function(result){
     res.send(result);
   });
 });
@@ -170,21 +174,21 @@ router.get('/obs/guest', function(req, res) {
   /* GET home page. */
   router.get('/obs/natOrgObs', function(req, res) {
     orgMgr.getOrg(1,function(result){
-      res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+      res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality});
     })
   });
 
   /* GET home page. */
   router.get('/obs/guestObs', function(req, res) {
     orgMgr.getOrg(2,function(result){
-      res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+      res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality});
     })
   });
 
   /* GET home page. */
   router.get('/obs/natMediaObs', function(req, res) {
     orgMgr.getOrg(3,function(result){
-      res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result});
+      res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality});
     })
   });
 
@@ -235,26 +239,39 @@ router.get('/obs/guest', function(req, res) {
 // start edit methods org
 
   /* GET home page. */
-  router.get('/editOrg/:id', function(req, res) {
+  router.get('/editOrgs/:id', function(req, res) {
     orgMgr.getOrg_Id(req.params.id,function(err,result){
-      res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
+      if(result[0].type==1){
+        res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
+      }else if(result[0].type==2){
+        res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
+      }else{
+        res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
+      }
+      
     });
   });
 
-  /* GET home page. */
-  router.get('/editMedia/:id', function(req, res) {
-    orgMgr.getOrg_Id(req.params.id,function(err,result){
-      res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
-    });
-  });
+  // router.get('/editOrg/:id', function(req, res) {
+  //   orgMgr.getOrg_Id(req.params.id,function(err,result){
+  //     res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
+  //   });
+  // });
+
+  // /* GET home page. */
+  // router.get('/editMedia/:id', function(req, res) {
+  //   orgMgr.getOrg_Id(req.params.id,function(err,result){
+  //     res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
+  //   });
+  // });
 
 
-  /* GET home page. */
-  router.get('/editGuest/:id', function(req, res) {
-    orgMgr.getOrg_Id(req.params.id,function(err,result){
-      res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
-    });
-  });
+  // /* GET home page. */
+  // router.get('/editGuest/:id', function(req, res) {
+  //   orgMgr.getOrg_Id(req.params.id,function(err,result){
+  //     res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
+  //   });
+  // });
 
 // end edit methods org
 ////////////////////////////////////////////
@@ -293,7 +310,7 @@ router.get('/obs/guest', function(req, res) {
 
   /*   editObs_phone  . */
   router.post('/editObs_phone', function(req, res) {
-    obsMgr.editObs_phone(req.body,function(err,result){
+    obsMgr.editObs_phone_obs(req.body,function(err,result){
       res.send(result);
     });
   });

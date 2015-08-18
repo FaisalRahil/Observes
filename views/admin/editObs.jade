@@ -26,9 +26,9 @@ block content
         li
           a(href='#') التقارير
         li
-          a(href='#') المراقبين
+          a(href='/admin/obs') المراقبين
         li
-          a(href='#') الـمنظمات
+          a(href='/admin/org') الـمنظمات
 
   .row
     .col-md-8.col-md-offset-2
@@ -47,7 +47,7 @@ block content
           tr
             td(width='35%') رقم الهاتف
             td(width='65%')
-              a#phone(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{obs[0].phone}') #{obs[0].phone}
+              a#phone_obs(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{obs[0].phone_obs}') #{obs[0].phone_obs}
           tr
             td(width='35%') البريد الاكتروني
             td(width='65%')
@@ -55,7 +55,7 @@ block content
           tr
             td(width='35%') الجنسية
             td(width='65%')
-              a#nationality(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الجنسية', data-value='#{obs[0].nationality}') #{obs[0].nationality}
+              a#nationality(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='الجنسية', data-value='#{obs[0].nationality}')
           tr
             td(width='35%') مدير
             td(width='65%')

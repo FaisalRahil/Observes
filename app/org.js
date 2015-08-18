@@ -48,7 +48,18 @@ exports.orgMgr = {
       });
     });
   },
-
+  getOrgsAdmin : function(cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `type` IN ( 1, 2, 3 ) ',  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
   addOrg : function(body,cb){
     mysqlMgr.connect(function (conn) {
       body['id_org']=new Date().getTime();

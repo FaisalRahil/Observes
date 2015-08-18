@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $.nat = new Array();
 
   var defaults = {
     disabled: true,
@@ -42,25 +43,41 @@ $(document).ready(function() {
     title: 'Enter center email',
   });
   
-  $('#phone').editable({
+  $('#phone_obs').editable({
     url: '/admin/editObs_phone/',
     type: 'text',
     pk: 1,
-    name: 'phone',
+    name: 'phone_obs',
     title: 'Enter center phone',
     validate: function(v) {
       if(!v) return 'الرجاء ادخال رقم الهاتف';
       if(v.length<10) return "يجب أن يكون رقم الهاتف على الاقل 10 ارقام";
     }
   });
-
-  $('#nationality').editable({
-    url: '/admin/editObs_nationality/',
-    type: 'text',
-    pk: 1,
-    name: 'nationality',
-    title: 'Enter center nationality'
+  $.getJSON("/admin/nationality/", function( result ) {
+       i=0;
+        for(key in result){
+        var k = new Object({id : i,value : result[key].country_id, text : result[key].country_name});
+        i++;
+        $.nat.push(k);
+      }
+    $('#nationality').editable({
+        url: '/admin/editObs_nationality/',
+        source:$.nat,
+        pk: 1,
+        name: 'nationality',
+        validate: function(v) {
+          if(!v) return 'الرجاء اختيار الجنسية';
+        }
+    }); 
   });
+  // $('#nationality').editable({
+  //   url: '/admin/editObs_nationality/',
+  //   type: 'text',
+  //   pk: 1,
+  //   name: 'nationality',
+  //   title: 'Enter center nationality'
+  // });
 
   $('#director').editable({
     url: '/admin/editObs_director/',

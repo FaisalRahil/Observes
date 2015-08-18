@@ -26,9 +26,9 @@ block content
         li
           a(href='#') التقارير
         li
-          a(href='#') المراقبين
+          a(href='/admin/obs') المراقبين
         li
-          a(href='#') الـمنظمات
+          a(href='/admin/org') الـمنظمات
 
   .row
     .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
@@ -60,7 +60,13 @@ block content
                 select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
                   option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
                   for org in orgs
-                    option(value="#{org.registration_no}") #{org.name_org}
+                    option(value="#{org.id_org}") #{org.name_org}
+              .form-group
+                select#nationality.form-control.selectpicker.show-tick(type="text",name="nationality",data-show-subtext='true',data-size='5',data-live-search='true')
+                  option(value="", style='color:grey; display:none;') الرجاء اختيار الجنسية
+                  for nat in nationality
+                    option(value="#{nat.country_id}") #{nat.country_name}
+                    
               .form-group.col-sm-6.col-md-6.col-lg-6
                 | الجنس :   
                 input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
@@ -68,7 +74,7 @@ block content
                 | مدير  : 
                 input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
               .form-group
-                input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
+                input.form-control#phone(name='phone_obs', placeholder='رقم الهاتف', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
               

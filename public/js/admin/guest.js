@@ -35,7 +35,7 @@ $(document).ready(function() {
   
   function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewGuest" class="btn btn-xs btn-primary" href="/admin/editGuest/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewGuest" class="btn btn-xs btn-primary" href="/admin/editOrgs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
