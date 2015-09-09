@@ -1,17 +1,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- <title>jsreport <%= version %></title> -->
-    <link rel="stylesheet" type="text/css" href="http://localhost:3000/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost:3000/css/bootstrap-rtl.min.css">
+    <title> بيانات المراقبين </title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:3003/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:3003/css/bootstrap-rtl.min.css">
     <style>
       @font-face {
         font-family: 'Amiri';
-        src: url("http://localhost:3000/fonts/amiri-regular.ttf") format("truetype");
+        src: url("http://localhost:3003/fonts/amiri-regular.ttf") format("truetype");
       }
       body {
         font-family: 'Amiri';
       }
+      @font-face {
+        font-family: 'Droid Arabic Kufi';
+        src : url("http://localhost:3003/fonts/DroidKufi-Regular.ttf") format("truetype");
+          }
       .fontSize{
         font-size: 31px;
       }
@@ -25,6 +29,18 @@
       .table,.table>tbody>tr>td{
         font-size: 15px;
         border: 1px dotted #000;
+      }
+      .table td{
+        font-family: 'Droid Arabic Kufi';
+        text-align: center;
+        vertical-align: middle;
+      }
+      .table{
+        /*table-layout: fixed;*/
+        
+      }
+      .table.fixed td { 
+        overflow: hidden; 
       }
       .condensed>tbody>tr>td {
         padding: 5px;
@@ -69,7 +85,7 @@
         <div class="col-xs-3">
           <div class="halfSpace"></div>
           <div class="text-left">
-            <img src="http://localhost:3003/images/hnec_logo.png"  > 
+            <img src="http://localhost:3003/images/hnec_logo.png"> 
           </div>
         </div>
         <!-- <div class="towSpaces"></div> -->
@@ -80,9 +96,9 @@
               <tr style="border-top-style: solid; border-top-width: 2px;" >
                 <th class="text-center" width="13%" style="background-color:#C3E6FC !important;"> اسـم الـمـراقـب </th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> الـجـنـسـيـة </th>
-                <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> الـرقـم الـوطـنـي <span>/</span> جـواز الـسـفـر </th>
+                <th class="text-center" width="9%" style="background-color:#C3E6FC !important;"> الـرقـم الـوطـنـي <span>/</span> جـواز الـسـفـر </th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> الـجـنـس </th>
-                <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> الـبـريـد الالـكـتـرونـي <span>(</span>الـمـراقـب <span>)</span></th>
+                <th class="text-center" width="9%" style="background-color:#C3E6FC !important;"> الـبـريـد الالـكـتـرونـي الـمـراقـب </th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> رقـم هـاتـف <span>(</span>الـمـراقـب <span>)</span></th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> الـلـجـنـة </th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> رقـم الاشـهـار </th>
@@ -90,7 +106,7 @@
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> مـديـر الـمـنـظـمـة </th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> نـوع الـمـنـظـمـة </th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> رقـم هـاتـف <span>(</span>الـمـنـظـمـة<span>)</span> </th>
-                <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> الـبـريـد الالـكـتـرونـي <span>(</span>الـمـنـظـمـة<span>)</span> </th>
+                <th class="text-center" width="9%" style="background-color:#C3E6FC !important;"> الـبـريـد الالـكـتـرونـي <span>(</span>الـمـنـظـمـة<span>)</span> </th>
                 <th class="text-center" width="7%" style="background-color:#C3E6FC !important;"> عـنـوان الـمـنـظـمـة </th>
               </tr>
             </thead>
@@ -98,396 +114,290 @@
               <tr>
                 <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
                 <td> لـيـبـي </td>
-                <td class="text-center"> 111111996647665 </td>
+                <td> 119890002059 </td>
                 <td> ذكـر </td>
                 <td> faisalrahil@gmail.com </td>
-                <td> 0911100111 </td>
+                <td> 0911019111 </td>
                 <td> طـراـبـلـس </td>
-                <td> 33134 </td>
+                <td> 1314 </td>
                 <td> طـرابـلـس الـخـيـر </td>
                 <td> محمد محمد محمد </td>
                 <td> مـحـلـيـة </td>
-                <td> 09222222345 </td>
-                <td> jhbvj@jgv.com </td>
+                <td> 0925027521 </td>
+                <td> faiiiiisal@naga.com </td>
                 <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tbody style="border: 2px solid #000;">
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tbody style="border: 2px solid #000;">
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tbody style="border: 2px solid #000;">
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tbody style="border: 2px solid #000;">
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tbody style="border: 2px solid #000;">
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td> مـحـمـد مـخـتـاـر مـحـمـد أدـم </td>
+                <td> لـيـبـي </td>
+                <td> 119890002059 </td>
+                <td> ذكـر </td>
+                <td> faisalrahil@gmail.com </td>
+                <td> 0911019111 </td>
+                <td> طـراـبـلـس </td>
+                <td> 1314 </td>
+                <td> طـرابـلـس الـخـيـر </td>
+                <td> محمد محمد محمد </td>
+                <td> مـحـلـيـة </td>
+                <td> 0925027521 </td>
+                <td> faisal@naga.com </td>
+                <td> طـريـق الـسـكـة </td>
               </tr>
             </tbody>
           </table>

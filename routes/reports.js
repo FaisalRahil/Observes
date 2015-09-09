@@ -6,23 +6,6 @@ var app = require('express')();
 var jsr = require("jsreport");
 var fs = require("fs");
 var path = require("path");
-/* GET home page. */
-// router.get('/', function(req, res) {
-//   orgMgr.getOrgs(function(results){
-//     console.log(results);
-//     jsr.render({
-//       template: {
-//         content:  fs.readFileSync(path.join(__dirname, "../views/report/test.html"), "utf8"),
-//         phantom: {
-//           header: "<img src='images/hnec_logo.png'>"
-//         }
-//       },
-//       data: { re: results }
-//     }).then(function(out) {
-//       out.result.pipe(res);
-//     });
-//   });
-// });
 
 router.get('/', function(req, res) {
 
@@ -44,57 +27,65 @@ router.get('/', function(req, res) {
     });
   });
 
-  // normale A4
-  router.get('/certificate', function(req, res, next) {
+  // this sertificate // widght A4
+  router.get('/obsByType', function(req, res, next) {
     jsr.render({
       template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/certificate.html"), "utf8"),
-        recipe: "phantom-pdf"
-      },
-      data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
-    });
-  });
-
-
-  router.get('/arabicTranscript', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/arabicTranscript.html"), "utf8"),
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
+        phantom:{
+          orientation: "landscape",
+        },
         recipe: "phantom-pdf",
-        helpers:htmlTagsDraw.toString()
       },
-      // data:{name:fullName,setNum:setNumber,dept:department,dev:devision,sys:system,obj:arabicTranscriptObject}
-      //{name:fullName,setNum:setNumber,dept:department,dev:devision,sys:system}
-    }).then(function (response) {
-      response.result.pipe(res);
-    });
-  });
-
-  router.get('/englishTranscript', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/englishTranscript.html"), "utf8"),
-        recipe: "phantom-pdf"
-      },
-      data:obj
+      // data:obj
     }).then(function (response) {
       response.result.pipe(res);
     });
   });
 
   // this sertificate // widght A4
-  router.get('/giftCertificate', function(req, res, next) {
+  router.get('/obsByNationality', function(req, res, next) {
     jsr.render({
       template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/giftCertificate.html"), "utf8"),
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByNationality.html"), "utf8"),
         phantom:{
           orientation: "landscape",
         },
         recipe: "phantom-pdf",
       },
-      data:obj
+      // data:obj
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+  // this sertificate // widght A4
+  router.get('/noOfLocaleObs', function(req, res, next) {
+    jsr.render({
+      template: { 
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
+        phantom:{
+          orientation: "landscape",
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:obj
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+  // this sertificate // widght A4
+  router.get('/statisticsOfficesByType', function(req, res, next) {
+    jsr.render({
+      template: { 
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByType.html"), "utf8"),
+        phantom:{
+          orientation: "landscape",
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:obj
     }).then(function (response) {
       response.result.pipe(res);
     });
