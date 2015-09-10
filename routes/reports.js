@@ -7,9 +7,9 @@ var jsr = require("jsreport");
 var fs = require("fs");
 var path = require("path");
 
-router.get('/', function(req, res) {
+  router.get('/', function(req, res) {
 
-});
+  });
 
   router.get('/observers', function(req, res, next) {
     jsr.render({
@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
     });
   });
 
-  // this sertificate // widght A4
+  // this obsByType // widght A4
   router.get('/obsByType', function(req, res, next) {
     jsr.render({
       template: { 
@@ -43,7 +43,7 @@ router.get('/', function(req, res) {
     });
   });
 
-  // this sertificate // widght A4
+  // this obsByNationality // widght A4
   router.get('/obsByNationality', function(req, res, next) {
     jsr.render({
       template: { 
@@ -59,7 +59,7 @@ router.get('/', function(req, res) {
     });
   });
 
-  // this sertificate // widght A4
+  // this noOfLocaleObs // widght A4
   router.get('/noOfLocaleObs', function(req, res, next) {
     jsr.render({
       template: { 
@@ -75,7 +75,56 @@ router.get('/', function(req, res) {
     });
   });
 
-  // this sertificate // widght A4
+  // this noOfLocaleObsEn // widght A4
+  router.get('/noOfLocaleObsEn', function(req, res, next) {
+    jsr.render({
+      template: { 
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObsEn.html"), "utf8"),
+        phantom:{
+          orientation: "landscape",
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:obj
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+    // this noOfInternationalObs // widght A4
+  router.get('/noOfInternationalObs', function(req, res, next) {
+    jsr.render({
+      template: { 
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternational.html"), "utf8"),
+        phantom:{
+          orientation: "landscape",
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:obj
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+  // this noOfInternationalObsEn // widght A4
+  router.get('/noOfInternationalObsEn', function(req, res, next) {
+    jsr.render({
+      template: { 
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObsEn.html"), "utf8"),
+        phantom:{
+          orientation: "landscape",
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:obj
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+
+  // this statisticsOfficesByType // widght A4
   router.get('/statisticsOfficesByType', function(req, res, next) {
     jsr.render({
       template: { 
@@ -91,14 +140,27 @@ router.get('/', function(req, res) {
     });
   });
 
-  // this sertificate // normale A4
-  router.get('/certificateTrue', function(req, res, next) {
+  // this noOfWomenAndMen // normale A4
+  router.get('/noOfWomenAndMen', function(req, res, next) {
     jsr.render({
       template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/certificateTrue.html"), "utf8"),
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfWomenAndMen.html"), "utf8"),
         recipe: "phantom-pdf"
       },
-      data:obj
+      // data:obj
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+   // this noOfWomenAndMenEn // normale A4
+  router.get('/noOfWomenAndMenEn', function(req, res, next) {
+    jsr.render({
+      template: { 
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfWomenAndMenEn.html"), "utf8"),
+        recipe: "phantom-pdf"
+      },
+      // data:obj
     }).then(function (response) {
       response.result.pipe(res);
     });
