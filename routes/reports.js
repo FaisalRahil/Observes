@@ -8,21 +8,80 @@ var jsr = require("jsreport");
 var fs = require("fs");
 var path = require("path");
 var nationality = require('../Nationality');
+var office = require('../office');
 
   router.get('/', function(req, res) {
 
   });
 
-  function drawAllResults(allResults){
+  // drawAllResultsNoOfLocaleObs
+  function drawAllResultsNoOfLocaleObs(allResults,officePar){
+    var html = '';
+    // var typeInTD = '';
+    // var office1 = '';
+    // var sumOfLocOrg = 0;
+    // var sumOfLocMedia = 0;
+    // var sumOfAgent = 0;
+    
+    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    console.log(allResults);
+    for (i in allResults){
+      // if(allResults[i].type == 4){
+      //   sumOfLocOrg += 1;
+      // }
+      // if(allResults[i].type == 5){
+      //   sumOfLocMedia += 1;
+      // }
+      // if(allResults[i].type == 6){
+      //   sumOfAgent += 1;
+      // }
+      // for (var l = 0; l < officePar.length; l++) {
+      //   if( allResults[i].id_office == officePar[l].idoffice ){
+      //     office1 = officePar[l].office_name_ar;
+      //     break;
+      //   }
+      // }
+      // for (var k = 0; k <= type1.length; k++) {
+      //   if(allResults[k].type-1 == k ){
+      //     typeInTD = type1[k];
+      //     break;
+      //   }
+      // }
+      html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+allResults[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+sumOfLocOrg+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+sumOfLocMedia+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+sumOfAgent+' </td>\
+              </tr>';
+            }
+    return html;
+  }
+  function drawAllResults(allResults,national,officePar){
     var html = '';
     var gender1;
-    var nat;
-    // for (i in allResults){
-    //   for (var i = 0; i <= nationality.length; i++) {
-    //     if( allResults[i].nationality == nationality ){
-
-    //     }
-    //   };
+    var nat = '';
+    var typeInTD = '';
+    var office1 = '';
+    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    for (i in allResults){
+      for (var l = 0; l < officePar.length; l++) {
+        if( allResults[i].id_office == officePar[l].idoffice ){
+          office1 = officePar[l].office_name_ar;
+          break;
+        }
+      }
+      for (var k = 0; k <= type1.length; k++) {
+        if(allResults[k].type-1 == k ){
+          typeInTD = type1[k];
+          break;
+        }
+      }
+      for (var j = 0; j < national.length; j++) {
+        if( allResults[i].nationality == national[j].id ){
+          nat = national[j].name;
+          break;
+        }
+      }
       if(allResults[i].gender == 0){
         gender1 = "ذكـر";
       }else{
@@ -30,28 +89,26 @@ var nationality = require('../Nationality');
       }
       html+= '<tr>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].nationality+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+nat+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].pass_nid+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+gender1+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_obs+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone_obs+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+office1+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].registration_no+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_director+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].type+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_org+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].address+' </td>\
-              </tr>';  
-    }
-    
-return html;
+              </tr>';
+            }
+    return html;
   }
 
   router.get('/observers', function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(results){
-      console.log(results);
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/observers.html"), "utf8"),
@@ -62,12 +119,29 @@ return html;
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results}
-        // data:{:,:,dept:department,dev:devision,sys:system,obj:arabicTranscriptObject,ob:subj,o:array}
+        data:{allResults:results,national:nationality,officePar:office}
       }).then(function (response) {
         response.result.pipe(res);
       });
     }); 
+  });
+  // this noOfLocaleObs // widght A4
+  router.get('/noOfLocaleObs', function(req, res, next) {
+    reportMgr.getAllNoOfLocaleObs(function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
+          phantom:{
+            orientation: "landscape",
+          },
+          recipe: "phantom-pdf",
+          helpers:drawAllResultsNoOfLocaleObs.toString()
+        },
+        data:{allResults:results,officePar:office}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
+    });
   });
 
   // this obsByType // widght A4
@@ -102,21 +176,7 @@ return html;
     });
   });
 
-  // this noOfLocaleObs // widght A4
-  router.get('/noOfLocaleObs', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
-        phantom:{
-          orientation: "landscape",
-        },
-        recipe: "phantom-pdf",
-      },
-      // data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
-    });
-  });
+  
 
   // this noOfLocaleObsEn // widght A4
   router.get('/noOfLocaleObsEn', function(req, res, next) {
