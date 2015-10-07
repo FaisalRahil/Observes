@@ -10,8 +10,14 @@ var path = require("path");
 var nationality = require('../Nationality');
 var office = require('../office');
 
-  router.get('/', function(req, res) {
 
+  // router.get('/obs/locOrg', function(req, res) {
+  //   orgMgr.getOrg(4,function(result){
+  //     res.render('manager/locOrgObs',{ title: 'مراقب محلي',orgs:result }); 
+  //   }) 
+  // });
+  router.get('/', function(req, res) {
+    res.render('reports/reports',{ title: 'الـتـقـاريـر'}); 
   });
 
   // drawAllResultsNoOfLocaleObs
@@ -201,7 +207,7 @@ var office = require('../office');
   router.get('/noOfInternationalObs', function(req, res, next) {
     jsr.render({
       template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternational.html"), "utf8"),
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObs.html"), "utf8"),
         phantom:{
           orientation: "landscape",
         },

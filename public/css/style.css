@@ -1,7 +1,11 @@
-
+@font-face {
+  font-family: 'droidkufi';
+  src : url("../fonts/DroidKufi-Regular.ttf") format("truetype");
+}
 
 body {
     margin-top:100px;
+    font-family: 'droidkufi', sans-serif; 
 }
 
 .fontCpanel {
@@ -54,6 +58,12 @@ body {
 
 .navbar-orange {
   background-color:rgb(223, 117, 20);
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-gray {
+  background-color:rgb(232, 232, 237);
     color:#ffffff;
     border-radius:0;
 }
@@ -296,4 +306,3 @@ border-right:1px solid #dadada;
 .table {
   table-layout:fixed;
 }
-

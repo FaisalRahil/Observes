@@ -1,0 +1,54 @@
+extends ../layout
+block content
+  link(rel='stylesheet', href='/css/reports.css')
+  header.navbar.navbar-gray.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') بيانات المستخدم
+            li
+              a(href='#') خروج
+        li
+          a(href='#') التقارير
+        li
+          a(href='/manager/obs') المراقبين
+        li
+          a(href='/manager/org') الـمنظمات
+ 
+  .row
+    .col-lg-4.col-lg-offset-2.col-md-4.col-md-offset-2.col-sm-4.col-sm-offset-2
+      font(style='font-size: 20px;')
+        //- button.btn.btn-default.ribbon(type='button') 
+        select.selectpicker(data-style='btn-info') عدد المراقبين المحلين حسب النوع و اللجنة باللغة العربية
+        button.btn.btn-primary.ribbon(type='button') عدد المراقبين المحليين حسب النوع و اللجنة باللغة الانجليزية
+        button.btn.btn-success.ribbon(type='button') noOfInternationalObs
+        button.btn.btn-info.ribbon(type='button') noOfInternationalObsEn
+        button.btn.btn-warning.ribbon(type='button') عدد المراقبين الرجال والنساء باللغة العربية 
+        button.btn.btn-danger.ribbon(type='button') عدد المراقبين الرجال و النساء باللغة الانجليزية
+
+    .col-md-4
+      button.btn.btn-danger.ribbon(type='button') اسماء المراقبين مع نوع المنظمة و حسب الجنسية 
+      button.btn.btn-warning.ribbon(type='button') obsByNationality
+      button.btn.btn-info.ribbon(type='button') obsByType
+      button.btn.btn-success.ribbon(type='button') observers
+      button.btn.btn-primary.ribbon(type='button') statisticsOfficesByType
+      button.btn.btn-default.ribbon(type='button') Danger
+   
+  script(src="/js/jquery-1.11.1.min.js")
+  script(src="/js/bootstrap.min.js")
