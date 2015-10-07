@@ -30,45 +30,44 @@ block content
         li
           a(href='/admin/org') الـمنظمات
 
-  .row
-    .col-md-8.col-md-offset-2
-      .form-group
-        input#discount_flag(type='checkbox', name='discount_flag')
-      table#media.table.table-bordered.table-striped(style='clear: both')
-        tbody
-          tr
-            td(width='35%') رقم التسجيل 
-            td(width='65%')
-              a#registration_no(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='الاسم' ,data-value='#{media[0].registration_no}') #{media[0].registration_no}
-          tr
-            td(width='35%') الاسم 
-            td(width='65%')
-              a#name_org(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='الاسم', data-value='#{media[0].name_org}') #{media[0].name_org}
-          tr
-            td(width='35%') اسم المدير
-            td(width='65%')
-              a#name_director(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='اسم المدير' ,data-value='#{media[0].name_director}') #{media[0].name_director}
-          tr
-            td(width='35%') رقم الهاتف
-            td(width='65%')
-              a#phone(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='رقم الهاتف' ,data-value='#{media[0].phone}') #{media[0].phone}
-          tr
-            td(width='35%') البريد الاكتروني
-            td(width='65%')
-              a#email(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='البريد الاكتروني', data-value='#{media[0].email}') #{media[0].email}
-          tr
-            td(width='35%') العنوان
-            td(width='65%')
-              a#address(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='العنوان', data-value='#{media[0].address}') #{media[0].address}
-  .row
-    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-      .panel.panel-warning
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            | 
-        .panel-body
-          table#table
+  .col-md-8.col-md-offset-2
+    .form-group
+      input#discount_flag(type='checkbox', name='discount_flag')
+    table#media.table.table-bordered.table-striped(style='clear: both')
+      tbody
+        tr
+          td(width='35%') رقم التسجيل 
+          td(width='65%')
+            a#registration_no(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='الاسم' ,data-value='#{media[0].registration_no}') #{media[0].registration_no}
+        tr
+          td(width='35%') الاسم 
+          td(width='65%')
+            a#name_org(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='الاسم', data-value='#{media[0].name_org}') #{media[0].name_org}
+        tr
+          td(width='35%') اسم المدير
+          td(width='65%')
+            a#name_director(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='اسم المدير' ,data-value='#{media[0].name_director}') #{media[0].name_director}
+        tr
+          td(width='35%') رقم الهاتف
+          td(width='65%')
+            a#phone(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='رقم الهاتف' ,data-value='#{media[0].phone}') #{media[0].phone}
+        tr
+          td(width='35%') البريد الاكتروني
+          td(width='65%')
+            a#email(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='البريد الاكتروني', data-value='#{media[0].email}') #{media[0].email}
+        tr
+          td(width='35%') العنوان
+          td(width='65%')
+            a#address(href='#', data-type='text', data-pk='#{media[0].id_org}', data-title='العنوان', data-value='#{media[0].address}') #{media[0].address}
+ 
+  .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+    .panel.panel-warning
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          | 
+      .panel-body
+        table#table
 
   #deleteObsOnMedia.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog
