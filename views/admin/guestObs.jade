@@ -57,16 +57,15 @@ block content
               .form-group
                 input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
               .form-group
-                select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
+                select#registration_org.form-control.selectpicker.show-tick(name="registration",data-show-subtext='true',data-size='5',data-live-search='true')
                   option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
                   for org in orgs
                     option(value="#{org.id_org}") #{org.name_org}
               .form-group
-                select#nationality.form-control.selectpicker.show-tick(type="text",name="nationality",data-show-subtext='true',data-size='5',data-live-search='true')
+                select#nationality.form-control.selectpicker.show-tick(name="nationality",data-show-subtext='true',data-size='5',data-live-search='true')
                   option(value="", style='color:grey; display:none;') الرجاء اختيار الجنسية
                   for nat in nationality
                     option(value="#{nat.country_id}") #{nat.country_name}
-                    
               .form-group.col-sm-6.col-md-6.col-lg-6
                 | الجنس :   
                 input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
@@ -74,7 +73,7 @@ block content
                 | مدير  : 
                 input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
               .form-group
-                input.form-control#phone(name='phone_obs', placeholder='رقم الهاتف', type='text')
+                input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
               

@@ -131,9 +131,11 @@ $(document).ready(function() {
 ////////////////////////////
 
   $("#natOrgObsId").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
       name:{
         required: true,
+        minlength: 10,
       },
       email:{
         required: true,
@@ -157,29 +159,42 @@ $(document).ready(function() {
       },
     },
     messages:{
-      name_org:{
-        required: "الرجاء إدخال اسم المنظمه",
+      name:{
+        required: "الرجاء إدخال اسم المراقب",
+        minlength: "الرجاء إدخال الأسم ثلاثي",
       },
-      email:{
-        required: "الرجاء إدخال الباريد الالكتروني",
-        email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
-      },
+      // email:{
+      //   required: "الرجاء إدخال الباريد الالكتروني",
+      //   email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
+      // },
       phone:{
         required: "يجب إدخال رقم الهاتف",
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
       },
-      registration_no:{
-        required: "الرجاء إدخال رقم الاشهار",
-        number: "يجب أن تكون المدخلات أرقام ",
+      email:{
+        required: "الرجاء إدخال الباريد الالكتروني",
+        email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
+      },
+      registration_org:{
+        required: "الرجاء إختيار المنظمة التابعة",
+        number: "الرجاء إختيار الجنسية ",
       },
       nationality:{
-        required: "يجب إدخال رقم الهاتف",
+        required: "يجب إختيار جنسية المراقب",
       },
       pass_nid:{
-        required: "الرجاء إدخال رقم الاشهار",
+        required: "الرجاء إدخال رقم جواز السفر",
         number: "يجب أن تكون المدخلات أرقام ",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){

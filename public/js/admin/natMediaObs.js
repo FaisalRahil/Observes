@@ -130,9 +130,11 @@ $(document).ready(function() {
 ////////////////////////////
 
   $("#natMediaObsId").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
       name:{
         required: true,
+        minlength: 10,
       },
       email:{
         required: true,
@@ -145,19 +147,18 @@ $(document).ready(function() {
       },
       registration_org:{
         required : true,
-        number: true,
       },
       nationality:{
         required: true,
       },
       pass_nid:{
         required : true,
-        number: true,
       },
     },
     messages:{
-      name_org:{
+      name:{
         required: "الرجاء إدخال اسم المنظمه",
+        minlength: "الرجاء إدخال الأسم ثلاثي ",
       },
       email:{
         required: "الرجاء إدخال الباريد الالكتروني",
@@ -168,17 +169,23 @@ $(document).ready(function() {
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
       },
-      registration_no:{
-        required: "الرجاء إدخال رقم الاشهار",
-        number: "يجب أن تكون المدخلات أرقام ",
+      registration_org:{
+        required: "الرجاء إختيار المنظمة التابعة للمراقب ",
       },
       nationality:{
-        required: "يجب إدخال رقم الهاتف",
+        required: "يجب إختيار الجنسية",
       },
       pass_nid:{
-        required: "الرجاء إدخال رقم الاشهار",
-        number: "يجب أن تكون المدخلات أرقام ",
+        required: "الرجاء إدخال رقم الجواز ",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){

@@ -297,3 +297,16 @@ border-right:1px solid #dadada;
   table-layout:fixed;
 }
 
+/*JQuery Validation Style Start*/
+.error{
+  color: red;
+  position: absolute;
+  font-size: 100%;
+  font-weight: 100;
+}
+.custom-error{
+  color: red;
+  font-size: 100%;
+  font-weight: 100;
+}
+/*JQuery Validation Style End*/
