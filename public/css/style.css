@@ -305,4 +305,22 @@ border-right:1px solid #dadada;
 }
 .table {
   table-layout:fixed;
+<<<<<<< HEAD
 }
+
+/*JQuery Validation Style Start*/
+.error{
+  color: red;
+  position: absolute;
+  font-size: 100%;
+  font-weight: 100;
+}
+.custom-error{
+  color: red;
+  font-size: 100%;
+  font-weight: 100;
+}
+/*JQuery Validation Style End*/
+=======
+}
+>>>>>>> 6d123a753fb79eacd7123071d4d641c78f8f4e61

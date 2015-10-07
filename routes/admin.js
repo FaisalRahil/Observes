@@ -61,6 +61,7 @@ router.post('/addOb', function(req, res) {
       res.redirect('obs/natMediaObs');
     }
   });
+  console.log("here");
 });
 
 //---- Get all obs by org -----------------------
