@@ -15,17 +15,64 @@ var office = require('../office');
   });
 
   // ////////////////////////////////////////////////////////////////////////
-  function resultsNoOfLocaleObs(allResults,officePar){
+  function resultsNoOfLocaleObs(arr1,arr2,arr3,arr4,arr5,arr6,officePar){
     var html = '';
     var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
-    for (i in allResults){
+      for(i in arr1){
       html+='<tr>\
-                <td style="background-color:#E7FFE7 !important;"> '+allResults[i].id_office+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+                <td style="background-color:#E7FFE7 !important;"> '+arr1[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 1 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr1[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-    }
+            }
+       for(i in arr2){      
+      html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+arr2[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 2 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr2[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+            }
+
+             for(i in arr3){      
+      html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+arr3[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 3 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr3[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+            }
+
+             for(i in arr4){      
+      html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+arr4[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 4 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr4[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+            }
+
+             for(i in arr5){      
+      html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+arr5[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 5 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr5[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+            }
+
+                for(i in arr6){      
+      html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+arr6[i].id_office+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 6 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr6[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+            }
+
+      
+    
     return html;
   }
 
@@ -102,10 +149,8 @@ var office = require('../office');
   });
   // this noOfLocaleObs // widght A4
   router.get('/noOfLocaleObs', function(req, res, next) {
-    reportMgr.getAllNoOfLocaleObs(function(results){
-      console.log("resultstttttttttttttttttttttttttttttttttt");
-     // console.log(results);
-      console.log("resultstttttttttttttttttttttttttttttttttt");
+    reportMgr.getAllNoOfLocaleObs(function(arr1,arr2,arr3,arr4,arr5,arr6){
+      console.log(arr1,arr2,arr3,arr4,arr5,arr6);
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
@@ -115,7 +160,7 @@ var office = require('../office');
           recipe: "phantom-pdf",
           helpers:resultsNoOfLocaleObs.toString()
         },
-        data:{allResults:results,officePar:office}
+        data:{arr1:arr1,arr2:arr2,arr3:arr3,arr4:arr4,arr5:arr5,arr6:arr6,officePar:office}
       }).then(function (response) {
         response.result.pipe(res);
       });

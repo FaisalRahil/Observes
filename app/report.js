@@ -34,8 +34,190 @@ exports.reportMgr = {
   getAllNoOfLocaleObs : function(cb){
     mysqlMgr.connect(function (conn) {
       conn.query('select ob.id_office,org.type from observers as ob,organisaition as org where org.type in (1,2,3,4,5,6) and org.id_org = ob.registration_org order by org.type', function(err, result1) {
-        console.log(result1.length);
-        var arr = [20]*[20];
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==1){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr1=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr1.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+        
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==2){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr2=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr2.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==3){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr3=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr3.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==4){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr4=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr4.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==5){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr5=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr5.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==6){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr6=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr6.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+          conn.release();
+            if(err) {
+              util.log(err);
+            } else {
+              cb(arr1,arr2,arr3,arr4,arr5,arr6);
+            }
+        
+
+
+       /* var arr = [20]*[20];
         console.log(arr);
         for(var t=0;t<result1[0].length;t++){
           for(var i=1;i<=17;i++){
@@ -60,7 +242,7 @@ exports.reportMgr = {
         }
         console.log("arr");
         console.log(arr);
-        console.log("arr");
+        console.log("arr");*/
      
 
 /*        t++;
