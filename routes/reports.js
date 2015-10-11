@@ -28,6 +28,21 @@ var office = require('../office');
     }
     return html;
   }
+  // ////////////////////////////////////////////////////////////////////////
+
+  // ////////////////////////////////////////////////////////////////////////
+  function resultsNoOfInternationalObs(allResults){
+    var html = '';
+    for (i in allResults){
+      html+='<tr>\
+              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+            </tr>';
+    }
+    return html;
+  }
+  // ////////////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////////////////
   function drawAllResults(allResults,national,officePar){
@@ -124,7 +139,7 @@ var office = require('../office');
 
   // this noOfInternationalObs // widght A4
   router.get('/noOfInternationalObs', function(req, res, next) {
-    /*reportMgr.appNoOfInternationalObs(function(results){
+    reportMgr.appNoOfInternationalObs(function(results){
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
@@ -132,26 +147,13 @@ var office = require('../office');
             orientation: "landscape"
           },
           recipe: "phantom-pdf",
-          helpers:resultsNoOfLocaleObs.toString()
+          helpers:resultsNoOfInternationalObs.toString()
         },
-        data:{allResults:results,officePar:office}
+        data:{allResults:results}
       }).then(function (response) {
         response.result.pipe(res);
       });
     });
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObs.html"), "utf8"),
-        phantom:{
-          orientation: "landscape",
-        },
-        recipe: "phantom-pdf",
-        helpers:resultsNoOfInternationalObs.toString()
-      },
-      data:{allResults:results}
-    }).then(function (response) {
-      response.result.pipe(res);
-    });*/
   });
 
   // this noOfInternationalObsEn // widght A4
