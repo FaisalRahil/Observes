@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var orgMgr = require('../app/org').orgMgr;
 var obsMgr = require('../app/obs').obsMgr;
+var trnMgr = require('../app/transfer').trnMgr;
 var nationality = require('../country.json');
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -10,9 +11,17 @@ router.get('/', function(req, res) {
 
 /* GET home page. */
 router.get('/moveOrg', function(req, res) {
-  res.render('admin/moveOrg');
+  orgMgr.getOrgs(function(org){
+    res.render('admin/moveOrg',{ title: 'نقل المراقبين',orgs:org});
+  });
 });
 
+router.post('/moveOrg', function(req, res) {
+  trnMgr.addTrn(req.body,function(result){
+    res.redirect('/admin/moveOrg');
+  });
+
+});
 router.get('/nationality', function(req, res) {
   res.send(nationality);
 });
@@ -403,6 +412,10 @@ router.get('/getNatMediaObs', function(req, res) {
   obsMgr.getAllObsAndNameOrgByType(3,function(result){
     res.send(result);
   })
+});
+
+router.post('/checkDir', function(req, res) {
+  console.log(req.body);
 });
 // end
 // //////////////////////////////////////////////////////

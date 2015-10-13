@@ -280,5 +280,10 @@ router.post('/addOrg', function(req, res) {
 
   });
 });
+router.get('/getToSer', function(req, res) {
+  orgMgr.getToSer(function (results){
+    res.redirect('/manager/org?msg='+results);
+  });
+});
 
 module.exports = router;

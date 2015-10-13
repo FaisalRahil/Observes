@@ -155,10 +155,21 @@ $(document).ready(function() {
         required : true,
         number: true,
       },
+      director:{
+        remote: {
+          url :"/admin/checkDir",
+          type : "post",
+          data: {
+            dir: function() {
+              return $( "#director" ).val();
+            }
+          }
+        }
+      },
     },
     messages:{
-      name_org:{
-        required: "الرجاء إدخال اسم المنظمه",
+      name:{
+        required: "الرجاء إدخال اسم المراقب",
       },
       email:{
         required: "الرجاء إدخال الباريد الالكتروني",
@@ -170,7 +181,7 @@ $(document).ready(function() {
         number: "يجب أن تكون المدخلات أرقام ",
       },
       registration_no:{
-        required: "الرجاء إدخال رقم الاشهار",
+        required: "الرجاء إدخال رقم الهوية",
         number: "يجب أن تكون المدخلات أرقام ",
       },
       nationality:{
@@ -180,6 +191,10 @@ $(document).ready(function() {
         required: "الرجاء إدخال رقم الاشهار",
         number: "يجب أن تكون المدخلات أرقام ",
       },
+      director:{
+        remote: "هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر"
+
+      }
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -187,5 +202,6 @@ $(document).ready(function() {
       });
     },
   });
+
 
 });
