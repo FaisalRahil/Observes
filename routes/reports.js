@@ -11,21 +11,62 @@ var nationality = require('../Nationality');
 var office = require('../office');
 
   router.get('/', function(req, res) {
-    res.render('reports/reports',{ title: 'الـتـقـاريـر'}); 
+    console.log(nationality);
+    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality});
   });
 
   // ////////////////////////////////////////////////////////////////////////
-  function resultsNoOfLocaleObs(allResults,officePar){
+  function resultsNoOfLocaleObs(office,arr1,arr2,arr3,arr4,arr5,arr6,officePar){
     var html = '';
     var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
-    for (i in allResults){
-      html+='<tr>\
-                <td style="background-color:#E7FFE7 !important;"> '+allResults[i].id_office+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+      for(i in arr1){
+        html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+office[arr1[i].id_office].office_name_ar+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 1 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr1[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-    }
+      }
+      for(i in arr2){
+        html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+office[arr2[i].id_office].office_name_ar+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 2 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr2[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+      }
+      for(i in arr3){
+        html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+office[arr3[i].id_office].office_name_ar+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 3 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr3[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+      }
+      for(i in arr4){
+        html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+office[arr4[i].id_office].office_name_ar+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 4 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr4[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+      }
+      for(i in arr5){
+        html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+office[arr5[i].id_office].office_name_ar+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 5 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr5[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+      }
+      for(i in arr6){
+        html+='<tr>\
+                <td style="background-color:#E7FFE7 !important;"> '+office[arr6[i].id_office].office_name_ar+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> 6 </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+arr6[i].number+' </td>\
+                <td style="background-color:#FFFFC2 !important;">  </td>\
+              </tr>';
+      }
     return html;
   }
   // ////////////////////////////////////////////////////////////////////////
@@ -96,6 +137,61 @@ var office = require('../office');
     return html;
   }
   /////////////////////////////////////////////////////////////////////////////
+  function statisticsOfficesByType(office,obj){
+    // html='';
+    html='<table class="table condensed">\
+      <thead>\
+        <tr style="border-top-style: solid; border-top-width: 1px;" >\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+        </tr>\
+      </thead>\
+      <tbody style="border: 1px solid #000;">';
+      sumAll=0;
+      for(i in office){
+        sum=0;
+         html+='<tr>\
+            <td style="background-color:#E7FFE7 !important;"> '+office[i].office_name_ar+' </td>';
+            if(obj[office[i].office_id]!=undefined){
+              for(k=1;k<7;k++){
+                if(obj[office[i].office_id][k]!=undefined){
+                  sum+=parseInt(obj[office[i].office_id][k]);
+                  html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k]+' </td>';
+                }else{
+                  html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+                }
+              }
+              html+='<td style="background-color:#F0F0EF !important;"> '+sum+' </td>\
+              </tr>';
+            }else{
+              html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#F0F0EF !important;"> - </td>\
+              </tr>';
+            }
+        sumAll+=sum;    
+      }
+
+      html+='</tbody>\
+        <tbody style="direction: ltr;">\
+          <tr>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAll+' </td>\
+          </tr>\
+        </tbody>\
+      </table>';
+    return html;
+  }
+  ////////////////////////////////////////////////////////////////////////////  
 
   router.get('/observers', function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(results){
@@ -117,10 +213,8 @@ var office = require('../office');
   });
   // this noOfLocaleObs // widght A4
   router.get('/noOfLocaleObs', function(req, res, next) {
-    reportMgr.getAllNoOfLocaleObs(function(results){
-      console.log("resultstttttttttttttttttttttttttttttttttt");
-     // console.log(results);
-      console.log("resultstttttttttttttttttttttttttttttttttt");
+    console.log(office[1].office_name_ar);
+    reportMgr.getAllNoOfLocaleObs(function(arr1,arr2,arr3,arr4,arr5,arr6){
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
@@ -130,7 +224,7 @@ var office = require('../office');
           recipe: "phantom-pdf",
           helpers:resultsNoOfLocaleObs.toString()
         },
-        data:{allResults:results,officePar:office}
+        data:{office:office,arr1:arr1,arr2:arr2,arr3:arr3,arr4:arr4,arr5:arr5,arr6:arr6,officePar:office}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -171,7 +265,6 @@ var office = require('../office');
       response.result.pipe(res);
     });
   });
-
 
   // this obsByType // widght A4
   router.get('/obsByType', function(req, res, next) {
@@ -226,17 +319,29 @@ var office = require('../office');
 
   // this statisticsOfficesByType // widght A4
   router.get('/statisticsOfficesByType', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByType.html"), "utf8"),
-        phantom:{
-          orientation: "landscape",
+    reportMgr.statisticsOfficesByType(function(result){
+      obj={};
+      for( k in result){
+        if(obj[result[k].id_office]==undefined){
+          obj[result[k].id_office]=[];
+        }
+        if(obj[result[k].id_office][result[k].type]==undefined){
+          obj[result[k].id_office][result[k].type]=[];
+          obj[result[k].id_office][result[k].type].push(result[k].num);
+        }
+      }
+
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByType.html"), "utf8"),
+
+          recipe: "phantom-pdf",
+          helpers:statisticsOfficesByType.toString()
         },
-        recipe: "phantom-pdf",
-      },
-      // data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
+        data:{offic:office,result:obj}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
     });
   });
 
@@ -265,6 +370,5 @@ var office = require('../office');
       response.result.pipe(res);
     });
   });
-
 
 module.exports = router;

@@ -35,36 +35,203 @@ exports.reportMgr = {
     });
   },
 
-  // getAllNoOfLocaleObs : function(cb){
-  //   mysqlMgr.connect(function (conn) {
-  //     var type=[1,2,3,4,5,6];
-  //     var array=[];
-  //     var t=0;
-  //     for(var i=0;i<6;i++){
-  //     conn.query('SELECT `org`.`id_org` FROM `organisaition` org WHERE `org`.`type` = ?;',type[i],  function(err, result1) {
-  //       t++;
-  //       array.push({type:t,id_org:result1});
-  //       if(t==6){
-  //         console.log(array[0]);
-  //         console.log(array[1]);
-  //         console.log(array[2]);
-  //         console.log(array[3]);
-  //         console.log(array[4]);
-  //         console.log(array[5]);
-  //       conn.query('select id_office from observers where registration_org in ('+[1444208440255]+')', function(err, result2) {
-  //         console.log(result2);
-  //       });
+  getAllNoOfLocaleObs : function(cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('select ob.id_office,org.type from observers as ob,organisaition as org where org.type in (1,2,3,4,5,6) and org.id_org = ob.registration_org order by org.type', function(err, result1) {
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==1){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr1=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr1.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+        
 
 
 
-  //     }
-  //       /* conn.query('SELECT `org`.`id_org` FROM `organisaition` org WHERE `org`.`type` = ?;',type[i],  function(err, result1) {
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==2){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr2=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr2.push({id_office:typeOffice1[i],number:c})
+        }
+        }
 
-  //       });*/
-  //     });
 
-  //     }
-  //   });
-  // },
 
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==3){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr3=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr3.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==4){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr4=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr4.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==5){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr5=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr5.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+
+
+
+        var typeOffice1=[];
+        var not=[];
+        for(var i=0;i<result1.length;i++){
+          if(result1[i].type==6){
+            typeOffice1.push(result1[i].id_office);
+          }
+        }
+        var arr6=[];
+        for(var i=0;i<typeOffice1.length;i++){
+           var x=true;
+           for(var l=0;l<not.length;l++){
+            if(not[l]==typeOffice1[i]){
+              x=false
+            }
+          }
+          var c=0;
+          if(x){
+          for(var j=i;j<typeOffice1.length;j++){
+            if(typeOffice1[i]==typeOffice1[j]){
+              c++;
+            }
+          }
+          not.push(typeOffice1[i]);
+          arr6.push({id_office:typeOffice1[i],number:c})
+        }
+        }
+          conn.release();
+            if(err) {
+              util.log(err);
+            } else {
+              cb(arr1,arr2,arr3,arr4,arr5,arr6);
+            }
+    });
+  });
+  },
+  statisticsOfficesByType :function(cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` group by `obs`.`id_office`,`org`.`type` ', function(err, result) {
+         conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  
 };
