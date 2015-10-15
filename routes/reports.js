@@ -257,17 +257,37 @@ var office = require('../office');
     });
   });
 
+  // this obsByNationality // widght A4
+  router.get('/obsByNationality/:nat', function(req, res, next) {
+    reportMgr.obsByNationality(req.params.nat,function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByNationality.html"), "utf8"),
+          phantom:{
+            format: 'A4',
+            orientation: "landscape",
+          },
+          recipe: "phantom-pdf",
+          helpers:obsByNat.toString()
+        },
+        data:{allResults:results , national:nationality}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
+    });
+  });
+
   // this noOfInternationalObsEn // widght A4
   router.get('/noOfInternationalObsEn', function(req, res, next) {
     jsr.render({
-      template: { 
+      template: {
         content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObsEn.html"), "utf8"),
         phantom:{
           orientation: "landscape",
         },
         recipe: "phantom-pdf",
       },
-      // data:obj
+      data:{allResults : results , national:nationality}
     }).then(function (response) {
       response.result.pipe(res);
     });
@@ -278,22 +298,6 @@ var office = require('../office');
     jsr.render({
       template: { 
         content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
-        phantom:{
-          orientation: "landscape",
-        },
-        recipe: "phantom-pdf",
-      },
-      // data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
-    });
-  });
-
-  // this obsByNationality // widght A4
-  router.get('/obsByNationality', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByNationality.html"), "utf8"),
         phantom:{
           orientation: "landscape",
         },
@@ -353,28 +357,91 @@ var office = require('../office');
 
   // this noOfWomenAndMen // normale A4
   router.get('/noOfWomenAndMen', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfWomenAndMen.html"), "utf8"),
-        recipe: "phantom-pdf"
-      },
-      // data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
+    reportMgr.noOfWomenAndMen(function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfWomenAndMen.html"), "utf8"),
+          phantom: {
+            format: 'A4',
+            orientation: "landscape",
+          },
+          recipe: "phantom-pdf",
+          helpers:noOfWomenAndMen.toString()
+        },
+          data:{allResults:results}
+        // data:obj
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
     });
   });
-
-   // this noOfWomenAndMenEn // normale A4
+  // this noOfWomenAndMen // normale A4
   router.get('/noOfWomenAndMenEn', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfWomenAndMenEn.html"), "utf8"),
-        recipe: "phantom-pdf"
-      },
-      // data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
+    reportMgr.noOfWomenAndMen(function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfWomenAndMenEn.html"), "utf8"),
+          phantom: {
+            format: 'A4',
+            orientation: "landscape",
+          },
+          recipe: "phantom-pdf",
+          helpers:noOfWomenAndMen.toString()
+        },
+          data:{allResults:results}
+        // data:obj
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
     });
   });
-
+  //draw observers counts by gender  /noOfWomenAndMen
+  function noOfWomenAndMen(allResults){
+    var html = '';
+      html+= '<tr>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[0][0].man+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[1][0].woman+' </td>\
+              </tr>';
+    return html;
+  }
+  
+  //draw observers counts by gender  /noOfWomenAndMen
+  function obsByNat(allResults,national){
+    var html = '';
+    var nat;
+    var typeInTD = '';
+    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    
+    for (var j = 0; j < national.length; j++) {
+      if( allResults[0].nationality == national[j].id ){
+        nat = national[j].name;
+        break;
+      }
+    }
+    
+    html+= '<tr style="border-top-style: solid; border-top-width: 1px;" >\
+              <th colspan="2" class="text-center" style="background-color:#B2E6FF !important;">  '+nat+'  </th>\
+            </tr>\
+            <tr style="border-top-style: solid; border-top-width: 1px;" >\
+              <th class="text-center" style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>\
+              <th class="text-center"  style="background-color:#B2E6FF !important;"> نـوع الـمـنـظـمـة </th>\
+            </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;">';
+    
+    for (i in allResults){
+      for (var k = 0; k <= type1.length; k++) {
+        if(allResults[k].type-1 == k ){
+          typeInTD = type1[k];
+          break;
+        }
+      }
+      html+= '<tr>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
+              </tr>';
+    }
+    
+    return html;
+  }
 module.exports = router;
