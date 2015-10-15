@@ -30,27 +30,24 @@ block content
         li
           a(href='/admin/org') الـمنظمات
 
-  .row
-    .col-md-8.col-md-offset-2
-      .form-group
-        input#discount_flag(type='checkbox', name='discount_flag')
-      table#guest.table.table-bordered.table-striped(style='clear: both')
-        tbody
-          tr
-            td(width='35%') رقم التسجيل 
-            td(width='65%')
-              a#name_org(href='#', data-type='text', data-pk='#{guest[0].id_org}', data-title='الاسم' ,data-value='#{guest[0].name_org}') #{guest[0].name_org}
+  .col-md-8.col-md-offset-2
+    .form-group
+      input#discount_flag(type='checkbox', name='discount_flag')
+    table#guest.table.table-bordered.table-striped(style='clear: both')
+      tbody
+        tr
+          td(width='35%') رقم التسجيل 
+          td(width='65%')
+            a#name_org(href='#', data-type='text', data-pk='#{guest[0].id_org}', data-title='الاسم' ,data-value='#{guest[0].name_org}') #{guest[0].name_org}
 
-  .row
-    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-      .panel.panel-warning
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            | 
-        .panel-body
-          table#table
-
+  .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+    .panel.panel-warning
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          | 
+      .panel-body
+        table#table
 
   #deleteObsOnGuest.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog
@@ -71,5 +68,4 @@ block content
   script(src="/js/jquery.validate.min.js")
   script(src='/js/bootstrap-switch.min.js')
   script(src="/js/admin/editGuest.js")
-  script(src='/js/admin/backToTop.js')
-  
+  script(src='/js/admin/backToTop.js')  

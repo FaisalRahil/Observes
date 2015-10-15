@@ -30,60 +30,54 @@ block content
         li
           a(href='#') الـمنظمات
 
-  .row
-    .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
-        .nav.nav-pills.nav-stacked
-          li
-              a.btn.btn-default.btn-block(href="/manager/org/locOrg", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | مـنـظـمـة محليـــة
-          li
-              a.btn.btn-warning.btn-block(href="/manager/org/locMedia", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | اعـلام محلــي
-          li
-              a.btn.btn-default.btn-block(href="/manager/org/candidate", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | مــرشحين
+  .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
+    .nav.nav-pills.nav-stacked
+      li
+        a.btn.btn-default.btn-block(href="/manager/org/locOrg", role="button")
+          span.glyphicon.glyphicon-th.pull-right
+          | مـنـظـمـة محليـــة
+      li
+        a.btn.btn-warning.btn-block(href="/manager/org/locMedia", role="button")
+          span.glyphicon.glyphicon-th.pull-right
+          | اعـلام محلــي
+      li
+        a.btn.btn-default.btn-block(href="/manager/org/candidate", role="button")
+          span.glyphicon.glyphicon-th.pull-right
+          | مــرشحين
 
+  .col-sm-7.col-md-7.col-lg-7
+    .panel.orange-form.panel-warning
+      .panel-heading إدخال إعلام محلي
+      .panel-body
+        form#natOrg(role='form',method="post",action="/manager/addOrg")
+          .form-group
+            input.form-control#name_org(name='name_org', placeholder='اسم المنظمة', type='text')
+          .form-group
+            input.form-control#name_director(name='name_director', placeholder='اسم مدير المنظمة', type='text')
+          .form-group
+            input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
+          .form-group
+            input.form-control#address(name='address', placeholder='العنوان', type='text')
+          .form-group
+            input.form-control#registration_no(name='registration_no', placeholder='رقم اﻹشهار', type='text')
+          .form-group
+            input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
 
-    .col-sm-7.col-md-7.col-lg-7
-      .row
-        .panel.orange-form.panel-warning
-          .panel-heading إدخال إعلام محلي
-          .panel-body
-            form#natOrg(role='form',method="post",action="/manager/addOrg")
-              .form-group
-                input.form-control#name_org(name='name_org', placeholder='اسم المنظمة', type='text')
-              .form-group
-                input.form-control#name_director(name='name_director', placeholder='اسم مدير المنظمة', type='text')
-              .form-group
-                input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
-              .form-group
-                input.form-control#address(name='address', placeholder='العنوان', type='text')
-              .form-group
-                input.form-control#registration_no(name='registration_no', placeholder='رقم اﻹشهار', type='text')
-              .form-group
-                input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+          input#type(name='type', type='hidden',value='5')
+          .row
+            .col-xs-8.col-md-8
+              button.btn.btn-warning.btn-block(type='submit') تسجيـــل 
+            .col-xs-4.col-md-4
+              button.btn.btn-default.btn-block(type='reset') إلغاء
 
-              input#type(name='type', type='hidden',value='5')
-              .row
-                .col-xs-8.col-md-8
-                  button.btn.btn-warning.btn-block(type='submit') تسجيـــل 
-                .col-xs-4.col-md-4
-                  button.btn.btn-default.btn-block(type='reset') إلغاء
-
-  .row
-    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-      .panel.panel-warning
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            | المنظمات
-        .panel-body
-          table#table
-
-  //- ///'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+    .panel.panel-warning
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          | المنظمات
+      .panel-body
+        table#table
   //- del
   #deleteOrgModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog
@@ -96,6 +90,7 @@ block content
         .modal-footer
           button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
           button.btn.btn-success(data-dismiss='modal', type='button') إلغاء 
+
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/jquery.validate.min.js")

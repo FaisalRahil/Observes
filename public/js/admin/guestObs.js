@@ -141,7 +141,7 @@ $(document).ready(function() {
         required: true,
         email: true,
       },
-      phone:{
+      phone_obs:{
         required: true,
         minlength: 10,
         number: true,
@@ -165,7 +165,7 @@ $(document).ready(function() {
         required: "الرجاء إدخال الباريد الالكتروني",
         email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
       },
-      phone:{
+      phone_obs:{
         required: "يجب إدخال رقم الهاتف",
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",

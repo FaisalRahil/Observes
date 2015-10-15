@@ -30,71 +30,100 @@ block content
         li
           a(href='/admin/org') الـمنظمات
 
-  .row
-    .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
-        .nav.nav-pills.nav-stacked
-          li
-              a.btn.btn-danger.btn-block(href="/admin/obs/natOrgObs", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | مـنـظـمـة دولــيـة
-          li
-              a.btn.btn-default.btn-block(href="/admin/obs/natMediaObs", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | اعـلام دولـي
-          li
-              a.btn.btn-default.btn-block(href="/admin/obs/guestObs", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | ضــيــف
+  .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
+      .nav.nav-pills.nav-stacked
+        li
+            a.btn.btn-danger.btn-block(href="/admin/obs/natOrgObs", role="button")
+              span.glyphicon.glyphicon-th.pull-right
+              | مـنـظـمـة دولــيـة
+        li
+            a.btn.btn-default.btn-block(href="/admin/obs/natMediaObs", role="button")
+              span.glyphicon.glyphicon-th.pull-right
+              | اعـلام دولـي
+        li
+            a.btn.btn-default.btn-block(href="/admin/obs/guestObs", role="button")
+              span.glyphicon.glyphicon-th.pull-right
+              | ضــيــف
                 
-    .col-sm-7.col-md-7.col-lg-7
-      .row
-        .panel.red-form.panel-danger
-          .panel-heading إدخال مراقب إعلامي
-          .panel-body
-            form#natOrgObsId(role='form',method="post",action="/admin/addOb")
-              .form-group
-                input.form-control#name(name='name', placeholder='اﻹسم', type='text')
-              .form-group
-                input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
-              .form-group
-                select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
-                  option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
-                  for org in orgs
-                    option(value="#{org.id_org}") #{org.name_org}
-              .form-group
-                select#nationality.form-control.selectpicker.show-tick(type="text",name="nationality",data-show-subtext='true',data-size='5',data-live-search='true')
-                  option(value="", style='color:grey; display:none;') الرجاء اختيار الجنسية
-                  for nat in nationality
-                    option(value="#{nat.country_id}") #{nat.country_name}
-              .form-group.col-sm-6.col-md-6.col-lg-6
-                | الجنس :   
-                input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
-              .form-group.col-sm-6.col-md-6.col-lg-6  
-                | مدير  : 
-                input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
-              .form-group
-                input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
-              .form-group
-                input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+  //-     .col-sm-7.col-md-7.col-lg-7
+  //-       .row
+  //-         .panel.red-form.panel-danger
+  //-           .panel-heading إدخال مراقب إعلامي
+  //-           .panel-body
+  //-             form#natOrgObsId(role='form',method="post",action="/admin/addOb")
+  //-               .form-group
+  //-                 input.form-control#name(name='name', placeholder='اﻹسم', type='text')
+  //-               .form-group
+  //-                 input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
+  //-               .form-group
+  //-                 select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
+  //-                   option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
+  //-                   for org in orgs
+  //-                     option(value="#{org.id_org}") #{org.name_org}
+  //-               .form-group
+  //-                 select#nationality.form-control.selectpicker.show-tick(type="text",name="nationality",data-show-subtext='true',data-size='5',data-live-search='true')
+  //-                   option(value="", style='color:grey; display:none;') الرجاء اختيار الجنسية
+  //-                   for nat in nationality
+  //-                     option(value="#{nat.country_id}") #{nat.country_name}
+  //-               .form-group.col-sm-6.col-md-6.col-lg-6
+  //-                 | الجنس :   
+  //-                 input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
+  //-               .form-group.col-sm-6.col-md-6.col-lg-6  
+  //-                 | مدير  : 
+  //-                 input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
+  //-               .form-group
+  //-                 input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
+  //-               .form-group
+  //-                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+  //- >>>>>>> 092baa7304284e399b48481068d7c8d4cd18bc0d
               
-              input#type(name='type', type='hidden',value='1')
-
-              .row
-                .col-xs-8.col-md-8
-                  button#btnSubmit.btn.btn-danger.btn-block(type='submit') تسجيــــل 
-                .col-xs-4.col-md-4
-                  button.btn.btn-default.btn-block(type='reset') إلغاء
-
-    
-  .row
-    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-      .panel.panel-danger
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            | المنظمات
+  .col-sm-7.col-md-7.col-lg-7
+    .row
+      .panel.red-form.panel-danger
+        .panel-heading إدخال مراقب إعلامي
         .panel-body
-          table#table
+          form#natOrgObsId(role='form',method="post",action="/admin/addOb")
+            .form-group
+              input.form-control#name(name='name', placeholder='اﻹسم', type='text')
+            .form-group
+              input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
+            .form-group
+              select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
+                option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
+                for org in orgs
+                  option(value="#{org.id_org}") #{org.name_org}
+            .form-group
+              select#nationality.form-control.selectpicker.show-tick(type="text",name="nationality",data-show-subtext='true',data-size='5',data-live-search='true')
+                option(value="", style='color:grey; display:none;') الرجاء اختيار الجنسية
+                for nat in nationality
+                  option(value="#{nat.country_id}") #{nat.country_name}
+            .form-group.col-sm-6.col-md-6.col-lg-6
+              | الجنس :   
+              input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
+            .form-group.col-sm-6.col-md-6.col-lg-6  
+              | مدير  : 
+              input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
+            .form-group
+              input.form-control#phone(name='phone_obs', placeholder='رقم الهاتف', type='text')
+            .form-group
+              input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+            
+            input#type(name='type', type='hidden',value='1')
+
+            .row
+              .col-xs-8.col-md-8
+                button#btnSubmit.btn.btn-danger.btn-block(type='submit') تسجيــــل 
+              .col-xs-4.col-md-4
+                button.btn.btn-default.btn-block(type='reset') إلغاء
+    
+  .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+    .panel.panel-danger
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          | المنظمات
+      .panel-body
+        table#table
 
   #deleteOrgObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog
@@ -108,7 +137,6 @@ block content
           button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
           button.btn.btn-success(data-dismiss='modal', type='button') إلغاء 
 
-          
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/jquery.validate.min.js")

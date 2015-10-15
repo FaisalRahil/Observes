@@ -1,4 +1,3 @@
-
 extends ../layout
 block content
   header.navbar.navbar-fixed-top.bs-docs-nav(class='#{nav}',role='banner')
@@ -31,48 +30,44 @@ block content
         li
           a(href='/manager/org') الـمنظمات
 
-  .row
-    .col-md-8.col-md-offset-2
-      .form-group
-        input#discount_flag(type='checkbox', name='discount_flag')
-      table#orgTable.table.table-bordered.table-striped(style='clear: both')
-        tbody
-          tr
-            td(width='35%') رقم التسجيل 
-            td(width='65%')
-              a#registration_no(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم التسجيل',data-value='#{org[0].registration_no}') #{org[0].registration_no}
-          tr
-            td(width='35%') الاسم 
-            td(width='65%')
-              a#name_org(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم', data-value='#{org[0].name_org}') #{org[0].name_org}
-          tr
-            td(width='35%') اسم المدير
-            td(width='65%')
-              a#name_director(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم المدير' ,data-value='#{org[0].name_director}') #{org[0].name_director}
-          tr
-            td(width='35%') رقم الهاتف
-            td(width='65%')
-              a#phone(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم الهاتف' ,data-value='#{org[0].phone}') #{org[0].phone}
-          tr
-            td(width='35%') البريد الاكتروني
-            td(width='65%')
-              a#email(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='البريد الاكتروني', data-value='#{org[0].email}') #{org[0].email}
-          tr
-            td(width='35%') العنوان
-            td(width='65%')
-              a#address(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='العنوان', data-value='#{org[0].address}') #{org[0].address}
+  .col-md-8.col-md-offset-2
+    .form-group
+      input#discount_flag(type='checkbox', name='discount_flag')
+    table#orgTable.table.table-bordered.table-striped(style='clear: both')
+      tbody
+        tr
+          td(width='35%') رقم التسجيل 
+          td(width='65%')
+            a#registration_no(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم التسجيل',data-value='#{org[0].registration_no}') #{org[0].registration_no}
+        tr
+          td(width='35%') الاسم 
+          td(width='65%')
+            a#name_org(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم', data-value='#{org[0].name_org}') #{org[0].name_org}
+        tr
+          td(width='35%') اسم المدير
+          td(width='65%')
+            a#name_director(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='الاسم المدير' ,data-value='#{org[0].name_director}') #{org[0].name_director}
+        tr
+          td(width='35%') رقم الهاتف
+          td(width='65%')
+            a#phone(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم الهاتف' ,data-value='#{org[0].phone}') #{org[0].phone}
+        tr
+          td(width='35%') البريد الاكتروني
+          td(width='65%')
+            a#email(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='البريد الاكتروني', data-value='#{org[0].email}') #{org[0].email}
+        tr
+          td(width='35%') العنوان
+          td(width='65%')
+            a#address(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='العنوان', data-value='#{org[0].address}') #{org[0].address}
 
-
-
-  .row
-    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-      .panel.panel-warning
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            | المراقبين
-        .panel-body
-          table#table
+  .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+    .panel.panel-warning
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          | المراقبين
+      .panel-body
+        table#table
 
   #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog
@@ -94,4 +89,3 @@ block content
   script(src='/js/bootstrap-switch.min.js')
   script(src="/js/manager/editOrg.js")
   script(src='/js/admin/backToTop.js')
-  
