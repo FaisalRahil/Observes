@@ -11,7 +11,8 @@ var nationality = require('../Nationality');
 var office = require('../office');
 
   router.get('/', function(req, res) {
-    res.render('reports/reports',{ title: 'الـتـقـاريـر'}); 
+    console.log(nationality);
+    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality});
   });
 
   // ////////////////////////////////////////////////////////////////////////
@@ -19,62 +20,70 @@ var office = require('../office');
     var html = '';
     var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
       for(i in arr1){
-      html+='<tr>\
+        html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr1[i].id_office].office_name_ar+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 1 </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+arr1[i].number+' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-            }
-       for(i in arr2){      
-      html+='<tr>\
+      }
+      for(i in arr2){
+        html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr2[i].id_office].office_name_ar+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 2 </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+arr2[i].number+' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-            }
-
-             for(i in arr3){      
-      html+='<tr>\
+      }
+      for(i in arr3){
+        html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr3[i].id_office].office_name_ar+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 3 </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+arr3[i].number+' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-            }
-
-             for(i in arr4){      
-      html+='<tr>\
+      }
+      for(i in arr4){
+        html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr4[i].id_office].office_name_ar+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 4 </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+arr4[i].number+' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-            }
-
-             for(i in arr5){      
-      html+='<tr>\
+      }
+      for(i in arr5){
+        html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr5[i].id_office].office_name_ar+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 5 </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+arr5[i].number+' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-            }
-
-                for(i in arr6){      
-      html+='<tr>\
+      }
+      for(i in arr6){
+        html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr6[i].id_office].office_name_ar+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 6 </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+arr6[i].number+' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-            }
-
-      
-    
+      }
     return html;
   }
+  // ////////////////////////////////////////////////////////////////////////
+
+  // ////////////////////////////////////////////////////////////////////////
+  function resultsNoOfInternationalObs(allResults){
+    var html = '';
+    for (i in allResults){
+      html+='<tr>\
+              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
+            </tr>';
+    }
+    return html;
+  }
+  // ////////////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////////////////
   function drawAllResults(allResults,national,officePar){
@@ -128,6 +137,61 @@ var office = require('../office');
     return html;
   }
   /////////////////////////////////////////////////////////////////////////////
+  function statisticsOfficesByType(office,obj){
+    // html='';
+    html='<table class="table condensed">\
+      <thead>\
+        <tr style="border-top-style: solid; border-top-width: 1px;" >\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+        </tr>\
+      </thead>\
+      <tbody style="border: 1px solid #000;">';
+      sumAll=0;
+      for(i in office){
+        sum=0;
+         html+='<tr>\
+            <td style="background-color:#E7FFE7 !important;"> '+office[i].office_name_ar+' </td>';
+            if(obj[office[i].office_id]!=undefined){
+              for(k=1;k<7;k++){
+                if(obj[office[i].office_id][k]!=undefined){
+                  sum+=parseInt(obj[office[i].office_id][k]);
+                  html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k]+' </td>';
+                }else{
+                  html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+                }
+              }
+              html+='<td style="background-color:#F0F0EF !important;"> '+sum+' </td>\
+              </tr>';
+            }else{
+              html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#FFFFC2 !important;"> - </td>\
+                <td style="background-color:#F0F0EF !important;"> - </td>\
+              </tr>';
+            }
+        sumAll+=sum;    
+      }
+
+      html+='</tbody>\
+        <tbody style="direction: ltr;">\
+          <tr>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAll+' </td>\
+          </tr>\
+        </tbody>\
+      </table>';
+    return html;
+  }
+  ////////////////////////////////////////////////////////////////////////////  
 
   router.get('/observers', function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(results){
@@ -169,7 +233,7 @@ var office = require('../office');
 
   // this noOfInternationalObs // widght A4
   router.get('/noOfInternationalObs', function(req, res, next) {
-    /*reportMgr.appNoOfInternationalObs(function(results){
+    reportMgr.appNoOfInternationalObs(function(results){
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
@@ -177,26 +241,13 @@ var office = require('../office');
             orientation: "landscape"
           },
           recipe: "phantom-pdf",
-          helpers:resultsNoOfLocaleObs.toString()
+          helpers:resultsNoOfInternationalObs.toString()
         },
-        data:{allResults:results,officePar:office}
+        data:{allResults:results}
       }).then(function (response) {
         response.result.pipe(res);
       });
     });
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObs.html"), "utf8"),
-        phantom:{
-          orientation: "landscape",
-        },
-        recipe: "phantom-pdf",
-        helpers:resultsNoOfInternationalObs.toString()
-      },
-      data:{allResults:results}
-    }).then(function (response) {
-      response.result.pipe(res);
-    });*/
   });
 
   // this obsByNationality // widght A4
@@ -272,17 +323,29 @@ var office = require('../office');
 
   // this statisticsOfficesByType // widght A4
   router.get('/statisticsOfficesByType', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByType.html"), "utf8"),
-        phantom:{
-          orientation: "landscape",
+    reportMgr.statisticsOfficesByType(function(result){
+      obj={};
+      for( k in result){
+        if(obj[result[k].id_office]==undefined){
+          obj[result[k].id_office]=[];
+        }
+        if(obj[result[k].id_office][result[k].type]==undefined){
+          obj[result[k].id_office][result[k].type]=[];
+          obj[result[k].id_office][result[k].type].push(result[k].num);
+        }
+      }
+
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByType.html"), "utf8"),
+
+          recipe: "phantom-pdf",
+          helpers:statisticsOfficesByType.toString()
         },
-        recipe: "phantom-pdf",
-      },
-      // data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
+        data:{offic:office,result:obj}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
     });
   });
 
@@ -326,7 +389,6 @@ var office = require('../office');
       });
     });
   });
-
   //draw observers counts by gender  /noOfWomenAndMen
   function noOfWomenAndMen(allResults){
     var html = '';
@@ -376,5 +438,4 @@ var office = require('../office');
     
     return html;
   }
-
 module.exports = router;
