@@ -16,21 +16,13 @@ exports.reportMgr = {
 
   appNoOfInternationalObs : function(cb){
     mysqlMgr.connect(function (conn) {
-      // select ob.id_office,org.type from observers as ob,organisaition as org where org.type in (1,2,3,4,5,6) and org.id_org = ob.registration_org order by org.type
-      conn.query('SELECT COUNT(*) FROM `organisaition` org, `observers` obs WHERE `org`.`id_org` = `obs`.`registration_org` AND `org`.`type` = ? ;',4,  function(err, result1) {
-        conn.query('SELECT COUNT(*) FROM `organisaition` org, `observers` obs WHERE `org`.`id_org` = `obs`.`registration_org` AND `org`.`type` = ?;',5,  function(err, result2) {
-          conn.query('SELECT COUNT(*) FROM `organisaition` org, `observers` obs WHERE `org`.`id_org` = `obs`.`registration_org` AND `org`.`type` = ? ;',6,  function(err, result3) {
-            conn.release();
-            if(err) {
-              util.log(err);
-            } else {
-              console.log("result1,result2,result3");
-              console.log(result1,result2,result3);
-              console.log("result1,result2,result3");
-              cb(result1,result2,result3);
-            }
-          });
-        });
+      conn.query('SELECT count(*) AS num,`org`.`type` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `org`.`type` in (1,2,3) group by `org`.`type` ', function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
       });
     });
   },
@@ -223,7 +215,7 @@ exports.reportMgr = {
   },
   statisticsOfficesByType :function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` group by `obs`.`id_office`,`org`.`type` ', function(err, result) {
+      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 group by `obs`.`id_office`,`org`.`type` ', function(err, result) {
          conn.release();
         if(err) {
           util.log(err);
