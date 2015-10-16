@@ -9,6 +9,7 @@ var fs = require("fs");
 var path = require("path");
 var nationality = require('../Nationality');
 var office = require('../office');
+var type = require('../type');
 
   router.get('/', function(req, res) {
     res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality});
@@ -86,13 +87,12 @@ var office = require('../office');
   // ////////////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////////////////
-  function drawAllResults(allResults,national,officePar){
+  function drawAllResults(allResults,national,officePar,typeOfOrg){
     var html = '';
     var gender1;
     var nat = '';
     var typeInTD = '';
     var office1 = '';
-    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
     for (i in allResults){
       for (var l = 0; l < officePar.length; l++) {
         if( allResults[i].id_office == officePar[l].idoffice ){
@@ -100,9 +100,9 @@ var office = require('../office');
           break;
         }
       }
-      for (var k = 0; k <= type1.length; k++) {
-        if(allResults[k].type-1 == k ){
-          typeInTD = type1[k];
+      for (var k = 0; k < typeOfOrg.length; k++) {
+        if(allResults[i].type == typeOfOrg[k].type_id ){
+          typeInTD = typeOfOrg[k].type_name;
           break;
         }
       }
@@ -205,7 +205,7 @@ var office = require('../office');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type}
       }).then(function (response) {
         response.result.pipe(res);
       });
