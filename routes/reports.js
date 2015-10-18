@@ -287,18 +287,22 @@ var office = require('../office');
   });
 
   // this obsByType // widght A4
-  router.get('/obsByType', function(req, res, next) {
-    jsr.render({
-      template: { 
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
-        phantom:{
-          orientation: "landscape",
+  router.get('/obsByType/:type', function(req, res, next) {
+    reportMgr.obsBytype(req.params.type,function(results){
+      console.log(results);
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
+          phantom:{
+            orientation: "landscape",
+          },
+          recipe: "phantom-pdf",
+          helpers:obsBytype.toString()
         },
-        recipe: "phantom-pdf",
-      },
-      // data:obj
-    }).then(function (response) {
-      response.result.pipe(res);
+        data:{allResults:results}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
     });
   });
 
@@ -437,5 +441,35 @@ var office = require('../office');
     }
     
     return html;
+  }  
+
+  //by type
+  function obsBytype(allResults){
+    var html = '';
+    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+
+    for (var k = 0; k <= type1.length; k++) {
+      if(allResults[k].type-1 == k ){
+        typeInTD = type1[k];
+        break;
+      }
+    }
+    html+= '<th colspan="2" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+typeInTD+' </th>\
+              </tr>\
+              <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center" width="13%" style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+              </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;">';
+     for (var i in allResults){
+        html+= '<tr>\
+          </tr>\
+          <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
+            <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ObsCount+' </td>';
+
+     }
+    return html;
   }
+
 module.exports = router;

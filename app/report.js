@@ -236,8 +236,7 @@ exports.reportMgr = {
 
   noOfWomenAndMen : function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT COUNT( * ) AS man FROM  `observers` obs WHERE  `obs`.`gender` =1 LIMIT 0 , 30; SELECT COUNT( * ) AS woman FROM  `observers` obs WHERE  `obs`.`gender` =2 LIMIT 0 , 30;',function(err, result) {
-        console.log(result[0][0].man);
+      conn.query('SELECT COUNT( * ) AS man FROM  `observers` obs WHERE  `obs`.`gender` =1 LIMIT 0 , 30; SELECT COUNT( * ) AS woman FROM  `observers` obs WHERE  `obs`.`gender` =0 LIMIT 0 , 30;',function(err, result) {
           conn.release();
           if(err) {
             util.log(err);
@@ -252,6 +251,18 @@ exports.reportMgr = {
       conn.query('SELECT  `observers`.`name`, `observers`.`nationality`,`observers`.`registration_org`, `observers`.`status` , `organisaition`.`id_org` , `organisaition`.`type` FROM `observers`  LEFT JOIN  `organisaition` ON `observers`.`registration_org`=`organisaition`.`id_org` WHERE  `observers`.`status` = 1 && `observers`.`nationality`=?',nat,function(err, result) {
         console.log("is");
         console.log(result[0]);
+          conn.release();
+          if(err) {
+            util.log(err);
+          } else {
+            cb(result);
+          }
+      });
+    });
+  },
+  obsBytype : function(type,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT COUNT(*) AS ObsCount,org.name_org , org.type FROM  `observers` as `obs` , `organisaition` as `org` where `obs`.`registration_org` = `org`.`id_org` AND `org`.type=? GROUP BY (org.`id_org`)',type,function(err, result) {
           conn.release();
           if(err) {
             util.log(err);
