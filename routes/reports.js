@@ -9,9 +9,9 @@ var fs = require("fs");
 var path = require("path");
 var nationality = require('../Nationality');
 var office = require('../office');
+var type = require('../type');
 
   router.get('/', function(req, res) {
-    console.log(nationality);
     res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality});
   });
 
@@ -72,27 +72,27 @@ var office = require('../office');
   // ////////////////////////////////////////////////////////////////////////
 
   // ////////////////////////////////////////////////////////////////////////
-  function resultsNoOfInternationalObs(allResults){
-    var html = '';
-    for (i in allResults){
-      html+='<tr>\
-              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
-              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
-              <td style="background-color:#FFFFC2 !important;"> '+allResults[i]+' </td>\
-            </tr>';
-    }
+  function resultsNoOfInternationalObs(resultt){
+    var html = '<tr>';
+    for (var i = 1; i < 4; i++) {
+      if(resultt[i] == undefined ){
+        html+=' <td style="background-color:#FFFFC2 !important;"> - </td>';
+      } else{
+        html+=' <td style="background-color:#FFFFC2 !important;"> '+ resultt[i] +' </td>';
+      } 
+    };
+      html+='</tr>';
     return html;
   }
   // ////////////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////////////////
-  function drawAllResults(allResults,national,officePar){
+  function drawAllResults(allResults,national,officePar,typeOfOrg){
     var html = '';
     var gender1;
     var nat = '';
     var typeInTD = '';
     var office1 = '';
-    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
     for (i in allResults){
       for (var l = 0; l < officePar.length; l++) {
         if( allResults[i].id_office == officePar[l].idoffice ){
@@ -100,9 +100,9 @@ var office = require('../office');
           break;
         }
       }
-      for (var k = 0; k <= type1.length; k++) {
-        if(allResults[k].type-1 == k ){
-          typeInTD = type1[k];
+      for (var k = 0; k < typeOfOrg.length; k++) {
+        if(allResults[i].type == typeOfOrg[k].type_id ){
+          typeInTD = typeOfOrg[k].type_name;
           break;
         }
       }
@@ -205,7 +205,7 @@ var office = require('../office');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -233,17 +233,24 @@ var office = require('../office');
 
   // this noOfInternationalObs // widght A4
   router.get('/noOfInternationalObs', function(req, res, next) {
-    reportMgr.appNoOfInternationalObs(function(results){
+    reportMgr.appNoOfInternationalObs(function(result){
+      obj={};
+      for( k in result){
+        if(obj[result[k].type]==undefined){
+          obj[result[k].type]=[];
+          obj[result[k].type].push(result[k].num);
+        }
+      }
       jsr.render({
         template: { 
-          content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObs.html"), "utf8"),
           phantom:{
             orientation: "landscape"
           },
           recipe: "phantom-pdf",
           helpers:resultsNoOfInternationalObs.toString()
         },
-        data:{allResults:results}
+        data:{resultt:obj}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -338,7 +345,6 @@ var office = require('../office');
           obj[result[k].id_office][result[k].type].push(result[k].num);
         }
       }
-
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByType.html"), "utf8"),
