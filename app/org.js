@@ -110,6 +110,7 @@ exports.orgMgr = {
         if(err) {
           cb(err,null);
         } else {
+          result['id_o']=body['id_org'];
           cb(null,result);
         }
       });

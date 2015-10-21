@@ -100,7 +100,6 @@ $(document).ready(function() {
       },
       registration_no:{
         required : true,
-        number: true,
       },
       name_director:{
         required : true,
@@ -124,7 +123,6 @@ $(document).ready(function() {
       },
       registration_no:{
         required: "الرجاء إدخال رقم الاشهار",
-        number: "يجب أن تكون المدخلات أرقام",
       },
       name_director:{
         required: "الرجاء إدخال اسم مدير المنظمه",

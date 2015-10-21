@@ -146,14 +146,12 @@ $(document).ready(function() {
       },
       registration_org:{
         required : true,
-        number: true,
       },
       nationality:{
         required: true,
       },
       pass_nid:{
         required : true,
-        number: true,
       },
       director:{
         remote: {
@@ -182,14 +180,12 @@ $(document).ready(function() {
       },
       registration_no:{
         required: "الرجاء إدخال رقم الهوية",
-        number: "يجب أن تكون المدخلات أرقام ",
       },
       nationality:{
         required: "يجب إدخال رقم الهاتف",
       },
       pass_nid:{
         required: "الرجاء إدخال رقم الاشهار",
-        number: "يجب أن تكون المدخلات أرقام ",
       },
       director:{
         remote: "هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر"

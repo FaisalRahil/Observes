@@ -89,6 +89,7 @@ exports.obsMgr = {
         if(err) {
           cb(err);
         } else {
+          result['id_o']=body['id_ob'];
           cb(result);
         }
       });
