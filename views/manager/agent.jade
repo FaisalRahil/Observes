@@ -1,6 +1,5 @@
 extends ../layout
 block content
-
   header.navbar.navbar-red.navbar-fixed-top.bs-docs-nav(role='banner')
     .navbar-header.pull-left
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
@@ -27,67 +26,65 @@ block content
         li
           a(href='#') التقارير
         li
-          a(href='#') المراقبين
+          a(href='/manager/obs') المراقبين
         li
-          a(href='#') الـمنظمات
+          a(href='/manager/org') الـمنظمات
 
-  .row
-    .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
-        .nav.nav-pills.nav-stacked
-          li
-              a.btn.btn-default.btn-block(href="/manager/obs/locOrg", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | مـنـظـمـة محلــيـة
-          li
-              a.btn.btn-default.btn-block(href="/manager/obs/locMedia", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | اعـلام محلـي
-          li
-              a.btn.btn-danger.btn-block(href="/manager/obs/agent", role="button")
-                span.glyphicon.glyphicon-th.pull-right
-                | وكيــــل
+  .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
+    .nav.nav-pills.nav-stacked
+      li
+        a.btn.btn-default.btn-block(href="/manager/obs/locOrg", role="button")
+          span.glyphicon.glyphicon-th.pull-right
+          | مـنـظـمـة محلــيـة
+      li
+        a.btn.btn-default.btn-block(href="/manager/obs/locMedia", role="button")
+          span.glyphicon.glyphicon-th.pull-right
+          | اعـلام محلـي
+      li
+        a.btn.btn-danger.btn-block(href="/manager/obs/agent", role="button")
+          span.glyphicon.glyphicon-th.pull-right
+          | وكيــــل
 
-    .col-sm-7.col-md-7.col-lg-7
-      .row
-        .panel.red-form.panel-danger
-          .panel-heading إدخال وكيل
-          .panel-body
-            form#agent(role='form',method="post",action="/manager/addObs")
-              .form-group
-                input.form-control#name(name='name', placeholder='اﻹسم', type='text')
-              .form-group
-                input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
-              .form-group
-                select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
-                  option(value="-1", style='color:grey; display:none;') الرجاء اختيار المرشح
-                  for org in orgs
-                    option(value="#{org.id_org}") #{org.name_org}
-              .form-group.col-sm-6.col-md-6.col-lg-6
-                | الجنس :   
-                input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
-              .form-group.col-sm-6.col-md-6.col-lg-6  
-                | مدير  : 
-                input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
-              .form-group
-                input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
-              .form-group
-                input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
-              input(type='hidden', name='Type', value='6')
-              .row
-                .col-xs-8.col-md-8
-                  button#btnSubmit.btn.btn-danger.btn-block(type='submit') تسجيــــل 
-                .col-xs-4.col-md-4
-                  button.btn.btn-default.btn-block(type='reset') إلغاء
-
-  .row
-    .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-      .panel.panel-danger
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            | المراقبين
+  .col-sm-7.col-md-7.col-lg-7
+    .row
+      .panel.red-form.panel-danger
+        .panel-heading إدخال وكيل
         .panel-body
-          table#table
+          form#agent(role='form',method="post",action="/manager/addObs")
+            .form-group
+              input.form-control#name(name='name', placeholder='اﻹسم', type='text')
+            .form-group
+              input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
+            .form-group
+              select#registration_org.form-control.selectpicker.show-tick(type="text",name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
+                option(value="-1", style='color:grey; display:none;') الرجاء اختيار المرشح
+                for org in orgs
+                  option(value="#{org.id_org}") #{org.name_org}
+            .form-group.col-sm-6.col-md-6.col-lg-6
+              | الجنس :   
+              input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
+            .form-group.col-sm-6.col-md-6.col-lg-6  
+              | مدير  : 
+              input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
+            .form-group
+              input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
+            .form-group
+              input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
+            input(type='hidden', name='Type', value='6')
+            .row
+              .col-xs-8.col-md-8
+                button#btnSubmit.btn.btn-danger.btn-block(type='submit') تسجيــــل 
+              .col-xs-4.col-md-4
+                button.btn.btn-default.btn-block(type='reset') إلغاء
+
+  .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+    .panel.panel-danger
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          | المراقبين
+      .panel-body
+        table#table
 
   #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog

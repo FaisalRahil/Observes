@@ -26,32 +26,31 @@ block content
         li
           a(href='#') التقارير
         li
-          a(href='#') المراقبين
+          a(href='/manager/obs') المراقبين
         li
-          a(href='#') الـمنظمات
+          a(href='/manager/org') الـمنظمات
 
-  .row
-    .col-md-8.col-md-offset-2
-      .form-group
-        input#discount_flag(type='checkbox', name='discount_flag')
-      table#obs.table.table-bordered.table-striped(style='clear: both')
-        tbody
-          tr
-            td(width='35%') إسم المراقب 
-            td(width='65%')
-              a#name(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الاسم' ,data-value='#{obs[0].name}') #{obs[0].name}
-          tr
-            td(width='35%') الرقم الوطني / رقم الجواز 
-            td(width='65%')
-              a#pass_nid(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الرقم الوطني / رقم الجواز', data-value='#{obs[0].pass_nid}') #{obs[0].pass_nid}
-          tr
-            td(width='35%') البريد اﻹلكتروني
-            td(width='65%')
-              a#email(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='البريد اﻹلكتروني' ,data-value='#{obs[0].email}') #{obs[0].email}
-          tr
-            td(width='35%') رقم الهاتف
-            td(width='65%')
-              a#phone_obs(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{obs[0].phone_obs}') #{obs[0].phone_obs}
+  .col-md-8.col-md-offset-2
+    .form-group
+      input#discount_flag(type='checkbox', name='discount_flag')
+    table#obs.table.table-bordered.table-striped(style='clear: both')
+      tbody
+        tr
+          td(width='35%') إسم المراقب 
+          td(width='65%')
+            a#name(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الاسم' ,data-value='#{obs[0].name}') #{obs[0].name}
+        tr
+          td(width='35%') الرقم الوطني / رقم الجواز 
+          td(width='65%')
+            a#pass_nid(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الرقم الوطني / رقم الجواز', data-value='#{obs[0].pass_nid}') #{obs[0].pass_nid}
+        tr
+          td(width='35%') البريد اﻹلكتروني
+          td(width='65%')
+            a#email(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='البريد اﻹلكتروني' ,data-value='#{obs[0].email}') #{obs[0].email}
+        tr
+          td(width='35%') رقم الهاتف
+          td(width='65%')
+            a#phone_obs(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{obs[0].phone_obs}') #{obs[0].phone_obs}
 
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
@@ -59,5 +58,4 @@ block content
   script(src="/js/jquery.validate.min.js")
   script(src='/js/bootstrap-switch.min.js')
   script(src="/js/manager/editAgentObs.js")
-  script(src='/js/admin/backToTop.js')
-  
+  script(src='/js/admin/backToTop.js')  

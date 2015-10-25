@@ -30,41 +30,39 @@ block content
         li
           a(href='/admin/org') الـمنظمات
 
-  .row
-    .col-md-8.col-md-offset-2
-      .form-group
-        input#discount_flag(type='checkbox', name='discount_flag')
-      table#obs.table.table-bordered.table-striped(style='clear: both')
-        tbody
-          tr
-            td(width='35%') الرقم الوطني / جواز سفر
-            td(width='65%')
-              a#pass_nid(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الرقم الوطني / جواز سفر' ,data-value='#{obs[0].pass_nid}') #{obs[0].pass_nid}
-          tr
-            td(width='35%') الاسم
-            td(width='65%')
-              a#name(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الاسم' ,data-value='#{obs[0].name}') #{obs[0].name}
-          tr
-            td(width='35%') رقم الهاتف
-            td(width='65%')
-              a#phone_obs(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{obs[0].phone_obs}') #{obs[0].phone_obs}
-          tr
-            td(width='35%') البريد الاكتروني
-            td(width='65%')
-              a#email(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='البريد الاكتروني', data-value='#{obs[0].email}') #{obs[0].email}
-          tr
-            td(width='35%') الجنسية
-            td(width='65%')
-              a#nationality(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='الجنسية', data-value='#{obs[0].nationality}')
-          tr
-            td(width='35%') مدير
-            td(width='65%')
-              a#director(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='مدير', data-value='#{obs[0].director}') 
-          tr
-            td(width='35%') الجنس
-            td(width='65%')
-              a#gender(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='الجنس', data-value='#{obs[0].gender}')
-
+  .col-md-8.col-md-offset-2
+    .form-group
+      input#discount_flag(type='checkbox', name='discount_flag')
+    table#obs.table.table-bordered.table-striped(style='clear: both')
+      tbody
+        tr
+          td(width='35%') الرقم الوطني / جواز سفر
+          td(width='65%')
+            a#pass_nid(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الرقم الوطني / جواز سفر' ,data-value='#{obs[0].pass_nid}') #{obs[0].pass_nid}
+        tr
+          td(width='35%') الاسم
+          td(width='65%')
+            a#name(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='الاسم' ,data-value='#{obs[0].name}') #{obs[0].name}
+        tr
+          td(width='35%') رقم الهاتف
+          td(width='65%')
+            a#phone_obs(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='رقم الهاتف' ,data-value='#{obs[0].phone_obs}') #{obs[0].phone_obs}
+        tr
+          td(width='35%') البريد الاكتروني
+          td(width='65%')
+            a#email(href='#', data-type='text', data-pk='#{obs[0].id_ob}', data-title='البريد الاكتروني', data-value='#{obs[0].email}') #{obs[0].email}
+        tr
+          td(width='35%') الجنسية
+          td(width='65%')
+            a#nationality(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='الجنسية', data-value='#{obs[0].nationality}')
+        tr
+          td(width='35%') مدير
+          td(width='65%')
+            a#director(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='مدير', data-value='#{obs[0].director}') 
+        tr
+          td(width='35%') الجنس
+          td(width='65%')
+            a#gender(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='الجنس', data-value='#{obs[0].gender}')
   
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
@@ -73,5 +71,4 @@ block content
   script(src="/js/jquery.validate.min.js")
   script(src='/js/bootstrap-switch.min.js')
   script(src="/js/admin/editObs.js")
-  script(src='/js/admin/backToTop.js')
-  
+  script(src='/js/admin/backToTop.js')  

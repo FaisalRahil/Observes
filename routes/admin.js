@@ -65,7 +65,6 @@ router.post('/addOb', function(req, res) {
     req.body['director']=1;
   }
   obsMgr.addOb(req.body,function(result){
-    console.log(result);
     logMgr.insertLog(1,"add","observers"," add new observer name : "+req.body['name'],result.id_o,req.body['name']);
     if (type == 1) {
       res.redirect('obs/natOrgObs');
@@ -465,8 +464,16 @@ router.get('/getNatMediaObs', function(req, res) {
   })
 });
 
-router.post('/checkDir', function(req, res) {
-  console.log(req.body);
+router.get('/checkDir/:id', function(req, res) {
+  console.log("result");
+  obsMgr.checkDir(req.params.id,function(result){
+    console.log(result);
+    if(result.length>0){
+      res.send(false);
+    }else{
+      res.send(true);
+    }
+  });
 });
 // end
 // //////////////////////////////////////////////////////

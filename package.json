@@ -21,6 +21,7 @@
     "passport-local": "^1.0.0",
     "password-generator": "^0.2.2",
     "static-favicon": "~1.0.0",
-    "step": "0.0.5"
+    "step": "0.0.5",
+    "jsreport": "~0.8.2"
   }
 }

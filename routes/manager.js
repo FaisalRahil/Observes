@@ -201,9 +201,7 @@ router.get('/getObsIdOrg/:id', function(req, res) {
 /* GET home page. */
 router.get('/getOb', function(req, res) {
 
-  console.log("im in");
   obsMgr.getAllObsAndNameOrgByType(5,function(result){
-    console.log(result);
     res.send(result);
   });
 });

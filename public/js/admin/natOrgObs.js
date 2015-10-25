@@ -8,7 +8,7 @@ $(document).ready(function() {
       $.nat.push(k);
     }
 
-    }); 
+  }); 
   $('#table').bootstrapTable({
       method: 'get',
       url: '/admin/getNatOrgObs',
@@ -120,6 +120,16 @@ $(document).ready(function() {
   $('#director').checkboxpicker({
     onLabel:"لا", offLabel:"نعم"
   });
+  $.validator.addMethod("checkDir", function (value) {
+    // alert(value);
+    // if(!$('#director').is(':checked')){
+    //   $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+    //     return result;
+    //   });
+    // }else{
+      return false;
+    // }
+  });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
@@ -131,6 +141,7 @@ $(document).ready(function() {
 ////////////////////////////
 
   $("#natOrgObsId").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
       name:{
         required: true,
@@ -154,15 +165,7 @@ $(document).ready(function() {
         required : true,
       },
       director:{
-        remote: {
-          url :"/admin/checkDir",
-          type : "post",
-          data: {
-            dir: function() {
-              return $( "#director" ).val();
-            }
-          }
-        }
+        checkDir: true
       },
     },
     messages:{
@@ -178,18 +181,26 @@ $(document).ready(function() {
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
       },
-      registration_no:{
-        required: "الرجاء إدخال رقم الهوية",
+      registration_org:{
+        required: "الرجاء إختيار المنضمة",
       },
       nationality:{
-        required: "يجب إدخال رقم الهاتف",
+        required: "يجب إختيار الجنسية",
       },
       pass_nid:{
         required: "الرجاء إدخال رقم الاشهار",
       },
       director:{
-        remote: "هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر"
+        checkDir: "هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر"
 
+      }
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
       }
     },
     highlight: function(element) {

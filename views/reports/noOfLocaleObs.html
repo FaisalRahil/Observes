@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> بيانات المراقبين </title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:3003/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:3003/css/bootstrap-rtl.min.css">
+    <style>
+      @font-face {
+        font-family: 'Amiri';
+        src: url("http://localhost:3003/fonts/amiri-regular.ttf") format("truetype");
+      }
+      body {
+        font-family: 'Amiri';
+      }
+      @font-face {
+        font-family: 'Droid Arabic Kufi';
+        src : url("http://localhost:3003/fonts/DroidKufi-Regular.ttf")format("truetype");
+      }
+      .fontSize{
+        font-size: 31px;
+      }
+      .table,.table>thead>tr>th{
+        font-size: 19px;
+        border: 1px solid #000;
+      }
+      .table,.table>tbody>tr>td{
+        font-size: 15px;
+        border: 1px dotted #000;
+      }
+      .table td{
+        font-family: 'Droid Arabic Kufi';
+        text-align: center;
+        vertical-align: middle;
+      }
+      .table.fixed td { 
+        overflow: hidden; 
+      }
+      .condensed>tbody>tr>td {
+        padding: 5px;
+      }
+      .condensed>thead>tr>th{
+        padding-top: 10px;
+        padding-bottom: 11px;
+        font-weight: 100;
+      }
+      .halfSpace{
+        height: 5px;
+      }
+      .space{
+        height: 10px;
+      }
+      .towSpaces{
+        height: 20px;
+      }
+      h3,.h4 {
+        font-weight: bold;
+      }
+    </style>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="text-center fontSize"> 
+            بــيـانـات الـمـراقـبـيـن الـمـحـلـيـيـن حـسـب الـلـجـان
+          </div>
+        </div>
+
+        <div class="col-xs-4">
+          <div class="halfSpace"></div>
+          <div class="text-left">
+            <img src="http://localhost:3003/images/hnec_logo.png"> 
+          </div>
+        </div>
+        <div class="col-xs-12">
+        <div class="towSpaces"></div>
+          <table class="table condensed">
+            <thead>
+              <tr style="border-top-style: solid; border-top-width: 1px;" >
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> الـلـجـنـة الانـتـخـابـيـة  id_office </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي type </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي reapeting number</th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>
+              </tr>
+            </thead>
+            <tbody style="border: 1px solid #000;">
+              {{{ resultsNoOfLocaleObs office arr1 arr2 arr3 arr4 arr5 arr6 officePar }}}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-xs-3">
+          <div class="pull-right"> 
+            
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="text-center"> 
+            
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="text-left">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

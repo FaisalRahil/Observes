@@ -30,45 +30,44 @@ block content
         li
           a(href='/admin/org') الـمنظمات
 
-  .row
-    .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
-      .panel.panel-primary
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            |   لـوحـــة الـتـحــكــم
-        .panel-body
-          .row
-            .col-xs-6.col-sm-6.col-md-6.col-lg-6
-              a.btn-lg.btn.btn-danger.btn-block(href="/admin/obs/natOrgObs", role="button")
-                span.glyphicon.glyphicon-user
-                br
-                | مــراقـب دولــي
-              p
-              a.btn-lg.btn.btn-warning.btn-block(href="/admin/obs/natMediaObs", role="button")
-                span.glyphicon.glyphicon-th
-                br
-                | اعـلامي دولـي
-              p
-            .col-xs-6.col-sm-6.col-md-6.col-lg-6  
-              a.btn-lg.btn.btn-info.btn-block(href="/admin/moveOrg", role="button")
-                span.glyphicon.glyphicon-th
-                br
-                | نـقـل مراقبين المنظمة
-              p
-              a.btn-lg.btn.btn-success.btn-block(href="/admin/obs/guestObs", role="button")
-                span.glyphicon.glyphicon-user
-                br
-                | ضــيــف
-              p
+  .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
+    .panel.panel-primary
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          |   لـوحـــة الـتـحــكــم
+      .panel-body
+        .row
+          .col-xs-6.col-sm-6.col-md-6.col-lg-6
+            a.btn-lg.btn.btn-danger.btn-block(href="/admin/obs/natOrgObs", role="button")
+              span.glyphicon.glyphicon-user
+              br
+              | مــراقـب دولــي
+            p
+            a.btn-lg.btn.btn-warning.btn-block(href="/admin/obs/natMediaObs", role="button")
+              span.glyphicon.glyphicon-th
+              br
+              | اعـلامي دولـي
+            p
+          .col-xs-6.col-sm-6.col-md-6.col-lg-6  
+            a.btn-lg.btn.btn-info.btn-block(href="/admin/moveOrg", role="button")
+              span.glyphicon.glyphicon-th
+              br
+              | نـقـل مراقبين المنظمة
+            p
+            a.btn-lg.btn.btn-success.btn-block(href="/admin/obs/guestObs", role="button")
+              span.glyphicon.glyphicon-user
+              br
+              | ضــيــف
+            p
 
-      .panel.panel-primary
-        .panel-heading
-          h3.panel-title
-            span.glyphicon.glyphicon-bookmark
-            | المراقبين
-        .panel-body
-          table#table
+    .panel.panel-primary
+      .panel-heading
+        h3.panel-title
+          span.glyphicon.glyphicon-bookmark
+          | المراقبين
+      .panel-body
+        table#table
 
   #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog
@@ -81,7 +80,6 @@ block content
         .modal-footer
           button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
           button.btn.btn-success(data-dismiss='modal', type='button') إلغاء 
-
 
   script(src="/js/jquery-1.11.1.min.js")
   script(src="/js/bootstrap.min.js")
