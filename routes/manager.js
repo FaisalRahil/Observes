@@ -67,35 +67,59 @@ router.get('/obs/agent', function(req, res) {
 /* EDIT. */
 router.get('/editMediaObs/:id', function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-orange'});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-orange'});
+    }else{
+      res.redirect('/manager/obs');
+    }
   });
 });
 
 router.get('/editLocOrg/:id', function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-inverse'});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-inverse'});
+    }else{
+      res.redirect('/manager/org');
+    }
   });
 });
 /* EDIT. */
 router.get('/editAgentObs/:id', function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editAgentObs',{ title: 'المراقبين' ,obs:result});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editAgentObs',{ title: 'المراقبين' ,obs:result});
+    }else{
+      res.redirect('/manager/obs');
+    }
   });
 });
 /* EDIT. */
 router.get('/editlocMeadia/:id', function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('manager/editlocMeadia',{ title: 'الاعلام المحلي' ,org:result});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editlocMeadia',{ title: 'الاعلام المحلي' ,org:result});
+    }else{
+      res.redirect('/manager/org');
+    }
   });
 });
 router.get('/editCandidateOrg/:id', function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-red'});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-red'});
+    }else{
+      res.redirect('/manager/org');
+    }
   });
 });
 router.get('/editOrgObs/:id', function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editOrgObs',{ title: 'المراقبين' ,obs:result});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editOrgObs',{ title: 'المراقبين' ,obs:result});
+    }else{
+      res.redirect('/manager/obs');
+    } 
   });
 });
 
@@ -206,6 +230,11 @@ router.get('/getOb', function(req, res) {
   });
 });
 
+router.get('/getAllObsAndNameOrg',function(req , res ){
+  obsMgr.getAllObsAndNameOrg([4,5,6],function(result){
+    res.send(result);
+  });
+});
 /* GET home page. */
 router.get('/getOb4', function(req, res) {
   obsMgr.getAllObsAndNameOrgByType(4,function(result){
@@ -245,10 +274,10 @@ router.post('/addObs', function(req, res) {
     req.body['gender']=1;
   }
   if(req.body['director']){
-    req.body['director']=0;
+    req.body['director']=1;
   }
   else{
-    req.body['director']=1;
+    req.body['director']=0;
   }
 
   obsMgr.addOb(req.body,function(err,result){

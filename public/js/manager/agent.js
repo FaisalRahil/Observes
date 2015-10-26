@@ -82,8 +82,18 @@ $(document).ready(function() {
       }
     }
     
-    $('#director').checkboxpicker({
-      onLabel:"لا", offLabel:"نعم"
+  $('#director').prop('disabled',true);
+  $('#director').checkboxpicker({
+      onLabel:"نعم", offLabel:"لا"
+    });
+  $('#registration_org').on('change',function(){
+      $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+        if(result){
+          $('#director').prop('disabled',false);
+        }else{
+          $('#director').prop('disabled',true);
+        }
+      });
     });
 
     $('#gender').checkboxpicker({
@@ -128,6 +138,19 @@ $(document).ready(function() {
       registration_org:{
         required: "الرجاء اختيار المرشح !",
       }  
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
+    highlight: function(element) {
+      $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $(this).removeClass('animated shake');
+      });
     },
   });
   $('body').on('click', '#deleteObs ', function () {

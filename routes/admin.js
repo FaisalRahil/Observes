@@ -57,12 +57,12 @@ router.post('/addOb', function(req, res) {
   else{
     req.body['gender']=1;
   }
-  
+  console.log(req.body);
   if(req.body['director']){
-    req.body['director']=0;
+    req.body['director']=1;
   }
   else{
-    req.body['director']=1;
+    req.body['director']=0;
   }
   obsMgr.addOb(req.body,function(result){
     logMgr.insertLog(1,"add","observers"," add new observer name : "+req.body['name'],result.id_o,req.body['name']);
@@ -466,6 +466,7 @@ router.get('/getNatMediaObs', function(req, res) {
 
 router.get('/checkDir/:id', function(req, res) {
   obsMgr.checkDir(req.params.id,function(result){
+    console.log(result);
     if(result.length>0){
       res.send(false);
     }else{

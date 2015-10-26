@@ -116,9 +116,19 @@ $(document).ready(function() {
           ].join('');
   }
   // $(':checkbox').checkboxpicker();
+  $('#director').prop('disabled',true);
   $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
+      onLabel:"نعم", offLabel:"لا"
+    });
+  $('#registration_org').on('change',function(){
+      $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+        if(result){
+          $('#director').prop('disabled',false);
+        }else{
+          $('#director').prop('disabled',true);
+        }
+      });
+    });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
