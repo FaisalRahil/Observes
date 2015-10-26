@@ -67,7 +67,7 @@ router.get('/obs/agent', function(req, res) {
 /* EDIT. */
 router.get('/editMediaObs/:id', function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-red'});
+    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-orange'});
   });
 });
 

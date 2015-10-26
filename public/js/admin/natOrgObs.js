@@ -120,23 +120,22 @@ $(document).ready(function() {
   $('#director').checkboxpicker({
     onLabel:"لا", offLabel:"نعم"
   });
-  $.validator.addMethod("checkDir", function (value) {
-    // alert(value);
-    // if(!$('#director').is(':checked')){
-    //   $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
-    //     return result;
-    //   });
-    // }else{
-      return false;
-    // }
-  });
+  // $.validator.addMethod("checkDir", function (value) {
+  //   alert($('#registration_org').val());
+  //   if(!$('#director').is(':checked')){
+  //     $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+  //       alert(result);
+  //       return result;
+  //     });
+  //   }else{
+  //     return true;
+  //   }
+  // });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
   });
-  $.validator.addMethod("selectValidat", function (value) {
-    return (value != '-1');
-  });
+
 
 ////////////////////////////
 
@@ -197,7 +196,13 @@ $(document).ready(function() {
     },
     errorClass: 'custom-error',
     errorPlacement: function (error, element) {
+      console.log(element);
       if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+      if ($(element).is('checkbox')) {
           element.next().after(error);
       } else {
           error.insertAfter(element);

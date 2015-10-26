@@ -465,9 +465,7 @@ router.get('/getNatMediaObs', function(req, res) {
 });
 
 router.get('/checkDir/:id', function(req, res) {
-  console.log("result");
   obsMgr.checkDir(req.params.id,function(result){
-    console.log(result);
     if(result.length>0){
       res.send(false);
     }else{
