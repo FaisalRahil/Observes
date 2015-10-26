@@ -67,7 +67,7 @@ router.get('/obs/agent', function(req, res) {
 /* EDIT. */
 router.get('/editMediaObs/:id', function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-red'});
+    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-orange'});
   });
 });
 
@@ -201,9 +201,7 @@ router.get('/getObsIdOrg/:id', function(req, res) {
 /* GET home page. */
 router.get('/getOb', function(req, res) {
 
-  console.log("im in");
   obsMgr.getAllObsAndNameOrgByType(5,function(result){
-    console.log(result);
     res.send(result);
   });
 });
@@ -278,6 +276,11 @@ router.post('/addOrg', function(req, res) {
     
     } 
 
+  });
+});
+router.get('/getToSer', function(req, res) {
+  orgMgr.getToSer(function (results){
+    res.redirect('/manager/org?msg='+results);
   });
 });
 

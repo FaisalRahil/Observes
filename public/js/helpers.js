@@ -15,6 +15,9 @@ $(document).ready(function(){
     });
     return o;
   };
+
+
+
   $(".prevent").on('keydown',function(e) { 
     var key = e.charCode || e.keyCode;
     if(key == 122 || key == 27 )

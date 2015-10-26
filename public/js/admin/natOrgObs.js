@@ -8,7 +8,7 @@ $(document).ready(function() {
       $.nat.push(k);
     }
 
-    }); 
+  }); 
   $('#table').bootstrapTable({
       method: 'get',
       url: '/admin/getNatOrgObs',
@@ -120,13 +120,22 @@ $(document).ready(function() {
   $('#director').checkboxpicker({
     onLabel:"لا", offLabel:"نعم"
   });
+  // $.validator.addMethod("checkDir", function (value) {
+  //   alert($('#registration_org').val());
+  //   if(!$('#director').is(':checked')){
+  //     $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+  //       alert(result);
+  //       return result;
+  //     });
+  //   }else{
+  //     return true;
+  //   }
+  // });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
   });
-  $.validator.addMethod("selectValidat", function (value) {
-    return (value != '-1');
-  });
+
 
 ////////////////////////////
 
@@ -135,7 +144,6 @@ $(document).ready(function() {
     rules:{
       name:{
         required: true,
-        minlength: 10,
       },
       email:{
         required: true,
@@ -148,49 +156,53 @@ $(document).ready(function() {
       },
       registration_org:{
         required : true,
-        number: true,
       },
       nationality:{
         required: true,
       },
       pass_nid:{
         required : true,
-        number: true,
+      },
+      director:{
+        checkDir: true
       },
     },
     messages:{
       name:{
         required: "الرجاء إدخال اسم المراقب",
-        minlength: "الرجاء إدخال الأسم ثلاثي",
-      },
-      // email:{
-      //   required: "الرجاء إدخال الباريد الالكتروني",
-      //   email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
-      // },
-      phone:{
-        required: "يجب إدخال رقم الهاتف",
-        minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
-        number: "يجب أن تكون المدخلات أرقام ",
       },
       email:{
         required: "الرجاء إدخال الباريد الالكتروني",
         email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
       },
-      registration_org:{
-        required: "الرجاء إختيار المنظمة التابعة",
-        number: "الرجاء إختيار الجنسية ",
-      },
-      nationality:{
-        required: "يجب إختيار جنسية المراقب",
-      },
-      pass_nid:{
-        required: "الرجاء إدخال رقم جواز السفر",
+      phone:{
+        required: "يجب إدخال رقم الهاتف",
+        minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
       },
+      registration_org:{
+        required: "الرجاء إختيار المنضمة",
+      },
+      nationality:{
+        required: "يجب إختيار الجنسية",
+      },
+      pass_nid:{
+        required: "الرجاء إدخال رقم الاشهار",
+      },
+      director:{
+        checkDir: "هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر"
+
+      }
     },
     errorClass: 'custom-error',
     errorPlacement: function (error, element) {
+      console.log(element);
       if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+      if ($(element).is('checkbox')) {
           element.next().after(error);
       } else {
           error.insertAfter(element);
@@ -202,5 +214,6 @@ $(document).ready(function() {
       });
     },
   });
+
 
 });

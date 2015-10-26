@@ -89,4 +89,82 @@ $(document).ready(function() {
       window.location.href="/manager/org";
     });
   });        
+
+  var qs = (function(a) {
+    if (a == "") return {};
+    var b = {};
+    for (var i = 0; i < a.length; ++i)
+    {
+      var p=a[i].split('=', 2);
+      if (p.length == 1)
+        b[p[0]] = "";
+      else
+        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+  })(window.location.search.substr(1).split('&'));
+  
+  if(qs["msg"]==0){
+    $.notify({
+      message: "<p class='font h5 text-center'><i class='glyphicon glyphicon-warning-sign'></i>&nbsp;<strong>خطأ:</strong> يوجد خطا في الاتصال </p>"
+      },{
+      type: 'danger',
+      allow_dismiss: true,
+      showProgressbar: false,
+      placement: {
+        from: 'top',
+        align: 'center'
+      },
+      mouse_over: null,
+      newest_on_top: true,
+      animate: {
+        enter: 'animated bounceIn',
+        exit: 'animated bounceOut',
+      },
+    });
+    var pageUrl = '/manager/org'
+    window.history.pushState("","",pageUrl);
+  }else if(qs["msg"]==1){
+    $.notify({
+      message: "<p class='font h5 text-center'><i class='glyphicon glyphicon-warning-sign'></i>&nbsp;<strong>خطأ:</strong> لا توجد بيانات جديدة </p>"
+      },{
+      type: 'danger',
+      allow_dismiss: true,
+      showProgressbar: false,
+      placement: {
+        from: 'top',
+        align: 'center'
+      },
+      mouse_over: null,
+      newest_on_top: true,
+      animate: {
+        enter: 'animated bounceIn',
+        exit: 'animated bounceOut',
+      },
+    });
+    var pageUrl = '/manager/org'
+    window.history.pushState("","",pageUrl);
+  }else if(qs["msg"]==2){
+    $.notify({
+      message: "<p class='font h5 text-center'><i class='glyphicon glyphicon-warning-sign'></i>&nbsp;<strong>:</strong> تم التحميل بنجاح </p>"
+      },{
+      type: 'success',
+      allow_dismiss: true,
+      showProgressbar: false,
+      placement: {
+        from: 'top',
+        align: 'center'
+      },
+      mouse_over: null,
+      newest_on_top: true,
+      animate: {
+        enter: 'animated bounceIn',
+        exit: 'animated bounceOut',
+      },
+    });
+    var pageUrl = '/manager/org'
+    window.history.pushState("","",pageUrl);
+  }
+
+
 });

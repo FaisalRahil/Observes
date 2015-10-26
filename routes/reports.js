@@ -213,7 +213,6 @@ var type = require('../type');
   });
   // this noOfLocaleObs // widght A4
   router.get('/noOfLocaleObs', function(req, res, next) {
-    console.log(office[1].office_name_ar);
     reportMgr.getAllNoOfLocaleObs(function(arr1,arr2,arr3,arr4,arr5,arr6){
       jsr.render({
         template: { 
@@ -296,7 +295,6 @@ var type = require('../type');
   // this obsByType // widght A4
   router.get('/obsByType/:type', function(req, res, next) {
     reportMgr.obsBytype(req.params.type,function(results){
-      console.log(results);
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
@@ -316,7 +314,6 @@ var type = require('../type');
   // this noOfLocaleObsEn // widght A4
   router.get('/noOfLocaleObsEn', function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(results){
-      console.log(results);
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObsEn.html"), "utf8"),

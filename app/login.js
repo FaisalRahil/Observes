@@ -39,7 +39,6 @@ module.exports = function (router) {
       req.session.id_user=user[0].id_user;
       req.session.username=user[0].user_name;
       req.session.id_office=user[0].id_office;
-      // logMgr.insertLog(user.iduser,"login","user",user.name+" has login",user.iduser,user.name);
       if(user[0].id_office < 0){
         res.redirect('../admin/org');
       }else{
@@ -48,11 +47,11 @@ module.exports = function (router) {
     });
   });
   // here if a user wants to logout of the app
-  // router.get('/logout',ensureAuthenticated, function(req, res) {
-  //   logMgr.insertLog(req.session.iduser,"logout","user",req.session.name+" has logout",req.session.iduser,req.session.name);
-  //   req.session.destroy();
-  //   res.redirect('/users/login');
-  // });
+  router.get('/logout',ensureAuthenticated, function(req, res) {
+    logMgr.insertLog(req.session.iduser,"logout","user",req.session.name+" has logout",req.session.iduser,req.session.name);
+    req.session.destroy();
+    res.redirect('/users/login');
+  });
   return router;
 }
 
@@ -85,5 +84,5 @@ function authenticate( user, userEnteredPassword, callback) {
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/users/login')
+  res.redirect('/')
 }

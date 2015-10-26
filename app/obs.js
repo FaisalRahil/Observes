@@ -90,6 +90,7 @@ exports.obsMgr = {
         if(err) {
           cb(err);
         } else {
+          result['id_o']=body['id_ob'];
           cb(result);
         }
       });
@@ -281,6 +282,17 @@ exports.obsMgr = {
 
   // end edit all obs
   // ////////////////////////////////////////////////////////
-
+  checkDir : function(id,cb){ //sort by organisaition type
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT * FROM  `observers` obs WHERE  obs.`status` =1  AND obs.`registration_org` = ? AND obs.`director`=1', [id], function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
   
 };
