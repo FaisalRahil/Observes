@@ -14,6 +14,20 @@ router.get('/adduser', function(req, res) {
   res.render('adduser', { title: 'اضافة مستخدم ',offices:office });
 });
 
+router.get('/edituser/:id', function(req, res) {
+  userMgr.getUserById(req.params.id,function(err,result){
+    console.log(result);
+    res.render('edituser', { title: 'تعديل مستخدم ',offices:office  });
+  });
+});
+
+/*    editObs_pass_nid  . */
+router.post('/user_name', function(req, res) {
+  console.log(req.body);
+  userMgr.user_name(req.body,function(err,result){
+    res.send(result);
+  });
+});
 router.post('/addUser', function(req, res) {
   userHelp.addUser(req.body, function (results){
     res.redirect('/adduser');

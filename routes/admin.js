@@ -33,6 +33,7 @@ router.post('/addOrg', function(req, res) {
 
 // bhuvhvihybuvbiobuo
 router.post('/addOb', function(req, res) {
+  console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
   
   type=req.body["type"];
   delete req.body["type"];

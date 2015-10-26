@@ -27,7 +27,21 @@ exports.userMgr = {
   },
   getUserById : function(id,cb){ //get all observers
     mysqlMgr.connect(function (conn) {
+      console.log(id);
       conn.query('SELECT * FROM `user` WHERE `id_user`=? ',id,  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  user_name : function(id,name,cb){ //get all observers
+    mysqlMgr.connect(function (conn) {
+      console.log("user in app");
+      conn.query(' UPDATE `user` SET `user_name`= ?  WHERE `id_user`= ? ',id,name,  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
