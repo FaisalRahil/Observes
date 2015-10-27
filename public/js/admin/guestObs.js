@@ -145,7 +145,6 @@ $(document).ready(function() {
     rules:{
       name:{
         required: true,
-        minlength : 10,
       },
       email:{
         required: true,
@@ -169,7 +168,6 @@ $(document).ready(function() {
     messages:{
       name:{
         required: "الرجاء إدخال أسم المراقب",
-        minlength : " الرجاء إدخال الأسم ثلاثي",
       },
       email:{
         required: "الرجاء إدخال الباريد الالكتروني",

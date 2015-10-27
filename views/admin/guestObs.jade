@@ -22,7 +22,7 @@ block content
             li
               a(href='#') بيانات المستخدم
             li
-              a(href='#') خروج
+              a(href='/logout') خروج
         li
           a(href='/reports') التقارير
         li
@@ -56,7 +56,7 @@ block content
               .form-group
                 input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
               .form-group
-                select#registration_org.form-control.selectpicker.show-tick(name="registration",data-show-subtext='true',data-size='5',data-live-search='true')
+                select#registration_org.form-control.selectpicker.show-tick(name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
                   option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
                   for org in orgs
                     option(value="#{org.id_org}") #{org.name_org}
@@ -75,7 +75,16 @@ block content
                 input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
               .form-group
                 input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
-              
+              input#type(name='type', type='hidden',value='2')
+
+              .row
+                .col-xs-8.col-md-8
+                  button#btnSubmit.btn.btn-success.btn-block(type='submit') تسجيــــل 
+                .col-xs-4.col-md-4
+                  button.btn.btn-default.btn-block(type='reset') إلغاء
+
+
+
   //- .col-sm-7.col-md-7.col-lg-7
   //-   .row
   //-     .panel.green-form.panel-success

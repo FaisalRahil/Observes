@@ -29,7 +29,8 @@ $(document).ready(function() {
     }, {
         field: 'gender',
         sortable:true,
-        title: 'الجنس'
+        title: 'الجنس',
+        formatter:gender
     }, {
         field: 'phone',
         sortable:true,
@@ -74,6 +75,15 @@ $(document).ready(function() {
     return  [
               '<button id="deleteObs" data-toggle="modal" href="#deleteObsModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
+  }
+
+  function gender(value, row, index) {
+    if(value==1){
+      var gender="ذكر";
+    }else{
+      var gender="أنثى";
+    }
+    return  [gender].join('');
   }
 
   /* Go to orgTable needs view or edit */

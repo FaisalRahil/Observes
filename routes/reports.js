@@ -10,8 +10,9 @@ var path = require("path");
 var nationality = require('../Nationality');
 var office = require('../office');
 var type = require('../type');
+var userHelpers = require('../app/userHelpers');
 
-  router.get('/', function(req, res) {
+  router.get('/', userHelpers.isRoot,function(req, res) {
     res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality});
   });
 
@@ -193,7 +194,7 @@ var type = require('../type');
   }
   ////////////////////////////////////////////////////////////////////////////  
 
-  router.get('/observers', function(req, res, next) {
+  router.get('/observers', userHelpers.isRoot,function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(results){
       jsr.render({
         template: { 
@@ -212,7 +213,7 @@ var type = require('../type');
     }); 
   });
   // this noOfLocaleObs // widght A4
-  router.get('/noOfLocaleObs', function(req, res, next) {
+  router.get('/noOfLocaleObs',userHelpers.isRoot, function(req, res, next) {
     reportMgr.getAllNoOfLocaleObs(function(arr1,arr2,arr3,arr4,arr5,arr6){
       jsr.render({
         template: { 
@@ -231,7 +232,7 @@ var type = require('../type');
   });
 
   // this noOfInternationalObs // widght A4
-  router.get('/noOfInternationalObs', function(req, res, next) {
+  router.get('/noOfInternationalObs', userHelpers.isRoot,function(req, res, next) {
     reportMgr.appNoOfInternationalObs(function(result){
       obj={};
       for( k in result){
@@ -257,7 +258,7 @@ var type = require('../type');
   });
 
   // this obsByNationality // widght A4
-  router.get('/obsByNationality/:nat', function(req, res, next) {
+  router.get('/obsByNationality/:nat',userHelpers.isRoot, function(req, res, next) {
     reportMgr.obsByNationality(req.params.nat,function(results){
       jsr.render({
         template: { 
@@ -277,7 +278,7 @@ var type = require('../type');
   });
 
   // this noOfInternationalObsEn // widght A4
-  router.get('/noOfInternationalObsEn', function(req, res, next) {
+  router.get('/noOfInternationalObsEn',userHelpers.isRoot, function(req, res, next) {
     jsr.render({
       template: {
         content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObsEn.html"), "utf8"),
@@ -293,7 +294,7 @@ var type = require('../type');
   });
 
   // this obsByType // widght A4
-  router.get('/obsByType/:type', function(req, res, next) {
+  router.get('/obsByType/:type',userHelpers.isRoot,function(req, res, next) {
     reportMgr.obsBytype(req.params.type,function(results){
       jsr.render({
         template: { 
@@ -312,7 +313,7 @@ var type = require('../type');
   });
 
   // this noOfLocaleObsEn // widght A4
-  router.get('/noOfLocaleObsEn', function(req, res, next) {
+  router.get('/noOfLocaleObsEn', userHelpers.isRoot,function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(results){
       jsr.render({
         template: { 
@@ -330,7 +331,7 @@ var type = require('../type');
   });
 
   // this statisticsOfficesByType // widght A4
-  router.get('/statisticsOfficesByType', function(req, res, next) {
+  router.get('/statisticsOfficesByType', userHelpers.isRoot,function(req, res, next) {
     reportMgr.statisticsOfficesByType(function(result){
       obj={};
       for( k in result){
@@ -357,7 +358,7 @@ var type = require('../type');
   });
 
   // this noOfWomenAndMen // normale A4
-  router.get('/noOfWomenAndMen', function(req, res, next) {
+  router.get('/noOfWomenAndMen', userHelpers.isRoot,function(req, res, next) {
     reportMgr.noOfWomenAndMen(function(results){
       jsr.render({
         template: { 
@@ -377,7 +378,7 @@ var type = require('../type');
     });
   });
   // this noOfWomenAndMen // normale A4
-  router.get('/noOfWomenAndMenEn', function(req, res, next) {
+  router.get('/noOfWomenAndMenEn', userHelpers.isRoot,function(req, res, next) {
     reportMgr.noOfWomenAndMen(function(results){
       jsr.render({
         template: { 
