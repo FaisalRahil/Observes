@@ -4,6 +4,25 @@ $(document).ready(function() {
   var defaults = {
     disabled: true,
   };
+  $.getJSON("/user_office", function( json ) {
+    var i = 0;
+    for(key in json){
+      var k = new Object({id : i,value : json[key].office_id, text : json[key].office_name_ar});
+      i++;
+      $.nat.push(k);
+    }
+      
+    $('#id_office').editable({
+        url: '/id_office',
+        source:$.nat,
+        pk: 1,
+        name: 'id_office',
+        validate: function(v) {
+          if(!v) return 'الرجاء اختيار صفة الموظف';
+        }
+    }); 
+       
+  });
 
   $.extend($.fn.editable.defaults, defaults);
   $("[name='discount_flag']").bootstrapSwitch('state', false);
@@ -22,77 +41,49 @@ $(document).ready(function() {
     }
   });
   
-  $('#name').editable({
-    url: '/admin/editObs_name/',
+  $('#first_name').editable({
+    url: '/first_name',
     type: 'text',
     pk: 1,
-    name: 'name',
-    title: 'Enter center name',
+    name: 'first_name',
+    title: 'Enter center first_name',
     validate: function(v) {
-      if(!v) return 'الرجاء ادخال اسم المراقب';
-      if(v.length<5) return "يجب أن يكون الاسم أكثر من 5 حروف";
+      if(!v) return 'الرجاء إدخال الأسم';
     }
   });
-  
-  $('#email').editable({
-    url: '/admin/editObs_email/',
+
+  $('#last_name').editable({
+    url: '/last_name',
     type: 'text',
     pk: 1,
-    name: 'email',
-    title: 'Enter center email',
-  });
-  
-  $('#phone_obs').editable({
-    url: '/admin/editObs_phone/',
-    type: 'text',
-    pk: 1,
-    name: 'phone_obs',
-    title: 'Enter center phone',
+    name: 'last_name',
+    title: 'Enter center last_name',
     validate: function(v) {
-      if(!v) return 'الرجاء ادخال رقم الهاتف';
-      if(v.length<10) return "يجب أن يكون رقم الهاتف على الاقل 10 ارقام";
+      if(!v) return 'الرجاء إدخال اللقب';
     }
   });
-  $.getJSON("/admin/nationality/", function( result ) {
-       i=0;
-        for(key in result){
-        var k = new Object({id : i,value : result[key].country_id, text : result[key].country_name});
-        i++;
-        $.nat.push(k);
-      }
-    $('#nationality').editable({
-        url: '/admin/editObs_nationality/',
-        source:$.nat,
-        pk: 1,
-        name: 'nationality',
-        validate: function(v) {
-          if(!v) return 'الرجاء اختيار الجنسية';
-        }
-    }); 
-  });
-  // $('#nationality').editable({
-  //   url: '/admin/editObs_nationality/',
-  //   type: 'text',
-  //   pk: 1,
-  //   name: 'nationality',
-  //   title: 'Enter center nationality'
-  // });
 
-  $('#director').editable({
-    url: '/admin/editObs_director/',
-    source:[
-      {value:0,text:"لا"},
-      {value:1,text:"نعم"}
-    ]
+  $('#password').editable({
+    url: '/password',
+    type: 'text',
+    pk: 1,
+    name: 'password',
+    title: 'Enter center password',
+    validate: function(v) {
+      if(!v) return 'الرجاء إدخال أسم المستخدم';
+    }
   });
 
-  $('#gender').editable({
-    url: '/admin/editObs_gender/',
-    source:[
-      {value:0,text:"أنثى"},
-      {value:1,text:"ذكر"}
-    ]
+  
+  $('#phone_no').editable({
+    url: '/phone_no',
+    type: 'text',
+    pk: 1,
+    name: 'phone_no',
+    title: 'Enter center phone_no',
+    validate: function(v) {
+      if(!v) return 'الرجاء إدخال رقم الهاتف';
+    }
   });
-
 
 });

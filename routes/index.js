@@ -15,16 +15,49 @@ router.get('/adduser', function(req, res) {
 });
 
 router.get('/edituser/:id', function(req, res) {
-  userMgr.getUserById(req.params.id,function(err,result){
-    console.log(result);
-    res.render('edituser', { title: 'تعديل مستخدم ',offices:office  });
+  userMgr.getUserById(req.params.id,function(result){
+    res.render('edituser', { title: 'تعديل مستخدم ',offices:office ,user:result[0]  });
   });
 });
 
-/*    editObs_pass_nid  . */
+/*    edit user name   . */
 router.post('/user_name', function(req, res) {
-  console.log(req.body);
-  userMgr.user_name(req.body,function(err,result){
+  userMgr.user_name(req.body,function(result){
+    res.send(result);
+  });
+});
+/*    edit user last_name   . */
+router.post('/last_name', function(req, res) {
+  userMgr.last_name(req.body,function(result){
+    console.log(result);
+    res.send(result);
+  });
+});
+/*    edit user firstname   . */
+router.post('/first_name', function(req, res) {
+  userMgr.first_name(req.body,function(result){
+    console.log(result);
+    res.send(result);
+  });
+});
+/*    edit user last_name   . */
+router.post('/password', function(req, res) {
+  userMgr.password(req.body,function(result){
+    console.log(result);
+    res.send(result);
+  });
+});
+/*    edit user last_name   . */
+router.post('/last_name', function(req, res) {
+  userMgr.last_name(req.body,function(result){
+    console.log(result);
+    res.send(result);
+  });
+});
+/*    edit user last_name   . */
+router.post('/phone_no', function(req, res) {
+  userMgr.phone_no(req.body,function(result){
+    console.log(result);
     res.send(result);
   });
 });
@@ -32,6 +65,17 @@ router.post('/addUser', function(req, res) {
   userHelp.addUser(req.body, function (results){
     res.redirect('/adduser');
   });
+});
+
+router.post('/id_office', function(req, res) {
+  userMgr.id_office(req.body,function(result){
+    console.log(result);
+    res.send(result);
+  });
+});
+router.get('/user_office', function(req, res) {
+  console.log(office);
+  res.send(office);
 });
 
 router.post('/checkUser',function(req, res) {
