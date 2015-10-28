@@ -114,9 +114,9 @@ var userHelpers = require('../app/userHelpers');
         }
       }
       if(allResults[i].gender == 0){
-        gender1 = "ذكـر";
-      }else{
         gender1 = "أنـثـى";
+      }else{
+        gender1 = "ذكـر";
       }
       html+= '<tr>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
