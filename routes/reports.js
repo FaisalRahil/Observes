@@ -144,12 +144,12 @@ var userHelpers = require('../app/userHelpers');
       <thead>\
         <tr style="border-top-style: solid; border-top-width: 1px;" >\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
         </tr>\
       </thead>\
