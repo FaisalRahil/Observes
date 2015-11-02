@@ -13,7 +13,8 @@ $(document).ready(function(){
       }
     },
   });
-  $("#reports").validate({
+
+  $("#report").validate({
     ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
       obsByType:{
@@ -26,5 +27,21 @@ $(document).ready(function(){
         custNotify("danger","خطأ","الرجاء اختيار بيانات المراقبين حسب النوع","warning-sign","bounceIn","bounceOut");
       }
     },
+  });
+  $('#natbtn').on('click', function (e) {
+    e.preventDefault();
+    var isvalidate=$("#reports").valid();
+    if(isvalidate){
+      var win = window.open("/reports/obsByNationality/"+$('#obsByNationality').val(), '_blank');
+      win.focus();
+    }
+  });
+  $('#typebtn').on('click', function (e) {
+    e.preventDefault();
+    var isvalidate=$("#report").valid();
+    if(isvalidate){
+      var win = window.open("/reports/obsByType/"+$('#obsByType').val(), '_blank');
+      win.focus();
+    }
   });
 });

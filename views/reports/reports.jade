@@ -41,19 +41,20 @@ block content
               | 
               span التقارير
       .panel-body
-        form.form#reports(accept-charset="utf-8", role="form")
-          .row
+        .row
+          form.form#reports(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
-              select.form-control.selectpicker(name="obsByNationality", data-live-search="true", data-size=5, data-style="btn-danger")
+              select#obsByNationality.form-control.selectpicker(name="obsByNationality", data-live-search="true", data-size=5, data-style="btn-danger")
                 option(value="", style='color:grey; display:none;') بيانات المراقبين حسب الجنسية
                 for nat in nationalities
                   option(value="#{nat.id}") #{nat.name}
         
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
-              button.btn.btn-danger.btn-block(type="submit") عرض
+              button#natbtn.btn.btn-danger.btn-block() عرض
               //- a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/obsByNationality/#{}", target="_blank") عرض
+          form.form#report(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
-              select.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
+              select#obsByType.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
                 option(value="", style='color:grey; display:none;') بيانات المراقبين حسب النوع
                 option(value="1") منظمة عالمية
                 option(value="2") ضيف
@@ -62,8 +63,8 @@ block content
                 option(value="5") إعلام محلي
                 option(value="6") وكيل
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
-              button.btn.btn-warning.btn-block(type="submit") عرض
-              //- a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/obsByType/#{}", target="_blank") عرض
+              button#typebtn.btn.btn-warning.btn-block() عرض
+            //- a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/obsByType/#{}", target="_blank") عرض
             .col-xs-6.col-lg-6(style="padding-top: 20px;")
               a.btn.btn-primary.btn-block(href="http://localhost:3003/reports/noOfLocaleObs", target="_blank") بيانات المراقبين المحليين حسب اللجان
             .col-xs-6.col-lg-6(style="padding-top: 20px;")

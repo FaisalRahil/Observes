@@ -260,6 +260,7 @@ var userHelpers = require('../app/userHelpers');
   // this obsByNationality // widght A4
   router.get('/obsByNationality/:nat',userHelpers.isRoot, function(req, res, next) {
     reportMgr.obsByNationality(req.params.nat,function(results){
+      console.log(results);
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByNationality.html"), "utf8"),
