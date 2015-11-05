@@ -139,6 +139,14 @@ $("#candidate").validate({
         required: "الرجاء ادخال رقم المترشح !",
       }  
     },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
           $(this).removeClass('animated shake');

@@ -22,9 +22,9 @@ block content
             li
               a(href='#') بيانات المستخدم
             li
-              a(href='#') خروج
+              a(href='/logout') خروج
         li
-          a(href='#') التقارير
+          a(href='/reports') التقارير
         li
           a(href='/admin/obs') المراقبين
         li
@@ -102,7 +102,7 @@ block content
               input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
             .form-group.col-sm-6.col-md-6.col-lg-6  
               | مدير  : 
-              input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox',checked)
+              input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
             .form-group
               input.form-control#phone(name='phone_obs', placeholder='رقم الهاتف', type='text')
             .form-group

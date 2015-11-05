@@ -135,6 +135,15 @@ $("#natOrg").validate({
         required: "الرجاء إدخال عنوان المنظمه ",
       },
     },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      console.log(element);
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
           $(this).removeClass('animated shake');

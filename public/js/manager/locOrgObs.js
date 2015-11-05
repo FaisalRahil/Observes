@@ -97,9 +97,19 @@ $(document).ready(function() {
   });
 
   // $(':checkbox').checkboxpicker();
+  $('#director').prop('disabled',true);
   $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
+      onLabel:"نعم", offLabel:"لا"
+    });
+  $('#registration_org').on('change',function(){
+      $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+        if(result){
+          $('#director').prop('disabled',false);
+        }else{
+          $('#director').prop('disabled',true);
+        }
+      });
+    });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
@@ -143,6 +153,19 @@ $(document).ready(function() {
       registration_no:{
         required: "الرجاء إدخال الرقم اﻹشهار !",
       }  
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
+    highlight: function(element) {
+      $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $(this).removeClass('animated shake');
+      });
     },
   });
 

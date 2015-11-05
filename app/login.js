@@ -48,9 +48,8 @@ module.exports = function (router) {
   });
   // here if a user wants to logout of the app
   router.get('/logout',ensureAuthenticated, function(req, res) {
-    logMgr.insertLog(req.session.iduser,"logout","user",req.session.name+" has logout",req.session.iduser,req.session.name);
     req.session.destroy();
-    res.redirect('/users/login');
+    res.redirect('/');
   });
   return router;
 }

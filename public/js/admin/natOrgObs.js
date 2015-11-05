@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $('#director').prop('disabled',true);
   $.nat = new Array();
   $.get('/admin/nationality/', function(result){
       i=0;
@@ -118,25 +119,23 @@ $(document).ready(function() {
   }
   // $(':checkbox').checkboxpicker();
   $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
+    onLabel:"نعم", offLabel:"لا"
   });
-  // $.validator.addMethod("checkDir", function (value) {
-  //   alert($('#registration_org').val());
-  //   if(!$('#director').is(':checked')){
-  //     $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
-  //       alert(result);
-  //       return result;
-  //     });
-  //   }else{
-  //     return true;
-  //   }
-  // });
+
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
   });
 
-
+  $('#registration_org').on('change',function(){
+    $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+      if(result){
+        $('#director').prop('disabled',false);
+      }else{
+        $('#director').prop('disabled',true);
+      }
+    });
+  });
 ////////////////////////////
 
   $("#natOrgObsId").validate({
@@ -163,9 +162,6 @@ $(document).ready(function() {
       pass_nid:{
         required : true,
       },
-      director:{
-        checkDir: true
-      },
     },
     messages:{
       name:{
@@ -189,20 +185,10 @@ $(document).ready(function() {
       pass_nid:{
         required: "الرجاء إدخال رقم الاشهار",
       },
-      director:{
-        checkDir: "هذا البريد الالكتروني تم تسجيله من قبل الرجاء اختيار بريد آخر"
-
-      }
     },
     errorClass: 'custom-error',
     errorPlacement: function (error, element) {
-      console.log(element);
       if ($(element).is('select')) {
-          element.next().after(error);
-      } else {
-          error.insertAfter(element);
-      }
-      if ($(element).is('checkbox')) {
           element.next().after(error);
       } else {
           error.insertAfter(element);

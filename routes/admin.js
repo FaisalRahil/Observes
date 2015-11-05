@@ -6,19 +6,16 @@ var trnMgr = require('../app/transfer').trnMgr;
 var nationality = require('../country.json');
 var logMgr = require('../app/log').repoMgr;
 var typeO=['','natOrg','guest','natMedia'];
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('admin/admin');
-});
+var userHelpers = require('../app/userHelpers');
 
 /* GET home page. */
-router.get('/moveOrg', function(req, res) {
+router.get('/moveOrg',userHelpers.isRoot, function(req, res) {
   orgMgr.getOrgs(function(org){
     res.render('admin/moveOrg',{ title: 'نقل المراقبين',orgs:org});
   });
 });
 
-router.post('/moveOrg', function(req, res) {
+router.post('/moveOrg',userHelpers.isRoot, function(req, res) {
   trnMgr.addTrn(req.body,function(result){
     res.redirect('/admin/moveOrg');
   });
@@ -30,9 +27,10 @@ router.get('/nationality', function(req, res) {
 
 ///////////////////////////////////////////
 
-router.post('/addOrg', function(req, res) {
+router.post('/addOrg',userHelpers.isRoot, function(req, res) {
+  req.body.id_office=req.session.id_office;
   orgMgr.addOrg(req.body, function (err,results){
-    logMgr.insertLog(1,"add","organisaition"," add new organisaition "+typeO[req.body["type"]]+" name : "+req.body['name_org'],results.id_o,req.body['name_org']);
+    logMgr.insertLog(req.session.id_user,"add","organisaition"," add new organisaition "+typeO[req.body["type"]]+" name : "+req.body['name_org'],results.id_o,req.body['name_org']);
     if (req.body["type"] == 1) {
       res.redirect('org/natOrg');
     } else if (req.body["type"] == 2){
@@ -44,29 +42,24 @@ router.post('/addOrg', function(req, res) {
 });
 
 // bhuvhvihybuvbiobuo
-router.post('/addOb', function(req, res) {
-  console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-  
+router.post('/addOb',userHelpers.isRoot, function(req, res) {
+  req.body.id_office=req.session.id_office;
   type=req.body["type"];
   delete req.body["type"];
-  req.body['id_office']=1;
-  // req.body['nationality']=1;
-  
   if(req.body['gender']){
     req.body['gender']=0;
   }
   else{
     req.body['gender']=1;
   }
-  
   if(req.body['director']){
-    req.body['director']=0;
-  }
-  else{
     req.body['director']=1;
   }
+  else{
+    req.body['director']=0;
+  }
   obsMgr.addOb(req.body,function(result){
-    logMgr.insertLog(1,"add","observers"," add new observer name : "+req.body['name'],result.id_o,req.body['name']);
+    logMgr.insertLog(req.session.id_user,"add","observers"," add new observer name : "+req.body['name'],result.id_o,req.body['name']);
     if (type == 1) {
       res.redirect('obs/natOrgObs');
     } else if (type == 2){
@@ -125,19 +118,19 @@ router.get('/getOrgsAdmin', function(req, res) {
 });
 
 //******************************************
-router.get('/org/natOrg', function(req, res) {
+router.get('/org/natOrg',userHelpers.isRoot, function(req, res) {
     res.render('admin/natOrg',{ title: 'المنظمات'});
 });
 
 /* GET home page. */
-router.get('/org', function(req, res) {
+router.get('/org',userHelpers.isRoot, function(req, res) {
     res.render('admin/org',{ title: 'المنظمات' });
   });
 
 //////////////////////////////////////////////
 
 /* GET home page. */
-router.get('/obs', function(req, res) {
+router.get('/obs',userHelpers.isRoot, function(req, res) {
   res.render('admin/obs',{ title: 'مراقبين'});
 });
 
@@ -154,53 +147,53 @@ router.get('/getAllObsAndNameOrg',function(req , res ){
 });
 
 /* GET home page. */
-router.get('/report', function(req, res) {
+router.get('/report',userHelpers.isRoot, function(req, res) {
   res.render('admin/report');
 });
 
 /* GET home page. */
-router.get('/org/natMedia', function(req, res) {
+router.get('/org/natMedia',userHelpers.isRoot, function(req, res) {
   res.render('admin/natMedia');
 });
 
 /* GET home page. */
-router.get('/org/guest', function(req, res) {
+router.get('/org/guest',userHelpers.isRoot, function(req, res) {
   res.render('admin/guest');
 });
 
 /* GET home page. */
-router.get('/obs/natOrg', function(req, res) {
+router.get('/obs/natOrg',userHelpers.isRoot, function(req, res) {
   res.render('admin/natOrg');
 });
 
 /* GET home page. */
-router.get('/obs/natMedia', function(req, res) {
+router.get('/obs/natMedia',userHelpers.isRoot, function(req, res) {
   res.render('admin/natMedia');
 });
 
 /* GET home page. */
-router.get('/obs/guest', function(req, res) {
+router.get('/obs/guest',userHelpers.isRoot, function(req, res) {
   res.render('admin/guest');
 });
 /////////////////////////////////////////////////
 // start
 
   /* GET home page. */
-  router.get('/obs/natOrgObs', function(req, res) {
+  router.get('/obs/natOrgObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(1,function(result){
       res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality});
     })
   });
 
   /* GET home page. */
-  router.get('/obs/guestObs', function(req, res) {
+  router.get('/obs/guestObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(2,function(result){
       res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality});
     })
   });
 
   /* GET home page. */
-  router.get('/obs/natMediaObs', function(req, res) {
+  router.get('/obs/natMediaObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(3,function(result){
       res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality});
     })
@@ -210,58 +203,58 @@ router.get('/obs/guest', function(req, res) {
 //////////////////////////////////////////////////////////////////
 // start edit 
   /* GET home page. */
-  router.post('/editOrg_registration_no', function(req, res) {
-    logMgr.addLog(req.body,1,'organisaition','id_org',function(err,text){
+  router.post('/editOrg_registration_no', userHelpers.isRoot,function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'organisaition','id_org',function(err,text){
       orgMgr.editOrg_registration_no(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","organisaition",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","organisaition",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
   /* GET home page. */
-  router.post('/editOrg_name_org', function(req, res) {
-    logMgr.addLog(req.body,1,'organisaition','id_org',function(err,text){
+  router.post('/editOrg_name_org',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'organisaition','id_org',function(err,text){
       orgMgr.editOrg_name_org(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","organisaition",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","organisaition",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
   /* GET home page. */
-  router.post('/editOrg_name_director', function(req, res) {
-    logMgr.addLog(req.body,1,'organisaition','id_org',function(err,text){
+  router.post('/editOrg_name_director',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'organisaition','id_org',function(err,text){
       orgMgr.editOrg_name_director(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","organisaition",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","organisaition",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
   /* GET home page. */
-  router.post('/editOrg_email', function(req, res) {
-    logMgr.addLog(req.body,1,'organisaition','id_org',function(err,text){
+  router.post('/editOrg_email',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'organisaition','id_org',function(err,text){
       orgMgr.editOrg_email(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","organisaition",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","organisaition",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
-  router.post('/editOrg_address', function(req, res) {
-    logMgr.addLog(req.body,1,'organisaition','id_org',function(err,text){
+  router.post('/editOrg_address',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'organisaition','id_org',function(err,text){
       orgMgr.editOrg_address(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","organisaition",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","organisaition",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
-  router.post('/editOrg_phone', function(req, res) {
-    logMgr.addLog(req.body,1,'organisaition','id_org',function(err,text){
+  router.post('/editOrg_phone',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'organisaition','id_org',function(err,text){
       orgMgr.editOrg_phone(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","organisaition",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","organisaition",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
@@ -271,7 +264,7 @@ router.get('/obs/guest', function(req, res) {
 // start edit methods org
 
   /* GET home page. */
-  router.get('/editOrgs/:id', function(req, res) {
+  router.get('/editOrgs/:id',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg_Id(req.params.id,function(err,result){
       if(result[0].type==1){
         res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
@@ -284,106 +277,78 @@ router.get('/obs/guest', function(req, res) {
     });
   });
 
-  // router.get('/editOrg/:id', function(req, res) {
-  //   orgMgr.getOrg_Id(req.params.id,function(err,result){
-  //     res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
-  //   });
-  // });
-
-  // /* GET home page. */
-  // router.get('/editMedia/:id', function(req, res) {
-  //   orgMgr.getOrg_Id(req.params.id,function(err,result){
-  //     res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
-  //   });
-  // });
-
-
-  // /* GET home page. */
-  // router.get('/editGuest/:id', function(req, res) {
-  //   orgMgr.getOrg_Id(req.params.id,function(err,result){
-  //     res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
-  //   });
-  // });
-
-// end edit methods org
-////////////////////////////////////////////
-
-// ///////////////////////////////////////////////////
-// ***************************************************
-// start
-
   /* Edit general observers . */
-  router.get('/editObs/:id', function(req, res) {
+  router.get('/editObs/:id',userHelpers.isRoot, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
       res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-inverse'});
     });
   });
 
   /*    editObs_pass_nid  . */
-  router.post('/editObs_pass_nid', function(req, res) {
-    logMgr.addLog(req.body,1,'observers','id_ob',function(err,text){
+  router.post('/editObs_pass_nid',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'observers','id_ob',function(err,text){
       obsMgr.editObs_pass_nid(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","observers",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","observers",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
   /*    editObs_name  . */
-  router.post('/editObs_name', function(req, res) {
-    logMgr.addLog(req.body,1,'observers','id_ob',function(err,text){
+  router.post('/editObs_name',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'observers','id_ob',function(err,text){
       obsMgr.editObs_name(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","observers",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","observers",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
   /*    editObs_email  . */
-  router.post('/editObs_email', function(req, res) {
-    logMgr.addLog(req.body,1,'observers','id_ob',function(err,text){
+  router.post('/editObs_email',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'observers','id_ob',function(err,text){
       obsMgr.editObs_email(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","observers",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","observers",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
   /*   editObs_phone  . */
-  router.post('/editObs_phone', function(req, res) {
-    logMgr.addLog(req.body,1,'observers','id_ob',function(err,text){
+  router.post('/editObs_phone',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'observers','id_ob',function(err,text){
       obsMgr.editObs_phone_obs(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","observers",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","observers",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
     /*   editObs_nationality  . */
-  router.post('/editObs_nationality', function(req, res) {
-    logMgr.addLog(req.body,1,'observers','id_ob',function(err,text){
+  router.post('/editObs_nationality',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'observers','id_ob',function(err,text){
       obsMgr.editObs_nationality(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","observers",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","observers",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
     /*   editObs_director  . */
-  router.post('/editObs_director', function(req, res) {
-    logMgr.addLog(req.body,1,'observers','id_ob',function(err,text){
+  router.post('/editObs_director',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'observers','id_ob',function(err,text){
       obsMgr.editObs_director(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","observers",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","observers",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
   });
 
     /*   editObs_gender  . */
-  router.post('/editObs_gender', function(req, res) {
-    logMgr.addLog(req.body,1,'observers','id_ob',function(err,text){
+  router.post('/editObs_gender',userHelpers.isRoot, function(req, res) {
+    logMgr.addLog(req.body,req.session.id_user,'observers','id_ob',function(err,text){
       obsMgr.editObs_gender(req.body,function(err,result){
-        logMgr.insertLog(1,"edit","observers",text,req.body.pk,req.body.value);
+        logMgr.insertLog(req.session.id_user,"edit","observers",text,req.body.pk,req.body.value);
         res.send(result);
       });
     });
@@ -398,21 +363,21 @@ router.get('/obs/guest', function(req, res) {
 // Start
 
   /* GET home page. */
-  router.get('/editNatMediaObs/:id', function(req, res) {
+  router.get('/editNatMediaObs/:id',userHelpers.isRoot, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
       res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-orange'});
     });
   });
 
   /* GET home page. */
-  router.get('/editNatOrgObs/:id', function(req, res) {
+  router.get('/editNatOrgObs/:id',userHelpers.isRoot, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
       res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-red'});
     });
   });
   
   /* GET home page. */
-  router.get('/editGuestObs/:id', function(req, res) {
+  router.get('/editGuestObs/:id',userHelpers.isRoot, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
       res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-green'});
     });
@@ -423,20 +388,20 @@ router.get('/obs/guest', function(req, res) {
 // /////////////////////////////////////////////////////////
 
 /* GET home page. */
-router.get('/delObs/:id', function(req, res) {
+router.get('/delObs/:id',userHelpers.isRoot, function(req, res) {
   obsMgr.delObs(req.params.id,function(result){
     logMgr.getQuery(req.params.id,"observers","id_ob",function(resultq){
-      logMgr.insertLog(1,"delete","observers"," delete observers ",req.params.id,resultq[0].name);
+      logMgr.insertLog(req.session.id_user,"delete","observers"," delete observers ",req.params.id,resultq[0].name);
       res.send('result');  
     });
   })
 });
 
 /* GET home page. */
-router.get('/delOrg/:id', function(req, res) {
+router.get('/delOrg/:id',userHelpers.isRoot, function(req, res) {
   orgMgr.delOrg(req.params.id,function(result){
     logMgr.getQuery(req.params.id,"organisaition","id_org",function(resultq){
-      logMgr.insertLog(1,"delete","organisaition"," delete organisaition ",req.params.id,resultq[0].name_org);
+      logMgr.insertLog(req.session.id_user,"delete","organisaition"," delete organisaition ",req.params.id,resultq[0].name_org);
       res.send('result');  
     });
     
@@ -465,7 +430,7 @@ router.get('/getNatMediaObs', function(req, res) {
   })
 });
 
-router.get('/checkDir/:id', function(req, res) {
+router.get('/checkDir/:id',userHelpers.isRoot, function(req, res) {
   obsMgr.checkDir(req.params.id,function(result){
     if(result.length>0){
       res.send(false);

@@ -23,13 +23,13 @@ block content
             li
               a(href='#') بيانات المستخدم
             li
-              a(href='#') خروج
+              a(href='/logout') خروج
         li
-          a(href='#') التقارير
+          a(href='/reports') التقارير
         li
-          a(href='/manager/obs') المراقبين
+          a(href='/admin/obs') المراقبين
         li
-          a(href='/manager/org') الـمنظمات 
+          a(href='/admin/org') الـمنظمات 
   
   .col-md-8.col-md-offset-2(style="padding-top:5%")
     .panel.panel-primary
@@ -44,13 +44,13 @@ block content
         form.form#reports(accept-charset="utf-8", role="form")
           .row
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
-              select.form-control.selectpicker(name="obsByNationality", data-live-search="true", data-size=5, data-style="btn-danger")
+              select#nat.form-control.selectpicker(name="obsByNationality", data-live-search="true", data-size=5, data-style="btn-danger")
                 option(value="", style='color:grey; display:none;') بيانات المراقبين حسب الجنسية
                 for nat in nationalities
                   option(value="#{nat.id}") #{nat.name}
         
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
-              button.btn.btn-danger.btn-block(type="submit") عرض
+              button#view.btn.btn-danger.btn-block(type="button") عرض
               //- a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/obsByNationality/#{}", target="_blank") عرض
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")

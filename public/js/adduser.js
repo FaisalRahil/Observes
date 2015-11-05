@@ -70,6 +70,19 @@ $(document).ready(function(){
       id_office: {
         required: "الرجاء الاختيار ",
       }
-    }
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
+    highlight: function(element) {
+      $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $(this).removeClass('animated shake');
+      });
+    },
   });
 });

@@ -27,4 +27,8 @@ $(document).ready(function(){
       }
     },
   });
+    $('#view').on('input', function(){
+      window.location.assign("http://localhost:3003/reports?obsByNationality/'"+(nat).value+"');
+    });
+
 });

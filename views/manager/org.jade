@@ -22,7 +22,7 @@ block content
             li
               a(href='#') بيانات المستخدم
             li
-              a(href='#') خروج
+              a(href='/logout') خروج
         li
           a(href='#') التقارير
         li
@@ -51,20 +51,17 @@ block content
                 | المنظمات المحلية
               p
             .col-xs-6.col-sm-6.col-md-6.col-lg-6  
-              a.btn-lg.btn.btn-info.btn-block(href="/", role="button")
-                span.glyphicon.glyphicon-th
+              a.btn.btn-primary.btn-lg.btn-block(href="/manager/getToSer", role="button")
+                span.glyphicon.glyphicon-th-list
                 br
-                | مـــــثـال
+                | تحمـــــــيل البيـــــنات
               p
               a.btn-lg.btn.btn-success.btn-block(href="/manager/org/locMedia", role="button")
                 span.glyphicon.glyphicon-user
                 br
                 | الاعلام المحلي
-              p
-          br
-          a.btn.btn-primary.btn-lg.btn-block(href="/manager/getToSer", role="button")
-            span.glyphicon.glyphicon-th-list
-            | تحمـــــــيل البيـــــنات
+
+          
   .row
     .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
       .panel.panel-primary

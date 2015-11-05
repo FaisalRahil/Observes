@@ -117,9 +117,19 @@ $(document).ready(function() {
 
 
   // $(':checkbox').checkboxpicker();
+  $('#director').prop('disabled',true);
   $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
+      onLabel:"نعم", offLabel:"لا"
+    });
+  $('#registration_org').on('change',function(){
+      $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+        if(result){
+          $('#director').prop('disabled',false);
+        }else{
+          $('#director').prop('disabled',true);
+        }
+      });
+    });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
@@ -135,7 +145,6 @@ $(document).ready(function() {
     rules:{
       name:{
         required: true,
-        minlength : 10,
       },
       email:{
         required: true,
@@ -159,7 +168,6 @@ $(document).ready(function() {
     messages:{
       name:{
         required: "الرجاء إدخال أسم المراقب",
-        minlength : " الرجاء إدخال الأسم ثلاثي",
       },
       email:{
         required: "الرجاء إدخال الباريد الالكتروني",
