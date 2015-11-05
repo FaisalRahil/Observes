@@ -13,7 +13,8 @@ $(document).ready(function(){
       }
     },
   });
-  $("#reports").validate({
+
+  $("#report").validate({
     ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
       obsByType:{
@@ -27,8 +28,21 @@ $(document).ready(function(){
       }
     },
   });
-    $('#view').on('input', function(){
-      window.location.assign("http://localhost:3003/reports?obsByNationality/'"+(nat).value+"');
-    });
-
+  $('#natbtn').on('click', function (e) {
+    e.preventDefault();
+    var isvalidate=$("#reports").valid();
+    if(isvalidate){
+      alert($('#obsByNationality').val());
+      var win = window.open("/reports/obsByNationality/"+$('#obsByType').val(), '_blank');
+      win.focus();
+    }
+  });
+  $('#typebtn').on('click', function (e) {
+    e.preventDefault();
+    var isvalidate=$("#report").valid();
+    if(isvalidate){
+      var win = window.open("/reports/obsByType/"+$('#obsByType').val(), '_blank');
+      win.focus();
+    }
+  });
 });

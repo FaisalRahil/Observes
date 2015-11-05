@@ -114,9 +114,9 @@ var userHelpers = require('../app/userHelpers');
         }
       }
       if(allResults[i].gender == 0){
-        gender1 = "ذكـر";
-      }else{
         gender1 = "أنـثـى";
+      }else{
+        gender1 = "ذكـر";
       }
       html+= '<tr>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
@@ -144,12 +144,12 @@ var userHelpers = require('../app/userHelpers');
       <thead>\
         <tr style="border-top-style: solid; border-top-width: 1px;" >\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
         </tr>\
       </thead>\
@@ -260,6 +260,7 @@ var userHelpers = require('../app/userHelpers');
   // this obsByNationality // widght A4
   router.get('/obsByNationality/:nat',userHelpers.isRoot, function(req, res, next) {
     reportMgr.obsByNationality(req.params.nat,function(results){
+      console.log(results);
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByNationality.html"), "utf8"),
