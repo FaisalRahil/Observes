@@ -13,7 +13,8 @@ var type = require('../type');
 var userHelpers = require('../app/userHelpers');
 
   router.get('/', userHelpers.isRoot,function(req, res) {
-    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality});
+    console.log(office);
+    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality,office:office});
   });
 
   // ////////////////////////////////////////////////////////////////////////
@@ -297,19 +298,23 @@ var userHelpers = require('../app/userHelpers');
   // this obsByType // widght A4
   router.get('/obsByType/:type',userHelpers.isRoot,function(req, res, next) {
     reportMgr.obsBytype(req.params.type,function(results){
-      jsr.render({
-        template: { 
-          content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
-          phantom:{
-            orientation: "landscape",
+      if(results.length>0){
+        jsr.render({
+          template: { 
+            content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
+            phantom:{
+              orientation: "landscape",
+            },
+            recipe: "phantom-pdf",
+            helpers:obsBytype.toString()
           },
-          recipe: "phantom-pdf",
-          helpers:obsBytype.toString()
-        },
-        data:{allResults:results}
-      }).then(function (response) {
-        response.result.pipe(res);
-      });
+          data:{allResults:results}
+        }).then(function (response) {
+          response.result.pipe(res);
+        });
+      }else{
+        res.redirect('/reports?msg=1');
+      }
     });
   });
 
@@ -393,6 +398,35 @@ var userHelpers = require('../app/userHelpers');
         },
           data:{allResults:results}
         // data:obj
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
+    });
+  });
+
+
+  router.get('/statisticsOfficesByTypeGender', userHelpers.isRoot,function(req, res, next) {
+    reportMgr.statisticsOfficesByType(function(result){
+      obj={};
+      for( k in result){
+        if(obj[result[k].id_office]==undefined){
+          obj[result[k].id_office]=[];
+        }
+        if(obj[result[k].id_office][result[k].type]==undefined){
+          obj[result[k].id_office][result[k].type]=[];
+          obj[result[k].id_office][result[k].type].push(result[k].num);
+        }
+      }
+      var now = new Date();
+      var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByTypeGender.html"), "utf8"),
+
+          recipe: "phantom-pdf",
+          helpers:statisticsOfficesByType.toString()
+        },
+        data:{offic:office,result:obj,date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });

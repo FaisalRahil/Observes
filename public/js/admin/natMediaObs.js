@@ -112,7 +112,7 @@ $(document).ready(function() {
 
   function nationality(value, row, index) {
     return  [
-            $.nat[value-1].text.country_name
+            $.nat[value-1].text.name
           ].join('');
   }
   // $(':checkbox').checkboxpicker();
@@ -149,7 +149,7 @@ $(document).ready(function() {
         required: true,
         email: true,
       },
-      phone:{
+      phone_obs:{
         required: true,
         minlength: 10,
         number: true,
@@ -162,6 +162,7 @@ $(document).ready(function() {
       },
       pass_nid:{
         required : true,
+        maxlength: 13,
       },
     },
     messages:{
@@ -172,7 +173,7 @@ $(document).ready(function() {
         required: "الرجاء إدخال الباريد الالكتروني",
         email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
       },
-      phone:{
+      phone_obs:{
         required: "يجب إدخال رقم الهاتف",
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
@@ -184,7 +185,8 @@ $(document).ready(function() {
         required: "يجب إختيار الجنسية",
       },
       pass_nid:{
-        required: "الرجاء إدخال رقم الجواز ",
+        required: "الرجاء إدخال رقم الهوية ",
+        maxlength:"هذا الحقل لا يسمح بادخال اكثر من 13 الرمز"
       },
     },
     errorClass: 'custom-error',

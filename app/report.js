@@ -228,7 +228,7 @@ exports.reportMgr = {
 
   noOfWomenAndMen : function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT COUNT( * ) AS man FROM  `observers` obs WHERE  `obs`.`gender` =1 LIMIT 0 , 30; SELECT COUNT( * ) AS woman FROM  `observers` obs WHERE  `obs`.`gender` =0 LIMIT 0 , 30;',function(err, result) {
+      conn.query('SELECT COUNT( * ) AS man FROM  `observers` obs WHERE  `obs`.`gender` =1 AND `obs`.`status`=1 ; SELECT COUNT( * ) AS woman FROM  `observers` obs WHERE  `obs`.`gender` =0 AND `obs`.`status`=1;',function(err, result) {
           conn.release();
           if(err) {
             util.log(err);
@@ -259,6 +259,18 @@ exports.reportMgr = {
           } else {
             cb(result);
           }
+      });
+    });
+  },
+  statisticsOfficesByTypeGender :function(cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office`,`obs`.`gender` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `obs`.`id_office`<> -1 group by `obs`.`id_office`,`org`.`type`,`obs`.`gender`', function(err, result) {
+         conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
       });
     });
   },

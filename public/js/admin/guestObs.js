@@ -111,7 +111,7 @@ $(document).ready(function() {
   function nationality(value, row, index) {
     console.log($.nat);
     return  [
-            $.nat[value-1].text.country_name
+            $.nat[value-1].text.name
           ].join('');
   }
 
@@ -163,6 +163,7 @@ $(document).ready(function() {
       },
       pass_nid:{
         required : true,
+        maxlength: 13,
       },
     },
     messages:{
@@ -170,8 +171,8 @@ $(document).ready(function() {
         required: "الرجاء إدخال أسم المراقب",
       },
       email:{
-        required: "الرجاء إدخال الباريد الالكتروني",
-        email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
+        required: "الرجاء إدخال البريد الالكتروني",
+        email: "يجب أن تكون صيغة البريد الالكتروني صحيحه",
       },
       phone_obs:{
         required: "يجب إدخال رقم الهاتف",
@@ -185,7 +186,8 @@ $(document).ready(function() {
         required: "الرجاء إختيار الجنسية",
       },
       pass_nid:{
-        required: "الرجاء إدخال رقم جواز السفر ",
+        required: "الرجاء إدخال رقم الهوية ",
+        maxlength:"هذا الحقل لا يسمح بادخال اكثر من 13 الرمز"
       },
     },
     errorClass: 'custom-error',
