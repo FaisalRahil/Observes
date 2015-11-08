@@ -84,6 +84,7 @@ exports.obsMgr = {
   addOb : function(body,cb){
     mysqlMgr.connect(function (conn) {
       body['id_ob']=new Date().getTime();
+      console.log(body);
       conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
         conn.release();
         if(err) {

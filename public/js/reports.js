@@ -32,7 +32,8 @@ $(document).ready(function(){
     e.preventDefault();
     var isvalidate=$("#reports").valid();
     if(isvalidate){
-      var win = window.open("/reports/obsByNationality/"+$('#obsByNationality').val(), '_blank');
+      alert($('#obsByNationality').val());
+      var win = window.open("/reports/obsByNationality/"+$('#obsByType').val(), '_blank');
       win.focus();
     }
   });

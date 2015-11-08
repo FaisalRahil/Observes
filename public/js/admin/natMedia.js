@@ -17,11 +17,11 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم المنظمه'
+          title: ' المنظمه'
       }, {
           field: 'name_director',
           sortable:true,
-          title: 'اسم الرئيس'
+          title: ' المدير '
       }, {
           field: 'address',
           sortable:true,
@@ -33,7 +33,7 @@ $(document).ready(function() {
       }, {
           field: 'email',
           sortable:true,
-          title: 'الباريد الالكتروني'
+          title: 'البريد الالكتروني'
       }, {
           field: 'phone',
           sortable:true,
