@@ -266,7 +266,7 @@ router.post('/addObs',userHelpers.Login, function(req, res) {
   type=req.body["Type"];
   delete req.body["Type"];
   req.body.id_office=req.session.id_office;
-  req.body['nationality']=210;
+  req.body['nationality']=113;
   if(req.body['gender']){
     req.body['gender']=0;
   }

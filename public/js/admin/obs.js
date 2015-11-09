@@ -1,4 +1,13 @@
 $(document).ready(function() {
+  $.nat = new Array();
+  $.get('/admin/nationality/', function(result){
+      i=0;
+      for(key in result){
+      var k = new Object({id : i,value : key, text : result[key]});
+      i++;
+      $.nat.push(k);
+    }
+  }); 
   $('#table').bootstrapTable({
     method: 'get',
     url: '/admin/getAllObsAndNameOrg',
@@ -25,7 +34,8 @@ $(document).ready(function() {
     }, {
         field: 'nationality',
         sortable:true,
-        title: 'الجنسية'
+        title: 'الجنسية',
+        formatter: nationality
     }, {
         field: 'gender',
         sortable:true,
@@ -75,6 +85,11 @@ $(document).ready(function() {
     return  [
               '<button id="deleteObs" data-toggle="modal" href="#deleteObsModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
+  }
+  function nationality(value, row, index) {
+    return  [
+            $.nat[value-1].text.name
+          ].join('');
   }
   function gender(value, row, index) {
     if(value==1){
