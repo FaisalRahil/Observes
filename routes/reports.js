@@ -13,7 +13,7 @@ var type = require('../type');
 var userHelpers = require('../app/userHelpers');
 
   router.get('/', userHelpers.isRoot,function(req, res) {
-    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality,office:office});
+    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality,office:office,user:req.session.id_user});
   });
 
   // ////////////////////////////////////////////////////////////////////////
