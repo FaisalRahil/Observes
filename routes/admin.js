@@ -267,11 +267,11 @@ router.get('/obs/guest',userHelpers.isRoot, function(req, res) {
   router.get('/editOrgs/:id',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg_Id(req.params.id,function(err,result){
       if(result[0].type==1){
-        res.render('admin/editOrg',{ title: 'المنظمات' ,org:result});
+        res.render('admin/editOrg',{ title: 'المنظمات' ,org:result,user:req.session.id_user});
       }else if(result[0].type==2){
-        res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result});
+        res.render('admin/editGuest',{ title: 'المنظمات' ,guest:result,user:req.session.id_user});
       }else{
-        res.render('admin/editMedia',{ title: 'المنظمات' ,media:result});
+        res.render('admin/editMedia',{ title: 'المنظمات' ,media:result,user:req.session.id_user});
       }
       
     });
@@ -365,21 +365,21 @@ router.get('/obs/guest',userHelpers.isRoot, function(req, res) {
   /* GET home page. */
   router.get('/editNatMediaObs/:id',userHelpers.isRoot, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
-      res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-orange'});
+      res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-orange',user:req.session.id_user});
     });
   });
 
   /* GET home page. */
   router.get('/editNatOrgObs/:id',userHelpers.isRoot, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
-      res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-red'});
+      res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-red',user:req.session.id_user});
     });
   });
   
   /* GET home page. */
   router.get('/editGuestObs/:id',userHelpers.isRoot, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
-      res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-green'});
+      res.render('admin/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-green',user:req.session.id_user});
     });
   });
 
