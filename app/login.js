@@ -40,7 +40,7 @@ module.exports = function (router) {
       req.session.username=user[0].user_name;
       req.session.id_office=user[0].id_office;
       if(user[0].id_office < 0){
-        res.redirect('../admin/org');
+        res.redirect('../adminOrManager');
       }else{
         res.redirect('../manager/org');
       }

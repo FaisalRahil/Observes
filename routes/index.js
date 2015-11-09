@@ -15,6 +15,11 @@ router.get('/adduser',userHelpers.isRoot, function(req, res) {
   res.render('adduser', { title: 'اضافة مستخدم ',offices:office });
 });
 
+
+router.get('/adminOrManager',userHelpers.isRoot, function(req, res) {
+  res.render('adminOrManager', { title: 'اضافة مستخدم ',offices:office });
+});
+
 router.get('/edituser/:id', function(req, res) {
   userMgr.getUserById(req.params.id,function(result){
     res.render('edituser', { title: 'تعديل مستخدم ',offices:office ,user:result[0]  });
