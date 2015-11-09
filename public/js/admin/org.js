@@ -26,11 +26,13 @@ $(document).ready(function() {
         field: 'address',
         sortable:true,
         title: 'العنوان'
-    }, {
-        field: 'registration_no',
-        sortable:true,
-        title: 'رقم الاشهار'
-    }, {
+    },
+    //  {
+    //     field: 'registration_no',
+    //     sortable:true,
+    //     title: 'رقم الاشهار'
+    // },
+     {
         field: 'email',
         sortable:true,
         title: 'الباريد الالكتروني'

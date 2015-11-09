@@ -118,7 +118,7 @@ $(document).ready(function() {
           field: 'director',
           align: 'center',
           valign: 'middle',
-          title: 'مدير',
+          title: 'مندوب',
           formatter: status
       }, {
           field: 'print',

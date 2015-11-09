@@ -26,11 +26,13 @@ $(document).ready(function() {
           field: 'address',
           sortable:true,
           title: 'العنوان'
-      }, {
-          field: 'registration_no',
-          sortable:true,
-          title: 'رقم الاشهار'
-      }, {
+      },
+      //  {
+      //     field: 'registration_no',
+      //     sortable:true,
+      //     title: 'رقم الاشهار'
+      // },
+       {
           field: 'email',
           sortable:true,
           title: 'الباريد الالكتروني'
@@ -98,9 +100,9 @@ $(document).ready(function() {
         minlength: 10,
         number: true,
       },
-      registration_no:{
-        required : true,
-      },
+      // registration_no:{
+      //   required : true,
+      // },
       name_director:{
         required : true,
       },
@@ -121,15 +123,23 @@ $(document).ready(function() {
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام",
         number: "يجب أن تكون المدخلات أرقام",
       },
-      registration_no:{
-        required: "الرجاء إدخال رقم الاشهار",
-      },
+      // registration_no:{
+      //   required: "الرجاء إدخال رقم الاشهار",
+      // },
       name_director:{
         required: "الرجاء إدخال اسم مدير المنظمه",
       },
       address:{
         required: "الرجاء إدخال عنوان المنظمه ",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
