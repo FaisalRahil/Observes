@@ -41,13 +41,15 @@ $(document).ready(function() {
         field: 'phone_obs',
         sortable:true,
         title: 'رقم الهاتف'
-    }, {
-        field: 'director',
-        align: 'center',
-        valign: 'middle',
-        title: 'مدير',
-        formatter: status
-    }, {
+    }, 
+    // {
+    //     field: 'director',
+    //     align: 'center',
+    //     valign: 'middle',
+    //     title: 'مدير',
+    //     formatter: status
+    // }, 
+    {
         field: 'print',
         align: 'center',
         valign: 'middle',

@@ -10,7 +10,17 @@ $(document).ready(function() {
     $('#orgTable .editable').editable('toggleDisabled');
   });
   
-  
+  $('#registration_no').editable({
+    url: '/manager/editOrg_registration_no/',
+    type: 'text',
+    pk: 1,
+    name: 'name_org',
+    title: 'Enter name',
+    validate: function(v) {
+      if(!v) return 'الرجاء ادخال اﻹسم';
+      if(v.length<2) return "يجب أن يكون الاسم أكثر من حرفين";
+    }
+  });
   $('#name_org').editable({
     url: '/manager/editOrg_name_org/',
     type: 'text',
@@ -75,7 +85,7 @@ $(document).ready(function() {
   
   $('#table').bootstrapTable({
       method: 'get',
-      url: '/manager/getOrg5',
+      url: '/manager/getObsIdOrg/'+$('#confdelete').data('id_o'),
       cache: false,
       height: 400,
       striped: true,
@@ -87,59 +97,72 @@ $(document).ready(function() {
       showColumns: true,
       showRefresh: true,
       minimumCountColumns: 2,
-      clickToSelect: true,
       columns: [{
+          field: 'name',
+          sortable:true,
+          title: 'اﻹسم'
+      }, {
+          field: 'pass_nid',
+          sortable:true,
+          title: 'رقم الهوية'
+      }, {
           field: 'name_org',
           sortable:true,
-          title: 'اسم المنظمه'
+          title: 'اسم المنظمة'
       }, {
-          field: 'name_director',
-          sortable:true,
-          title: 'اسم الرئيس'
-      }, {
-          field: 'address',
-          sortable:true,
-          title: 'العنوان'
-      }, {
-          field: 'registration_no',
-          sortable:true,
-          title: 'رقم الاشهار'
-      }, {
-          field: 'email',
-          sortable:true,
-          title: 'الباريد الالكتروني'
-      }, {
-          field: 'phone',
+          field: 'phone_obs',
           sortable:true,
           title: 'رقم الهاتف'
       }, {
-          field: 'id_org',
+          field: 'director',
+          align: 'center',
+          valign: 'middle',
+          title: 'مندوب',
+          formatter: status
+      }, {
+          field: 'print',
+          align: 'center',
+          valign: 'middle',
+          title: 'حالة الطباعة',
+          formatter: status
+      }, {
+          field: 'id_ob',
           align: 'center',
           valign: 'middle',
           title: 'عرض',
           formatter: operateFormatter
       }, {
-          field: 'id_org',
+          field: 'id_ob',
           align: 'center',
           valign: 'middle',
           title: 'مسح',
           formatter: operateFormatter1
       }],
-  });
+    });
   
-
-  function operateFormatter(value, row, index) {
+    function operateFormatter(value, row, index) {
     return  [
-              '<a id="viewMedia" class="btn btn-xs btn-primary" href="/manager/editlocMeadia/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
+              '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editOrgObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
             ].join('');
   }
 
-  
-
   function operateFormatter1(value, row, index) {
     return  [
-              '<button id="deleteMedia" data-toggle="modal" href="#deleteOrgModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
+              '<button id="deleteObs" data-toggle="modal" href="#" class="remove btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
+  }
+
+    function status(value, row, index) {
+      if (value == 1){
+        return  [
+              '<i class="glyphicon glyphicon-ok"></i>'
+            ].join('');
+      } 
+      else {
+        return  [
+              ''
+            ].join('');
+      }
   }
 
   $('body').on('click', '#deleteMedia ', function () {

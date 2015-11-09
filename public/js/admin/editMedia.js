@@ -79,10 +79,9 @@ $(document).ready(function() {
     }
   });
 
-
   $('#table').bootstrapTable({
     method: 'get',
-    url: '/admin/getOrgObs/'+$(this).data('id_o'),
+    url: '/admin/getOrgObs/'+$('#confdelete').data('id_o'),
     cache: false,
     height: 400,
     striped: true,
@@ -111,13 +110,15 @@ $(document).ready(function() {
         field: 'phone_obs',
         sortable:true,
         title: 'رقم الهاتف'
-    }, {
-        field: 'director',
-        align: 'center',
-        valign: 'middle',
-        title: 'المدير',
-        formatter: status
-    }, {
+    },
+    //  {
+    //     field: 'director',
+    //     align: 'center',
+    //     valign: 'middle',
+    //     title: 'المدير',
+    //     formatter: status
+    // },
+     {
         field: 'print',
         align: 'center',
         valign: 'middle',
