@@ -264,7 +264,7 @@ exports.reportMgr = {
   },
   statisticsOfficesByTypeGender :function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office`,`obs`.`gender` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `obs`.`id_office`<> -1 group by `obs`.`id_office`,`org`.`type`,`obs`.`gender`', function(err, result) {
+      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office`,`obs`.`gender` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `obs`.`id_office`<> -1  AND `org`.`type` IN(4,5,6) group by `obs`.`id_office`,`org`.`type`,`obs`.`gender`', function(err, result) {
          conn.release();
         if(err) {
           util.log(err);

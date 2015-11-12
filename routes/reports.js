@@ -13,7 +13,7 @@ var type = require('../type');
 var userHelpers = require('../app/userHelpers');
 
   router.get('/', userHelpers.isRoot,function(req, res) {
-    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality,office:office,user:req.session.id_user});
+    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality,offi:office,user:req.session.id_user});
   });
 
   // ////////////////////////////////////////////////////////////////////////
@@ -420,10 +420,11 @@ var userHelpers = require('../app/userHelpers');
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByTypeGender.html"), "utf8"),
-
           recipe: "phantom-pdf",
+          
           helpers:statisticsOfficesByType.toString()
         },
+        engine: "jsrender",
         data:{offic:office,result:obj,date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
@@ -508,5 +509,26 @@ var userHelpers = require('../app/userHelpers');
      }
     return html;
   }
+router.get('/typegender',function(req, res, next) {  
+  reportMgr.statisticsOfficesByTypeGender(function(result){
+    obj={};
+    for( k in result){
+      if(obj[result[k].id_office]==undefined){
+        obj[result[k].id_office]=[];
+      }
+      if(obj[result[k].id_office][result[k].type]==undefined){
+        obj[result[k].id_office][result[k].type]=[];
+        // obj[result[k].id_office][result[k].type].push(result[k].num);
+      }
+      if(obj[result[k].id_office][result[k].type][result[k].gender]==undefined){
+        obj[result[k].id_office][result[k].type][result[k].gender]=[];
+        obj[result[k].id_office][result[k].type][result[k].gender].push(result[k].num);
+      }
+    }
+    console.log(obj);
+    console.log(obj[4]);
+    res.send({obj:obj,office:office});    
+  });
+});
 
 module.exports = router;
