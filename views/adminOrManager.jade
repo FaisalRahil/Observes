@@ -1,0 +1,18 @@
+extends layout
+block content
+  .row
+    .col-sm-8.col-md-offset-2.col-md-8.col-md-offset-2.col-lg-8.col-lg-offset-2
+      .panel.panel-default
+        .panel-heading
+          .row
+            .col-sm-4.col-md-offset-8.col-md-4.col-md-offset-8.col-lg-4.col-lg-offset-8
+              img.profile-img(src='/images/hnec_logo.png', alt='')
+        .panel-body
+          fieldset
+            .row
+              .col-sm-4.col-md-offset-1.col-md-4.col-md-offset-2.col-lg-4.col-lg-offset-1
+                a.btn.btn-primary.btn-lg.btn-block.btn3d(href='/admin/org')
+                  |  دولي
+              .col-sm-4.col-md-offset-1.col-md-4.col-md-offset-2.col-lg-4.col-lg-offset-1
+                a.btn.btn-success.btn-lg.btn-block.btn3d(href='/manager/org')
+                  |  محلي
