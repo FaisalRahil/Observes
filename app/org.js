@@ -239,7 +239,54 @@ exports.orgMgr = {
       });
     });
   },
-
+  getCount : function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num FROM `organisaition` WHERE `status`=1 AND `type` IN(?)',id,  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  getCountAll : function(cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num FROM `organisaition` WHERE `status`=1 AND `type` IN(1,2,3)',  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  getCountOb : function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(`obs`.`id_ob`) AS num FROM `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` = ? AND obs.`registration_org` = org.`id_org`',id,  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  getCountAllOb : function(cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(`obs`.`id_ob`) AS num FROM `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND `type` IN(1,2,3) AND obs.`registration_org` = org.`id_org`',  function(err, result) {
+        conn.release();
+        if(err) {
+          cb(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
   delOrg : function(id,cb){
     mysqlMgr.connect(function (conn) {
       conn.query('UPDATE `organisaition` SET `status` = 0 WHERE `id_org` = ?',id,  function(err, result) {

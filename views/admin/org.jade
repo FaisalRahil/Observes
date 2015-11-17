@@ -25,7 +25,7 @@ block content
           a(href='/reports') التقارير
         li
           a(href='/admin/obs') المراقبين
-        li
+        li(class='active')
           a(href='/admin/org') الـمنظمات
   
   .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
@@ -64,6 +64,8 @@ block content
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
           | المنظمات
+          span.pull-left
+            | عدد المنظمات  #{cnt}
       .panel-body
         table#table
   

@@ -25,7 +25,7 @@ block content
           a(href='/reports') التقارير
         li
           a(href='/admin/obs') المراقبين
-        li
+        li.btn-success(class='active')
           a(href='/admin/org') الـمنظمات
 
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
@@ -50,7 +50,12 @@ block content
         form#guest(role='form',method="post",action="/admin/addOrg")
           .form-group
             input.form-control#name_org(name='name_org', placeholder='أسم الضيف', type='text')
-
+          .form-group
+              input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
+          .form-group
+            input.form-control#address(name='address', placeholder='العنوان', type='text')
+          .form-group
+            input.form-control#email(name='email', placeholder='البريد الالكتروني', type='email')
           input#type(name='type', type='hidden',value='2')
           //- .form-group
           //-   select.form-control#level(name='level',type='text')
@@ -68,7 +73,9 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | الضيوف
+          span.pull-left
+            | عدد الضيوف  #{cnt}
       .panel-body
         table#table
 

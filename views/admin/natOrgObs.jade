@@ -23,7 +23,7 @@ block content
               a(href='/logout') خروج
         li
           a(href='/reports') التقارير
-        li
+        li.btn-danger
           a(href='/admin/obs') المراقبين
         li
           a(href='/admin/org') الـمنظمات
@@ -120,6 +120,8 @@ block content
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
           | المنظمات
+          span.pull-left
+            | عدد مراقبي المنظمات  #{cnt}
       .panel-body
         table#table
 

@@ -252,7 +252,7 @@ exports.reportMgr = {
   },
   obsBytype : function(type,cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT COUNT(*) AS ObsCount,org.name_org , org.type FROM  `observers` as `obs` , `organisaition` as `org` where `obs`.`registration_org` = `org`.`id_org` AND `org`.type=? GROUP BY (org.`id_org`)',type,function(err, result) {
+      conn.query('SELECT `org`.*,COUNT(*) AS ObsCount FROM `organisaition` as `org` LEFT JOIN `observers` as `obs` ON(`obs`.`registration_org` = `org`.`id_org` AND `obs`.`status`=1) where `org`.`status` =1 AND `org`.`type`=? GROUP BY (org.`id_org`)',type,function(err, result) {
           conn.release();
           if(err) {
             util.log(err);

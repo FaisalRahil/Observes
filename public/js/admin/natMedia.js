@@ -17,7 +17,7 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: ' المنظمه'
+          title: ' المؤسسة'
       }, {
           field: 'name_director',
           sortable:true,

@@ -30,7 +30,8 @@ $(document).ready(function(){
         }
       html+='<td style="background-color:#F0F0EF !important;"> '+sum+' </td>';  
     }else{
-      html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
+      html+='<td colspan="2" style="background-color:#FFFFC2 !important;"> - </td>\
+      <td style="background-color:#FFFFC2 !important;"> - </td>\
       <td style="background-color:#FFFFC2 !important;"> - </td>\
       <td style="background-color:#FFFFC2 !important;"> - </td>\
       <td style="background-color:#FFFFC2 !important;"> - </td>\

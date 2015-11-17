@@ -297,16 +297,15 @@ var userHelpers = require('../app/userHelpers');
   router.get('/obsByType/:type',userHelpers.isRoot,function(req, res, next) {
     reportMgr.obsBytype(req.params.type,function(results){
       if(results.length>0){
+        var now = new Date();
+        var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
         jsr.render({
           template: { 
             content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByType.html"), "utf8"),
-            phantom:{
-              orientation: "landscape",
-            },
             recipe: "phantom-pdf",
             helpers:obsBytype.toString()
           },
-          data:{allResults:results}
+          data:{allResults:results,date:nowdate}
         }).then(function (response) {
           response.result.pipe(res);
         });
@@ -404,7 +403,7 @@ var userHelpers = require('../app/userHelpers');
 
 
   router.get('/statisticsOfficesByTypeGender', userHelpers.isRoot,function(req, res, next) {
-    reportMgr.statisticsOfficesByType(function(result){
+    reportMgr.statisticsOfficesByTypeGender(function(result){
       obj={};
       for( k in result){
         if(obj[result[k].id_office]==undefined){
@@ -412,7 +411,11 @@ var userHelpers = require('../app/userHelpers');
         }
         if(obj[result[k].id_office][result[k].type]==undefined){
           obj[result[k].id_office][result[k].type]=[];
-          obj[result[k].id_office][result[k].type].push(result[k].num);
+          // obj[result[k].id_office][result[k].type].push(result[k].num);
+        }
+        if(obj[result[k].id_office][result[k].type][result[k].gender]==undefined){
+          obj[result[k].id_office][result[k].type][result[k].gender]=[];
+          obj[result[k].id_office][result[k].type][result[k].gender].push(result[k].num);
         }
       }
       var now = new Date();
@@ -422,10 +425,10 @@ var userHelpers = require('../app/userHelpers');
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByTypeGender.html"), "utf8"),
           recipe: "phantom-pdf",
           
-          helpers:statisticsOfficesByType.toString()
+          helpers:statisticsOfficesByTypeGender.toString()
         },
         engine: "jsrender",
-        data:{offic:office,result:obj,date:nowdate}
+        data:{office:office,obj:obj,date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -492,43 +495,110 @@ var userHelpers = require('../app/userHelpers');
         break;
       }
     }
-    html+= '<th colspan="2" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+typeInTD+' </th>\
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+typeInTD+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
-                <th class="text-center" width="13%" style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسم المدير  </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
+     j=0;
      for (var i in allResults){
+      j++;
         html+= '<tr>\
           </tr>\
-          <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
+          <td>'+j+'</td>'+
+          '<td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
+          <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_director+' </td> \
+          <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone+' </td> \
+          <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email+' </td> \
             <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ObsCount+' </td>';
 
      }
     return html;
   }
-router.get('/typegender',function(req, res, next) {  
-  reportMgr.statisticsOfficesByTypeGender(function(result){
-    obj={};
-    for( k in result){
-      if(obj[result[k].id_office]==undefined){
-        obj[result[k].id_office]=[];
+// router.get('/typegender',function(req, res, next) {  
+//   reportMgr.statisticsOfficesByTypeGender(function(result){
+//     obj={};
+//     for( k in result){
+//       if(obj[result[k].id_office]==undefined){
+//         obj[result[k].id_office]=[];
+//       }
+//       if(obj[result[k].id_office][result[k].type]==undefined){
+//         obj[result[k].id_office][result[k].type]=[];
+//         // obj[result[k].id_office][result[k].type].push(result[k].num);
+//       }
+//       if(obj[result[k].id_office][result[k].type][result[k].gender]==undefined){
+//         obj[result[k].id_office][result[k].type][result[k].gender]=[];
+//         obj[result[k].id_office][result[k].type][result[k].gender].push(result[k].num);
+//       }
+//     }
+//     console.log(obj);
+//     console.log(obj[4]);
+//     res.send({obj:obj,office:office});    
+//   });
+// });
+function statisticsOfficesByTypeGender(obj,office){
+  sumAll=0;
+  var sumgF=[0,0,0];
+  var sumgM=[0,0,0];
+  var html='';
+  for(i in office){
+    var sum = 0;
+    html+='<tr><td colspan="2" style="background-color:#FFFFC2 !important;"> '+office[i].office_name_ar+' </td>';
+    if(obj[office[i].office_id]!=undefined){
+      for(k=4;k<7;k++){
+        if(obj[office[i].office_id][k]!=undefined||obj[office[i].office_id][k]!=null){
+          
+          if(obj[office[i].office_id][k][1]!=null){
+            sum+=parseInt(obj[office[i].office_id][k][1]);
+            sumgM[k-4]+=parseInt(obj[office[i].office_id][k][1]);
+            html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][1]+' </td>'; 
+          }else{
+            html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+          }
+          if(obj[office[i].office_id][k][0]!=null){
+            sum+=parseInt(obj[office[i].office_id][k][0]);
+            sumgF[k-4]+=parseInt(obj[office[i].office_id][k][0]);
+            html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][0]+' </td>'; 
+          }else{
+            html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+          }  
+        }else{
+          html+='<td style="background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
+        }
       }
-      if(obj[result[k].id_office][result[k].type]==undefined){
-        obj[result[k].id_office][result[k].type]=[];
-        // obj[result[k].id_office][result[k].type].push(result[k].num);
-      }
-      if(obj[result[k].id_office][result[k].type][result[k].gender]==undefined){
-        obj[result[k].id_office][result[k].type][result[k].gender]=[];
-        obj[result[k].id_office][result[k].type][result[k].gender].push(result[k].num);
-      }
+      html+='<td style="background-color:#F0F0EF !important;"> '+sum+' </td>';  
+    }else{
+      html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
+      <td style="background-color:#FFFFC2 !important;"> - </td>\
+      <td style="background-color:#FFFFC2 !important;"> - </td>\
+      <td style="background-color:#FFFFC2 !important;"> - </td>\
+      <td style="background-color:#FFFFC2 !important;"> - </td>\
+      <td style="background-color:#FFFFC2 !important;"> - </td>\
+      <td style="background-color:#F0F0EF !important;"> - </td>';
     }
-    console.log(obj);
-    console.log(obj[4]);
-    res.send({obj:obj,office:office});    
-  });
-});
-
+    html+='</tr>';
+   
+    sumAll+=sum;
+  }
+   html+='</tbody ><tbody >\
+          <tr>\
+            <td colspan="2" style="background-color:#F0F0EF !important;border: 1px solid;">  </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgM[0]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgF[0]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgM[1]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgF[1]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgM[2]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgF[2]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAll+' </td>\
+          </tr>\
+        </tbody>';
+  return html;
+}
 module.exports = router;

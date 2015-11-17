@@ -25,7 +25,7 @@ block content
           a(href='/reports') التقارير
         li
           a(href='/admin/obs') المراقبين
-        li
+        li.btn-warning(class='active')
           a(href='/admin/org') الـمنظمات
 
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
@@ -47,13 +47,13 @@ block content
   .col-sm-7.col-md-7.col-lg-7
     .row
       .panel.orange-form.panel-warning
-        .panel-heading تـسـجـيـل بيانات المنظمات الاعلاميه الدولية
+        .panel-heading تـسـجـيـل بيانات المؤسسات الاعلاميه الدولية
         .panel-body
           form#natMedia(role='form',method="post",action="/admin/addOrg")
             .form-group
-              input.form-control#name_org(name='name_org', placeholder='اسم المنظمه', type='text')
+              input.form-control#name_org(name='name_org', placeholder='اسم المؤسسة', type='text')
             .form-group
-              input.form-control#name_director(name='name_director', placeholder='اسم مدير المنظمه', type='text')
+              input.form-control#name_director(name='name_director', placeholder='اسم مدير المؤسسة', type='text')
             .form-group
               input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
             .form-group
@@ -61,7 +61,7 @@ block content
             //- .form-group
               input.form-control#registration_no(name='registration_no', placeholder='رقم الاشهار', type='text')
             .form-group
-              input.form-control#email(name='email', placeholder='الباريد الالكتروني', type='email')
+              input.form-control#email(name='email', placeholder='البريد الالكتروني', type='email')
 
             input#type(name='type', type='hidden',value='3') 
             .row
@@ -75,7 +75,9 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | المؤسسات
+          span.pull-left
+            | عدد المؤسسات  #{cnt}
       .panel-body
         table#table
 

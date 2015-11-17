@@ -119,19 +119,25 @@ router.get('/getOrgsAdmin', function(req, res) {
 
 //******************************************
 router.get('/org/natOrg',userHelpers.isRoot, function(req, res) {
-    res.render('admin/natOrg',{ title: 'المنظمات',user:req.session.id_user});
+  orgMgr.getCount(1,function(result){
+    res.render('admin/natOrg',{ title: 'المنظمات',user:req.session.id_user,cnt:result[0].num});
+  });
 });
 
 /* GET home page. */
 router.get('/org',userHelpers.isRoot, function(req, res) {
-    res.render('admin/org',{ title: 'المنظمات',user:req.session.id_user });
+  orgMgr.getCountAll(function(result){
+      res.render('admin/org',{ title: 'المنظمات',user:req.session.id_user ,cnt:result[0].num});
+    });
   });
 
 //////////////////////////////////////////////
 
 /* GET home page. */
 router.get('/obs',userHelpers.isRoot, function(req, res) {
-  res.render('admin/obs',{ title: 'مراقبين',user:req.session.id_user});
+  orgMgr.getCountAllOb(function(result){
+    res.render('admin/obs',{ title: 'مراقبين',user:req.session.id_user,cnt:result[0].num});
+  });
 });
 
 router.get('/getAllObs',function(req , res ){
@@ -153,12 +159,16 @@ router.get('/report',userHelpers.isRoot, function(req, res) {
 
 /* GET home page. */
 router.get('/org/natMedia',userHelpers.isRoot, function(req, res) {
-  res.render('admin/natMedia',{user:req.session.id_user});
+  orgMgr.getCount(3,function(result){
+    res.render('admin/natMedia',{user:req.session.id_user,cnt:result[0].num});
+  });
 });
 
 /* GET home page. */
 router.get('/org/guest',userHelpers.isRoot, function(req, res) {
-  res.render('admin/guest',{user:req.session.id_user});
+  orgMgr.getCount(2,function(result){
+    res.render('admin/guest',{user:req.session.id_user,cnt:result[0].num});
+  });
 });
 
 /* GET home page. */
@@ -181,22 +191,28 @@ router.get('/obs/guest',userHelpers.isRoot, function(req, res) {
   /* GET home page. */
   router.get('/obs/natOrgObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(1,function(result){
-      res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user});
-    })
+      orgMgr.getCountOb(1,function(result){
+        res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result[0].num});
+      });
+    });
   });
 
   /* GET home page. */
   router.get('/obs/guestObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(2,function(result){
-      res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user});
-    })
+      orgMgr.getCountOb(2,function(result){
+        res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result[0].num});
+      });   
+    });
   });
 
   /* GET home page. */
   router.get('/obs/natMediaObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(3,function(result){
-      res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user});
-    })
+      orgMgr.getCountOb(3,function(result){
+        res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result[0].num});
+      });
+    });
   });
 
 // end
