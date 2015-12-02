@@ -13,7 +13,12 @@ var type = require('../type');
 var userHelpers = require('../app/userHelpers');
 
   router.get('/', userHelpers.isRoot,function(req, res) {
-    res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality,offi:office,user:req.session.id_user});
+    orgMgr.getOrgs(function(Morg){
+      orgMgr.getOrgsAdmin(function(Norg){
+        res.render('reports/reports',{ title: 'الـتـقـاريـر',nationalities: nationality,offi:office,user:req.session.id_user,Norg:Norg,Morg:Morg});
+      });
+    });
+    
   });
 
   // ////////////////////////////////////////////////////////////////////////
@@ -144,9 +149,6 @@ var userHelpers = require('../app/userHelpers');
       <thead>\
         <tr style="border-top-style: solid; border-top-width: 1px;" >\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي </th>\
           <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>\
@@ -155,14 +157,17 @@ var userHelpers = require('../app/userHelpers');
       </thead>\
       <tbody style="border: 1px solid #000;">';
       sumAll=0;
+      var sumT=[0,0,0];
       for(i in office){
         sum=0;
+        if(i!=0){
          html+='<tr>\
             <td style="background-color:#E7FFE7 !important;"> '+office[i].office_name_ar+' </td>';
             if(obj[office[i].office_id]!=undefined){
-              for(k=1;k<7;k++){
+              for(k=4;k<7;k++){
                 if(obj[office[i].office_id][k]!=undefined){
                   sum+=parseInt(obj[office[i].office_id][k]);
+                  sumT[k-4]+=parseInt(obj[office[i].office_id][k]);
                   html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k]+' </td>';
                 }else{
                   html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
@@ -174,16 +179,59 @@ var userHelpers = require('../app/userHelpers');
               html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
                 <td style="background-color:#FFFFC2 !important;"> - </td>\
                 <td style="background-color:#FFFFC2 !important;"> - </td>\
-                <td style="background-color:#FFFFC2 !important;"> - </td>\
-                <td style="background-color:#FFFFC2 !important;"> - </td>\
-                <td style="background-color:#FFFFC2 !important;"> - </td>\
                 <td style="background-color:#F0F0EF !important;"> - </td>\
               </tr>';
             }
-        sumAll+=sum;    
+          sumAll+=sum; 
+        }
+             
       }
 
       html+='</tbody>\
+        <tbody >\
+          <tr>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumT[0]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumT[1]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumT[2]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAll+' </td>\
+          </tr>\
+        </tbody>\
+      </table>';
+      html+='<table class="table condensed">\
+      <thead>\
+        <tr style="border-top-style: solid; border-top-width: 1px;" >\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+        </tr>\
+      </thead>\
+      <tbody style="border: 1px solid #000;">';
+      sum=0;
+      html+='<tr><td style="background-color:#E7FFE7 !important;"> '+office[0].office_name_ar+' </td>';
+      if(obj[office[0].office_id]!=undefined){
+        for(k=1;k<4;k++){
+          if(obj[office[0].office_id][k]!=undefined){
+            sum+=parseInt(obj[office[0].office_id][k]);
+            html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[0].office_id][k]+' </td>';
+          }else{
+            html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+          }
+        }
+        html+='<td style="background-color:#F0F0EF !important;"> '+sum+' </td>\
+        </tr>';
+      }else{
+        html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
+          <td style="background-color:#FFFFC2 !important;"> - </td>\
+          <td style="background-color:#FFFFC2 !important;"> - </td>\
+          <td style="background-color:#F0F0EF !important;"> - </td>\
+        </tr>';
+      }
+    sumAll+=sum;
+    html+=' </tbody>';
+       html+='</tbody>\
         <tbody style="direction: ltr;">\
           <tr>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAll+' </td>\
@@ -346,6 +394,8 @@ var userHelpers = require('../app/userHelpers');
           obj[result[k].id_office][result[k].type].push(result[k].num);
         }
       }
+      var now = new Date();
+      var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/statisticsOfficesByType.html"), "utf8"),
@@ -353,7 +403,7 @@ var userHelpers = require('../app/userHelpers');
           recipe: "phantom-pdf",
           helpers:statisticsOfficesByType.toString()
         },
-        data:{offic:office,result:obj}
+        data:{offic:office,result:obj,date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -487,7 +537,7 @@ var userHelpers = require('../app/userHelpers');
   //by type
   function obsBytype(allResults){
     var html = '';
-    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    var type1 = ["منظمة عالمية","الهيئات الدبلوماسية","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
 
     for (var k = 0; k <= type1.length; k++) {
       if(allResults[k].type-1 == k ){
@@ -522,27 +572,7 @@ var userHelpers = require('../app/userHelpers');
      }
     return html;
   }
-// router.get('/typegender',function(req, res, next) {  
-//   reportMgr.statisticsOfficesByTypeGender(function(result){
-//     obj={};
-//     for( k in result){
-//       if(obj[result[k].id_office]==undefined){
-//         obj[result[k].id_office]=[];
-//       }
-//       if(obj[result[k].id_office][result[k].type]==undefined){
-//         obj[result[k].id_office][result[k].type]=[];
-//         // obj[result[k].id_office][result[k].type].push(result[k].num);
-//       }
-//       if(obj[result[k].id_office][result[k].type][result[k].gender]==undefined){
-//         obj[result[k].id_office][result[k].type][result[k].gender]=[];
-//         obj[result[k].id_office][result[k].type][result[k].gender].push(result[k].num);
-//       }
-//     }
-//     console.log(obj);
-//     console.log(obj[4]);
-//     res.send({obj:obj,office:office});    
-//   });
-// });
+
 function statisticsOfficesByTypeGender(obj,office){
   sumAll=0;
   var sumgF=[0,0,0];
@@ -601,4 +631,57 @@ function statisticsOfficesByTypeGender(obj,office){
         </tbody>';
   return html;
 }
+  router.get('/orgObs/:id',userHelpers.isRoot,function(req, res, next) {
+    obsMgr.getOrgObs(req.params.id,function(results){
+      if(results.length>0){
+        var now = new Date();
+        var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
+        jsr.render({
+          template: { 
+            content:  fs.readFileSync(path.join(__dirname, "../views/reports/orgObs.html"), "utf8"),
+            recipe: "phantom-pdf",
+            helpers:orgObs.toString()
+          },
+          data:{allResults:results,date:nowdate,office:office}
+        }).then(function (response) {
+          response.result.pipe(res);
+        });
+      }else{
+        res.redirect('/reports?msg=1');
+      }
+    });
+  });
+  function orgObs(data,offic){
+    var html = '';
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+data[0].name_org+' </th>\
+              </tr>\
+              <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم البطاقة  </th>\
+              </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;">';
+     j=0;
+     for (var i in data){
+      j++;
+        html+= '<tr>\
+          </tr>\
+          <td>'+j+'</td>'+
+          '<td style="background-color:#FFFFC2 !important;"> '+data[i].name_org+' </td> \
+          <td style="background-color:#FFFFC2 !important;"> '+data[i].phone_obs+' </td> \
+          <td style="background-color:#FFFFC2 !important;"> '+data[i].email_obs+' </td> ';
+          if(data[i].office_obs<0){
+            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
+          }else{
+            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[data[i].office_obs].office_name_ar+' </td> ';  
+          }
+          html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+
+     }
+    return html;
+  }
 module.exports = router;

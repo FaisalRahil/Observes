@@ -17,7 +17,7 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم الضيف'
+          title: 'اسم الهيئة'
       }, {
           field: 'email',
           align: 'center',

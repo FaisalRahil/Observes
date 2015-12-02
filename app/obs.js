@@ -45,7 +45,7 @@ exports.obsMgr = {
 
   getOrgObs : function(id_org,cb){ //get observers in organisaitions
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE `org`.`status` =1 AND obs.`status` =1 AND `org`.`id_org` = `obs`.`registration_org` AND org.`id_org` = ? ', id_org,  function(err, result) {
+      conn.query('SELECT *,`obs`.`email` AS email_obs,`obs`.`id_office` AS office_obs FROM  `observers` obs, `organisaition` org WHERE `org`.`status` =1 AND obs.`status` =1 AND `org`.`id_org` = `obs`.`registration_org` AND org.`id_org` = ? ', id_org,  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);

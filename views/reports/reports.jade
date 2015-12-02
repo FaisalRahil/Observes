@@ -13,21 +13,16 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='/edituser/#{user}') بيانات المستخدم
-            li
-              a(href='/logout') خروج
         li
-          a(href='/reports') التقارير
+          a(href='/admin/org') الـمنظمات
         li
           a(href='/admin/obs') المراقبين
+        li(class='active')
+          a(href='/reports') التقارير
         li
-          a(href='/admin/org') الـمنظمات 
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
   
   .col-md-8.col-md-offset-2(style="padding-top:5%")
     .panel.panel-primary
@@ -40,7 +35,18 @@ block content
               span التقارير
       .panel-body
         .row
-          form.form#reports(accept-charset="utf-8", role="form")
+          form.form#reportN(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              select#obsByTypeN.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
+                option(value="", style='color:grey; display:none;') بيانات المراقبين حسب النوع
+                option(value="1") منظمة عالمية
+                option(value="2") ضيف
+                option(value="3") إعلام دولي
+
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              button#typebtnN.btn.btn-warning.btn-block() عرض
+
+          //- form.form#reports(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#nat.form-control.selectpicker(name="obsByNationality", data-live-search="true", data-size=5, data-style="btn-danger")
                 option(value="", style='color:grey; display:none;') بيانات المراقبين حسب الجنسية
@@ -49,20 +55,40 @@ block content
         
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               button#natbtn.btn.btn-danger.btn-block() عرض
-              //- a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/obsByNationality/#{}", target="_blank") عرض
-          form.form#report(accept-charset="utf-8", role="form")
+
+          form.form#reportM(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
-              select#obsByType.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
+              select#obsByTypeM.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
                 option(value="", style='color:grey; display:none;') بيانات المراقبين حسب النوع
-                option(value="1") منظمة عالمية
-                option(value="2") ضيف
-                option(value="3") إعلام دولي
+
                 option(value="4") منظمة محلية
                 option(value="5") إعلام محلي
                 option(value="6") وكيل
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
-              button#typebtn.btn.btn-warning.btn-block() عرض
+              button#typebtnM.btn.btn-warning.btn-block() عرض
             //- a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/obsByType/#{}", target="_blank") عرض
+          form.form#norgform(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              br
+              select#orgobsN.form-control.selectpicker(name="orgobsN", data-live-search="true", data-size=5, data-style="btn-danger")
+                option(value="", style='color:grey; display:none;') المنظمات الدولية
+                for org in Norg
+                  option(value="#{org.id_org}") #{org.name_org}
+
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              br
+              button#orgbtnN.btn.btn-danger.btn-block() عرض
+          form.form#morgform(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              br
+              select#orgobsM.form-control.selectpicker(name="orgobsM", data-live-search="true", data-size=5, data-style="btn-danger")
+                option(value="", style='color:grey; display:none;') المنظمات المحلية
+                for org in Morg
+                  option(value="#{org.id_org}") #{org.name_org}
+
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              br
+              button#orgbtnM.btn.btn-danger.btn-block() عرض
             .col-xs-6.col-lg-6(style="padding-top: 20px;")
               a.btn.btn-primary.btn-block(href="http://localhost:3003/reports/noOfLocaleObs", target="_blank") بيانات المراقبين المحليين حسب اللجان
             //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
@@ -76,7 +102,7 @@ block content
             //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
               a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/noOfWomenAndMenEn", target="_blank") Data observers men and women
             .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/statisticsOfficesByType", target="_blank") بيانات المراقبين حسب اللجان والنوع
+              a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/statisticsOfficesByType", target="_blank") احصائيات الشاملة
             .col-xs-6.col-lg-6(style="padding-top: 20px;")
               a.btn.btn-primary.btn-block(href="http://localhost:3003/reports/observers", target="_blank") بيانات المراقبين
     

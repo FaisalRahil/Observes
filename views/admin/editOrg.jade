@@ -12,28 +12,23 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='/edituser/#{user}') بيانات المستخدم
-            li
-              a(href='/logout') خروج
-        li
-          a(href='/reports') التقارير
-        li
-          a(href='/admin/obs') المراقبين
         li
           a(href='/admin/org') الـمنظمات
+        li
+          a(href='/admin/obs') المراقبين
+        li(class='active')
+          a(href='/reports') التقارير
+        li
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
   
   .col-md-8.col-md-offset-2
     .form-group
       input#discount_flag(type='checkbox', name='discount_flag')
     table#orgTable.table.table-bordered.table-striped(style='clear: both')
       tbody
-        tr
+        //- tr
           td(width='35%') رقم التسجيل 
           td(width='65%')
             a#registration_no(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم التسجيل',data-value='#{org[0].registration_no}') #{org[0].registration_no}

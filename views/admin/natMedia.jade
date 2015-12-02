@@ -12,22 +12,17 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='/edituser/#{user}') بيانات المستخدم
-            li
-              a(href='/logout') خروج
-        li
-          a(href='/reports') التقارير
-        li
-          a(href='/admin/obs') المراقبين
         li.btn-warning(class='active')
           a(href='/admin/org') الـمنظمات
-
+        li
+          a(href='/admin/obs') المراقبين
+        li(class='active')
+          a(href='/reports') التقارير
+        li
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
+        
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
       .nav.nav-pills.nav-stacked
         li
@@ -41,7 +36,7 @@ block content
         li
             a.btn.btn-default.btn-block(href="/admin/org/guest", role="button")
               span.glyphicon.glyphicon-th.pull-right
-              | ضــيــف
+              | الهيئات الدبلوماسية
               
 
   .col-sm-7.col-md-7.col-lg-7
@@ -75,9 +70,9 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المؤسسات
+          | مؤسسات اعلامية
           span.pull-left
-            | عدد المؤسسات  #{cnt}
+            | العدد   #{cnt}
       .panel-body
         table#table
 

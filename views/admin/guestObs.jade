@@ -12,21 +12,16 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='/edituser/#{user}') بيانات المستخدم
-            li
-              a(href='/logout') خروج
-        li
-          a(href='/reports') التقارير
-        li.btn-success
-          a(href='/admin/obs') المراقبين
         li
           a(href='/admin/org') الـمنظمات
+        li.btn-success(class='active')
+          a(href='/admin/obs') المراقبين
+        li(class='active')
+          a(href='/reports') التقارير
+        li
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
 
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
       .nav.nav-pills.nav-stacked
@@ -55,7 +50,7 @@ block content
                 input.form-control#pass_nid(name='pass_nid', placeholder='الرقم الوطني / جواز سفر', type='text')
               .form-group
                 select#registration_org.form-control.selectpicker.show-tick(name="registration_org",data-show-subtext='true',data-size='5',data-live-search='true')
-                  option(value="", style='color:grey; display:none;') الرجاء اختيار منظمة
+                  option(value="", style='color:grey; display:none;') الرجاء اختيار الجهة
                   for org in orgs
                     option(value="#{org.id_org}") #{org.name_org}
               .form-group.col-sm-6.col-md-6.col-lg-6  

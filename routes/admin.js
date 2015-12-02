@@ -191,8 +191,8 @@ router.get('/obs/guest',userHelpers.isRoot, function(req, res) {
   /* GET home page. */
   router.get('/obs/natOrgObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(1,function(result){
-      orgMgr.getCountOb(1,function(result){
-        res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result[0].num});
+      orgMgr.getCountOb(1,function(result1){
+        res.render('admin/natOrgObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result1[0].num});
       });
     });
   });
@@ -200,8 +200,8 @@ router.get('/obs/guest',userHelpers.isRoot, function(req, res) {
   /* GET home page. */
   router.get('/obs/guestObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(2,function(result){
-      orgMgr.getCountOb(2,function(result){
-        res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result[0].num});
+      orgMgr.getCountOb(2,function(result1){
+        res.render('admin/guestObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result1[0].num});
       });   
     });
   });
@@ -209,8 +209,8 @@ router.get('/obs/guest',userHelpers.isRoot, function(req, res) {
   /* GET home page. */
   router.get('/obs/natMediaObs',userHelpers.isRoot, function(req, res) {
     orgMgr.getOrg(3,function(result){
-      orgMgr.getCountOb(3,function(result){
-        res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result[0].num});
+      orgMgr.getCountOb(3,function(result1){
+        res.render('admin/natMediaObs',{ title: 'مراقبين المنظمات العالمية' ,orgs:result,nationality:nationality,user:req.session.id_user,cnt:result1[0].num});
       });
     });
   });
