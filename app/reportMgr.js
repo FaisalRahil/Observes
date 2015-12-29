@@ -1,10 +1,70 @@
 var mysqlMgr = require('./mysql').mysqlMgr,
   util=require('util');
 exports.reportMgr = {
-  getAllObsAndOrg : function(cb){
+  getOrgsRport : function(id,cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT *,`org`.`email` AS email_org ,`obs`.`email` AS email_obs FROM `organisaition` org, `observers` obs WHERE `org`.`id_org` = `obs`.`registration_org`;',  function(err, result) {
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `id_office`=? AND `type` IN ( 4,5, 6 )',id,  function(err, result) {
         conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  obsBytype : function(id,type,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT `org`.*,COUNT(obs.id_ob) AS ObsCount FROM `organisaition` as `org` LEFT JOIN `observers` as `obs` ON(`obs`.`registration_org` = `org`.`id_org` AND `obs`.`status`=1) where `org`.`status` =1 AND `org`.`id_office`=? AND `org`.`type`=? GROUP BY (org.`id_org`)',[id,type],function(err, result) {
+          conn.release();
+          if(err) {
+            util.log(err);
+          } else {
+            cb(result);
+          }
+      });
+    });
+  },
+  appNoOfInternationalObs : function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num,`org`.`type` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `org`.`id_office`=? AND `obs`.`status`=1  group by `org`.`type` ',id, function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  getAllObsAndOrg : function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT *,`org`.`email` AS email_org ,`obs`.`email` AS email_obs FROM `organisaition` org, `observers` obs WHERE `obs`.`id_office`=? AND `org`.`id_org` = `obs`.`registration_org`;',id,  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+   statisticsOfficesByTypeGender :function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office`,`obs`.`gender` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `obs`.`id_office`=? AND `obs`.`id_office`=`org`.`id_office`    group by `obs`.`id_office`,`org`.`type`,`obs`.`gender`',id, function(err, result) {
+         conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+    statisticsOfficesByType :function(id,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `obs`.`id_office`=? AND `obs`.`id_office`=`org`.`id_office` group by `obs`.`id_office`,`org`.`type` ',id, function(err, result) {
+         conn.release();
         if(err) {
           util.log(err);
         } else {
@@ -14,18 +74,10 @@ exports.reportMgr = {
     });
   },
 
-  appNoOfInternationalObs : function(cb){
-    mysqlMgr.connect(function (conn) {
-      conn.query('SELECT count(*) AS num,`org`.`type` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1  group by `org`.`type` ', function(err, result) {
-        conn.release();
-        if(err) {
-          util.log(err);
-        } else {
-          cb(result);
-        }
-      });
-    });
-  },
+  /////////////////////////////////////////////////////////////////////////////////
+  
+
+  
 
   getAllNoOfLocaleObs : function(cb){
     mysqlMgr.connect(function (conn) {
@@ -213,18 +265,6 @@ exports.reportMgr = {
     });
   });
   },
-  statisticsOfficesByType :function(cb){
-    mysqlMgr.connect(function (conn) {
-      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 group by `obs`.`id_office`,`org`.`type` ', function(err, result) {
-         conn.release();
-        if(err) {
-          util.log(err);
-        } else {
-          cb(result);
-        }
-      });
-    });
-  },
 
   noOfWomenAndMen : function(cb){
     mysqlMgr.connect(function (conn) {
@@ -250,28 +290,6 @@ exports.reportMgr = {
       });
     });
   },
-  obsBytype : function(type,cb){
-    mysqlMgr.connect(function (conn) {
-      conn.query('SELECT `org`.*,COUNT(obs.id_ob) AS ObsCount FROM `organisaition` as `org` LEFT JOIN `observers` as `obs` ON(`obs`.`registration_org` = `org`.`id_org` AND `obs`.`status`=1) where `org`.`status` =1 AND `org`.`type`=? GROUP BY (org.`id_org`)',type,function(err, result) {
-          conn.release();
-          if(err) {
-            util.log(err);
-          } else {
-            cb(result);
-          }
-      });
-    });
-  },
-  statisticsOfficesByTypeGender :function(cb){
-    mysqlMgr.connect(function (conn) {
-      conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office`,`obs`.`gender` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1    group by `obs`.`id_office`,`org`.`type`,`obs`.`gender`', function(err, result) {
-         conn.release();
-        if(err) {
-          util.log(err);
-        } else {
-          cb(result);
-        }
-      });
-    });
-  },
+  
+ 
 };

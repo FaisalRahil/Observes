@@ -79,7 +79,16 @@ var userHelpers = require('../app/userHelpers');
 
   // ////////////////////////////////////////////////////////////////////////
   function resultsNoOfInternationalObs(resultt){
-    var html = '<tr>';
+    var html = ' <div class="col-xs-12">\
+        <div class="towSpaces"></div><table class="table condensed">\
+            <thead>\
+              <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي International observers</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف Guest</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي International media</th>\
+              </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;"><tr>';
     for (var i = 1; i < 4; i++) {
       if(resultt[i] == undefined ){
         html+=' <td style="background-color:#FFFFC2 !important;"> - </td>';
@@ -87,7 +96,30 @@ var userHelpers = require('../app/userHelpers');
         html+=' <td style="background-color:#FFFFC2 !important;"> '+ resultt[i] +' </td>';
       } 
     };
-      html+='</tr>';
+      html+='</tr></tbody></table></div><div class="towSpaces" height="5%"> </div><div class="col-xs-12 col-xs-offset-4">\
+          <div class="col-xs-5 text-center">\
+            <div class="text-center fontSize"> \
+              إحصائـــيـــة الجهات المعتـــمدة المحلية\
+            </div>\
+          </div>\
+        </div><div class="col-xs-12">\
+        <div class="towSpaces"></div><table class="table condensed">\
+            <thead>\
+              <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي Local observers </th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعـلام مـحـلـي Local media</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  وكيل agent</th>\
+              </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;"><tr>';
+      for (var i = 4; i < 7; i++) {
+        if(resultt[i] == undefined ){
+          html+=' <td style="background-color:#FFFFC2 !important;"> - </td>';
+        } else{
+          html+=' <td style="background-color:#FFFFC2 !important;"> '+ resultt[i] +' </td>';
+        } 
+      };
+    html+='</tr></tbody></table></div>';
     return html;
   }
   // ////////////////////////////////////////////////////////////////////////
@@ -289,16 +321,17 @@ var userHelpers = require('../app/userHelpers');
           obj[result[k].type].push(result[k].num);
         }
       }
+      var now = new Date();
+      var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfInternationalObs.html"), "utf8"),
           phantom:{
-            orientation: "landscape"
           },
           recipe: "phantom-pdf",
           helpers:resultsNoOfInternationalObs.toString()
         },
-        data:{resultt:obj}
+        data:{resultt:obj,date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -574,48 +607,63 @@ var userHelpers = require('../app/userHelpers');
   }
 
 function statisticsOfficesByTypeGender(obj,office){
-  sumAll=0;
+  var sumAll=0;
+  var sumAllM=0;
+  var sumAllF=0;
+
   var sumgF=[0,0,0];
   var sumgM=[0,0,0];
   var html='';
   for(i in office){
-    var sum = 0;
-    html+='<tr><td colspan="2" style="background-color:#FFFFC2 !important;"> '+office[i].office_name_ar+' </td>';
-    if(obj[office[i].office_id]!=undefined){
-      for(k=4;k<7;k++){
-        if(obj[office[i].office_id][k]!=undefined||obj[office[i].office_id][k]!=null){
-          
-          if(obj[office[i].office_id][k][1]!=null){
-            sum+=parseInt(obj[office[i].office_id][k][1]);
-            sumgM[k-4]+=parseInt(obj[office[i].office_id][k][1]);
-            html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][1]+' </td>'; 
+    if(i!=0){
+      var sum = 0;
+      var sumM=0;
+      var sumF=0;
+      html+='<tr><td colspan="2" style="height:1px; background-color:#FFFFC2 !important;"> '+office[i].office_name_ar+' </td>';
+      if(obj[office[i].office_id]!=undefined){
+        for(k=4;k<7;k++){
+          if(obj[office[i].office_id][k]!=undefined||obj[office[i].office_id][k]!=null){
+            
+            if(obj[office[i].office_id][k][1]!=null){
+              sum+=parseInt(obj[office[i].office_id][k][1]);
+              sumM+=parseInt(obj[office[i].office_id][k][1]);
+              sumgM[k-4]+=parseInt(obj[office[i].office_id][k][1]);
+              html+='<td style="height:1px;background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][1]+' </td>'; 
+            }else{
+              html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
+            }
+            if(obj[office[i].office_id][k][0]!=null){
+              sum+=parseInt(obj[office[i].office_id][k][0]);
+              sumF+=parseInt(obj[office[i].office_id][k][0]);
+              sumgF[k-4]+=parseInt(obj[office[i].office_id][k][0]);
+              html+='<td style="height:1px;background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][0]+' </td>'; 
+            }else{
+              html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
+            }  
           }else{
-            html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+            html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
           }
-          if(obj[office[i].office_id][k][0]!=null){
-            sum+=parseInt(obj[office[i].office_id][k][0]);
-            sumgF[k-4]+=parseInt(obj[office[i].office_id][k][0]);
-            html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][0]+' </td>'; 
-          }else{
-            html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
-          }  
-        }else{
-          html+='<td style="background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
         }
+        html+='<td style="height:1px;background-color:#F0F0EF !important;"> '+sumM+' </td><td style="height:1px;background-color:#F0F0EF !important;"> '+sumF+' </td><td style="height:1px;background-color:#F0F0EF !important;"> '+sum+' </td>';  
+      }else{
+        html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
+        <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
+        <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
+        <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
+        <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
+        <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
+        <td style="height:1px;background-color:#F0F0EF !important;"> - </td>\
+        <td style="height:1px;background-color:#F0F0EF !important;"> - </td>\
+        <td style="height:1px;background-color:#F0F0EF !important;"> - </td>';
       }
-      html+='<td style="background-color:#F0F0EF !important;"> '+sum+' </td>';  
-    }else{
-      html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
-      <td style="background-color:#FFFFC2 !important;"> - </td>\
-      <td style="background-color:#FFFFC2 !important;"> - </td>\
-      <td style="background-color:#FFFFC2 !important;"> - </td>\
-      <td style="background-color:#FFFFC2 !important;"> - </td>\
-      <td style="background-color:#FFFFC2 !important;"> - </td>\
-      <td style="background-color:#F0F0EF !important;"> - </td>';
+      html+='</tr>';
+     
+      sumAll+=sum;
+      sumAllF+=sumF;
+      sumAllM+=sumM;
     }
-    html+='</tr>';
-   
-    sumAll+=sum;
+    
+    
   }
    html+='</tbody ><tbody >\
           <tr>\
@@ -626,9 +674,73 @@ function statisticsOfficesByTypeGender(obj,office){
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgF[1]+' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgM[2]+' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumgF[2]+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAllM+' </td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAllF+' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> '+sumAll+' </td>\
           </tr>\
-        </tbody>';
+        </tbody></table>';
+
+
+        html+='<table class="table condensed"><thead>';
+        html+='<tr height="1%" style="border-top-style: solid; border-top-width: 1px;" >\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
+              <th height="1%" colspan="3" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+            </tr>\
+              <tr height="1%" style="border-top-style: solid; border-top-width: 1px;" >\
+              <th height="1%" colspan="2" class="text-center" width="1%" style="background-color:#B2E6FF !important;"></th>\
+              <th  height="1%" class="text-center" width="1%" style="background-color:#B2E6FF !important;"> ذكر</th>\
+              <th  height="1%" class="text-center" width="1%" style="background-color:#B2E6FF !important;"> أنثى </th>\
+              <th  height="1%" class="text-center" width="1%" style="background-color:#B2E6FF !important;"> ذكر</th>\
+              <th  height="1%" class="text-center" width="1%" style="background-color:#B2E6FF !important;"> أنثى </th>\
+              <th  height="1%" class="text-center" width="1%" style="background-color:#B2E6FF !important;"> ذكر</th>\
+              <th  height="1%" class="text-center" width="1%" style="background-color:#B2E6FF !important;"> أنثى </th>\
+              <th height="1%"  class="text-center" width="1%" style="background-color:#B2E6FF !important;">ذكر</th>\
+              <th height="1%"  class="text-center" width="1%" style="background-color:#B2E6FF !important;">أنثى</th>\
+              <th height="1%"  class="text-center" width="1%" style="background-color:#B2E6FF !important;">المجموع</th>\
+            </tr>\
+          </thead>\
+      <tbody style="border: 1px solid #000;" >';
+      sum=0;
+      sumM=0;
+      sumF=0;
+      html+='<tr><td colspan="2" style="background-color:#FFFFC2 !important;"> '+office[0].office_name_ar+' </td>';
+        i=0;
+        if(obj[office[i].office_id]!=undefined){
+        for(k=1;k<4;k++){
+          if(obj[office[i].office_id][k]!=undefined||obj[office[i].office_id][k]!=null){
+            
+            if(obj[office[i].office_id][k][1]!=null){
+              sum+=parseInt(obj[office[i].office_id][k][1]);
+              sumM+=parseInt(obj[office[i].office_id][k][1]);
+              html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][1]+' </td>'; 
+            }else{
+              html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+            }
+            if(obj[office[i].office_id][k][0]!=null){
+              sum+=parseInt(obj[office[i].office_id][k][0]);
+              sumF+=parseInt(obj[office[i].office_id][k][0]);
+              html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][0]+' </td>'; 
+            }else{
+              html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+            }  
+          }else{
+            html+='<td style="background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
+          }
+        }
+        html+='<td style="background-color:#F0F0EF !important;"> '+sumM+' </td><td style="background-color:#F0F0EF !important;"> '+sumF+' </td><td style="background-color:#F0F0EF !important;"> '+sum+' </td></tr>';  
+      }else{
+        html+='<td style="background-color:#FFFFC2 !important;"> - </td>\
+        <td style="background-color:#FFFFC2 !important;"> - </td>\
+        <td style="background-color:#FFFFC2 !important;"> - </td>\
+        <td style="background-color:#FFFFC2 !important;"> - </td>\
+        <td style="background-color:#FFFFC2 !important;"> - </td>\
+        <td style="background-color:#FFFFC2 !important;"> - </td>\
+        <td style="background-color:#F0F0EF !important;"> - </td><td style="background-color:#F0F0EF !important;"> - </td><td style="background-color:#F0F0EF !important;"> - </td></tr>';
+      }
+      html+='</tbody></table>';
   return html;
 }
   router.get('/orgObs/:id',userHelpers.isRoot,function(req, res, next) {
@@ -653,15 +765,19 @@ function statisticsOfficesByTypeGender(obj,office){
   });
   function orgObs(data,offic){
     var html = '';
-    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+data[0].name_org+' </th>\
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين في '+data[0].name_org+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم البطاقة  </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>';
+                if(data[0].type>3){
+                  html+='<th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>';    
+                }
+                
+                
+                html+='<th class="text-center"  style="background-color:#B2E6FF !important;"> رقم البطاقة  </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -671,13 +787,15 @@ function statisticsOfficesByTypeGender(obj,office){
         html+= '<tr>\
           </tr>\
           <td>'+j+'</td>'+
-          '<td style="background-color:#FFFFC2 !important;"> '+data[i].name_org+' </td> \
+          '<td style="background-color:#FFFFC2 !important;"> '+data[i].name+' </td> \
           <td style="background-color:#FFFFC2 !important;"> '+data[i].phone_obs+' </td> \
           <td style="background-color:#FFFFC2 !important;"> '+data[i].email_obs+' </td> ';
-          if(data[i].office_obs<0){
-            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
-          }else{
-            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[data[i].office_obs].office_name_ar+' </td> ';  
+          if(data[0].type>3){
+            if(data[i].office_obs<0){
+            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+'<br>'+offic[0].office_name+' </td> ';  
+            }else{
+              html+='<td style="background-color:#FFFFC2 !important;"> '+offic[data[i].office_obs].office_name_ar+' </td> ';  
+            }
           }
           html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
 

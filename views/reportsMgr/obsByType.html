@@ -14,8 +14,8 @@
       }
       @font-face {
         font-family: 'Droid Arabic Kufi';
-        src : url("http://localhost:3003/fonts/DroidKufi-Regular.ttf")format("truetype");
-      }
+        src : url("http://localhost:3003/fonts/DroidKufi-Regular.ttf") format("truetype");
+          }
       .fontSize{
         font-size: 31px;
       }
@@ -61,7 +61,7 @@
   <body>
     <div class="container">
       <div class="row">
-       <div class="col-xs-3">
+        <div class="col-xs-3">
           <div class="halfSpace"></div>
           <div class="text-left">
             <img src="http://localhost:3003/images/logo.jpg"> 
@@ -69,7 +69,7 @@
         </div>
         <div class="col-xs-5">
           <div class="text-center fontSize"> 
-            
+            بــيـانـات الـمـراقـبـيـن حـسـب الـنـوع
           </div>
         </div>
         <div class="col-xs-4">
@@ -78,43 +78,33 @@
             <img src="http://localhost:3003/images/hnec_logo.png"> 
           </div>
         </div>
-        <div class="col-xs-4 pull-left">
+        <div class="col-xs-4 ">
          </br>
-          <div  class="col-xs-offset-2"> التاريـخ <span>:</span> {{date}}</div>
+          <div  class=""> التاريـخ <span>:</span> {{date}}</div>
         </div>
-        <div class="col-xs-12 col-xs-offset-4">
-          <div class="col-xs-5 text-center">
-            <div class="text-center fontSize"> 
-              إحصائـــيـــة الجهات المعتـــمدة الدولية
-            </div>
-          </div>
-        </div>
-        <!-- <div class="col-xs-12">
-        <div class="towSpaces"></div> -->
-         <!--  <table class="table condensed">
+        <div class="col-xs-12">
+        <div class="towSpaces"></div>
+          <table class="table condensed">
             <thead>
               <tr style="border-top-style: solid; border-top-width: 1px;" >
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي International observers</th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف Guest</th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي International media</th>
-              </tr>
-            </thead>
-            <tbody style="border: 1px solid #000;"> -->
-              {{{ resultsNoOfInternationalObs resultt }}}
-            <!-- </tbody>
-          </table> -->
-        <!-- </div> -->
+              {{{obsBytype  allResults }}}
+            </tbody>
+          </table>
+        </div>
         <div class="col-xs-3">
+          <div class="space"></div>
           <div class="pull-right"> 
             
           </div>
         </div>
         <div class="col-xs-6">
+          <div class="space"></div>
           <div class="text-center"> 
             
           </div>
         </div>
         <div class="col-xs-3">
+          <div class="space"></div>
           <div class="text-left">
             
           </div>
