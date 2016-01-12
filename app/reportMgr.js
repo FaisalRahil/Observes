@@ -49,6 +49,18 @@ exports.reportMgr = {
       });
     });
   },
+  getAllObsAndOrgtype : function(id,type,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT *,`org`.`email` AS email_org ,`obs`.`email` AS email_obs FROM `organisaition` org, `observers` obs WHERE `obs`.`id_office`=? AND `org`.`id_org` = `obs`.`registration_org` AND `org`.`type`=?;',[id,type],  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
    statisticsOfficesByTypeGender :function(id,cb){
     mysqlMgr.connect(function (conn) {
       conn.query('SELECT count(*) AS num,`org`.`type`,`obs`.`id_office`,`obs`.`gender` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `obs`.`id_office`=? AND `obs`.`id_office`=`org`.`id_office`    group by `obs`.`id_office`,`org`.`type`,`obs`.`gender`',id, function(err, result) {

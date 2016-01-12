@@ -274,4 +274,16 @@ exports.reportMgr = {
       });
     });
   },
+  getOrgObszip : function(id_org,cb){ //get observers in organisaitions
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT count(*) AS num,`obs`.`id_office`,`org`.`name_org` FROM `observers` obs,`organisaition` org WHERE `org`.`id_org`=`obs`.`registration_org` AND `obs`.`status`=1 AND `org`.`id_org` = ? group by `obs`.`id_office`  ', id_org,  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
 };

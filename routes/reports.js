@@ -802,4 +802,110 @@ function statisticsOfficesByTypeGender(obj,office){
      }
     return html;
   }
+  router.get('/obsByTypezip/:type',userHelpers.isRoot,function(req, res, next) {
+    reportMgr.obsBytype(req.params.type,function(results){
+      if(results.length>0){
+        var now = new Date();
+        var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
+        jsr.render({
+          template: { 
+            content:  fs.readFileSync(path.join(__dirname, "../views/reports/obsByTypezip.html"), "utf8"),
+            recipe: "phantom-pdf",
+            helpers:obsBytypezip.toString()
+          },
+          data:{allResults:results,date:nowdate,offic:office}
+        }).then(function (response) {
+          response.result.pipe(res);
+        });
+      }else{
+        res.redirect('/reports?msg=1');
+      }
+    });
+  });
+  function obsBytypezip(allResults,offic){
+    var html = '';
+    var type1 = ["منظمة عالمية","الهيئات الدبلوماسية","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+
+    for (var k = 0; k <= type1.length; k++) {
+      if(allResults[k].type-1 == k ){
+        typeInTD = type1[k];
+        break;
+      }
+    }
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+typeInTD+' </th>\
+              </tr>\
+              <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>\
+              </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;">';
+     j=0;
+     for (var i in allResults){
+      j++;
+        html+= '<tr>\
+          </tr>\
+          <td>'+j+'</td>'+
+          '<td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
+            <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ObsCount+' </td>';
+            if(allResults[i].id_office<0){
+            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+'<br>'+offic[0].office_name+' </td> ';  
+            }else{
+              html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].office_obs].office_name_ar+' </td> ';  
+            }
+
+
+     }
+    return html;
+  }
+  router.get('/orgObszip/:id',userHelpers.isRoot,function(req, res, next) {
+    reportMgr.getOrgObszip(req.params.id,function(results){
+      if(results.length>0){
+        var now = new Date();
+        var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
+        jsr.render({
+          template: { 
+            content:  fs.readFileSync(path.join(__dirname, "../views/reports/orgObszip.html"), "utf8"),
+            recipe: "phantom-pdf",
+            helpers:orgObszip.toString()
+          },
+          data:{allResults:results,date:nowdate,office:office}
+        }).then(function (response) {
+          response.result.pipe(res);
+        });
+      }else{
+        res.redirect('/reports?msg=1');
+      }
+    });
+  });
+  function orgObszip(data,offic){
+    var html = '';
+    html= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين في '+data[0].name_org+' </th>';
+       html+=' </tr>\
+              <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> العـدد </th>\
+              </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;">';
+     j=0;
+     for (var i in data){
+      j++;
+        html+= '<tr>\
+          </tr>\
+          <td>'+j+'</td>';
+          if(data[i].id_office<0){
+            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
+            }else{
+              html+='<td style="background-color:#FFFFC2 !important;"> '+offic[data[i].id_office].office_name_ar+' </td> ';  
+            }
+          html+='<td style="background-color:#FFFFC2 !important;"> '+data[i].num+' </td> ';
+          
+
+     }
+    return html;
+  }
 module.exports = router;

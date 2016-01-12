@@ -82,6 +82,24 @@ var userHelpers = require('../app/userHelpers');
       });
     }); 
   });
+  router.get('/observerstype/:type', userHelpers.Login,function(req, res, next) {
+    reportMgr.getAllObsAndOrgtype(req.session.id_office,req.params.type, function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reportsMgr/observers.html"), "utf8"),
+          phantom: {
+            format: 'A3',
+            orientation: "landscape",
+          },
+          recipe: "phantom-pdf",
+          helpers:drawAllResults.toString()
+        },
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
+    }); 
+  });
   router.get('/statisticsOfficesByTypeGender', userHelpers.Login,function(req, res, next) {
     reportMgr.statisticsOfficesByTypeGender(req.session.id_office,function(result){
       obj={};
@@ -677,6 +695,60 @@ function statisticsOfficesByType(office,obj){
      
     sumAll+=sum;
     
+    return html;
+  }
+  router.get('/obsByTypezip/:type',userHelpers.isRoot,function(req, res, next) {
+    reportMgr.obsBytype(req.session.id_office,req.params.type,function(results){
+      if(results.length>0){
+        console.log(results);
+        var now = new Date();
+        var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
+        jsr.render({
+          template: { 
+            content:  fs.readFileSync(path.join(__dirname, "../views/reportsMgr/obsByTypezip.html"), "utf8"),
+            recipe: "phantom-pdf",
+            helpers:obsBytypezip.toString()
+          },
+          data:{allResults:results,date:nowdate}
+        }).then(function (response) {
+          response.result.pipe(res);
+        });
+      }else{
+        res.redirect('/reports?msg=1');
+      }
+    });
+  });
+  function obsBytypezip(allResults){
+    var html = '';
+    var type1 = ["منظمة عالمية","الهيئات الدبلوماسية","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+
+    // for (var k = 0; k <= type1.length; k++) {
+    //   if(allResults[k].type-1 == k ){
+    //     typeInTD = type1[k];
+    //     break;
+    //   }
+    // }
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
+              </tr>\
+              <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+              </tr>\
+            </thead>\
+            <tbody style="border: 1px solid #000;">';
+     j=0;
+     for (var i in allResults){
+      j++;
+        html+= '<tr>\
+          </tr>\
+          <td>'+j+'</td>'+
+          '<td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
+            <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ObsCount+' </td>';
+
+
+
+     }
     return html;
   }
 module.exports = router;

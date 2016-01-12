@@ -35,7 +35,6 @@ block content
               span التقارير
       .panel-body
         .row
-          
           form.form#reportM(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#obsByTypeM.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
@@ -57,22 +56,43 @@ block content
 
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               button#orgbtnM.btn.btn-danger.btn-block() عرض
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-primary.btn-block(href="http://localhost:3003/reportsgrM/noOfLocaleObs", target="_blank") 
-            //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            //-   a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfLocaleObsEn", target="_blank") Data according to local observers committees
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-success.btn-block(href="http://localhost:3003/reportsMgr/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة 
+        .row
+
+          form.form#reportMzip(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              br
+              select#obsByTypeMzip.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
+                option(value="", style='color:grey; display:none;') بيانات المراقبين المحليين 
+
+                option(value="4") منظمة محلية
+                option(value="5") إعلام محلي
+                option(value="6") وكيل
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              br
+              button#typebtnMzip.btn.btn-warning.btn-block() عرض
+          //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
+          //-   a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfLocaleObsEn", target="_blank") Data according to local observers committees
+
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-success.btn-block(href="http://localhost:3003/reportsMgr/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة 
             //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
               a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/noOfInternationalObsEn", target="_blank") Number according to international observers committees
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfWomenAndMen", target="_blank")
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-danger.btn-block(href="reportsMgr/statisticsOfficesByTypeGender", target="_blank") إحصائية حسب النوع
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-danger.btn-block(href="http://localhost:3003/reportsMgr/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-primary.btn-block(href="http://localhost:3003/reportsMgr/observers", target="_blank") بيانات المراقبين
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-info.btn-block(href="http://localhost:3003/reportsMgr/observerstype/4", target="_blank")
+              |بيانات المراقبين المنظمات
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-danger.btn-block(href="reportsMgr/statisticsOfficesByTypeGender", target="_blank") إحصائية حسب النوع
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-danger.btn-block(href="http://localhost:3003/reportsMgr/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-primary.btn-block(href="http://localhost:3003/reportsMgr/observers", target="_blank") بيانات المراقبين
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-success.btn-block(href="http://localhost:3003/reportsMgr/observerstype/5", target="_blank") بيانات المراقبين الاعلاميين
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-info.btn-block(href="http://localhost:3003/reportsMgr/observerstype/6", target="_blank") بيانات المراقبين الوكلاء
     
   script(src="/js/jquery-2.1.1.min.js")
   script(src="/js/bootstrap.min.js")

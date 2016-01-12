@@ -46,7 +46,7 @@ block content
 
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               button#typebtnN.btn.btn-warning.btn-block() عرض
-
+          
           //- form.form#reports(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#nat.form-control.selectpicker(name="obsByNationality", data-live-search="true", data-size=5, data-style="btn-danger")
@@ -68,6 +68,7 @@ block content
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               button#typebtnM.btn.btn-warning.btn-block() عرض
             //- a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/obsByType/#{}", target="_blank") عرض
+        .row
           form.form#norgform(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               br
@@ -90,22 +91,42 @@ block content
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               br
               button#orgbtnM.btn.btn-danger.btn-block() عرض
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-primary.btn-block(href="http://localhost:3003/reports/noOfLocaleObs", target="_blank") 
-            //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            //-   a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfLocaleObsEn", target="_blank") Data according to local observers committees
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-success.btn-block(href="http://localhost:3003/reports/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة (دولي,محلي)
-            //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/noOfInternationalObsEn", target="_blank") Number according to international observers committees
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfWomenAndMen", target="_blank")
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-danger.btn-block(href="reports/statisticsOfficesByTypeGender", target="_blank") إحصائية حسب النوع
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
-            .col-xs-6.col-lg-6(style="padding-top: 20px;")
-              a.btn.btn-primary.btn-block(href="http://localhost:3003/reports/observers", target="_blank") بيانات المراقبين
+        .row
+          br
+          form.form#reportNzip(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              select#obsByTypeNzip.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
+                option(value="", style='color:grey; display:none;') بيانات المراقبين الدوليين 
+                option(value="1") منظمة عالمية
+                option(value="2") ضيف
+                option(value="3") إعلام دولي
+
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              button#typebtnNzip.btn.btn-warning.btn-block() عرض
+          form.form#norgformzip(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              select#orgobsNzip.form-control.selectpicker(name="orgobsN", data-live-search="true", data-size=5, data-style="btn-danger")
+                option(value="", style='color:grey; display:none;') بيانات الجهات الدولية المعتمدة
+                for org in Norg
+                  option(value="#{org.id_org}") #{org.name_org}
+
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              button#orgbtnNzip.btn.btn-danger.btn-block() عرض
+          //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
+          //-   a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfLocaleObsEn", target="_blank") Data according to local observers committees
+          
+          //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/noOfInternationalObsEn", target="_blank") Number according to international observers committees
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-success.btn-block(href="http://localhost:3003/reports/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة (دولي,محلي)
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-danger.btn-block(href="reports/statisticsOfficesByTypeGender", target="_blank") إحصائية حسب النوع
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-primary.btn-block(href="http://localhost:3003/reports/observers", target="_blank") بيانات المراقبين
     
   script(src="/js/jquery-2.1.1.min.js")
   script(src="/js/bootstrap.min.js")

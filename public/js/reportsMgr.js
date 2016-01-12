@@ -29,6 +29,20 @@ $(document).ready(function(){
       }
     },
   });
+  $("#reportMzip").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
+    rules:{
+      obsByType:{
+        required: true,
+      }
+    },
+    invalidHandler: function(event, validator) {
+      var errors = validator.numberOfInvalids();
+      if (errors) {
+        custNotify("danger","خطأ","الرجاء اختيار بيانات المراقبين حسب النوع","warning-sign","bounceIn","bounceOut");
+      }
+    },
+  });
 
   $('#typebtnN').on('click', function (e) {
     e.preventDefault();
@@ -43,6 +57,14 @@ $(document).ready(function(){
     var isvalidate=$("#reportM").valid();
     if(isvalidate){
       var win = window.open("/reportsMgr/obsByType/"+$('#obsByTypeM').val(), '_blank');
+      win.focus();
+    }
+  });
+  $('#typebtnMzip').on('click', function (e) {
+    e.preventDefault();
+    var isvalidate=$("#reportMzip").valid();
+    if(isvalidate){
+      var win = window.open("/reportsMgr/obsByTypezip/"+$('#obsByTypeMzip').val(), '_blank');
       win.focus();
     }
   });
