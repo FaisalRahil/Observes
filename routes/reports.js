@@ -850,20 +850,11 @@ function statisticsOfficesByTypeGender(obj,office){
           <td>'+j+'</td>'+
           '<td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
             <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ObsCount+' </td>';
-<<<<<<< HEAD
             // if(allResults[i].id_office<0){
             // html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
             // }else{
             //   html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].id_office].office_name_ar+' </td> ';  
             // }
-=======
-            if(allResults[i].id_office<0){
-            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
-            }else{
-              html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].id_office].office_name_ar+' </td> ';  
-            }
->>>>>>> b6f932341154b8f26d517b0c82dd84d4d0b2ef3f
-
 
      }
     return html;
