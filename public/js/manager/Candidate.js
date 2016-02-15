@@ -21,11 +21,11 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم الرشح'
+          title: 'اسم المترشح'
       }, {
           field: 'name_director',
           sortable:true,
-          title: 'اسم الرئيس'
+          title: 'اسم المدير'
       }, {
           field: 'address',
           sortable:true,
@@ -33,7 +33,7 @@ $(document).ready(function() {
       }, {
           field: 'registration_no',
           sortable:true,
-          title: 'رقم الاشهار'
+          title: 'رقم المترشح'
       }, {
           field: 'email',
           sortable:true,

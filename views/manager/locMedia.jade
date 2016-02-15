@@ -43,15 +43,15 @@ block content
       .panel-body
         form#natOrg(role='form',method="post",action="/manager/addOrg")
           .form-group
-            input.form-control#name_org(name='name_org', placeholder='اسم المنظمة', type='text')
+            input.form-control#name_org(name='name_org', placeholder='اسم المؤسسة', type='text')
           .form-group
-            input.form-control#name_director(name='name_director', placeholder='اسم مدير المنظمة', type='text')
+            input.form-control#name_director(name='name_director', placeholder='اسم مدير ', type='text')
           .form-group
             input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
           .form-group
             input.form-control#address(name='address', placeholder='العنوان', type='text')
           .form-group
-            input.form-control#registration_no(name='registration_no', placeholder='رقم اﻹشهار', type='text')
+            input.form-control#registration_no(name='registration_no', placeholder='', type='text')
           .form-group
             input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
 
@@ -67,7 +67,7 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | المؤسسة الاعلامية
       .panel-body
         table#table
   //- del

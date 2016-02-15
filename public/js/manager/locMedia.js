@@ -17,7 +17,7 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم المنظمه'
+          title: 'اسم المؤسسة'
       }, {
           field: 'name_director',
           sortable:true,
@@ -29,7 +29,7 @@ $(document).ready(function() {
       }, {
           field: 'registration_no',
           sortable:true,
-          title: 'رقم الاشهار'
+          title: 'رقم '
       }, {
           field: 'email',
           sortable:true,

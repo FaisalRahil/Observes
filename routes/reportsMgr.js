@@ -557,6 +557,13 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
         gender1 = "ذكـر";
       }
       html+= '<tr>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].registration_no+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_director+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_org+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].address+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+nat+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].pass_nid+' </td>\
@@ -564,13 +571,6 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_obs+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone_obs+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+office1+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].registration_no+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_director+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_org+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].address+' </td>\
               </tr>';
             }
     return html;
@@ -731,7 +731,7 @@ function statisticsOfficesByType(office,obj){
     html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;width:30px;"> رقم </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
               </tr>\

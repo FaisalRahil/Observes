@@ -38,7 +38,7 @@ block content
           form.form#reportM(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#obsByTypeM.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
-                option(value="", style='color:grey; display:none;') بيانات المراقبين المحليين 
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين المحليين (جهات) 
 
                 option(value="4") منظمة محلية
                 option(value="5") إعلام محلي
@@ -50,7 +50,7 @@ block content
           form.form#morgform(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#orgobsM.form-control.selectpicker(name="orgobsM", data-live-search="true", data-size=5, data-style="btn-danger")
-                option(value="", style='color:grey; display:none;') بيانات الجهات المحلية المعتمدة
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين المحليين (افرد) 
                 for org in Morg
                   option(value="#{org.id_org}") #{org.name_org}
 
@@ -62,7 +62,7 @@ block content
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               br
               select#obsByTypeMzip.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
-                option(value="", style='color:grey; display:none;') بيانات المراقبين المحليين 
+                option(value="", style='color:grey; display:none;') اعداد المعتمدين المحليين (جهات)
 
                 option(value="4") منظمة محلية
                 option(value="5") إعلام محلي
@@ -80,20 +80,23 @@ block content
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             a.btn.btn-info.btn-block(href="http://localhost:3003/reportsMgr/observerstype/4", target="_blank")
-              |بيانات المراقبين المنظمات
+              |بــيـانـات تفصيلية  للمراقبين
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-danger.btn-block(href="reportsMgr/statisticsOfficesByTypeGender", target="_blank") إحصائية حسب النوع
+            a.btn.btn-danger.btn-block(href="reportsMgr/statisticsOfficesByTypeGender", target="_blank") تقرير حسب النوع
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-danger.btn-block(href="http://localhost:3003/reportsMgr/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
+            a.btn.btn-info.btn-block(href="http://localhost:3003/reportsMgr/observerstype/6", target="_blank") بيانات تفصيلية الوكلاء
+          
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-primary.btn-block(href="http://localhost:3003/reportsMgr/observers", target="_blank") بيانات المراقبين
-        .row
-          .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-success.btn-block(href="http://localhost:3003/reportsMgr/observerstype/5", target="_blank") بيانات المراقبين الاعلاميين
-          .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-info.btn-block(href="http://localhost:3003/reportsMgr/observerstype/6", target="_blank") بيانات المراقبين الوكلاء
+            a.btn.btn-danger.btn-block(href="http://localhost:3003/reportsMgr/statisticsOfficesByType", target="_blank") تقرير   شامل
     
+
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-success.btn-block(href="http://localhost:3003/reportsMgr/observerstype/5", target="_blank") بيانات تفصيلية الاعلاميين
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-primary.btn-block(href="http://localhost:3003/reportsMgr/observers", target="_blank") بيانات تفصيلية لجميع المعتمدين
+          
   script(src="/js/jquery-2.1.1.min.js")
   script(src="/js/bootstrap.min.js")
   script(src="/js/bootstrap-select.min.js")

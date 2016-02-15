@@ -156,6 +156,13 @@ var userHelpers = require('../app/userHelpers');
         gender1 = "ذكـر";
       }
       html+= '<tr>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].registration_no+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_director+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_org+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].address+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+nat+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].pass_nid+' </td>\
@@ -163,13 +170,6 @@ var userHelpers = require('../app/userHelpers');
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_obs+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone_obs+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+office1+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].registration_no+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_director+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_org+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].address+' </td>\
               </tr>';
             }
     return html;
@@ -804,6 +804,7 @@ function statisticsOfficesByTypeGender(obj,office){
   }
   router.get('/obsByTypezip/:type',userHelpers.isRoot,function(req, res, next) {
     reportMgr.obsBytype(req.params.type,function(results){
+      console.log(results);
       if(results.length>0){
         var now = new Date();
         var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
@@ -838,7 +839,6 @@ function statisticsOfficesByTypeGender(obj,office){
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -850,11 +850,11 @@ function statisticsOfficesByTypeGender(obj,office){
           <td>'+j+'</td>'+
           '<td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
             <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ObsCount+' </td>';
-            if(allResults[i].id_office<0){
-            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+'<br>'+offic[0].office_name+' </td> ';  
-            }else{
-              html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].office_obs].office_name_ar+' </td> ';  
-            }
+            // if(allResults[i].id_office<0){
+            // html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
+            // }else{
+            //   html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].id_office].office_name_ar+' </td> ';  
+            // }
 
 
      }
