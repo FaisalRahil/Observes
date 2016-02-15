@@ -13,6 +13,9 @@ $(document).ready(function(){
   //     }
   //   },
   // });
+ $('body').on('click', '#csv', function(){
+    window.location.href='/reports/csv';
+  });
 
   $("#reportN").validate({
     ignore: ':not(select:hidden, input:visible, textarea:visible)',

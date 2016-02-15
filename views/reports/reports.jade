@@ -119,14 +119,18 @@ block content
             a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/noOfInternationalObsEn", target="_blank") Number according to international observers committees
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-success.btn-block(href="http://localhost:3003/reports/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة (دولي,محلي)
+            a.btn.btn-success.btn-block(href="/reports/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة (دولي,محلي)
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             a.btn.btn-danger.btn-block(href="reports/statisticsOfficesByTypeGender", target="_blank") إحصائية حسب النوع
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-danger.btn-block(href="http://localhost:3003/reports/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
+            a.btn.btn-danger.btn-block(href="/reports/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-primary.btn-block(href="http://localhost:3003/reports/observers", target="_blank") بيانات المراقبين
+            a.btn.btn-primary.btn-block(href="/reports/observers", target="_blank") بيانات المراقبين
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            button#csv.btn.btn-danger.btn-block() csv
+
     
   script(src="/js/jquery-2.1.1.min.js")
   script(src="/js/bootstrap.min.js")

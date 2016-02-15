@@ -3,7 +3,19 @@ var mysqlMgr = require('./mysql').mysqlMgr,
 exports.reportMgr = {
   getAllObsAndOrg : function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT *,`org`.`email` AS email_org ,`obs`.`email` AS email_obs FROM `organisaition` org, `observers` obs WHERE `org`.`id_org` = `obs`.`registration_org`;',  function(err, result) {
+      conn.query('SELECT *,`org`.`email` AS email_org ,`obs`.`email` AS email_obs,`org`.`id_office` AS id_office_org,`obs`.`creation_date` AS cd FROM `organisaition` org, `observers` obs WHERE `org`.`id_org` = `obs`.`registration_org`;',  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
+  getAllObsAndOrgtype : function(type,cb){
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT *,`org`.`email` AS email_org ,`obs`.`email` AS email_obs FROM `organisaition` org, `observers` obs WHERE  `org`.`id_org` = `obs`.`registration_org` AND `org`.`type`=?;',[type],  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);

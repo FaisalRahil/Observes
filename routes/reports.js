@@ -11,6 +11,7 @@ var nationality = require('../Nationality');
 var office = require('../office');
 var type = require('../type');
 var userHelpers = require('../app/userHelpers');
+var json2csv = require('json2csv');
 
   router.get('/', userHelpers.isRoot,function(req, res) {
     orgMgr.getOrgs(function(Morg){
@@ -20,7 +21,48 @@ var userHelpers = require('../app/userHelpers');
     });
     
   });
-
+  router.get('/csv',function(req, res, next) {
+    reportMgr.getAllObsAndOrg(function(result){
+      var object=[]
+      var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
+      var typeen = ["International Observer","Guest","International Media","Domestic Observer","National Media","Candidate Agent"];
+      for(i in result){
+        var obj={};
+        obj.id_ob=result[i].id_ob;
+        obj.name=result[i].name;
+        obj.national=nationality[result[i].nationality-1].name ;
+        obj.pass_nid=result[i].pass_nid;
+        if(result[i].id_office<0){
+          obj.id_office=office[0].office_name_ar;
+        }else{
+          obj.id_office=office[result[i].id_office].office_name_ar;
+        }
+        obj.phone_obs=result[i].phone_obs;
+        obj.creation_date=Date(result[i].cd);
+        
+        obj.director=result[i].director;
+        if(result[i].gender==1){
+          obj.gender='ذكر';
+        }else{
+          obj.gender='أنثي';
+        }
+        obj.name_org=result[i].name_org;
+        obj.type_en=typeen[result[i].type-1];
+        obj.type_ar=typear[result[i].type-1];
+        obj.first_name=' ';
+        obj.last_name=' ';
+        obj.phone=result[i].phone;
+        object.push(obj);
+      }
+      var fields = ['id_ob','name','national','pass_nid','id_office','phone_obs','creation_date' ,'director','gender','name_org', 'type_en','type_ar','first_name','last_name','id_office','phone',];
+      var fieldNames = ['ObserverAutoNo', 'Name', 'Nationality','PassportNo','Address','Tel','DataEntryDate' ,'Representative','Gender','OrgName', 'OrgType','OrgTypeArabic','FirstName','LastName','OfficeName','PhoneNo',];
+      json2csv({ data: object, fields: fields, fieldNames : fieldNames }, function(err, csv) {
+        if (err) console.log(err);
+        res.attachment('data.csv');
+        res.send(csv);
+      });
+    });
+  });
   // ////////////////////////////////////////////////////////////////////////
   function resultsNoOfLocaleObs(office,arr1,arr2,arr3,arr4,arr5,arr6,officePar){
     var html = '';
@@ -276,6 +318,24 @@ var userHelpers = require('../app/userHelpers');
 
   router.get('/observers', userHelpers.isRoot,function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/observers.html"), "utf8"),
+          phantom: {
+            format: 'A3',
+            orientation: "landscape",
+          },
+          recipe: "phantom-pdf",
+          helpers:drawAllResults.toString()
+        },
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
+    }); 
+  });
+  router.get('/observerstype/:type', userHelpers.Login,function(req, res, next) {
+    reportMgr.getAllObsAndOrgtype(req.params.type, function(results){
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/observers.html"), "utf8"),
@@ -879,6 +939,24 @@ function statisticsOfficesByTypeGender(obj,office){
       }else{
         res.redirect('/reports?msg=1');
       }
+    });
+  });
+  router.get('/test',function(req, res, next) {
+    reportMgr.noOfWomenAndMen(function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/test.html"), "utf8"),
+          phantom: {
+            format: 'A4',
+          },
+          recipe: "phantom-pdf",
+          helpers:noOfWomenAndMen.toString()
+        },
+          data:{allResults:results}
+        // data:obj
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
     });
   });
   function orgObszip(data,offic){
