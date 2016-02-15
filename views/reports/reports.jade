@@ -39,7 +39,7 @@ block content
           form.form#reportN(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#obsByTypeN.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
-                option(value="", style='color:grey; display:none;') بيانات المراقبين الدوليين 
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين (جهات/دولي) 
                 option(value="1") منظمة عالمية
                 option(value="2") ضيف
                 option(value="3") إعلام دولي
@@ -60,7 +60,7 @@ block content
           form.form#reportM(accept-charset="utf-8", role="form")
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#obsByTypeM.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
-                option(value="", style='color:grey; display:none;') بيانات المراقبين المحليين 
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين (جهات/محلي)
 
                 option(value="4") منظمة محلية
                 option(value="5") إعلام محلي
@@ -73,7 +73,7 @@ block content
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               br
               select#orgobsN.form-control.selectpicker(name="orgobsN", data-live-search="true", data-size=5, data-style="btn-danger")
-                option(value="", style='color:grey; display:none;') بيانات الجهات الدولية المعتمدة
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين (افراد/دولي)
                 for org in Norg
                   option(value="#{org.id_org}") #{org.name_org}
 
@@ -84,7 +84,7 @@ block content
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               br
               select#orgobsM.form-control.selectpicker(name="orgobsM", data-live-search="true", data-size=5, data-style="btn-danger")
-                option(value="", style='color:grey; display:none;') بيانات الجهات المحلية المعتمدة
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين (افراد/محلي)
                 for org in Morg
                   option(value="#{org.id_org}") #{org.name_org}
 
@@ -92,44 +92,52 @@ block content
               br
               button#orgbtnM.btn.btn-danger.btn-block() عرض
         .row
-          br
           form.form#reportNzip(accept-charset="utf-8", role="form")
+            br
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#obsByTypeNzip.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
-                option(value="", style='color:grey; display:none;') بيانات المراقبين الدوليين 
+                option(value="", style='color:grey; display:none;') اعداد المعتمدين (جهات/دولي)
                 option(value="1") منظمة عالمية
                 option(value="2") ضيف
                 option(value="3") إعلام دولي
 
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               button#typebtnNzip.btn.btn-warning.btn-block() عرض
+
+          
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-info.btn-block(href="/reports/observerstype/1", target="_blank") بــيـانـات تفصيلية  للمراقبين
+          
+        .row
           form.form#norgformzip(accept-charset="utf-8", role="form")
+            <br>
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#orgobsNzip.form-control.selectpicker(name="orgobsN", data-live-search="true", data-size=5, data-style="btn-danger")
-                option(value="", style='color:grey; display:none;') بيانات الجهات الدولية المعتمدة
+                option(value="", style='color:grey; display:none;') اعداد المعتمدين (افراد/دولي) 
                 for org in Norg
                   option(value="#{org.id_org}") #{org.name_org}
 
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               button#orgbtnNzip.btn.btn-danger.btn-block() عرض
-          //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
-          //-   a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfLocaleObsEn", target="_blank") Data according to local observers committees
-          
-          //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/noOfInternationalObsEn", target="_blank") Number according to international observers committees
-        .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-success.btn-block(href="/reports/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة (دولي,محلي)
-          .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-danger.btn-block(href="reports/statisticsOfficesByTypeGender", target="_blank") إحصائية حسب النوع
-        .row
-          .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-danger.btn-block(href="/reports/statisticsOfficesByType", target="_blank") احصائية حسب اللجان
-          .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-primary.btn-block(href="/reports/observers", target="_blank") بيانات المراقبين
+            a.btn.btn-info.btn-block(href="/reports/observerstype/3", target="_blank") بيانات تفصيلية الاعلاميين
+       
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             button#csv.btn.btn-danger.btn-block() csv
+            a.btn.btn-danger.btn-block(href="reports/statisticsOfficesByTypeGender", target="_blank") تقرير يومي شامل حسب النوع
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-info.btn-block(href="/reports/observerstype/2", target="_blank") بيانات تفصيلية الضيوف
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-danger.btn-block(href="/reports/statisticsOfficesByType", target="_blank") تقرير يومي شامل
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-primary.btn-block(href="/reports/observers", target="_blank") بيانات تفصيلية
+
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-success.btn-block(href="/reports/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة (دولي,محلي)
 
     
   script(src="/js/jquery-2.1.1.min.js")

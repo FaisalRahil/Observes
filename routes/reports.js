@@ -198,8 +198,8 @@ var json2csv = require('json2csv');
         gender1 = "ذكـر";
       }
       html+= '<tr>\
-                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].registration_no+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].registration_no+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_director+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone+' </td>\
@@ -899,7 +899,6 @@ function statisticsOfficesByTypeGender(obj,office){
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -911,12 +910,11 @@ function statisticsOfficesByTypeGender(obj,office){
           <td>'+j+'</td>'+
           '<td style="background-color:#FFFFC2 !important;"> '+allResults[i].name_org+' </td> \
             <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ObsCount+' </td>';
-            if(allResults[i].id_office<0){
-            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
-            }else{
-              html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].id_office].office_name_ar+' </td> ';  
-            }
-
+            // if(allResults[i].id_office<0){
+            // html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+' </td> ';  
+            // }else{
+            //   html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].id_office].office_name_ar+' </td> ';  
+            // }
 
      }
     return html;
