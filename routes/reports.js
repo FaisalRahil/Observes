@@ -939,12 +939,15 @@ function statisticsOfficesByTypeGender(obj,office){
       }
     });
   });
+  
   router.get('/test',function(req, res, next) {
     reportMgr.noOfWomenAndMen(function(results){
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/test.html"), "utf8"),
           phantom: {
+            // width: "6047.244095",
+            // height: "9070.866142",
             format: 'A4',
           },
           recipe: "phantom-pdf"
