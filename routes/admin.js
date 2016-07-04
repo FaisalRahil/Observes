@@ -21,6 +21,10 @@ router.post('/moveOrg',userHelpers.isRoot, function(req, res) {
   });
 
 });
+router.post('/printnat',userHelpers.isRoot, function(req, res) {
+  console.log(req.body);
+
+});
 router.get('/nationality', function(req, res) {
   res.send(nationality);
 });

@@ -67,9 +67,22 @@ $(document).ready(function() {
         valign: 'middle',
         title: 'مسح',
         formatter: operateFormatter1
+    }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        // checkbox:true,
+        title: '<button id="print" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span><span class="text-none"> الطباعة</span></button>',
+        formatter: operateFormattercheckbox
     }],
   });
   
+  
+  function operateFormattercheckbox(value, row, index) {
+    return  [
+              '<input name="id_print" type="checkbox" value="'+value+'">'
+            ].join('');
+  }
 
   function operateFormatter(value, row, index) {
     return  [
@@ -89,8 +102,20 @@ $(document).ready(function() {
     $('#confdelete').val(id);
   });
 
+  $('body').on('click', '#print', function (e) {
+    e.preventDefault();
+    $('#formprint').submit();
+  });
+
+  $("#formprint").submit(function(e) {
+    e.preventDefault();
+    $.post("/admin/printnat", $("#formprint").serialize(),function(data){
+
+    });
+   
+  });
   /* Go to media needs view or edit */
-  $('#confdelete').click(function() {
+  $('body').on('click', '#confdelete', function (e) {
     var id = $(this).val();
     $.get('/admin/delObs/'+id, function(result){
       window.location.href="/admin/obs/natOrgObs";
