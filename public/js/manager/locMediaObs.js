@@ -54,9 +54,20 @@ $(document).ready(function() {
           valign: 'middle',
           title: 'مسح',
           formatter: operateFormatter1
-      }],
+      }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        // checkbox:true,
+        title: '<button id="print" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span><span class="text-none"> الطباعة</span></button>',
+        formatter: operateFormattercheckbox
+    }],
     });
-  
+  function operateFormattercheckbox(value, row, index) {
+    return  [
+              '<input name="id_print" type="checkbox" value="'+value+'">'
+            ].join('');
+  }  
     function operateFormatter(value, row, index) {
     return  [
               '<a id="viewOrg" class="btn btn-xs btn-primary" href="/manager/editMediaObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
@@ -81,7 +92,18 @@ $(document).ready(function() {
             ].join('');
       }
   }
+  $('body').on('click', '#print', function (e) {
+    e.preventDefault();
+    $('#formprint').submit();
+  });
 
+  $("#formprint").submit(function(e) {
+    e.preventDefault();
+    $.post("/manager/printloc", $("#formprint").serialize(),function(data){
+
+    });
+   
+  });
   /* Go to orgTable needs view or edit */
   $('body').on('click', '#deleteObs ', function () {
     var id = $(this).val();

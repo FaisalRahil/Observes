@@ -312,5 +312,8 @@ router.get('/getToSer',userHelpers.Login, function(req, res) {
     res.redirect('/manager/org?msg='+results);
   });
 });
+router.post('/printloc',userHelpers.isRoot, function(req, res) {
+  console.log(req.body);
 
+});
 module.exports = router;

@@ -66,10 +66,22 @@ $(document).ready(function() {
         valign: 'middle',
         title: 'مسح',
         formatter: operateFormatter1
+    }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        // checkbox:true,
+        title: '<button id="print" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span><span class="text-none"> الطباعة</span></button>',
+        formatter: operateFormattercheckbox
     }],
   });
 
   
+  function operateFormattercheckbox(value, row, index) {
+    return  [
+              '<input name="id_print" type="checkbox" value="'+value+'">'
+            ].join('');
+  }
 
   function operateFormatter(value, row, index) {
     return  [
@@ -82,7 +94,19 @@ $(document).ready(function() {
               '<button id="deleteGuest" data-toggle="modal" href="#deleteGuestObsModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
+  $('body').on('click', '#print', function (e) {
+    e.preventDefault();
+    $('#formprint').submit();
+  });
 
+  $("#formprint").submit(function(e) {
+    e.preventDefault();
+    var id = $("#formprint").serialize();
+    $.post("/admin/printnat", $("#formprint").serialize(),function(data){
+
+    });
+   
+  });
   /* Go to media needs view or edit */
   $('body').on('click', '#deleteGuest ', function () {
     var id = $(this).val();
