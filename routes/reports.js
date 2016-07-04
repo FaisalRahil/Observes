@@ -947,8 +947,26 @@ function statisticsOfficesByTypeGender(obj,office){
           phantom: {
             format: 'A4',
           },
-          recipe: "phantom-pdf",
-          helpers:noOfWomenAndMen.toString()
+          recipe: "phantom-pdf"
+          // helpers:noOfWomenAndMen.toString()
+        },
+          data:{allResults:results}
+        // data:obj
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
+    });
+  });
+  router.get('/svg',function(req, res, next) {
+    reportMgr.noOfWomenAndMen(function(results){
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/svg.html"), "utf8"),
+          phantom: {
+            format: 'A4',
+          },
+          recipe: "phantom-pdf"
+          // helpers:noOfWomenAndMen.toString()
         },
           data:{allResults:results}
         // data:obj
