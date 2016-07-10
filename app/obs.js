@@ -295,4 +295,16 @@ exports.obsMgr = {
     });
   },
   
+  getprint : function(id,cb){ //get observers in organisaitions
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND obs.`id_ob` in (?) AND obs.`registration_org` = org.`id_org`', [id],  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
 };

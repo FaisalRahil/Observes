@@ -312,8 +312,9 @@ router.get('/getToSer',userHelpers.Login, function(req, res) {
     res.redirect('/manager/org?msg='+results);
   });
 });
-router.post('/printloc',userHelpers.isRoot, function(req, res) {
-  console.log(req.body);
-
+router.post('/printloc',userHelpers.Login, function(req, res) {
+  obsMgr.getprint(req.body.id_print,function(result){
+    console.log(result);
+  });
 });
 module.exports = router;

@@ -22,8 +22,9 @@ router.post('/moveOrg',userHelpers.isRoot, function(req, res) {
 
 });
 router.post('/printnat',userHelpers.isRoot, function(req, res) {
-  console.log(req.body);
-
+  obsMgr.getprint(req.body.id_print,function(result){
+    console.log(result);
+  });
 });
 router.get('/nationality', function(req, res) {
   res.send(nationality);
