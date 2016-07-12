@@ -12,7 +12,7 @@ var pool = mysql.createPool({
 var servire =  mysql.createPool({
   host     : config.ho,
   user     : config.user,
-  password : config.password,
+  password : config.epassword,
   database : config.db,
   multipleStatements: true
 });
