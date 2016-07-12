@@ -778,12 +778,12 @@ function statisticsOfficesByType(office,obj){
   }
 
   function printloc(result){
-    
     var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
     var html='';
-    html+='<span class="vertical-text" style="padding-right:200px;padding-top:125px; !important">\
-        1111111111\
-      </span>\
+    if(result[0]!=undefined && result[1]!=undefined){
+      html+='<span class="vertical-text" style="padding-right:200px;padding-top:125px; !important">'+
+        result[0].ob_num+
+      '</span>\
       <div class="col-xs-7">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
@@ -801,9 +801,9 @@ function statisticsOfficesByType(office,obj){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:190px;padding-bottom:530px; !important">\
-      2222222222\
-      </span>\
+      <span class="vertical-text" style="padding-left:190px;padding-bottom:530px; !important">'+
+      result[1].ob_num+
+      '</span>\
       <div class="col-xs-3">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
@@ -823,11 +823,14 @@ function statisticsOfficesByType(office,obj){
     </div>\
     <div class="row">\
       <div class="col-xs-6"></div>\
-    </div>\
-    <div class="row">\
-      <span class="vertical-text" style="padding-right:220px;padding-top:110px; !important">\
-      3333333333\
-      </span>\
+    </div>';
+    }
+    if(result[2]!=undefined && result[3]!=undefined){
+      
+    html+='<div class="row">\
+      <span class="vertical-text" style="padding-right:220px;padding-top:110px; !important">'+
+      result[2].ob_num+
+      '</span>\
       <div class="col-xs-7">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
@@ -845,9 +848,9 @@ function statisticsOfficesByType(office,obj){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:220px;padding-bottom: 540px; !important">\
-      4444444444\
-      </span>\
+      <span class="vertical-text" style="padding-left:220px;padding-bottom: 540px; !important">'+
+      result[3].ob_num+
+      '</span>\
       <div class="col-xs-3">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
@@ -869,6 +872,7 @@ function statisticsOfficesByType(office,obj){
       <div class="col-xs-6"></div>\
       <div class="col-xs-6"></div>\
     </div>';
+  }
       return html;
   }
 module.exports = router;
