@@ -32,7 +32,7 @@ exports.orgMgr = {
           var id_oborg =[];
           for (j in result1){
             var w=[];
-            w.push(result1[j].id_ob,result1[j].name,result1[j].nationality,result1[j].pass_nid,result1[j].registration_org,result1[j].gender,result1[j].email,result1[j].phone_obs,result1[j].modify_date,result1[j].status,result1[j].upload,result1[j].upload_date,result1[j].director,result1[j].print,result1[j].id_office);
+            w.push(result1[j].id_ob,result1[j].name,result1[j].nationality,result1[j].pass_nid,result1[j].registration_org,result1[j].gender,result1[j].email,result1[j].phone_obs,result1[j].modify_date,result1[j].status,result1[j].upload,result1[j].upload_date,result1[j].director,result1[j].print,result1[j].id_office.result1[j].ob_num);
             id_ob.push(result1[j].id_ob);
             id_oborg.push(result1[j].registration_org);
             obss.push(w);
@@ -54,7 +54,7 @@ exports.orgMgr = {
                   });
                 }
                 if(obss.length!=0){
-                  connw.query('INSERT INTO `observers`(`id_ob`, `name`, `nationality`, `pass_nid`, `registration_org`, `gender`, `email`, `phone_obs`, `modify_date`, `status`, `upload`, `upload_date`, `director`, `print`, `id_office`) VALUES ?',[obss],function(err, resl) {
+                  connw.query('INSERT INTO `observers`(`id_ob`, `name`, `nationality`, `pass_nid`, `registration_org`, `gender`, `email`, `phone_obs`, `modify_date`, `status`, `upload`, `upload_date`, `director`, `print`, `id_office`,`ob_num`) VALUES ?',[obss],function(err, resl) {
                     if(err) {
                     util.log(err);
                     }else{

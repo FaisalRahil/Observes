@@ -81,18 +81,29 @@ exports.obsMgr = {
     });
   },
 
-  addOb : function(body,cb){
+  addOb : function(body,id_u,cb){
     mysqlMgr.connect(function (conn) {
       body['id_ob']=new Date().getTime();
-      console.log(body);
-      conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
-        conn.release();
-        if(err) {
-          cb(err);
-        } else {
-          result['id_o']=body['id_ob'];
-          cb(result);
+      var num='';
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `id_org`=?',body['registration_org']  ,function(err, result) {
+        if(id_u<0){
+          num+="00";
+        }else if(id_u>0 && id_u<10){
+          num+="0"+id_u;
+        }else if(id_u>9){
+          num+=id_u;
         }
+        num+='.0'+result[0].type+'.'+new Date().getTime();
+        body['ob_num']=num;
+        conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
+          conn.release();
+          if(err) {
+            cb(err);
+          } else {
+            result['id_o']=body['id_ob'];
+            cb(result);
+          }
+        });
       });
     });
   },

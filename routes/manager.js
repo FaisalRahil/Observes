@@ -12,7 +12,11 @@ router.get('/',userHelpers.Login, function(req, res) {
 router.get('/org',userHelpers.Login, function(req, res) {
   res.render('manager/org',{ user:req.session.id_user});
 });
-
+router.get('/editObs/:id',userHelpers.Login, function(req, res) {
+    obsMgr.getObs_Id(req.params.id,function(err,result){
+      res.render('manager/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-inverse'});
+    });
+  });
 /* GET home page. */
 router.get('/obs', userHelpers.Login,function(req, res) {
   res.render('manager/obs',{ user:req.session.id_user});
@@ -144,7 +148,11 @@ router.post('/editObs_email', userHelpers.Login,function(req, res) {
     res.send(result);
   });
 });
-
+router.post('/editObs_gender', userHelpers.Login,function(req, res) {
+  obsMgr.editObs_gender(req.body,function(err,result){
+    res.send(result);
+  });
+});
 /* GET home page. */
 router.post('/editObs_phone_obs',userHelpers.Login, function(req, res) {
   obsMgr.editObs_phone_obs(req.body,function(err,result){
@@ -280,7 +288,7 @@ router.post('/addObs',userHelpers.Login, function(req, res) {
     req.body['director']=0;
   }
 
-  obsMgr.addOb(req.body,function(err,result){
+  obsMgr.addOb(req.body,req.session.id_office,function(err,result){
     if(type==4){
       res.redirect('/manager/obs/locOrg');
     }
