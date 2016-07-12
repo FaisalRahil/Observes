@@ -280,7 +280,7 @@ router.post('/addObs',userHelpers.Login, function(req, res) {
     req.body['director']=0;
   }
 
-  obsMgr.addOb(req.body,function(err,result){
+  obsMgr.addOb(req.body,req.session.id_office,function(err,result){
     if(type==4){
       res.redirect('/manager/obs/locOrg');
     }

@@ -63,7 +63,7 @@ router.post('/addOb',userHelpers.isRoot, function(req, res) {
   else{
     req.body['director']=0;
   }
-  obsMgr.addOb(req.body,function(result){
+  obsMgr.addOb(req.body,req.session.id_office,function(result){
     logMgr.insertLog(req.session.id_user,"add","observers"," add new observer name : "+req.body['name'],result.id_o,req.body['name']);
     if (type == 1) {
       res.redirect('obs/natOrgObs');

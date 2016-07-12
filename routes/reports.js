@@ -212,6 +212,7 @@ var json2csv = require('json2csv');
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].email_obs+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].phone_obs+' </td>\
                 <td style="background-color:#FFFFC2 !important;"> '+office1+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+allResults[i].ob_num+' </td>\
               </tr>';
             }
     return html;
