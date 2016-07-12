@@ -118,7 +118,7 @@ block content
           span.pull-left
             | العدد   #{cnt}
       .panel-body
-        form#formprint
+        form#formprint(action="/reports/printloc",method="Post")
           table#table
           //- tr
           //-   th(data-field="id_ob", data-checkbox="true")

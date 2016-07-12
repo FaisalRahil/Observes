@@ -92,18 +92,18 @@ $(document).ready(function() {
             ].join('');
       }
     }
-  $('body').on('click', '#print', function (e) {
-    e.preventDefault();
-    $('#formprint').submit();
-  });
+  // $('body').on('click', '#print', function (e) {
+  //   e.preventDefault();
+  //   $('#formprint').submit();
+  // });
 
-  $("#formprint").submit(function(e) {
-    e.preventDefault();
-    $.post("/manager/printloc", $("#formprint").serialize(),function(data){
+  // $("#formprint").submit(function(e) {
+  //   e.preventDefault();
+  //   $.post("/reportsMgr/printloc", $("#formprint").serialize(),function(data){
 
-    });
+  //   });
    
-  });  
+  // });  
   $('#director').prop('disabled',true);
   $('#director').checkboxpicker({
       onLabel:"نعم", offLabel:"لا"

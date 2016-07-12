@@ -77,7 +77,7 @@ block content
           span.glyphicon.glyphicon-bookmark
           | الوكلاء
       .panel-body
-        form#formprint
+        form#formprint(action="/reportsMgr/printloc",method="Post")
           table#table
 
   #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")

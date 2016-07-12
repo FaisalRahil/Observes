@@ -64,6 +64,30 @@ var userHelpers = require('../app/userHelpers');
       });
     });
   });
+
+  router.post('/printloc',userHelpers.Login, function(req, res) {
+    obsMgr.getprint(req.body.id_print,function(result){
+      console.log(result);
+      jsr.render({
+        template: { 
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/test.html"), "utf8"),
+          phantom: {
+            // width: "6047.244095",
+            // height: "9070.866142",
+            format: 'A4',
+          },
+          recipe: "phantom-pdf",
+          helpers:printloc.toString()
+        },
+          data:{allResults:result}
+        // data:obj
+      }).then(function (response) {
+        response.result.pipe(res);
+      });   
+    });
+  });
+
+
   router.get('/observers', userHelpers.Login,function(req, res, next) {
     reportMgr.getAllObsAndOrg(req.session.id_office,function(results){
       jsr.render({
@@ -750,5 +774,100 @@ function statisticsOfficesByType(office,obj){
 
      }
     return html;
+  }
+
+  function printloc(result){
+    
+    var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
+    var html='';
+    html+='<span class="vertical-text" style="padding-right:200px;padding-top:125px; !important">\
+        1111111111\
+      </span>\
+      <div class="col-xs-7">\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
+            <p class="text-center"><span>'+typear[result[0].type]+'</span></p>\
+          </div>\
+        </div>\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+            <p class="text-center"><span>'+result[0].name+'</span></p>\
+          </div>\
+        </div>\
+        <div class="row">\
+          <div class="col-xs-12   "style="padding-top: 25px; !important;">\
+            <p class="text-center"><span>'+result[0].name_org+'</span></p>\
+          </div>\
+        </div>\
+      </div>\
+      <span class="vertical-text" style="padding-left:190px;padding-bottom:530px; !important">\
+      2222222222\
+      </span>\
+      <div class="col-xs-3">\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
+            <p class="text-center">'+typear[result[1].type]+'</p>\
+          </div>\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+            <p class="text-center">'+result[1].name+'</p>\
+          </div>\
+        </div>\
+        <div class="row">\
+          <div class="col-xs-12   "style="padding-top: 35px; !important;">\
+            <p class="text-center">'+result[1].name_org+'</p>\
+          </div>\
+        </div>\
+      </div>\
+    </div>\
+    <div class="row">\
+      <div class="col-xs-6"></div>\
+    </div>\
+    <div class="row">\
+      <span class="vertical-text" style="padding-right:220px;padding-top:110px; !important">\
+      3333333333\
+      </span>\
+      <div class="col-xs-7">\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
+            <p class="text-center">'+typear[result[2].type]+'</p>\
+          </div>\
+        </div>\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+            <p class="text-center">'+result[2].name+'</p>\
+          </div>\
+        </div>\
+        <div class="row">\
+          <div class="col-xs-12   "style="padding-top: 25px; !important;">\
+            <p class="text-center">'+result[2].name_org+'</p>\
+          </div>\
+        </div>\
+      </div>\
+      <span class="vertical-text" style="padding-left:220px;padding-bottom: 540px; !important">\
+      4444444444\
+      </span>\
+      <div class="col-xs-3">\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
+            <p class="text-center">'+typear[result[3].type]+'</p>\
+          </div>\
+        <div class="row">\
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+            <p class="text-center">'+result[3].name+'</p>\
+          </div>\
+        </div>\
+        <div class="row">\
+          <div class="col-xs-12   "style="padding-top: 35px; !important;">\
+            <p class="text-center">'+result[3].name_org+'</p>\
+          </div>\
+        </div>\
+      </div>\
+    </div>\
+    <div class="row">\
+      <div class="col-xs-6"></div>\
+      <div class="col-xs-6"></div>\
+    </div>';
+      return html;
   }
 module.exports = router;

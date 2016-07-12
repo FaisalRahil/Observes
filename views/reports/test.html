@@ -16,78 +16,123 @@
         font-family: 'Droid Arabic Kufi';
         src : url("http://localhost:3003/fonts/DroidKufi-Regular.ttf") format("truetype");
           }
-      .padding: {
-        padding-top: 300px;
-      }
-      .fontSize{
-        font-size: 31px;
-      }
-      .table,.table>thead>tr>th{
-        font-size: 19px;
-        border: 1px solid #000;
-      }
-      .table,.table>tbody>tr>td{
-        font-size: 15px;
-        border: 1px dotted #000;
-      }
-      .table td{
-        font-family: 'Droid Arabic Kufi';
-        text-align: center;
-        vertical-align: middle;
-      }
-      .table.fixed td { 
-        overflow: hidden; 
-      }
-      .condensed>tbody>tr>td {
-        padding: 5px;
-      }
-      .condensed>thead>tr>th{
-        padding-top: 10px;
-        padding-bottom: 11px;
-        font-weight: 100;
-      }
-      .halfSpace{
-        height: 5px;
-      }
-      .space{
-        height: 10px;
-      }
-      .towSpaces{
-        height: 20px;
-      }
       h3,.h4 {
         font-weight: bold;
       }
+    .vertical-text {
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+      -webkit-transform-origin: 50% 50%;
+      -moz-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+      -o-transform-origin: 50% 50%;
+      transform-origin: 50% 50%;
+      /* Should be unset in IE9+ I think. */
+      filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+      /*transform-origin: left top 0;*/
+      position: absolute;
+    }
+    .title{
+      padding-right: 88px;
+      position: relative; 
+    }
     </style>
     <meta charset="utf-8"/>
   </head>
   <body>
     <div class="row">
-      <div class="col-xs-6">
+    {{{printloc allResults}}}
+      <!-- <span class="vertical-text" style="padding-right:200px;padding-top:125px; !important">
+        1111111111
+      </span>
+      <div class="col-xs-7">
         <div class="row">
-          <div class="col-xs-12 "style=" padding-top: 330px; !important;">
+          <div class="col-xs-12 "style=" padding-top: 245px; !important;">
+            <p class="text-center">ss</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">
             <p class="text-center">dfgfdg</p>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12   "style="padding-top: 10px; !important;">
+          <div class="col-xs-12   "style="padding-top: 25px; !important;">
             <p class="text-center">org1fihsdfohsdf</p>
           </div>
         </div>
+      </div> --><!-- 
+      <span class="vertical-text" style="padding-left:190px;padding-bottom:530px; !important">
+      2222222222
+      </span>
+      <div class="col-xs-3">
         <div class="row">
-          <div class="col-xs-12   "style="padding-top:55px; !important;">
+          <div class="col-xs-12 "style=" padding-top: 245px; !important;">
+            <p class="text-center">aaaaaa</p>
+          </div>
+        <div class="row">
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">
+            <p class="text-center">dfgfdg</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12   "style="padding-top: 35px; !important;">
             <p class="text-center">org1fihsdfohsdf</p>
           </div>
         </div>
       </div>
-
-      <hr>
+    </div>
+    <div class="row">
       <div class="col-xs-6"></div>
     </div>
-    <hr>
+    <div class="row">
+      <span class="vertical-text" style="padding-right:220px;padding-top:110px; !important">
+      3333333333
+      </span>
+      <div class="col-xs-7">
+        <div class="row">
+          <div class="col-xs-12 "style=" padding-top: 300px; !important;">
+            <p class="text-center">aaaaaa</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">
+            <p class="text-center">dfgfdg</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12   "style="padding-top: 25px; !important;">
+            <p class="text-center">org1fihsdfohsdf</p>
+          </div>
+        </div>
+      </div>
+      <span class="vertical-text" style="padding-left:220px;padding-bottom: 540px; !important">
+      4444444444
+      </span>
+      <div class="col-xs-3">
+        <div class="row">
+          <div class="col-xs-12 "style=" padding-top: 300px; !important;">
+            <p class="text-center">aaaaaa</p>
+          </div>
+        <div class="row">
+          <div class="col-xs-12 "style=" padding-top: 30px; !important;">
+            <p class="text-center">dfgfdg</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12   "style="padding-top: 35px; !important;">
+            <p class="text-center">org1fihsdfohsdf</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-xs-6"></div>
       <div class="col-xs-6"></div>
-    </div>
+    </div> -->
   </body>
 </html>

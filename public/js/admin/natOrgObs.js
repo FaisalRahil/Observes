@@ -102,18 +102,18 @@ $(document).ready(function() {
     $('#confdelete').val(id);
   });
 
-  $('body').on('click', '#print', function (e) {
-    e.preventDefault();
-    $('#formprint').submit();
-  });
+  // $('body').on('click', '#print', function (e) {
+  //   e.preventDefault();
+  //   $('#formprint').submit();
+  // });
 
-  $("#formprint").submit(function(e) {
-    e.preventDefault();
-    $.post("/admin/printnat", $("#formprint").serialize(),function(data){
+  // $("#formprint").submit(function(e) {
+  //   e.preventDefault();
+  //   $.post("/admin/printnat", $("#formprint").serialize(),function(data){
 
-    });
+  //   });
    
-  });
+  // });
   /* Go to media needs view or edit */
   $('body').on('click', '#confdelete', function (e) {
     var id = $(this).val();

@@ -84,7 +84,7 @@ block content
           span.pull-left
             | العدد   #{cnt}
       .panel-body
-        form#formprint
+        form#formprint(action="/reports/printloc",method="Post")
           table#table
 
   #deleteMediaObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")

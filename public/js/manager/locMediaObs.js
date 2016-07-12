@@ -92,18 +92,16 @@ $(document).ready(function() {
             ].join('');
       }
   }
-  $('body').on('click', '#print', function (e) {
-    e.preventDefault();
-    $('#formprint').submit();
-  });
+  // $('body').on('click', '#print', function (e) {
+  //   e.preventDefault();
+  //   $('#formprint').submit();
+  // });
 
-  $("#formprint").submit(function(e) {
-    e.preventDefault();
-    $.post("/manager/printloc", $("#formprint").serialize(),function(data){
-
-    });
+  // $("#formprint").submit(function(e) {
+  //   e.preventDefault();
+  //   $.post("/reportsMgr/printloc", $("#formprint").serialize());
    
-  });
+  // });
   /* Go to orgTable needs view or edit */
   $('body').on('click', '#deleteObs ', function () {
     var id = $(this).val();

@@ -94,19 +94,19 @@ $(document).ready(function() {
               '<button id="deleteGuest" data-toggle="modal" href="#deleteGuestObsModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
-  $('body').on('click', '#print', function (e) {
-    e.preventDefault();
-    $('#formprint').submit();
-  });
+  // $('body').on('click', '#print', function (e) {
+  //   e.preventDefault();
+  //   $('#formprint').submit();
+  // });
 
-  $("#formprint").submit(function(e) {
-    e.preventDefault();
-    var id = $("#formprint").serialize();
-    $.post("/admin/printnat", $("#formprint").serialize(),function(data){
+  // $("#formprint").submit(function(e) {
+  //   e.preventDefault();
+  //   var id = $("#formprint").serialize();
+  //   $.post("/admin/printnat", $("#formprint").serialize(),function(data){
 
-    });
+  //   });
    
-  });
+  // });
   /* Go to media needs view or edit */
   $('body').on('click', '#deleteGuest ', function () {
     var id = $(this).val();
