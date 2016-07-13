@@ -781,7 +781,8 @@ function statisticsOfficesByType(office,obj){
     var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
     var html='';
     if(result[0]!=undefined && result[1]!=undefined){
-      html+='<span class="vertical-text" style="padding-right:200px;padding-top:125px; !important">'+
+      html+='    <div class="row">\
+    <span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+
         result[0].ob_num+
       '</span>\
       <div class="col-xs-7">\
@@ -801,7 +802,7 @@ function statisticsOfficesByType(office,obj){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:190px;padding-bottom:530px; !important">'+
+      <span class="vertical-text" style="padding-left:220px;padding-bottom:480px; !important">'+
       result[1].ob_num+
       '</span>\
       <div class="col-xs-3">\
@@ -828,7 +829,7 @@ function statisticsOfficesByType(office,obj){
     if(result[2]!=undefined && result[3]!=undefined){
       
     html+='<div class="row">\
-      <span class="vertical-text" style="padding-right:220px;padding-top:110px; !important">'+
+      <span class="vertical-text" style="padding-right:250px;padding-top:180px; !important">'+
       result[2].ob_num+
       '</span>\
       <div class="col-xs-7">\
@@ -848,7 +849,7 @@ function statisticsOfficesByType(office,obj){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:220px;padding-bottom: 540px; !important">'+
+      <span class="vertical-text" style="padding-left:140px;padding-bottom: 580px; !important">'+
       result[3].ob_num+
       '</span>\
       <div class="col-xs-3">\
