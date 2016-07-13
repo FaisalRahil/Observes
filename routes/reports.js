@@ -1038,17 +1038,17 @@ function statisticsOfficesByTypeGender(obj,office){
       '</span>\
       <div class="col-xs-7">\
         <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
+          <div class="col-xs-12 "style=" padding-top: 225px; !important;">\
             <p class="text-center"><span>'+typear[result[0].type-1]+'</span></p>\
           </div>\
         </div>\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-            <p class="text-center"><b><span>'+result[0].name+'</span></b></p>\
+            <p class="text-center"><span>'+result[0].name+'</span></p>\
           </div>\
         </div>\
         <div class="row">\
-          <div class="col-xs-12   "style="padding-top: 25px; !important;">\
+          <div class="col-xs-12   "style="padding-top: 45px; !important;">\
             <p class="text-center"><span>'+result[0].name_org+'</span></p>\
           </div>\
         </div>\
@@ -1060,11 +1060,11 @@ function statisticsOfficesByTypeGender(obj,office){
       '</span>\
       <div class="col-xs-3">\
         <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
+          <div class="col-xs-12 "style=" padding-top: 225px; !important;">\
             <p class="text-center">'+typear[result[1].type-1]+'</p>\
           </div>\
         <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+          <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
             <p class="text-center">'+result[1].name+'</p>\
           </div>\
         </div>\
@@ -1081,7 +1081,7 @@ function statisticsOfficesByTypeGender(obj,office){
     html+='</div><div class="row">'
     if(result[2]!=undefined ){
       
-    html+='<span class="vertical-text" style="padding-right:250px;padding-top:180px; !important">'+
+    html+='<span class="vertical-text" style="padding-right:245px;padding-top:160px; !important">'+
       result[2].ob_num+
       '</span>\
       <div class="col-xs-7">\
