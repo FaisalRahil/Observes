@@ -14,7 +14,11 @@ router.get('/org',userHelpers.Login, function(req, res) {
 });
 router.get('/editObs/:id',userHelpers.Login, function(req, res) {
     obsMgr.getObs_Id(req.params.id,function(err,result){
-      res.render('manager/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-inverse'});
+      if(result[0].upload==0||req.session.id_office<0){
+        res.render('manager/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-inverse',user:req.session.id_user});
+      }else{
+        res.redirect('/manager/obs');
+      }
     });
   });
 /* GET home page. */
