@@ -787,7 +787,7 @@ function statisticsOfficesByType(office,obj){
       <div class="col-xs-7">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
-            <p class="text-center"><span>'+typear[result[0].type]+'</span></p>\
+            <p class="text-center"><span>'+typear[result[0].type-1]+'</span></p>\
           </div>\
         </div>\
         <div class="row">\
@@ -807,7 +807,7 @@ function statisticsOfficesByType(office,obj){
       <div class="col-xs-3">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
-            <p class="text-center">'+typear[result[1].type]+'</p>\
+            <p class="text-center">'+typear[result[1].type-1]+'</p>\
           </div>\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
@@ -834,7 +834,7 @@ function statisticsOfficesByType(office,obj){
       <div class="col-xs-7">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
-            <p class="text-center">'+typear[result[2].type]+'</p>\
+            <p class="text-center">'+typear[result[2].type-1]+'</p>\
           </div>\
         </div>\
         <div class="row">\
@@ -854,7 +854,7 @@ function statisticsOfficesByType(office,obj){
       <div class="col-xs-3">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
-            <p class="text-center">'+typear[result[3].type]+'</p>\
+            <p class="text-center">'+typear[result[3].type-1]+'</p>\
           </div>\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
