@@ -781,7 +781,7 @@ function statisticsOfficesByType(office,obj){
     var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
     var html='';
     if(result[0]!=undefined && result[1]!=undefined){
-      html+='    <div class="row">\
+      html+='<div class="row">\
     <span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+
         result[0].ob_num+
       '</span>\

@@ -1045,7 +1045,7 @@ function statisticsOfficesByTypeGender(obj,office){
         </div>\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-            <p class="text-center"><span>'+result[0].name+'</span></p>\
+            <p class="text-center"><b><span>'+result[0].name+'</span></b></p>\
           </div>\
         </div>\
         <div class="row">\
