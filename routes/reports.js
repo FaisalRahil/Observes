@@ -1031,10 +1031,9 @@ function statisticsOfficesByTypeGender(obj,office){
   });
   function printloc(result){
     var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
-    var html='';
-    if(result[0]!=undefined && result[1]!=undefined){
-      html+=' <div class="row">\
-        <span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+
+    var html='<div class="row">';
+    if(result[0]!=undefined){
+      html+='<span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+
         result[0].ob_num+
       '</span>\
       <div class="col-xs-7">\
@@ -1053,8 +1052,10 @@ function statisticsOfficesByTypeGender(obj,office){
             <p class="text-center"><span>'+result[0].name_org+'</span></p>\
           </div>\
         </div>\
-      </div>\
-      <span class="vertical-text" style="padding-left:195px;padding-bottom:480px; !important">'+
+      </div>';
+    }
+    if(result[1]!=undefined){
+      html+='<span class="vertical-text" style="padding-left:195px;padding-bottom:480px; !important">'+
       result[1].ob_num+
       '</span>\
       <div class="col-xs-3">\
@@ -1075,13 +1076,12 @@ function statisticsOfficesByTypeGender(obj,office){
       </div>\
     </div>\
     <div class="row">\
-      <div class="col-xs-6"></div>\
-    </div>';
+      <div class="col-xs-6"></div>';
     }
-    if(result[2]!=undefined && result[3]!=undefined){
+    html+='</div><div class="row">'
+    if(result[2]!=undefined ){
       
-    html+='<div class="row">\
-      <span class="vertical-text" style="padding-right:250px;padding-top:180px; !important">'+
+    html+='<span class="vertical-text" style="padding-right:250px;padding-top:180px; !important">'+
       result[2].ob_num+
       '</span>\
       <div class="col-xs-7">\
@@ -1100,8 +1100,10 @@ function statisticsOfficesByTypeGender(obj,office){
             <p class="text-center">'+result[2].name_org+'</p>\
           </div>\
         </div>\
-      </div>\
-      <span class="vertical-text" style="padding-left:120px;padding-bottom: 580px; !important">'+
+      </div>';
+    }
+    if(result[3]!=undefined ){
+      html+='<span class="vertical-text" style="padding-left:120px;padding-bottom: 580px; !important">'+
       result[3].ob_num+
       '</span>\
       <div class="col-xs-3">\
@@ -1124,8 +1126,9 @@ function statisticsOfficesByTypeGender(obj,office){
     <div class="row">\
       <div class="col-xs-6"></div>\
       <div class="col-xs-6"></div>\
-    </div>';
+    ';
   }
+  html+="</div>"
       return html;
   }
 module.exports = router;
