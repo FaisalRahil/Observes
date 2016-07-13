@@ -802,7 +802,7 @@ function statisticsOfficesByType(office,obj){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:220px;padding-bottom:480px; !important">'+
+      <span class="vertical-text" style="padding-left:300px;padding-bottom:480px; !important">'+
       result[1].ob_num+
       '</span>\
       <div class="col-xs-3">\
@@ -849,7 +849,7 @@ function statisticsOfficesByType(office,obj){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:140px;padding-bottom: 580px; !important">'+
+      <span class="vertical-text" style="padding-left:120px;padding-bottom: 580px; !important">'+
       result[3].ob_num+
       '</span>\
       <div class="col-xs-3">\

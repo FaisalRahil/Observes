@@ -1039,12 +1039,12 @@ function statisticsOfficesByTypeGender(obj,office){
       '</span>\
       <div class="col-xs-7">\
         <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 245px; !important;">\
+          <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
             <p class="text-center"><span>'+typear[result[0].type-1]+'</span></p>\
           </div>\
         </div>\
         <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+          <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
             <p class="text-center"><span>'+result[0].name+'</span></p>\
           </div>\
         </div>\
@@ -1054,7 +1054,7 @@ function statisticsOfficesByTypeGender(obj,office){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:220px;padding-bottom:480px; !important">'+
+      <span class="vertical-text" style="padding-left:195px;padding-bottom:480px; !important">'+
       result[1].ob_num+
       '</span>\
       <div class="col-xs-3">\
@@ -1091,7 +1091,7 @@ function statisticsOfficesByTypeGender(obj,office){
           </div>\
         </div>\
         <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+          <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
             <p class="text-center">'+result[2].name+'</p>\
           </div>\
         </div>\
@@ -1101,7 +1101,7 @@ function statisticsOfficesByTypeGender(obj,office){
           </div>\
         </div>\
       </div>\
-      <span class="vertical-text" style="padding-left:140px;padding-bottom: 580px; !important">'+
+      <span class="vertical-text" style="padding-left:120px;padding-bottom: 580px; !important">'+
       result[3].ob_num+
       '</span>\
       <div class="col-xs-3">\
