@@ -858,7 +858,7 @@ function statisticsOfficesByTypeGender(obj,office){
               html+='<td style="background-color:#FFFFC2 !important;"> '+offic[data[i].office_obs].office_name_ar+' </td> ';  
             }
           }
-          html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+          html+='<td style="background-color:#FFFFC2 !important;"> '+data[i].ob_num+' </td>';
 
      }
     return html;
