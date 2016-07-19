@@ -237,40 +237,40 @@ router.get('/getObsIdOrg/:id', function(req, res) {
 
 /* GET home page. */
 router.get('/getOb', function(req, res) {
-  obsMgr.getAllObsAndNameOrgByType(5,function(result){
+  obsMgr.getAllObsAndNameOrgByType(3,function(result){
     res.send(result);
   });
 });
 
 router.get('/getAllObsAndNameOrg',function(req , res ){
-  obsMgr.getAllObsAndNameOrg([4,5,6],function(result){
+  obsMgr.getAllObsAndNameOrg([1,2,3],function(result){
     res.send(result);
   });
 });
 /* GET home page. */
 router.get('/getOb4', function(req, res) {
-  obsMgr.getAllObsAndNameOrgByType(4,function(result){
+  obsMgr.getAllObsAndNameOrgByType(2,function(result){
     res.send(result);
   });
 });
 
 router.get('/getOb6', function(req, res) {
-  obsMgr.getAllObsAndNameOrgByType(6,function(result){
+  obsMgr.getAllObsAndNameOrgByType(1,function(result){
     res.send(result);
   });
 });
 router.get('/getOrg6', function(req, res) {
-  orgMgr.getOrg(6,function(result){
+  orgMgr.getOrg(1,function(result){
     res.send(result);
   });
 });
 router.get('/getOrg5', function(req, res) {
-  orgMgr.getOrg(5,function(result){
+  orgMgr.getOrg(3,function(result){
     res.send(result);
   });
 });
 router.get('/getOrg4', function(req, res) {
-  orgMgr.getOrg(4,function(result){
+  orgMgr.getOrg(2,function(result){
     res.send(result);
   });
 });
@@ -293,13 +293,13 @@ router.post('/addObs',userHelpers.Login, function(req, res) {
   }
 
   obsMgr.addOb(req.body,req.session.id_office,function(err,result){
-    if(type==4){
+    if(type==2){
       res.redirect('/manager/obs/locOrg');
     }
-    if(type==5){
+    if(type==3){
       res.redirect('/manager/obs/locMedia');
     }
-    if(type==6){
+    if(type==1){
       res.redirect('/manager/obs/agent');
     }
   });
@@ -308,13 +308,12 @@ router.post('/addObs',userHelpers.Login, function(req, res) {
 router.post('/addOrg',userHelpers.Login, function(req, res) {
   req.body.id_office=req.session.id_office;
   orgMgr.addOrg(req.body, function (results){
-    if (req.body["type"] == 6) {
+    if (req.body["type"] == 1) {
       res.redirect('org/candidate');
-    } else if (req.body["type"] == 5){
+    } else if (req.body["type"] == 3){
       res.redirect('org/locMedia');
-    } else {
+    } else if (req.body["type"] == 2){ 
       res.redirect('org/locOrg');
-    
     } 
 
   });

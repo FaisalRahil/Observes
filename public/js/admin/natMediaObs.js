@@ -104,7 +104,7 @@ $(document).ready(function() {
 
   //   });
    
-  });
+  // });
   /* Go to media needs view or edit */
   $('body').on('click', '#deleteMedia ', function () {
     var id = $(this).val();

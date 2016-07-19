@@ -3,7 +3,7 @@ var mysqlMgr = require('./mysql').mysqlMgr,
 exports.reportMgr = {
   getOrgsRport : function(id,cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `id_office`=? AND `type` IN ( 4,5, 6 )',id,  function(err, result) {
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `id_office`=? AND `type` IN ( 1,2, 3 )',id,  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);

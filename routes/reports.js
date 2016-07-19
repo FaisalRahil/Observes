@@ -24,8 +24,8 @@ var json2csv = require('json2csv');
   router.get('/csv',function(req, res, next) {
     reportMgr.getAllObsAndOrg(function(result){
       var object=[]
-      var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
-      var typeen = ["International Observer","Guest","International Media","Domestic Observer","National Media","Candidate Agent"];
+      var typear = ["وكيل","مراقب محلي","إعلام محلي","مراقب دولي","إعلام دولي","ضيف"];
+      var typeen = ["Candidate Agent","Domestic Observer","National Media","International Observer","International Media","Guest"];
       for(i in result){
         var obj={};
         obj.id_ob=result[i].id_ob;
@@ -66,7 +66,7 @@ var json2csv = require('json2csv');
   // ////////////////////////////////////////////////////////////////////////
   function resultsNoOfLocaleObs(office,arr1,arr2,arr3,arr4,arr5,arr6,officePar){
     var html = '';
-    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
       for(i in arr1){
         html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr1[i].id_office].office_name_ar+' </td>\
@@ -126,12 +126,12 @@ var json2csv = require('json2csv');
             <thead>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي International observers</th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف Guest</th>\
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي International media</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف Guest</th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;"><tr>';
-    for (var i = 1; i < 4; i++) {
+    for (var i = 4; i < 7; i++) {
       if(resultt[i] == undefined ){
         html+=' <td style="background-color:#FFFFC2 !important;"> - </td>';
       } else{
@@ -148,13 +148,13 @@ var json2csv = require('json2csv');
         <div class="towSpaces"></div><table class="table condensed">\
             <thead>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  وكيل agent</th>\
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي Local observers </th>\
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعـلام مـحـلـي Local media</th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  وكيل agent</th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;"><tr>';
-      for (var i = 4; i < 7; i++) {
+      for (var i = 1; i < 4; i++) {
         if(resultt[i] == undefined ){
           html+=' <td style="background-color:#FFFFC2 !important;"> - </td>';
         } else{
@@ -593,8 +593,8 @@ var json2csv = require('json2csv');
     var html = '';
     var nat;
     var typeInTD = '';
-    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
-    
+    // var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
     for (var j = 0; j < national.length; j++) {
       if( allResults[0].nationality == national[j].id ){
         nat = national[j].name;
@@ -613,15 +613,15 @@ var json2csv = require('json2csv');
             <tbody style="border: 1px solid #000;">';
     
     for (i in allResults){
-      for (var k = 0; k <= type1.length; k++) {
-        if(allResults[k].type-1 == k ){
-          typeInTD = type1[k];
-          break;
-        }
-      }
+      // for (var k = 0; k <= type1.length; k++) {
+      //   if(allResults[k].type-1 == k ){
+      //     typeInTD = type1[k];
+      //     break;
+      //   }
+      // }
       html+= '<tr>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+type1[allResults[i]-1]+' </td>\
               </tr>';
     }
     
@@ -631,15 +631,10 @@ var json2csv = require('json2csv');
   //by type
   function obsBytype(allResults){
     var html = '';
-    var type1 = ["منظمة عالمية","الهيئات الدبلوماسية","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
 
-    for (var k = 0; k <= type1.length; k++) {
-      if(allResults[k].type-1 == k ){
-        typeInTD = type1[k];
-        break;
-      }
-    }
-    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+typeInTD+' </th>\
+    
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
@@ -886,15 +881,14 @@ function statisticsOfficesByTypeGender(obj,office){
   });
   function obsBytypezip(allResults,offic){
     var html = '';
-    var type1 = ["منظمة عالمية","الهيئات الدبلوماسية","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
-
-    for (var k = 0; k <= type1.length; k++) {
-      if(allResults[k].type-1 == k ){
-        typeInTD = type1[k];
-        break;
-      }
-    }
-    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+typeInTD+' </th>\
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
+    // for (var k = 0; k <= type1.length; k++) {
+    //   if(allResults[k].type-1 == k ){
+    //     typeInTD = type1[k];
+    //     break;
+    //   }
+    // }
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\

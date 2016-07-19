@@ -98,6 +98,7 @@ exports.obsMgr = {
         conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
           conn.release();
           if(err) {
+            console.log(err);
             cb(err);
           } else {
             result['id_o']=body['id_ob'];

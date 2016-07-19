@@ -80,7 +80,7 @@ exports.orgMgr = {
 
   getOrgs : function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `type` IN ( 4,5, 6 )',  function(err, result) {
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `type` IN ( 1,2, 3 )',  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
@@ -92,7 +92,7 @@ exports.orgMgr = {
   },
   getOrgsAdmin : function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `type` IN ( 1, 2, 3 ) ',  function(err, result) {
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `type` IN ( 4, 5, 6 ) ',  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
@@ -108,6 +108,7 @@ exports.orgMgr = {
       conn.query('INSERT INTO `organisaition` SET ?',body,  function(err, result) {
         conn.release();
         if(err) {
+          console.log(err)
           cb(err,null);
         } else {
           result['id_o']=body['id_org'];
@@ -253,7 +254,7 @@ exports.orgMgr = {
   },
   getCountAll : function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT count(*) AS num FROM `organisaition` WHERE `status`=1 AND `type` IN(1,2,3)',  function(err, result) {
+      conn.query('SELECT count(*) AS num FROM `organisaition` WHERE `status`=1 AND `type` IN(4,5,6)',  function(err, result) {
         conn.release();
         if(err) {
           cb(err);
@@ -277,7 +278,7 @@ exports.orgMgr = {
   },
   getCountAllOb : function(cb){
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT count(`obs`.`id_ob`) AS num FROM `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND `type` IN(1,2,3) AND obs.`registration_org` = org.`id_org`',  function(err, result) {
+      conn.query('SELECT count(`obs`.`id_ob`) AS num FROM `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND `type` IN(4,5,6) AND obs.`registration_org` = org.`id_org`',  function(err, result) {
         conn.release();
         if(err) {
           cb(err);

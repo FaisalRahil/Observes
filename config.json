@@ -1,7 +1,7 @@
 {
-	"host" : "41.208.72.52",
+	"host" : "localhost",
 	"user" : "root",
-	"password" : "RF9UK0quR1Rg",
+	"password" : "102030",
 	"database" : "obs",
 	"epassword" : "RF9UK0quR1Rg",
 	"ho" : "41.208.72.52",
