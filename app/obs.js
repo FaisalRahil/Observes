@@ -87,7 +87,7 @@ exports.obsMgr = {
       var num='';
       conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `id_org`=?',body['registration_org']  ,function(err, result) {
         if(id_u<0){
-          num+="00";
+          num+="18";
         }else if(id_u>0 && id_u<10){
           num+="0"+id_u;
         }else if(id_u>9){
