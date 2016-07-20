@@ -188,7 +188,7 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
   // ////////////////////////////////////////////////////////////////////////
   function resultsNoOfLocaleObs(office,arr1,arr2,arr3,arr4,arr5,arr6,officePar){
     var html = '';
-    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
       for(i in arr1){
         html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[arr1[i].id_office].office_name_ar+' </td>\
@@ -391,7 +391,7 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
     var html = '';
     var nat;
     var typeInTD = '';
-    var type1 = ["منظمة عالمية","ضيف","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
     
     for (var j = 0; j < national.length; j++) {
       if( allResults[0].nationality == national[j].id ){
@@ -411,15 +411,15 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
             <tbody style="border: 1px solid #000;">';
     
     for (i in allResults){
-      for (var k = 0; k <= type1.length; k++) {
-        if(allResults[k].type-1 == k ){
-          typeInTD = type1[k];
-          break;
-        }
-      }
+      // for (var k = 0; k <= type1.length; k++) {
+      //   if(allResults[k].type-1 == k ){
+      //     typeInTD = type1[k];
+      //     break;
+      //   }
+      // }
       html+= '<tr>\
                 <td style="background-color:#FFFFC2 !important;"> '+allResults[i].name+' </td>\
-                <td style="background-color:#FFFFC2 !important;"> '+typeInTD+' </td>\
+                <td style="background-color:#FFFFC2 !important;"> '+type1[allResults[i].type-1]+' </td>\
               </tr>';
     }
     
@@ -484,7 +484,7 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
               html+='<td style="background-color:#FFFFC2 !important;"> '+offic[data[i].office_obs].office_name_ar+' </td> ';  
             }
           }
-          html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
+          html+='<td style="background-color:#FFFFC2 !important;"> '+data[i].ob_num+'</td>';
 
      }
     return html;
@@ -492,7 +492,7 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
 ///////////////////////////////////////////////////////////////////
   function obsBytype(allResults){
     var html = '';
-    var type1 = ["منظمة عالمية","الهيئات الدبلوماسية","إعلامي دولي","منظمة مــحـــلية","إعلامي مــحـــلي","وكـــيـــل"];
+    var type1 = ["وكـــيـــل","منظمة مــحـــلية","إعلامي مــحـــلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
 
 
     html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
@@ -540,7 +540,7 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;"><tr>';
-      for (var i = 4; i < 7; i++) {
+      for (var i = 1; i < 4; i++) {
         if(resultt[i] == undefined ){
           html+=' <td style="background-color:#FFFFC2 !important;"> - </td>';
         } else{
@@ -616,13 +616,13 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
       
       if(obj[office[i].office_id]!=undefined){
         html+='<tr><td colspan="2" style="height:1px; background-color:#FFFFC2 !important;"> '+office[i].office_name_ar+' </td>';
-        for(k=4;k<7;k++){
+        for(k=1;k<4;k++){
           if(obj[office[i].office_id][k]!=undefined||obj[office[i].office_id][k]!=null){
             
             if(obj[office[i].office_id][k][1]!=null){
               sum+=parseInt(obj[office[i].office_id][k][1]);
               sumM+=parseInt(obj[office[i].office_id][k][1]);
-              sumgM[k-4]+=parseInt(obj[office[i].office_id][k][1]);
+              sumgM[k-1]+=parseInt(obj[office[i].office_id][k][1]);
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][1]+' </td>'; 
             }else{
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
@@ -630,7 +630,7 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
             if(obj[office[i].office_id][k][0]!=null){
               sum+=parseInt(obj[office[i].office_id][k][0]);
               sumF+=parseInt(obj[office[i].office_id][k][0]);
-              sumgF[k-4]+=parseInt(obj[office[i].office_id][k][0]);
+              sumgF[k-1]+=parseInt(obj[office[i].office_id][k][0]);
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][0]+' </td>'; 
             }else{
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
@@ -689,10 +689,10 @@ function statisticsOfficesByType(office,obj){
             if(obj[office[i].office_id]!=undefined){
               html+='<tr>\
                 <td style="background-color:#E7FFE7 !important;"> '+office[i].office_name_ar+' </td>';
-              for(k=4;k<7;k++){
+              for(k=1;k<4;k++){
                 if(obj[office[i].office_id][k]!=undefined){
                   sum+=parseInt(obj[office[i].office_id][k]);
-                  sumT[k-4]+=parseInt(obj[office[i].office_id][k]);
+                  sumT[k-1]+=parseInt(obj[office[i].office_id][k]);
                   html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k]+' </td>';
                 }else{
                   html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
@@ -722,7 +722,7 @@ function statisticsOfficesByType(office,obj){
     
     return html;
   }
-  router.get('/obsByTypezip/:type',userHelpers.isRoot,function(req, res, next) {
+  router.get('/obsByTypezip/:type',userHelpers.Login,function(req, res, next) {
     reportMgr.obsBytype(req.session.id_office,req.params.type,function(results){
       if(results.length>0){
         console.log(results);
@@ -745,7 +745,7 @@ function statisticsOfficesByType(office,obj){
   });
   function obsBytypezip(allResults){
     var html = '';
-    var type1 = ["منظمة عالمية","الهيئات الدبلوماسية","إعلامي دولي","منظمة محلية","إعلامي محلي","وكيل"];
+    var type1 = ["وكـــيـــل","منظمة مــحـــلية","إعلامي مــحـــلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
 
     // for (var k = 0; k <= type1.length; k++) {
     //   if(allResults[k].type-1 == k ){
@@ -778,7 +778,7 @@ function statisticsOfficesByType(office,obj){
   }
 
   function printloc(result){
-    var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
+    var typear = ["وكـــيـــل","مراقب مــحـــلية","إعلامي مــحـــلي","مراقب عالمية","إعلامي دولي","ضيف"];
     var html='<div class="row">';
     if(result[0]!=undefined){
       html+='<span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+

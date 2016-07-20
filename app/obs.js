@@ -93,7 +93,9 @@ exports.obsMgr = {
         }else if(id_u>9){
           num+=id_u;
         }
-        num+='.0'+result[0].type+'.'+new Date().getTime();
+        var idstring=body['id_ob'].toString();
+        var nu=idstring.substring(idstring.length-6,idstring.length);
+        num+='.'+result[0].type+'.'+nu;
         body['ob_num']=num;
         conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
           conn.release();

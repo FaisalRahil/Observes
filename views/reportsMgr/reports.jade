@@ -40,9 +40,9 @@ block content
               select#obsByTypeM.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
                 option(value="", style='color:grey; display:none;') بيانات المعتمدين المحليين (جهات) 
 
-                option(value="4") منظمة محلية
-                option(value="5") إعلام محلي
-                option(value="6") وكيل
+                option(value="2") منظمة محلية
+                option(value="3") إعلام محلي
+                option(value="1") وكيل
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               button#typebtnM.btn.btn-warning.btn-block() عرض
             //- a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/obsByType/#{}", target="_blank") عرض
@@ -64,9 +64,9 @@ block content
               select#obsByTypeMzip.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
                 option(value="", style='color:grey; display:none;') اعداد المعتمدين المحليين (جهات)
 
-                option(value="4") منظمة محلية
-                option(value="5") إعلام محلي
-                option(value="6") وكيل
+                option(value="2") منظمة محلية
+                option(value="3") إعلام محلي
+                option(value="1") وكيل
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
               br
               button#typebtnMzip.btn.btn-warning.btn-block() عرض
@@ -79,13 +79,13 @@ block content
               a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/noOfInternationalObsEn", target="_blank") Number according to international observers committees
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-info.btn-block(href="/reportsMgr/observerstype/4", target="_blank")
+            a.btn.btn-info.btn-block(href="/reportsMgr/observerstype/2", target="_blank")
               |بــيـانـات تفصيلية  للمراقبين
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             a.btn.btn-danger.btn-block(href="reportsMgr/statisticsOfficesByTypeGender", target="_blank") تقرير حسب النوع
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-info.btn-block(href="/reportsMgr/observerstype/6", target="_blank") بيانات تفصيلية الوكلاء
+            a.btn.btn-info.btn-block(href="/reportsMgr/observerstype/1", target="_blank") بيانات تفصيلية الوكلاء
           
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             a.btn.btn-danger.btn-block(href="/reportsMgr/statisticsOfficesByType", target="_blank") تقرير   شامل
@@ -93,7 +93,7 @@ block content
 
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-success.btn-block(href="/reportsMgr/observerstype/5", target="_blank") بيانات تفصيلية الاعلاميين
+            a.btn.btn-success.btn-block(href="/reportsMgr/observerstype/3", target="_blank") بيانات تفصيلية الاعلاميين
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             a.btn.btn-primary.btn-block(href="/reportsMgr/observers", target="_blank") بيانات تفصيلية لجميع المعتمدين
           

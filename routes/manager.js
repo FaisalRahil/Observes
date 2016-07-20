@@ -43,7 +43,7 @@ router.get('/org/locOrg',userHelpers.Login, function(req, res) {
 
 /* GET home page. */
 router.get('/org/candidate', userHelpers.Login,function(req, res) {
-  orgMgr.getOrg(6,function(result){
+  orgMgr.getOrg(1,function(result){
    res.render('manager/candidate',{ title: 'المرشحين',orgs:result,user:req.session.id_user });
 });
 });
@@ -54,21 +54,21 @@ res.render('editOrg');
 
 /* GET home page. */
 router.get('/obs/locOrg', userHelpers.Login,function(req, res) {
-  orgMgr.getOrg(4,function(result){
+  orgMgr.getOrg(2,function(result){
    res.render('manager/locOrgObs',{ title: 'مراقب محلي',orgs:result ,user:req.session.id_user}); 
   }) 
 });
 
 /* GET home page. */
 router.get('/obs/locMedia',userHelpers.Login, function(req, res) {
-  orgMgr.getOrg(5,function(result){
+  orgMgr.getOrg(3,function(result){
     res.render('manager/locMediaObs',{ title: 'المنظمات',orgs:result ,user:req.session.id_user});
   });
 });
 
 /* GET home page. */
 router.get('/obs/agent',userHelpers.Login, function(req, res) {
-  orgMgr.getOrg(6,function(result){
+  orgMgr.getOrg(1,function(result){
     res.render('manager/agent',{ title: 'الوكيل',orgs:result,user:req.session.id_user});
   });
 });

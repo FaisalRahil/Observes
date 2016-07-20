@@ -239,10 +239,10 @@ var json2csv = require('json2csv');
          html+='<tr>\
             <td style="background-color:#E7FFE7 !important;"> '+office[i].office_name_ar+' </td>';
             if(obj[office[i].office_id]!=undefined){
-              for(k=4;k<7;k++){
+              for(k=1;k<4;k++){
                 if(obj[office[i].office_id][k]!=undefined){
                   sum+=parseInt(obj[office[i].office_id][k]);
-                  sumT[k-4]+=parseInt(obj[office[i].office_id][k]);
+                  sumT[k-1]+=parseInt(obj[office[i].office_id][k]);
                   html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k]+' </td>';
                 }else{
                   html+='<td style="background-color:#FFFFC2 !important;"> - </td>';
@@ -287,7 +287,7 @@ var json2csv = require('json2csv');
       sum=0;
       html+='<tr><td style="background-color:#E7FFE7 !important;"> '+office[0].office_name_ar+' </td>';
       if(obj[office[0].office_id]!=undefined){
-        for(k=1;k<4;k++){
+        for(k=4;k<7;k++){
           if(obj[office[0].office_id][k]!=undefined){
             sum+=parseInt(obj[office[0].office_id][k]);
             html+='<td style="background-color:#FFFFC2 !important;"> '+obj[office[0].office_id][k]+' </td>';
@@ -677,13 +677,13 @@ function statisticsOfficesByTypeGender(obj,office){
       var sumF=0;
       html+='<tr><td colspan="2" style="height:1px; background-color:#FFFFC2 !important;"> '+office[i].office_name_ar+' </td>';
       if(obj[office[i].office_id]!=undefined){
-        for(k=4;k<7;k++){
+        for(k=1;k<4;k++){
           if(obj[office[i].office_id][k]!=undefined||obj[office[i].office_id][k]!=null){
             
             if(obj[office[i].office_id][k][1]!=null){
               sum+=parseInt(obj[office[i].office_id][k][1]);
               sumM+=parseInt(obj[office[i].office_id][k][1]);
-              sumgM[k-4]+=parseInt(obj[office[i].office_id][k][1]);
+              sumgM[k-1]+=parseInt(obj[office[i].office_id][k][1]);
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][1]+' </td>'; 
             }else{
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
@@ -691,7 +691,7 @@ function statisticsOfficesByTypeGender(obj,office){
             if(obj[office[i].office_id][k][0]!=null){
               sum+=parseInt(obj[office[i].office_id][k][0]);
               sumF+=parseInt(obj[office[i].office_id][k][0]);
-              sumgF[k-4]+=parseInt(obj[office[i].office_id][k][0]);
+              sumgF[k-1]+=parseInt(obj[office[i].office_id][k][0]);
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> '+obj[office[i].office_id][k][0]+' </td>'; 
             }else{
               html+='<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
@@ -765,7 +765,7 @@ function statisticsOfficesByTypeGender(obj,office){
       html+='<tr><td colspan="2" style="background-color:#FFFFC2 !important;"> '+office[0].office_name_ar+' </td>';
         i=0;
         if(obj[office[i].office_id]!=undefined){
-        for(k=1;k<4;k++){
+        for(k=4;k<7;k++){
           if(obj[office[i].office_id][k]!=undefined||obj[office[i].office_id][k]!=null){
             
             if(obj[office[i].office_id][k][1]!=null){
@@ -860,7 +860,6 @@ function statisticsOfficesByTypeGender(obj,office){
   }
   router.get('/obsByTypezip/:type',userHelpers.isRoot,function(req, res, next) {
     reportMgr.obsBytype(req.params.type,function(results){
-      console.log(results);
       if(results.length>0){
         var now = new Date();
         var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
