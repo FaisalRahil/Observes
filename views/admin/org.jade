@@ -12,23 +12,19 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
+        li(class='active')
+          a(href='/admin/org') الـمنظمات
         li
           a(href='/admin/obs') المراقبين
         li
-          a(href='/admin/org') الـمنظمات
+          a(href='/reports') التقارير
+        li
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
+        
+        
+        
   
   .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
     .panel.panel-primary
@@ -47,10 +43,10 @@ block content
             a.btn-lg.btn.btn-warning.btn-block(href="/admin/org/natMedia", role="button")
               span.glyphicon.glyphicon-th
               br
-              | اعـلام دولـي
+              | مؤسسة اعلامية
             p
           .col-xs-6.col-sm-6.col-md-6.col-lg-6  
-            a.btn-lg.btn.btn-info.btn-block(href="/admin//moveOrg", role="button")
+            //- a.btn-lg.btn.btn-info.btn-block(href="/admin/moveOrg", role="button")
               span.glyphicon.glyphicon-th
               br
               | نـقـل مراقبين المنظمة
@@ -58,14 +54,16 @@ block content
             a.btn-lg.btn.btn-success.btn-block(href="/admin/org/guest", role="button")
               span.glyphicon.glyphicon-user
               br
-              | ضــيــف
+              | الهيئات الدبلوماسية
             p
 
     .panel.panel-primary
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | المنظمات/مؤسسات/هيئات
+          span.pull-left
+            | العدد   #{cnt}
       .panel-body
         table#table
   
@@ -84,5 +82,6 @@ block content
   script(src="/js/jquery-1.11.1.min.js")
   script(src="/js/bootstrap.min.js")
   script(src="/js/bootstrap-table.min.js")
+  script(src="/js/admin/bootstrap-notify.min.js")
   script(src="/js/admin/org.js")
   script(src='/js/admin/backToTop.js')

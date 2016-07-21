@@ -77,7 +77,7 @@
         </div>
         <div class="col-xs-6">
           <div class="text-center fontSize"> 
-            بــيـانـات الـمـراقـبـيـن 
+            بــيـانـات تفصيلية 
           </div>
         </div>
         <div class="col-xs-4">
@@ -91,24 +91,26 @@
           <table class="table condensed">
             <thead>
               <tr style="border-top-style: solid; border-top-width: 1px;" >
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> أسـم الـمـنـظـمـة </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> رقـم الاشـهـار </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـديـر الـمـنـظـمـة </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> نـوع الـمـنـظـمـة </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> رقـم هـاتـف <span>(</span>الـمـنـظـمـة<span>)</span> </th>
+                <th class="text-center" width="9%" style="background-color:#B2E6FF !important;"> الـبـريـد الالـكـتـرونـي <span>(</span>الـمـنـظـمـة<span>)</span> </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> عـنـوان الـمـنـظـمـة </th>
                 <th class="text-center" width="13%" style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> الـجـنـسـيـة </th>
                 <th class="text-center" width="9%" style="background-color:#B2E6FF !important;"> الـرقـم الـوطـنـي <span>/</span> جـواز الـسـفـر </th>
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> الـجـنـس </th>
                 <th class="text-center" width="9%" style="background-color:#B2E6FF !important;"> الـبـريـد الالـكـتـرونـي الـمـراقـب </th>
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> رقـم هـاتـف <span>(</span>الـمـراقـب <span>)</span></th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> رقـم الاشـهـار </th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> أسـم الـمـنـظـمـة </th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـديـر الـمـنـظـمـة </th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> نـوع الـمـنـظـمـة </th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> رقـم هـاتـف <span>(</span>الـمـنـظـمـة<span>)</span> </th>
-                <th class="text-center" width="9%" style="background-color:#B2E6FF !important;"> الـبـريـد الالـكـتـرونـي <span>(</span>الـمـنـظـمـة<span>)</span> </th>
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> عـنـوان الـمـنـظـمـة </th>
+                <th class="text-center" width="5%" style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> رقم المراقب </th>
+                
               </tr>
             </thead>
             <tbody style="border: 1px solid #000;">
-              {{{ drawAllResults allResults national officePar }}}
+              {{{ drawAllResults allResults national officePar typeOfOrg }}}
             </tbody>
           </table>
         </div>

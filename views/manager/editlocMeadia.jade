@@ -12,29 +12,25 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
+        li(class='active')
+          a(href='/manager/org') الـمنظمات
         li
           a(href='/manager/obs') المراقبين
         li
-          a(href='/manager/org') الـمنظمات
+          a(href='/reportsMgr') التقارير
+       
+        li
+          a(href='/logout') خروج
 
   .col-md-8.col-md-offset-2
     .form-group
       input#discount_flag(type='checkbox', name='discount_flag')
     table#orgTable.table.table-bordered.table-striped(style='clear: both')
       tbody
+        tr
+          td(width='35%') رقم التسجيل 
+          td(width='65%')
+            a#registration_no(href='#', data-type='text', data-pk='#{org[0].id_org}', data-title='رقم التسجيل',data-value='#{org[0].registration_no}') #{org[0].registration_no}
         tr
           td(width='35%') الاسم 
           td(width='65%')
@@ -61,22 +57,21 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | المراقبين
       .panel-body
         table#table
 
-    //- del
-    #deleteOrgModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
-      .modal-dialog
-        .modal-content
-          .modal-headr.modal-header-danger
-            p.h1 هل أنت متأكد من  حدف ؟
-          .modal-body
-            p.h2 هل انت متأكد
-            p
-          .modal-footer
-            button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
-            button.btn.btn-success(data-dismiss='modal', type='button') إلغاء
+  #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body
+          p.h2 هل انت متأكد 
+          p 
+        .modal-footer
+          button#confdelete.btn.btn-danger(type='button',data-id_o="#{org[0].id_org}",data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء 
 
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')

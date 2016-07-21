@@ -45,7 +45,7 @@ exports.obsMgr = {
 
   getOrgObs : function(id_org,cb){ //get observers in organisaitions
     mysqlMgr.connect(function (conn) {
-      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE `org`.`status` =1 AND obs.`status` =1 AND `org`.`id_org` = `obs`.`registration_org` AND org.`id_org` = ? ', id_org,  function(err, result) {
+      conn.query('SELECT *,`obs`.`email` AS email_obs,`obs`.`id_office` AS office_obs FROM  `observers` obs, `organisaition` org WHERE `org`.`status` =1 AND obs.`status` =1 AND `org`.`id_org` = `obs`.`registration_org` AND org.`id_org` = ? ', id_org,  function(err, result) {
         conn.release();
         if(err) {
           util.log(err);
@@ -81,16 +81,32 @@ exports.obsMgr = {
     });
   },
 
-  addOb : function(body,cb){
+  addOb : function(body,id_u,cb){
     mysqlMgr.connect(function (conn) {
       body['id_ob']=new Date().getTime();
-      conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
-        conn.release();
-        if(err) {
-          cb(err);
-        } else {
-          cb(result);
+      var num='';
+      conn.query('SELECT * FROM `organisaition` WHERE `status`= 1 AND `id_org`=?',body['registration_org']  ,function(err, result) {
+        if(id_u<0){
+          num+="18";
+        }else if(id_u>0 && id_u<10){
+          num+="0"+id_u;
+        }else if(id_u>9){
+          num+=id_u;
         }
+        var idstring=body['id_ob'].toString();
+        var nu=idstring.substring(idstring.length-6,idstring.length);
+        num+='.'+result[0].type+'.'+nu;
+        body['ob_num']=num;
+        conn.query('INSERT INTO `observers` SET ?',body,  function(err, result) {
+          conn.release();
+          if(err) {
+            console.log(err);
+            cb(err);
+          } else {
+            result['id_o']=body['id_ob'];
+            cb(result);
+          }
+        });
       });
     });
   },
@@ -280,6 +296,29 @@ exports.obsMgr = {
 
   // end edit all obs
   // ////////////////////////////////////////////////////////
-
+  checkDir : function(id,cb){ //sort by organisaition type
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT * FROM  `observers` obs WHERE  obs.`status` =1  AND obs.`registration_org` = ? AND obs.`director`=1', [id], function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
   
+  getprint : function(id,cb){ //get observers in organisaitions
+    mysqlMgr.connect(function (conn) {
+      conn.query('SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND obs.`id_ob` in (?) AND obs.`registration_org` = org.`id_org`', [id],  function(err, result) {
+        conn.release();
+        if(err) {
+          util.log(err);
+        } else {
+          cb(result);
+        }
+      });
+    });
+  },
 };

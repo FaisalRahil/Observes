@@ -1,4 +1,13 @@
 $(document).ready(function() {
+  $.nat = new Array();
+  $.get('/admin/nationality/', function(result){
+      i=0;
+      for(key in result){
+      var k = new Object({id : i,value : key, text : result[key]});
+      i++;
+      $.nat.push(k);
+    }
+  }); 
   $('#table').bootstrapTable({
     method: 'get',
     url: '/admin/getAllObsAndNameOrg',
@@ -25,22 +34,26 @@ $(document).ready(function() {
     }, {
         field: 'nationality',
         sortable:true,
-        title: 'الجنسية'
+        title: 'الجنسية',
+        formatter: nationality
     }, {
         field: 'gender',
         sortable:true,
-        title: 'الجنس'
+        title: 'الجنس',
+        formatter:gender
     }, {
         field: 'phone',
         sortable:true,
         title: 'رقم الهاتف'
-    }, {
-        field: 'director',
-        align: 'center',
-        valign: 'middle',
-        title: 'مدير',
-        formatter: status
-    }, {
+    }, 
+    // {
+    //     field: 'director',
+    //     align: 'center',
+    //     valign: 'middle',
+    //     title: 'مدير',
+    //     formatter: status
+    // }, 
+    {
         field: 'print',
         align: 'center',
         valign: 'middle',
@@ -74,6 +87,19 @@ $(document).ready(function() {
     return  [
               '<button id="deleteObs" data-toggle="modal" href="#deleteObsModule" class="btn btn-xs btn-danger" value="'+value+'"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
+  }
+  function nationality(value, row, index) {
+    return  [
+            $.nat[value-1].text.name
+          ].join('');
+  }
+  function gender(value, row, index) {
+    if(value==1){
+      var gender="ذكر";
+    }else{
+      var gender="أنثى";
+    }
+    return  [gender].join('');
   }
 
   /* Go to orgTable needs view or edit */

@@ -17,23 +17,25 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم المنظمه'
+          title: ' المؤسسة'
       }, {
           field: 'name_director',
           sortable:true,
-          title: 'اسم الرئيس'
+          title: ' المدير '
       }, {
           field: 'address',
           sortable:true,
           title: 'العنوان'
-      }, {
-          field: 'registration_no',
-          sortable:true,
-          title: 'رقم الاشهار'
-      }, {
+      },
+      //  {
+      //     field: 'registration_no',
+      //     sortable:true,
+      //     title: 'رقم الاشهار'
+      // },
+       {
           field: 'email',
           sortable:true,
-          title: 'الباريد الالكتروني'
+          title: 'البريد الالكتروني'
       }, {
           field: 'phone',
           sortable:true,
@@ -98,10 +100,9 @@ $(document).ready(function() {
         minlength: 10,
         number: true,
       },
-      registration_no:{
-        required : true,
-        number: true,
-      },
+      // registration_no:{
+      //   required : true,
+      // },
       name_director:{
         required : true,
       },
@@ -122,16 +123,24 @@ $(document).ready(function() {
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
       },
-      registration_no:{
-        required: "الرجاء إدخال رقم الاشهار",
-        number: "يجب أن تكون المدخلات أرقام ",
-      },
+      // registration_no:{
+      //   required: "الرجاء إدخال رقم الاشهار",
+      // },
       name_director:{
         required: "الرجاء إدخال أسم مدير المنظمه ",
       },
       address:{
         required: "الرجاء إدخال عنوان المنظمه  ",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      console.log(element);
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){

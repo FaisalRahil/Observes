@@ -12,23 +12,15 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
+        li(class='active')
+          a(href='/manager/org') الـمنظمات
         li
           a(href='/manager/obs') المراقبين
         li
-          a(href='/manager/org') الـمنظمات
+          a(href='/reportsMgr') التقارير
+       
+        li
+          a(href='/logout') خروج
 
   .col-md-8.col-md-offset-2
     .form-group

@@ -17,8 +17,23 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم الضيف'
+          title: 'اسم الهيئة'
       }, {
+          field: 'email',
+          align: 'center',
+          valign: 'middle',
+          title: 'البريد الالكتروني',
+      },{
+          field: 'address',
+          align: 'center',
+          valign: 'middle',
+          title: 'العنوان',
+      },{
+          field: 'phone',
+          align: 'center',
+          valign: 'middle',
+          title: 'الهاتف'
+      },{
           field: 'id_org',
           align: 'center',
           valign: 'middle',
@@ -65,10 +80,24 @@ $(document).ready(function() {
       name_org:{
         required: true,
       },
+      email:{
+        email: true,
+      },
+      phone:{
+        minlength: 10,
+        number: true,
+      },
     },
     messages:{
       name_org:{
         required: "الرجاء إدخال أسم الضيف",
+      },
+      email:{
+        email: "الرجاء إدخال البريد الالكتروني بصورته الصحيحه",
+      },
+      phone:{
+        minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام",
+        number: "يجب أن تكون المدخلات أرقام",
       },
     },
     highlight: function(element) {

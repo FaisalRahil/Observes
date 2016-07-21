@@ -12,23 +12,15 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
+        li.btn-danger(class='active')
+          a(href='/manager/org') الـمنظمات
         li
           a(href='/manager/obs') المراقبين
         li
-          a(href='/manager/org') الـمنظمات
+          a(href='/reportsMgr') التقارير
+       
+        li
+          a(href='/logout') خروج
 
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
     .nav.nav-pills.nav-stacked
@@ -63,7 +55,7 @@ block content
               input.form-control#registration_no(name='registration_no', placeholder='رقم المترشح', type='text')
             .form-group
               input.form-control#email(name='email', placeholder='البريد الالكتروني', type='email')
-              input(name='type',type='hidden',value='6')
+              input(name='type',type='hidden',value='1')
             .row
               .col-xs-8.col-md-8
                 button#btnSubmit.btn.btn-danger.btn-block(type='submit') تسجيـــل
@@ -75,7 +67,7 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | المترشحين
       .panel-body
         table#table
 

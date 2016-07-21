@@ -11,24 +11,17 @@ block content
         a(href="/")
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
-      ul.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
+      ul.nav.navbar-nav.fontSizeNav
+        li.btn-info(class='active')
+          a(href='/manager/org') الـمنظمات
         li
           a(href='/manager/obs') المراقبين
         li
-          a(href='/manager/org') الـمنظمات
+          a(href='/reportsMgr') التقارير
+       
+        li
+          a(href='/logout') خروج
+
   
   .col-xs-8.col-sm-8.col-md-8.col-lg-8.col-lg-offset-2.col-md-offset-2  
     .panel.panel-primary
@@ -47,31 +40,42 @@ block content
             a.btn-lg.btn.btn-info.btn-block(href="/manager/obs/locOrg", role="button")
               span.glyphicon.glyphicon-th
               br
-              | المنظمات المحلية
+              | مراقب محلي
             p
           .col-xs-6.col-sm-6.col-md-6.col-lg-6  
-            a.btn-lg.btn.btn-info.btn-block(href="#", role="button")
-              span.glyphicon.glyphicon-th
+            a.btn.btn-primary.btn-lg.btn-block(href="/manager/getToSer", role="button")
+              span.glyphicon.glyphicon-th-list
               br
-              | مـــــثـال
+              | تحمـــــــيل البيـــــنات
+
             p
             a.btn-lg.btn.btn-warning.btn-block(href="/manager/obs/locMedia", role="button")
               span.glyphicon.glyphicon-user
               br
-              | الاعلام المحلي
+              | ممثل الاعلام المحلي
             p
-        br
-        a.btn.btn-primary.btn-lg.btn-block(href="/", role="button")
+        //br
+        //a.btn.btn-primary.btn-lg.btn-block(href="/", role="button")
           span.glyphicon.glyphicon-th-list
           | مـــــثـال
      .panel.panel-primary
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | المسجلين
       .panel-body
         table#table
-  
+  #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-headr.modal-header-danger
+          p.h1 هل أنت متأكد من  حدف ؟
+        .modal-body
+          p.h2 هل انت متأكد 
+          p 
+        .modal-footer
+          button#confdelete.btn.btn-danger(type='button',data-dismiss='modal') حدف
+          button.btn.btn-success(data-dismiss='modal', type='button') إلغاء 
   script(src='/js/jquery-1.11.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src="/js/bootstrap-table.min.js")

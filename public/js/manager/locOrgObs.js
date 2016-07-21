@@ -34,7 +34,7 @@ $(document).ready(function() {
           field: 'director',
           align: 'center',
           valign: 'middle',
-          title: 'مدير',
+          title: 'مندوب',
           formatter: status
       }, {
           field: 'print',
@@ -54,8 +54,20 @@ $(document).ready(function() {
           valign: 'middle',
           title: 'مسح',
           formatter: operateFormatter1
-      }],
+      }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        // checkbox:true,
+        title: '<button id="print" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span><span class="text-none"> الطباعة</span></button>',
+        formatter: operateFormattercheckbox
+    }],
     });
+  function operateFormattercheckbox(value, row, index) {
+    return  [
+              '<input name="id_print" type="checkbox" value="'+value+'">'
+            ].join('');
+  }
   
     function operateFormatter(value, row, index) {
     return  [
@@ -81,7 +93,18 @@ $(document).ready(function() {
             ].join('');
       }
   }
+  // $('body').on('click', '#print', function (e) {
+  //   e.preventDefault();
+  //   $('#formprint').submit();
+  // });
 
+  // $("#formprint").submit(function(e) {
+  //   e.preventDefault();
+  //   $.post("/manager/printloc", $("#formprint").serialize(),function(data){
+
+  //   });
+   
+  // });
   /* Go to orgTable needs view or edit */
   $('body').on('click', '#deleteObs ', function () {
     var id = $(this).val();
@@ -97,9 +120,19 @@ $(document).ready(function() {
   });
 
   // $(':checkbox').checkboxpicker();
+  $('#director').prop('disabled',true);
   $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
+      onLabel:"نعم", offLabel:"لا"
+    });
+  $('#registration_org').on('change',function(){
+      $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+        if(result){
+          $('#director').prop('disabled',false);
+        }else{
+          $('#director').prop('disabled',true);
+        }
+      });
+    });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
@@ -143,6 +176,19 @@ $(document).ready(function() {
       registration_no:{
         required: "الرجاء إدخال الرقم اﻹشهار !",
       }  
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
+    highlight: function(element) {
+      $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $(this).removeClass('animated shake');
+      });
     },
   });
 

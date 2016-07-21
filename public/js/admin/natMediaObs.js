@@ -41,13 +41,15 @@ $(document).ready(function() {
         field: 'phone_obs',
         sortable:true,
         title: 'رقم الهاتف'
-    }, {
-        field: 'director',
-        align: 'center',
-        valign: 'middle',
-        title: 'مدير',
-        formatter: status
-    }, {
+    }, 
+    // {
+    //     field: 'director',
+    //     align: 'center',
+    //     valign: 'middle',
+    //     title: 'مدير',
+    //     formatter: status
+    // }, 
+    {
         field: 'print',
         align: 'center',
         valign: 'middle',
@@ -65,10 +67,21 @@ $(document).ready(function() {
         valign: 'middle',
         title: 'مسح',
         formatter: operateFormatter1
+    }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        // checkbox:true,
+        title: '<button id="print" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span><span class="text-none"> الطباعة</span></button>',
+        formatter: operateFormattercheckbox
     }],
   });
   
-
+  function operateFormattercheckbox(value, row, index) {
+    return  [
+              '<input name="id_print" type="checkbox" value="'+value+'">'
+            ].join('');
+  }
   function operateFormatter(value, row, index) {
     return  [
               '<a id="viewMedia" class="btn btn-xs btn-primary" href="/admin/editNatMediaObs/'+value+'"><i class="glyphicon glyphicon-eye-open"></i></a>'
@@ -80,7 +93,18 @@ $(document).ready(function() {
               '<button id="deleteMedia" data-toggle="modal" href="#deleteMediaObsModule" class="btn btn-xs btn-danger" value="'+value+'" href="deleteOrg"><i class="glyphicon glyphicon-trash"></i></button>'
             ].join('');
   }
+  // $('body').on('click', '#print', function (e) {
+  //   e.preventDefault();
+  //   $('#formprint').submit();
+  // });
 
+  // $("#formprint").submit(function(e) {
+  //   e.preventDefault();
+  //   $.post("/admin/printnat", $("#formprint").serialize(),function(data){
+
+  //   });
+   
+  // });
   /* Go to media needs view or edit */
   $('body').on('click', '#deleteMedia ', function () {
     var id = $(this).val();
@@ -112,13 +136,23 @@ $(document).ready(function() {
 
   function nationality(value, row, index) {
     return  [
-            $.nat[value-1].text.country_name
+            $.nat[value-1].text.name
           ].join('');
   }
   // $(':checkbox').checkboxpicker();
+  $('#director').prop('disabled',true);
   $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
-  });
+      onLabel:"نعم", offLabel:"لا"
+    });
+  $('#registration_org').on('change',function(){
+      $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+        if(result){
+          $('#director').prop('disabled',false);
+        }else{
+          $('#director').prop('disabled',true);
+        }
+      });
+    });
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
@@ -134,13 +168,12 @@ $(document).ready(function() {
     rules:{
       name:{
         required: true,
-        minlength: 10,
       },
       email:{
         required: true,
         email: true,
       },
-      phone:{
+      phone_obs:{
         required: true,
         minlength: 10,
         number: true,
@@ -153,18 +186,18 @@ $(document).ready(function() {
       },
       pass_nid:{
         required : true,
+        maxlength: 13,
       },
     },
     messages:{
       name:{
         required: "الرجاء إدخال اسم المنظمه",
-        minlength: "الرجاء إدخال الأسم ثلاثي ",
       },
       email:{
         required: "الرجاء إدخال الباريد الالكتروني",
         email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
       },
-      phone:{
+      phone_obs:{
         required: "يجب إدخال رقم الهاتف",
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
@@ -176,7 +209,8 @@ $(document).ready(function() {
         required: "يجب إختيار الجنسية",
       },
       pass_nid:{
-        required: "الرجاء إدخال رقم الجواز ",
+        required: "الرجاء إدخال رقم الهوية ",
+        maxlength:"هذا الحقل لا يسمح بادخال اكثر من 13 الرمز"
       },
     },
     errorClass: 'custom-error',

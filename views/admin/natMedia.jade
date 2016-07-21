@@ -12,24 +12,17 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
+        li.btn-warning(class='active')
+          a(href='/admin/org') الـمنظمات
         li
           a(href='/admin/obs') المراقبين
+        li(class='active')
+          a(href='/reports') التقارير
         li
-          a(href='/admin/org') الـمنظمات
-
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
+        
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
       .nav.nav-pills.nav-stacked
         li
@@ -43,29 +36,29 @@ block content
         li
             a.btn.btn-default.btn-block(href="/admin/org/guest", role="button")
               span.glyphicon.glyphicon-th.pull-right
-              | ضــيــف
+              | الهيئات الدبلوماسية
               
 
   .col-sm-7.col-md-7.col-lg-7
     .row
       .panel.orange-form.panel-warning
-        .panel-heading تـسـجـيـل بيانات المنظمات الاعلاميه الدولية
+        .panel-heading تـسـجـيـل بيانات المؤسسات الاعلاميه الدولية
         .panel-body
           form#natMedia(role='form',method="post",action="/admin/addOrg")
             .form-group
-              input.form-control#name_org(name='name_org', placeholder='اسم المنظمه', type='text')
+              input.form-control#name_org(name='name_org', placeholder='اسم المؤسسة', type='text')
             .form-group
-              input.form-control#name_director(name='name_director', placeholder='اسم مدير المنظمه', type='text')
+              input.form-control#name_director(name='name_director', placeholder='اسم مدير المؤسسة', type='text')
             .form-group
               input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
             .form-group
               input.form-control#address(name='address', placeholder='العنوان', type='text')
-            .form-group
+            //- .form-group
               input.form-control#registration_no(name='registration_no', placeholder='رقم الاشهار', type='text')
             .form-group
-              input.form-control#email(name='email', placeholder='الباريد الالكتروني', type='email')
+              input.form-control#email(name='email', placeholder='البريد الالكتروني', type='email')
 
-            input#type(name='type', type='hidden',value='3') 
+            input#type(name='type', type='hidden',value='5') 
             .row
               .col-xs-8.col-md-8
                 button#btnSubmit.btn.btn-warning.btn-block(type='submit') تـسـجـيـل
@@ -77,7 +70,9 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | مؤسسات اعلامية
+          span.pull-left
+            | العدد   #{cnt}
       .panel-body
         table#table
 

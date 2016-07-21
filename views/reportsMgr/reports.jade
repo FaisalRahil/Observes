@@ -1,0 +1,106 @@
+
+extends ../layout
+block content
+  //- link(rel='stylesheet', href='/css/reports.css')
+  header.navbar.navbar-gray.navbar-fixed-top.bs-docs-nav(role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li
+          a(href='/manager/org') الـمنظمات
+        li
+          a(href='/manager/obs') المراقبين
+        li(class='active')
+          a(href='/reportsMgr') التقارير
+       
+        li
+          a(href='/logout') خروج
+  
+  .col-md-8.col-md-offset-2(style="padding-top:5%")
+    .panel.panel-primary
+      .panel-heading
+        .row
+          .pull-right(style="margin-right: 10px;")
+            h3.panel-title
+              span.glyphicon.glyphicon-file
+              | 
+              span التقارير
+      .panel-body
+        .row
+          form.form#reportM(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              select#obsByTypeM.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين المحليين (جهات) 
+
+                option(value="2") منظمة محلية
+                option(value="3") إعلام محلي
+                option(value="1") وكيل
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              button#typebtnM.btn.btn-warning.btn-block() عرض
+            //- a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/obsByType/#{}", target="_blank") عرض
+          
+          form.form#morgform(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              select#orgobsM.form-control.selectpicker(name="orgobsM", data-live-search="true", data-size=5, data-style="btn-danger")
+                option(value="", style='color:grey; display:none;') بيانات المعتمدين المحليين (افرد) 
+                for org in Morg
+                  option(value="#{org.id_org}") #{org.name_org}
+
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              button#orgbtnM.btn.btn-danger.btn-block() عرض
+        .row
+
+          form.form#reportMzip(accept-charset="utf-8", role="form")
+            .col-xs-4.col-lg-4(style="padding-left: 5px;")
+              br
+              select#obsByTypeMzip.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
+                option(value="", style='color:grey; display:none;') اعداد المعتمدين المحليين (جهات)
+
+                option(value="2") منظمة محلية
+                option(value="3") إعلام محلي
+                option(value="1") وكيل
+            .col-xs-2.col-lg-2(style="padding-right: 5px;")
+              br
+              button#typebtnMzip.btn.btn-warning.btn-block() عرض
+          //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
+          //-   a.btn.btn-info.btn-block(href="http://localhost:3003/reports/noOfLocaleObsEn", target="_blank") Data according to local observers committees
+
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-success.btn-block(href="/reportsMgr/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة 
+            //- .col-xs-6.col-lg-6(style="padding-top: 20px;")
+              a.btn.btn-warning.btn-block(href="http://localhost:3003/reports/noOfInternationalObsEn", target="_blank") Number according to international observers committees
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-info.btn-block(href="/reportsMgr/observerstype/2", target="_blank")
+              |بــيـانـات تفصيلية  للمراقبين
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-danger.btn-block(href="reportsMgr/statisticsOfficesByTypeGender", target="_blank") تقرير حسب النوع
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-info.btn-block(href="/reportsMgr/observerstype/1", target="_blank") بيانات تفصيلية الوكلاء
+          
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-danger.btn-block(href="/reportsMgr/statisticsOfficesByType", target="_blank") تقرير   شامل
+    
+
+        .row
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-success.btn-block(href="/reportsMgr/observerstype/3", target="_blank") بيانات تفصيلية الاعلاميين
+          .col-xs-6.col-lg-6(style="padding-top: 20px;")
+            a.btn.btn-primary.btn-block(href="/reportsMgr/observers", target="_blank") بيانات تفصيلية لجميع المعتمدين
+          
+  script(src="/js/jquery-2.1.1.min.js")
+  script(src="/js/bootstrap.min.js")
+  script(src="/js/bootstrap-select.min.js")
+  script(src="/js/jquery.validate.min.js")
+  script(src="/js/bootstrap-notify.min.js")
+  script(src="/js/helpers.js")
+  script(src="/js/reportsMgr.js")

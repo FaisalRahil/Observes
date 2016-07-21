@@ -1,0 +1,61 @@
+extends layout
+block content
+  header.navbar.navbar-fixed-top.bs-docs-nav(class='#{nav}' ,role='banner')
+    .navbar-header.pull-left
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      h3.marginLeft.text-muted.text-left 
+        a(href="/")
+          img(src="/images/hnec_logo.png")
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.fontSizeNav.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | المستخدمين 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='/logout') خروج
+        li
+          a(href='/reports') التقارير
+        li
+          a(href='/admin/obs') المراقبين
+        li
+          a(href='/admin/org') الـمنظمات
+  .col-md-8.col-md-offset-2
+    .form-group
+      input#discount_flag(type='checkbox', name='discount_flag')
+    table#obs.table.table-bordered.table-striped(style='clear: both')
+      tbody
+        tr
+          td(width='35%') أسم المستخدم
+          td(width='65%')
+            a#user_name(href='#', data-type='text', data-pk='#{user.id_user}', data-title='أسم المستخدم' ,data-value=' #{user.user_name}') #{user.user_name}
+        tr
+          td(width='35%') الاسم
+          td(width='65%') 
+            a#first_name(href='#', data-type='text', data-pk='#{user.id_user}', data-title='الأسم' ,data-value=' #{user.first_name}')  #{user.first_name}
+        tr
+          td(width='35%') اللقب
+          td(width='65%')
+            a#last_name(href='#', data-type='text', data-pk='#{user.id_user}', data-title='اللقب' ,data-value='#{user.last_name}') #{user.last_name}
+        tr
+          td(width='35%') رقم الهاتف
+          td(width='65%')
+            a#phone_no(href='#', data-type='text',data-pk='#{user.id_user}', data-title='الرقم السري', data-value='#{user.phone_no}') #{user.phone_no}
+        tr
+          td(width='35%') الدائرة التابع لها 
+          td(width='65%')
+            a#id_office(href='#', data-type='select', data-pk='#{user.id_user}', data-title='الدائرة الفرعية التابعة لها', data-value='#{user.id_office}') 
+  
+  script(src='/js/jquery-1.11.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-table.min.js')
+  script(src="/js/bootstrap-editable.min.js")
+  script(src="/js/jquery.validate.min.js")
+  script(src='/js/bootstrap-switch.min.js')
+  script(src="/js/edituser.js")
+  script(src='/js/admin/backToTop.js')  

@@ -2,126 +2,163 @@ var express = require('express');
 var router = express.Router();
 var obsMgr = require('../app/obs').obsMgr;
 var orgMgr = require('../app/org').orgMgr;
+var userHelpers = require('../app/userHelpers');
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/',userHelpers.Login, function(req, res) {
   res.render('manager/manager');
 });
 
 /* GET home page. */
-router.get('/org', function(req, res) {
-  res.render('manager/org');
+router.get('/org',userHelpers.Login, function(req, res) {
+  res.render('manager/org',{ user:req.session.id_user});
+});
+router.get('/editObs/:id',userHelpers.Login, function(req, res) {
+    obsMgr.getObs_Id(req.params.id,function(err,result){
+      if(result[0].upload==0||req.session.id_office<0){
+        res.render('manager/editObs',{ title: 'تعديل المراقبين' ,obs:result,nav:'navbar-inverse',user:req.session.id_user});
+      }else{
+        res.redirect('/manager/obs');
+      }
+    });
+  });
+/* GET home page. */
+router.get('/obs', userHelpers.Login,function(req, res) {
+  res.render('manager/obs',{ user:req.session.id_user});
 });
 
 /* GET home page. */
-router.get('/obs', function(req, res) {
-  res.render('manager/obs');
-});
-
-/* GET home page. */
-router.get('/report', function(req, res) {
+router.get('/report',userHelpers.Login, function(req, res) {
   res.render('report');
 });
 
 /* GET home page. */
-router.get('/org/locMedia', function(req, res) {
-  res.render('manager/locMedia');
+router.get('/org/locMedia',userHelpers.Login, function(req, res) {
+  res.render('manager/locMedia',{ user:req.session.id_user});
 });
 
 /* GET home page. */
-router.get('/org/locOrg', function(req, res) {
-  res.render('manager/locOrg');
+router.get('/org/locOrg',userHelpers.Login, function(req, res) {
+  res.render('manager/locOrg',{ user:req.session.id_user});
 });
 
 /* GET home page. */
-router.get('/org/candidate', function(req, res) {
-  orgMgr.getOrg(6,function(result){
-   res.render('manager/candidate',{ title: 'المرشحين',orgs:result });
+router.get('/org/candidate', userHelpers.Login,function(req, res) {
+  orgMgr.getOrg(1,function(result){
+   res.render('manager/candidate',{ title: 'المرشحين',orgs:result,user:req.session.id_user });
 });
 });
 /* GET home page. */
-router.get('/editOrg/:id', function(req, res) {
-  res.render('editOrg');
+router.get('/editOrg/:id',userHelpers.Login, function(req, res) {
+res.render('editOrg');
 });
 
 /* GET home page. */
-router.get('/obs/locOrg', function(req, res) {
-  orgMgr.getOrg(4,function(result){
-   res.render('manager/locOrgObs',{ title: 'مراقب محلي',orgs:result }); 
+router.get('/obs/locOrg', userHelpers.Login,function(req, res) {
+  orgMgr.getOrg(2,function(result){
+   res.render('manager/locOrgObs',{ title: 'مراقب محلي',orgs:result ,user:req.session.id_user}); 
   }) 
 });
 
 /* GET home page. */
-router.get('/obs/locMedia', function(req, res) {
-  orgMgr.getOrg(5,function(result){
-    res.render('manager/locMediaObs',{ title: 'المنظمات',orgs:result });
+router.get('/obs/locMedia',userHelpers.Login, function(req, res) {
+  orgMgr.getOrg(3,function(result){
+    res.render('manager/locMediaObs',{ title: 'المنظمات',orgs:result ,user:req.session.id_user});
   });
 });
 
 /* GET home page. */
-router.get('/obs/agent', function(req, res) {
-  orgMgr.getOrg(6,function(result){
-   res.render('manager/agent',{ title: 'الوكيل',orgs:result });
-});
-});
-
-/* EDIT. */
-router.get('/editMediaObs/:id', function(req, res) {
-  obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-red'});
+router.get('/obs/agent',userHelpers.Login, function(req, res) {
+  orgMgr.getOrg(1,function(result){
+    res.render('manager/agent',{ title: 'الوكيل',orgs:result,user:req.session.id_user});
   });
 });
 
-router.get('/editLocOrg/:id', function(req, res) {
+/* EDIT. */
+router.get('/editMediaObs/:id',userHelpers.Login, function(req, res) {
+  obsMgr.getObs_Id(req.params.id,function(err,result){
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editMediaObs',{ title: 'المراقبين' ,obs:result,nav:'navbar-orange',user:req.session.id_user});
+    }else{
+      res.redirect('/manager/obs');
+    }
+  });
+});
+
+router.get('/editLocOrg/:id',userHelpers.Login, function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-inverse'});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-inverse',user:req.session.id_user});
+    }else{
+      res.redirect('/manager/org');
+    }
   });
 });
 /* EDIT. */
-router.get('/editAgentObs/:id', function(req, res) {
+router.get('/editAgentObs/:id',userHelpers.Login, function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editAgentObs',{ title: 'المراقبين' ,obs:result});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editAgentObs',{ title: 'المراقبين' ,obs:result,user:req.session.id_user});
+    }else{
+      res.redirect('/manager/obs');
+    }
   });
 });
 /* EDIT. */
-router.get('/editlocMeadia/:id', function(req, res) {
+router.get('/editlocMeadia/:id', userHelpers.Login,function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('manager/editlocMeadia',{ title: 'الاعلام المحلي' ,org:result});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editlocMeadia',{ title: 'الاعلام المحلي' ,org:result,user:req.session.id_user});
+    }else{
+      res.redirect('/manager/org');
+    }
   });
 });
-router.get('/editCandidateOrg/:id', function(req, res) {
+router.get('/editCandidateOrg/:id',userHelpers.Login, function(req, res) {
   orgMgr.getOrg_Id(req.params.id,function(err,result){
-    res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-red'});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editOrg',{ title: 'تعديل المنضمة' ,org:result,nav:'navbar-red',user:req.session.id_user});
+    }else{
+      res.redirect('/manager/org');
+    }
   });
 });
-router.get('/editOrgObs/:id', function(req, res) {
+router.get('/editOrgObs/:id',userHelpers.Login, function(req, res) {
   obsMgr.getObs_Id(req.params.id,function(err,result){
-    res.render('manager/editOrgObs',{ title: 'المراقبين' ,obs:result});
+    if(result[0].upload==0||req.session.id_office<0){
+      res.render('manager/editOrgObs',{ title: 'المراقبين' ,obs:result,user:req.session.id_user});
+    }else{
+      res.redirect('/manager/obs');
+    } 
   });
 });
 
 /* GET home page. */
-router.post('/editObs_name', function(req, res) {
+router.post('/editObs_name',userHelpers.Login, function(req, res) {
   obsMgr.editObs_name(req.body,function(err,result){
     res.send(result);
   });
 });
 
 /* GET home page. */
-router.post('/editObs_pass_nid', function(req, res) {
+router.post('/editObs_pass_nid',userHelpers.Login, function(req, res) {
   obsMgr.editObs_pass_nid(req.body,function(err,result){
     res.send(result);
   });
 });
 
 /* GET home page. */
-router.post('/editObs_email', function(req, res) {
+router.post('/editObs_email', userHelpers.Login,function(req, res) {
   obsMgr.editObs_email(req.body,function(err,result){
     res.send(result);
   });
 });
-
+router.post('/editObs_gender', userHelpers.Login,function(req, res) {
+  obsMgr.editObs_gender(req.body,function(err,result){
+    res.send(result);
+  });
+});
 /* GET home page. */
-router.post('/editObs_phone_obs', function(req, res) {
+router.post('/editObs_phone_obs',userHelpers.Login, function(req, res) {
   obsMgr.editObs_phone_obs(req.body,function(err,result){
     res.send(result);
   });
@@ -130,39 +167,39 @@ router.post('/editObs_phone_obs', function(req, res) {
 // ====================== edit org
 
 /* GET home page. */
-router.post('/editOrg_registration_no', function(req, res) {
+router.post('/editOrg_registration_no',userHelpers.Login, function(req, res) {
   orgMgr.editOrg_registration_no(req.body,function(err,result){
     res.send(result);
   });
 });
-router.post('/editOrg_name_org', function(req, res) {
+router.post('/editOrg_name_org', userHelpers.Login,function(req, res) {
   orgMgr.editOrg_name_org(req.body,function(err,result){
     res.send(result);
   });
 });
 
 /* GET home page. */
-router.post('/editOrg_name_director', function(req, res) {
+router.post('/editOrg_name_director',userHelpers.Login, function(req, res) {
   orgMgr.editOrg_name_director(req.body,function(err,result){
     res.send(result);
   });
 });
 
 /* GET home page. */
-router.post('/editOrg_email', function(req, res) {
+router.post('/editOrg_email', userHelpers.Login,function(req, res) {
   orgMgr.editOrg_email(req.body,function(err,result){
     res.send(result);
   });
 });
 /* GET home page. */
-router.post('/editOrg_phone', function(req, res) {
+router.post('/editOrg_phone',userHelpers.Login, function(req, res) {
   orgMgr.editOrg_phone(req.body,function(err,result){
     res.send(result);
   });
 });
 
 /* GET home page. */
-router.post('/editOrg_address', function(req, res) {
+router.post('/editOrg_address',userHelpers.Login, function(req, res) {
   orgMgr.editOrg_address(req.body,function(err,result){
     res.send(result);
   });
@@ -183,7 +220,7 @@ router.get('/delOrg/:id', function(req, res) {
   });
 });
 
-router.get('/checkOrg/:id', function(req, res) {
+router.get('/checkOrg/:id',userHelpers.Login, function(req, res) {
   obsMgr.getObsIdOrg(req.params.id,function(result){
     if(result[0]){
       res.send(false);
@@ -200,46 +237,48 @@ router.get('/getObsIdOrg/:id', function(req, res) {
 
 /* GET home page. */
 router.get('/getOb', function(req, res) {
-
-  console.log("im in");
-  obsMgr.getAllObsAndNameOrgByType(5,function(result){
-    console.log(result);
+  obsMgr.getAllObsAndNameOrgByType(3,function(result){
     res.send(result);
   });
 });
 
+router.get('/getAllObsAndNameOrg',function(req , res ){
+  obsMgr.getAllObsAndNameOrg([1,2,3],function(result){
+    res.send(result);
+  });
+});
 /* GET home page. */
 router.get('/getOb4', function(req, res) {
-  obsMgr.getAllObsAndNameOrgByType(4,function(result){
+  obsMgr.getAllObsAndNameOrgByType(2,function(result){
     res.send(result);
   });
 });
 
 router.get('/getOb6', function(req, res) {
-  obsMgr.getAllObsAndNameOrgByType(6,function(result){
+  obsMgr.getAllObsAndNameOrgByType(1,function(result){
     res.send(result);
   });
 });
 router.get('/getOrg6', function(req, res) {
-  orgMgr.getOrg(6,function(result){
+  orgMgr.getOrg(1,function(result){
     res.send(result);
   });
 });
 router.get('/getOrg5', function(req, res) {
-  orgMgr.getOrg(5,function(result){
+  orgMgr.getOrg(3,function(result){
     res.send(result);
   });
 });
 router.get('/getOrg4', function(req, res) {
-  orgMgr.getOrg(4,function(result){
+  orgMgr.getOrg(2,function(result){
     res.send(result);
   });
 });
-router.post('/addObs', function(req, res) {
+router.post('/addObs',userHelpers.Login, function(req, res) {
   type=req.body["Type"];
   delete req.body["Type"];
-  req.body['id_office']=1;
-  req.body['nationality']=210;
+  req.body.id_office=req.session.id_office;
+  req.body['nationality']=113;
   if(req.body['gender']){
     req.body['gender']=0;
   }
@@ -247,38 +286,46 @@ router.post('/addObs', function(req, res) {
     req.body['gender']=1;
   }
   if(req.body['director']){
-    req.body['director']=0;
-  }
-  else{
     req.body['director']=1;
   }
+  else{
+    req.body['director']=0;
+  }
 
-  obsMgr.addOb(req.body,function(err,result){
-    if(type==4){
+  obsMgr.addOb(req.body,req.session.id_office,function(err,result){
+    if(type==2){
       res.redirect('/manager/obs/locOrg');
     }
-    if(type==5){
+    if(type==3){
       res.redirect('/manager/obs/locMedia');
     }
-    if(type==6){
+    if(type==1){
       res.redirect('/manager/obs/agent');
     }
   });
 });
 
-router.post('/addOrg', function(req, res) {
-  req.body['id_office']=1;
+router.post('/addOrg',userHelpers.Login, function(req, res) {
+  req.body.id_office=req.session.id_office;
   orgMgr.addOrg(req.body, function (results){
-    if (req.body["type"] == 6) {
+    if (req.body["type"] == 1) {
       res.redirect('org/candidate');
-    } else if (req.body["type"] == 5){
+    } else if (req.body["type"] == 3){
       res.redirect('org/locMedia');
-    } else {
+    } else if (req.body["type"] == 2){ 
       res.redirect('org/locOrg');
-    
     } 
 
   });
 });
-
+router.get('/getToSer',userHelpers.Login, function(req, res) {
+  orgMgr.getToSer(function (results){
+    res.redirect('/manager/org?msg='+results);
+  });
+});
+router.post('/printloc',userHelpers.Login, function(req, res) {
+  obsMgr.getprint(req.body.id_print,function(result){
+    console.log(result);
+  });
+});
 module.exports = router;

@@ -57,7 +57,7 @@ $(document).ready(function() {
   $.getJSON("/admin/nationality/", function( result ) {
        i=0;
         for(key in result){
-        var k = new Object({id : i,value : result[key].country_id, text : result[key].country_name});
+        var k = new Object({id : i,value : result[key].id, text : result[key].name});
         i++;
         $.nat.push(k);
       }

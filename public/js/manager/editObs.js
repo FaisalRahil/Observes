@@ -58,5 +58,11 @@ $(document).ready(function() {
       if(v.length<10) return "يجب أن يكون رقم الهاتف أكثر من 9 أرقام ";
     }
   });
-  
+  $('#gender').editable({
+    url: '/manager/editObs_gender/',
+    source:[
+      {value:0,text:"أنثى"},
+      {value:1,text:"ذكر"}
+    ]
+  });
 });

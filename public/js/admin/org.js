@@ -26,11 +26,13 @@ $(document).ready(function() {
         field: 'address',
         sortable:true,
         title: 'العنوان'
-    }, {
-        field: 'registration_no',
-        sortable:true,
-        title: 'رقم الاشهار'
-    }, {
+    },
+    //  {
+    //     field: 'registration_no',
+    //     sortable:true,
+    //     title: 'رقم الاشهار'
+    // },
+     {
         field: 'email',
         sortable:true,
         title: 'الباريد الالكتروني'
@@ -77,8 +79,31 @@ $(document).ready(function() {
   /* Go to orgTable needs view or edit */
   $('#confdelete').click(function() {
     var id = $(this).val();
-    $.get('/admin/delOrg/'+id, function(result){
-      window.location.href="/admin/org/";
+    $.get('/admin/getOrgObs/'+id, function(data){
+      if(data.length==0){
+        $.get('/admin/delOrg/'+id, function(result){
+          window.location.href="/admin/org/";
+        });
+      }else{
+       $.notify({
+          title: "<strong>خطأ:</strong> ",
+          message: "لا يمكن مسح المنضمة لوجود مراقبين"
+        },{
+          type: 'danger',
+          allow_dismiss: true,
+          showProgressbar: false,
+          placement: {
+            from: 'top',
+            align: 'center'
+          },
+          mouse_over: null,
+          newest_on_top: true,
+          animate: {
+            enter: 'animated flipInY',
+            exit: 'animated flipOutX'
+          },
+        });
+      } 
     });
   });
 

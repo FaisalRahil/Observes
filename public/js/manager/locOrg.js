@@ -33,7 +33,7 @@ $(document).ready(function() {
       }, {
           field: 'email',
           sortable:true,
-          title: 'الباريد الالكتروني'
+          title: 'البريد الالكتروني'
       }, {
           field: 'phone',
           sortable:true,
@@ -138,6 +138,15 @@ $(document).ready(function() {
       address:{
         required: "الرجاء إدخال عنوان المنظمه ",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      console.log(element);
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){

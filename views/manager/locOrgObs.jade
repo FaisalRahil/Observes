@@ -12,23 +12,15 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
         li
-          a(href='#') التقارير
+          a(href='/manager/org') الـمنظمات
+        li.btn-info(class='active')
+          a(href='/manager/obs') المراقبين
         li
-          a(href='#') المراقبين
+          a(href='/reportsMgr') التقارير
+       
         li
-          a(href='#') الـمنظمات
+          a(href='/logout') خروج
 
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
       .nav.nav-pills.nav-stacked
@@ -64,13 +56,13 @@ block content
               | الجنس :   
               input.form-control#gender(name='gender', placeholder='الجس', type='checkbox', data-reverse='false')
             .form-group.col-sm-6.col-md-6.col-lg-6  
-              | مدير  : 
+              | مندوب  : 
               input.form-control#director(name='director', placeholder='الوظيفة', type='checkbox')
             .form-group
               input.form-control#phone_obs(name='phone_obs', placeholder='رقم الهاتف', type='text')
             .form-group
               input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
-            input(type='hidden', name='Type', value='4') 
+            input(type='hidden', name='Type', value='2') 
             .row
               .col-xs-8.col-md-8
                 button#btnSubmit.btn.btn-info.btn-block(type='submit') تسجيــــل 
@@ -84,7 +76,8 @@ block content
           span.glyphicon.glyphicon-bookmark
           | المراقبين
       .panel-body
-        table#table
+        form#formprint(action="/reportsMgr/printloc",method="Post")
+          table#table
 
   #deleteObsModule.modal.fade(data-width='760',role="dialog",aria-labelledby="myModalLabel", tabindex='-1',aria-hidden="true")
     .modal-dialog

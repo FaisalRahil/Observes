@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $('#director').prop('disabled',true);
   $.nat = new Array();
   $.get('/admin/nationality/', function(result){
       i=0;
@@ -8,7 +9,7 @@ $(document).ready(function() {
       $.nat.push(k);
     }
 
-    }); 
+  }); 
   $('#table').bootstrapTable({
       method: 'get',
       url: '/admin/getNatOrgObs',
@@ -40,13 +41,15 @@ $(document).ready(function() {
         field: 'phone_obs',
         sortable:true,
         title: 'رقم الهاتف'
-    }, {
-        field: 'director',
-        align: 'center',
-        valign: 'middle',
-        title: 'مدير',
-        formatter: status
-    }, {
+    },
+    //  {
+    //     field: 'director',
+    //     align: 'center',
+    //     valign: 'middle',
+    //     title: 'مدير',
+    //     formatter: status
+    // }, 
+    {
         field: 'print',
         align: 'center',
         valign: 'middle',
@@ -64,9 +67,22 @@ $(document).ready(function() {
         valign: 'middle',
         title: 'مسح',
         formatter: operateFormatter1
+    }, {
+        field: 'id_ob',
+        align: 'center',
+        valign: 'middle',
+        // checkbox:true,
+        title: '<button id="print" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span><span class="text-none"> الطباعة</span></button>',
+        formatter: operateFormattercheckbox
     }],
   });
   
+  
+  function operateFormattercheckbox(value, row, index) {
+    return  [
+              '<input name="id_print" type="checkbox" value="'+value+'">'
+            ].join('');
+  }
 
   function operateFormatter(value, row, index) {
     return  [
@@ -86,8 +102,20 @@ $(document).ready(function() {
     $('#confdelete').val(id);
   });
 
+  // $('body').on('click', '#print', function (e) {
+  //   e.preventDefault();
+  //   $('#formprint').submit();
+  // });
+
+  // $("#formprint").submit(function(e) {
+  //   e.preventDefault();
+  //   $.post("/admin/printnat", $("#formprint").serialize(),function(data){
+
+  //   });
+   
+  // });
   /* Go to media needs view or edit */
-  $('#confdelete').click(function() {
+  $('body').on('click', '#confdelete', function (e) {
     var id = $(this).val();
     $.get('/admin/delObs/'+id, function(result){
       window.location.href="/admin/obs/natOrgObs";
@@ -113,21 +141,28 @@ $(document).ready(function() {
 
   function nationality(value, row, index) {
     return  [
-            $.nat[value-1].text.country_name
+            $.nat[value-1].text.name
           ].join('');
   }
   // $(':checkbox').checkboxpicker();
   $('#director').checkboxpicker({
-    onLabel:"لا", offLabel:"نعم"
+    onLabel:"نعم", offLabel:"لا"
   });
+
 
   $('#gender').checkboxpicker({
     onLabel:"أنثى", offLabel:"ذكر"
   });
-  $.validator.addMethod("selectValidat", function (value) {
-    return (value != '-1');
-  });
 
+  $('#registration_org').on('change',function(){
+    $.get('/admin/checkDir/'+$('#registration_org').val(), function(result){
+      if(result){
+        $('#director').prop('disabled',false);
+      }else{
+        $('#director').prop('disabled',true);
+      }
+    });
+  });
 ////////////////////////////
 
   $("#natOrgObsId").validate({
@@ -135,57 +170,49 @@ $(document).ready(function() {
     rules:{
       name:{
         required: true,
-        minlength: 10,
       },
       email:{
         required: true,
         email: true,
       },
-      phone:{
+      phone_obs:{
         required: true,
         minlength: 10,
         number: true,
       },
       registration_org:{
         required : true,
-        number: true,
       },
       nationality:{
         required: true,
       },
       pass_nid:{
         required : true,
-        number: true,
+        maxlength: 13,
       },
     },
     messages:{
       name:{
         required: "الرجاء إدخال اسم المراقب",
-        minlength: "الرجاء إدخال الأسم ثلاثي",
       },
-      // email:{
-      //   required: "الرجاء إدخال الباريد الالكتروني",
-      //   email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
-      // },
-      phone:{
+      email:{
+        required: "الرجاء إدخال البريد الالكتروني",
+        email: "يجب أن تكون صيغة البريد الالكتروني صحيحه",
+      },
+      phone_obs:{
         required: "يجب إدخال رقم الهاتف",
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام ",
         number: "يجب أن تكون المدخلات أرقام ",
       },
-      email:{
-        required: "الرجاء إدخال الباريد الالكتروني",
-        email: "يجب أن تكون صيغة الباريد الالكتروني صحيحه",
-      },
       registration_org:{
-        required: "الرجاء إختيار المنظمة التابعة",
-        number: "الرجاء إختيار الجنسية ",
+        required: "الرجاء إختيار المنضمة",
       },
       nationality:{
-        required: "يجب إختيار جنسية المراقب",
+        required: "يجب إختيار الجنسية",
       },
       pass_nid:{
-        required: "الرجاء إدخال رقم جواز السفر",
-        number: "يجب أن تكون المدخلات أرقام ",
+        required: "الرجاء إدخال رقم الهوية",
+        maxlength:"هذا الحقل لا يسمح بادخال اكثر من 13 الرمز"
       },
     },
     errorClass: 'custom-error',
@@ -202,5 +229,6 @@ $(document).ready(function() {
       });
     },
   });
+
 
 });

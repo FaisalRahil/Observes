@@ -12,23 +12,16 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
-        li
-          a(href='/admin/obs') المراقبين
         li
           a(href='/admin/org') الـمنظمات
+        li
+          a(href='/admin/obs') المراقبين
+        li(class='active')
+          a(href='/reports') التقارير
+        li
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
 
   .col-md-8.col-md-offset-2
     .form-group
@@ -36,9 +29,21 @@ block content
     table#guest.table.table-bordered.table-striped(style='clear: both')
       tbody
         tr
-          td(width='35%') رقم التسجيل 
+          td(width='35%') اسم الهيئة 
           td(width='65%')
             a#name_org(href='#', data-type='text', data-pk='#{guest[0].id_org}', data-title='الاسم' ,data-value='#{guest[0].name_org}') #{guest[0].name_org}
+        tr
+          td(width='35%') رقم الهاتف
+          td(width='65%')
+            a#phone(href='#', data-type='text', data-pk='#{guest[0].id_org}', data-title='رقم الهاتف' ,data-value='#{guest[0].phone}') #{guest[0].phone}
+        tr
+          td(width='35%') البريد الاكتروني
+          td(width='65%')
+            a#email(href='#', data-type='text', data-pk='#{guest[0].id_org}', data-title='البريد الاكتروني', data-value='#{guest[0].email}') #{guest[0].email}
+        tr
+          td(width='35%') العنوان
+          td(width='65%')
+            a#address(href='#', data-type='text', data-pk='#{guest[0].id_org}', data-title='العنوان', data-value='#{guest[0].address}') #{guest[0].address}
 
   .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
     .panel.panel-warning

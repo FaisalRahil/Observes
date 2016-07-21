@@ -12,23 +12,15 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
+        li.btn-warning(class='active')
+          a(href='/manager/org') الـمنظمات
         li
-          a(href='#') التقارير
+          a(href='/manager/obs') المراقبين
         li
-          a(href='#') المراقبين
+          a(href='/reportsMgr') التقارير
+       
         li
-          a(href='#') الـمنظمات
+          a(href='/logout') خروج
 
   .col-sm-3.col-md-3.col-lg-3.col-sm-offset-1.col-md-offset-1.col-lg-offset-1
     .nav.nav-pills.nav-stacked
@@ -51,19 +43,19 @@ block content
       .panel-body
         form#natOrg(role='form',method="post",action="/manager/addOrg")
           .form-group
-            input.form-control#name_org(name='name_org', placeholder='اسم المنظمة', type='text')
+            input.form-control#name_org(name='name_org', placeholder='اسم المؤسسة', type='text')
           .form-group
-            input.form-control#name_director(name='name_director', placeholder='اسم مدير المنظمة', type='text')
+            input.form-control#name_director(name='name_director', placeholder='اسم مدير ', type='text')
           .form-group
             input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
           .form-group
             input.form-control#address(name='address', placeholder='العنوان', type='text')
           .form-group
-            input.form-control#registration_no(name='registration_no', placeholder='رقم اﻹشهار', type='text')
+            input.form-control#registration_no(name='registration_no', placeholder='رقم الإشهار', type='text')
           .form-group
             input.form-control#email(name='email', placeholder='البريد اﻹلكتروني', type='email')
 
-          input#type(name='type', type='hidden',value='5')
+          input#type(name='type', type='hidden',value='3')
           .row
             .col-xs-8.col-md-8
               button.btn.btn-warning.btn-block(type='submit') تسجيـــل 
@@ -75,7 +67,7 @@ block content
       .panel-heading
         h3.panel-title
           span.glyphicon.glyphicon-bookmark
-          | المنظمات
+          | المؤسسة الاعلامية
       .panel-body
         table#table
   //- del

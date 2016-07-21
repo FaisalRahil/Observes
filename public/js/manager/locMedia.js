@@ -17,7 +17,7 @@ $(document).ready(function() {
       columns: [{
           field: 'name_org',
           sortable:true,
-          title: 'اسم المنظمه'
+          title: 'اسم المؤسسة'
       }, {
           field: 'name_director',
           sortable:true,
@@ -29,7 +29,7 @@ $(document).ready(function() {
       }, {
           field: 'registration_no',
           sortable:true,
-          title: 'رقم الاشهار'
+          title: 'رقم '
       }, {
           field: 'email',
           sortable:true,
@@ -134,6 +134,15 @@ $("#natOrg").validate({
       address:{
         required: "الرجاء إدخال عنوان المنظمه ",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      console.log(element);
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){

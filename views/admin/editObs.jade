@@ -12,24 +12,16 @@ block content
           img(src="/images/hnec_logo.png")
     nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
       ul.fontSizeNav.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | المستخدمين 
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#') Action
-            li
-              a(href='#') بيانات المستخدم
-            li
-              a(href='#') خروج
-        li
-          a(href='#') التقارير
-        li
-          a(href='/admin/obs') المراقبين
         li
           a(href='/admin/org') الـمنظمات
-
+        li
+          a(href='/admin/obs') المراقبين
+        li(class='active')
+          a(href='/reports') التقارير
+        li
+          a(href='/admin/moveOrg') تصحيح
+        li
+          a(href='/logout') خروج
   .col-md-8.col-md-offset-2
     .form-group
       input#discount_flag(type='checkbox', name='discount_flag')
@@ -55,10 +47,10 @@ block content
           td(width='35%') الجنسية
           td(width='65%')
             a#nationality(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='الجنسية', data-value='#{obs[0].nationality}')
-        tr
-          td(width='35%') مدير
-          td(width='65%')
-            a#director(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='مدير', data-value='#{obs[0].director}') 
+        //- tr
+        //-   td(width='35%') مدير
+        //-   td(width='65%')
+        //-     a#director(href='#', data-type='select', data-pk='#{obs[0].id_ob}', data-title='مدير', data-value='#{obs[0].director}') 
         tr
           td(width='35%') الجنس
           td(width='65%')
