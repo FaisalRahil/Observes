@@ -1002,6 +1002,21 @@ function statisticsOfficesByTypeGender(obj,office){
      }
     return html;
   }
+  router.get('/test2',function(req, res, next) {
+    jsr.render({
+      template: { 
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/test2.html"), "utf8"),
+        phantom: {
+          format: 'A4',
+        },
+        recipe: "phantom-pdf"
+        // helpers:noOfWomenAndMen.toString()
+      }
+      // data:obj
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
   router.post('/printloc',userHelpers.Login, function(req, res) {
     obsMgr.getprint(req.body.id_print,function(result){
       jsr.render({
@@ -1032,17 +1047,17 @@ function statisticsOfficesByTypeGender(obj,office){
       <div class="col-xs-7">\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 225px; !important;">\
-            <p class="text-center"><span>'+typear[result[0].type-1]+'</span></p>\
+            <p class="text-center"><span class="font-size">'+typear[result[0].type-1]+'</span></p>\
           </div>\
         </div>\
         <div class="row">\
           <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-            <p class="text-center"><span>'+result[0].name+'</span></p>\
+            <p class="text-center"><span class="font-size">'+result[0].name+'</span></p>\
           </div>\
         </div>\
         <div class="row">\
           <div class="col-xs-12   "style="padding-top: 45px; !important;">\
-            <p class="text-center"><span>'+result[0].name_org+'</span></p>\
+            <p class="text-center"><span class="font-size">'+result[0].name_org+'</span></p>\
           </div>\
         </div>\
       </div>';
