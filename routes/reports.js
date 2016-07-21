@@ -1023,7 +1023,7 @@ function statisticsOfficesByTypeGender(obj,office){
     });
   });
   function printloc(result){
-    var typear = ["مراقب دولي","ضيف","إعلام دولي","مراقب محلي","إعلام محلي","وكيل"];
+    var typear = ["وكيل","مراقب محلي","إعلام محلي","مراقب دولي","إعلام دولي","ضيف"];
     var html='';
     if(result[0]!=undefined){
       html+='<div class="col-xs-6">\
