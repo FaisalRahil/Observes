@@ -70,7 +70,7 @@ var userHelpers = require('../app/userHelpers');
       console.log(result);
       jsr.render({
         template: { 
-          content:  fs.readFileSync(path.join(__dirname, "../views/reports/test.html"), "utf8"),
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/test2.html"), "utf8"),
           phantom: {
             // width: "6047.244095",
             // height: "9070.866142",
@@ -776,105 +776,159 @@ function statisticsOfficesByType(office,obj){
      }
     return html;
   }
-
   function printloc(result){
-    var typear = ["وكـــيـــل","مراقب مــحـــلية","إعلامي مــحـــلي","مراقب عالمية","إعلامي دولي","ضيف"];
-    var html='<div class="row">';
+    var typear = ["وكيل","مراقب محلي","إعلام محلي","مراقب دولي","إعلام دولي","ضيف"];
+    var html='';
     if(result[0]!=undefined){
-      html+='<span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+
-        result[0].ob_num+
-      '</span>\
-      <div class="col-xs-7">\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 225px; !important;">\
-            <p class="text-center"><span>'+typear[result[0].type-1]+'</span></p>\
+      html+='<div class="col-xs-6">\
+          <h4 class="vertical-number first-v-no">'+result[0].ob_num+'</h4>\
+          <div class="row">\
+            <div class="col-xs-6 first-col-right text-center">\
+              <h4 class="first-word">'+typear[result[0].type-1]+'</h4>\
+            </div>\
           </div>\
-        </div>\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-            <p class="text-center"><span>'+result[0].name+'</span></p>\
+          <div class="row">\
+            <div class="col-xs-12 second-col-right text-center">\
+              <h4 class="second-word">'+result[0].name+'</h4>\
+            </div>\
           </div>\
-        </div>\
-        <div class="row">\
-          <div class="col-xs-12   "style="padding-top: 45px; !important;">\
-            <p class="text-center"><span>'+result[0].name_org+'</span></p>\
+          <div class="row">\
+            <div class="col-xs-12 third-col-right text-center">\
+              <h4 class="third-word">'+result[0].name_org+'</h4>\
+            </div>\
           </div>\
-        </div>\
-      </div>';
+        </div>';
+
+    //   html+='<span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+
+    //     result[0].ob_num+
+    //   '</span>\
+    //   <div class="col-xs-7">\
+    //     <div class="row">\
+    //       <div class="col-xs-12 "style=" padding-top: 225px; !important;">\
+    //         <p class="text-center"><span class="font-size">'+typear[result[0].type-1]+'</span></p>\
+    //       </div>\
+    //     </div>\
+    //     <div class="row">\
+    //       <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
+    //         <p class="text-center"><span class="font-size">'+result[0].name+'</span></p>\
+    //       </div>\
+    //     </div>\
+    //     <div class="row">\
+    //       <div class="col-xs-12   "style="padding-top: 45px; !important;">\
+    //         <p class="text-center"><span class="font-size">'+result[0].name_org+'</span></p>\
+    //       </div>\
+    //     </div>\
+    //   </div>';
     }
     if(result[1]!=undefined){
-      html+='<span class="vertical-text" style="padding-left:195px;padding-bottom:480px; !important">'+
-      result[1].ob_num+
-      '</span>\
-      <div class="col-xs-3">\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 225px; !important;">\
-            <p class="text-center">'+typear[result[1].type-1]+'</p>\
+      html+='<div class="col-xs-6">\
+          <h4 class="vertical-number second-v-no">'+result[1].ob_num+'</h4>\
+          <div class="row">\
+            <div class="col-xs-6 first-col-left text-center">\
+              <h4 class="first-word">'+typear[result[1].type-1]+'</h4>\
+            </div>\
           </div>\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-            <p class="text-center">'+result[1].name+'</p>\
+          <div class="row">\
+            <div class="col-xs-10 text-center">\
+              <h4 class="second-word">'+result[1].name+'</h4>\
+            </div>\
           </div>\
-        </div>\
-        <div class="row">\
-          <div class="col-xs-12   "style="padding-top: 35px; !important;">\
-            <p class="text-center">'+result[1].name_org+'</p>\
+          <div class="row">\
+            <div class="col-xs-10 text-center">\
+              <h4 class="third-word">'+result[1].name_org+'</h4>\
+            </div>\
           </div>\
-        </div>\
-      </div>\
-    </div>\
-    <div class="row">\
-      <div class="col-xs-6"></div>';
+        </div>';
     }
-    html+='</div><div class="row">'
+    html+='</div><div class="row last-tow">'
     if(result[2]!=undefined ){
+
+      html+='<div class="col-xs-6">\
+          <h4 class="vertical-number third-v-no">'+result[2].ob_num+'</h4>\
+          <div class="row">\
+            <div class="col-xs-6 first-col-right-1 text-center">\
+              <h4 class="first-word-1">'+typear[result[2].type-1]+'</h4>\
+            </div>\
+          </div>\
+          <div class="row">\
+            <div class="col-xs-12 second-col-right-1 text-center">\
+              <h4 class="second-word">'+result[2].name+'</h4>\
+            </div>\
+          </div>\
+          <div class="row">\
+            <div class="col-xs-12 third-col-right-1 text-center">\
+              <h4 class="third-word">'+result[2].name_org+'</h4>\
+            </div>\
+          </div>\
+        </div>';
       
-    html+='<span class="vertical-text" style="padding-right:245px;padding-top:160px; !important">'+
-      result[2].ob_num+
-      '</span>\
-      <div class="col-xs-7">\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
-            <p class="text-center">'+typear[result[2].type-1]+'</p>\
-          </div>\
-        </div>\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-            <p class="text-center">'+result[2].name+'</p>\
-          </div>\
-        </div>\
-        <div class="row">\
-          <div class="col-xs-12   "style="padding-top: 25px; !important;">\
-            <p class="text-center">'+result[2].name_org+'</p>\
-          </div>\
-        </div>\
-      </div>';
+      
+    // html+='<span class="vertical-text" style="padding-right:245px;padding-top:160px; !important">'+
+    //   result[2].ob_num+
+    //   '</span>\
+    //   <div class="col-xs-7">\
+    //     <div class="row">\
+    //       <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
+    //         <p class="text-center">'+typear[result[2].type-1]+'</p>\
+    //       </div>\
+    //     </div>\
+    //     <div class="row">\
+    //       <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
+    //         <p class="text-center">'+result[2].name+'</p>\
+    //       </div>\
+    //     </div>\
+    //     <div class="row">\
+    //       <div class="col-xs-12   "style="padding-top: 25px; !important;">\
+    //         <p class="text-center">'+result[2].name_org+'</p>\
+    //       </div>\
+    //     </div>\
+    //   </div>';
     }
     if(result[3]!=undefined ){
-      html+='<span class="vertical-text" style="padding-left:120px;padding-bottom: 580px; !important">'+
-      result[3].ob_num+
-      '</span>\
-      <div class="col-xs-3">\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
-            <p class="text-center">'+typear[result[3].type-1]+'</p>\
+      html+='<div class="col-xs-6">\
+          <h4 class="vertical-number forth-v-no">'+result[3].ob_num+'</h4>\
+          <div class="row">\
+            <div class="col-xs-6 first-col-left-1 text-center">\
+              <h4 class="first-word">'+typear[result[3].type-1]+'</h4>\
+            </div>\
           </div>\
-        <div class="row">\
-          <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
-            <p class="text-center">'+result[3].name+'</p>\
+          <div class="row">\
+            <div class="col-xs-9 text-center">\
+              <h4 class="second-word">'+result[3].name+'</h4>\
+            </div>\
           </div>\
-        </div>\
-        <div class="row">\
-          <div class="col-xs-12   "style="padding-top: 35px; !important;">\
-            <p class="text-center">'+result[3].name_org+'</p>\
+          <div class="row">\
+            <div class="col-xs-9 text-center">\
+              <h4 class="third-word">'+result[3].name_org+'</h4>\
+            </div>\
           </div>\
-        </div>\
-      </div>\
-    </div>\
-    <div class="row">\
-      <div class="col-xs-6"></div>\
-      <div class="col-xs-6"></div>\
-    ';
+        </div>';
+      
+
+    //   html+='<span class="vertical-text" style="padding-left:120px;padding-bottom: 580px; !important">'+
+    //   result[3].ob_num+
+    //   '</span>\
+    //   <div class="col-xs-3">\
+    //     <div class="row">\
+    //       <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
+    //         <p class="text-center">'+typear[result[3].type-1]+'</p>\
+    //       </div>\
+    //     <div class="row">\
+    //       <div class="col-xs-12 "style=" padding-top: 30px; !important;">\
+    //         <p class="text-center">'+result[3].name+'</p>\
+    //       </div>\
+    //     </div>\
+    //     <div class="row">\
+    //       <div class="col-xs-12   "style="padding-top: 35px; !important;">\
+    //         <p class="text-center">'+result[3].name_org+'</p>\
+    //       </div>\
+    //     </div>\
+    //   </div>\
+    // </div>\
+    // <div class="row">\
+    //   <div class="col-xs-6"></div>\
+    //   <div class="col-xs-6"></div>\
+    // ';
   }
   html+="</div>"
       return html;
