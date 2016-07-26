@@ -102,9 +102,9 @@ $("#natOrg").validate({
         minlength: 10,
         number: true,
       },
-      registration_no:{
-        required : true,
-      },
+      // registration_no:{
+      //   required : true,
+      // },
       name_director:{
         required : true,
       },
@@ -125,9 +125,9 @@ $("#natOrg").validate({
         minlength: "يجب أن تكون المدخلات على الاقل 10 أرقام",
         number: "يجب أن تكون المدخلات أرقام",
       },
-      registration_no:{
-        required: "الرجاء إدخال رقم الاشهار",
-      },
+      // registration_no:{
+      //   required: "الرجاء إدخال رقم الاشهار",
+      // },
       name_director:{
         required: "الرجاء إدخال اسم مدير المنظمه",
       },

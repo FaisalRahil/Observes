@@ -632,13 +632,13 @@ var json2csv = require('json2csv');
   function obsBytype(allResults){
     var html = '';
     var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
-
+    var typeh=['المترشح','الـمـنـظـمـة','المؤسسة الإعلامية','الـمـنـظـمـة','المؤسسة الإعلامية','الهيئة']
     
     html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم '+typeh[allResults[0].type-1]+' </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسم المدير  </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>\

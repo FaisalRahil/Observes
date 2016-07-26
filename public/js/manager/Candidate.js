@@ -99,9 +99,9 @@ $("#candidate").validate({
       name_org:{
         required: true,
       },
-      name_director:{
-        required: true,
-      },
+      // name_director:{
+      //   required: true,
+      // },
       registration_no:{
         required: true,
       },
@@ -121,9 +121,9 @@ $("#candidate").validate({
       name_org:{
         required: "الرجاء إدخال اﻹسم !",
       },
-      name_director:{
-        required: "الرجاء إدخال اسم المدير !",
-      },
+      // name_director:{
+      //   required: "الرجاء إدخال اسم المدير !",
+      // },
       email:{
         required: "الرجاء إدخال البريد اﻹلكتروني !",
         email: "هذا ليس بريد إلكتروني !",

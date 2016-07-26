@@ -493,13 +493,14 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
   function obsBytype(allResults){
     var html = '';
     var type1 = ["وكـــيـــل","منظمة مــحـــلية","إعلامي مــحـــلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
+    var typeh=['المــــــتــــــــرشــــــــح','الـمـنـظـمـة','المؤسسة الإعلامية','الـمـنـظـمـة','المؤسسة الإعلامية','الهيئة']
 
 
     html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"><span> اسـم '+typeh[allResults[0].type-1]+'</span> </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسم المدير  </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>\
@@ -746,6 +747,7 @@ function statisticsOfficesByType(office,obj){
   function obsBytypezip(allResults){
     var html = '';
     var type1 = ["وكـــيـــل","منظمة مــحـــلية","إعلامي مــحـــلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
+    var typeh=['المــــــتــــــــرشــــــــح','الـمـنـظـمـة','المؤسسة الإعلامية','الـمـنـظـمـة','المؤسسة الإعلامية','الهيئة']
 
     // for (var k = 0; k <= type1.length; k++) {
     //   if(allResults[k].type-1 == k ){
@@ -757,7 +759,7 @@ function statisticsOfficesByType(office,obj){
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;width:30px;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم '+typeh[allResults[0].type-1]+' </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
               </tr>\
             </thead>\
