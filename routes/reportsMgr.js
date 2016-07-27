@@ -106,7 +106,7 @@ var userHelpers = require('../app/userHelpers');
     }); 
   });
   router.get('/observerstype/:type', userHelpers.Login,function(req, res, next) {
-    var title=['بيانات تفصيلية الوكلاء','بــيـانـات تـــفـــصــيـــلــــية  الـمـراقـبـيـن','بيانات تفصيلية الاعلاميين'];
+    var title=['بيانات تفصيلية /الوكلاء','بــيـانـات تـــفـــصــيـــلــــية / الـمـراقـبـيـن','بيانات تفصيلية / الاعلاميين'];
     reportMgr.getAllObsAndOrgtype(req.session.id_office,req.params.type, function(results){
       jsr.render({
         template: { 
