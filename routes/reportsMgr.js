@@ -67,7 +67,6 @@ var userHelpers = require('../app/userHelpers');
 
   router.post('/printloc',userHelpers.Login, function(req, res) {
     obsMgr.getprint(req.body.id_print,function(result){
-      console.log(result);
       jsr.render({
         template: { 
           content:  fs.readFileSync(path.join(__dirname, "../views/reports/test2.html"), "utf8"),
@@ -100,13 +99,14 @@ var userHelpers = require('../app/userHelpers');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين"}
       }).then(function (response) {
         response.result.pipe(res);
       });
     }); 
   });
   router.get('/observerstype/:type', userHelpers.Login,function(req, res, next) {
+    var title=['بيانات تفصيلية الوكلاء','بــيـانـات تـــفـــصــيـــلــــية  الـمـراقـبـيـن','بيانات تفصيلية الاعلاميين'];
     reportMgr.getAllObsAndOrgtype(req.session.id_office,req.params.type, function(results){
       jsr.render({
         template: { 
@@ -118,7 +118,7 @@ var userHelpers = require('../app/userHelpers');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-1]}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -528,16 +528,16 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
       html='<div class="col-xs-12 col-xs-offset-4">\
           <div class="col-xs-5 text-center">\
             <div class="text-center fontSize"> \
-              إحصائـــيـــة الجهات المعتـــمدة المحلية\
+              إحصائـــيـــة الجهات المحلية المعتـــمدة \
             </div>\
           </div>\
         </div><div class="col-xs-12">\
         <div class="towSpaces"></div><table class="table condensed">\
             <thead>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي Local observers </th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعـلام مـحـلـي Local media</th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  وكيل agent</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي  </th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعـلام مـحـلـي  </th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  وكيل </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;"><tr>';
