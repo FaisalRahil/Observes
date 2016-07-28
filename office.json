@@ -1,6 +1,6 @@
 
 [
-  {"idoffice": -1,"office_id": -1,"office_name": "hnec","office_name_ar": "المفوظية العليا للإنتخبات"},
+  {"idoffice": -1,"office_id": -1,"office_name": "hnec","office_name_ar": "الادارة العامة"},
   {"idoffice": 1,"office_id": 1,"office_name": "Sirt","office_name_ar": "سرت"},
   {"idoffice": 2,"office_id": 2,"office_name": "Musrata","office_name_ar": "مصراته"},
   {"idoffice": 3,"office_id": 3,"office_name": "Al Khoms","office_name_ar": "الخمس"}, 

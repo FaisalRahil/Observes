@@ -318,6 +318,8 @@ var json2csv = require('json2csv');
   ////////////////////////////////////////////////////////////////////////////  
 
   router.get('/observers', userHelpers.isRoot,function(req, res, next) {
+    var now = new Date();
+    var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
     reportMgr.getAllObsAndOrg(function(results){
       jsr.render({
         template: { 
@@ -329,7 +331,7 @@ var json2csv = require('json2csv');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين"}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين",date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -337,6 +339,8 @@ var json2csv = require('json2csv');
   });
   router.get('/observerstype/:type', userHelpers.Login,function(req, res, next) {
     var title=['بيانات تفصيلية / الـمـراقـبـيـن','بــيـانـات تـــفـــصــيـــلــــية / الاعلاميين','بيانات تفصيلية / الضيوف'];
+    var now = new Date();
+    var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
     reportMgr.getAllObsAndOrgtype(req.params.type, function(results){
       jsr.render({
         template: { 
@@ -348,7 +352,7 @@ var json2csv = require('json2csv');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-4]}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-4],date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });
