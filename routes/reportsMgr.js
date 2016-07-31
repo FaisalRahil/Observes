@@ -457,12 +457,12 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
   });
   function orgObs(data,offic){
     var html = '';
-    var t="";
+    var t="في";
     var typet=['الوكيل','الـمـراقـب', 'الاعلامي'];
     if(data[0].type==1){
-      t=" المــــــتــــــــرشــــــــح";
+      t=" &nbsp;<span>لـــــــــــــلمــــــتــــــــرشــــــــح</span>";
     }
-    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين في  '+t+"  "+data[0].name_org+' </th>\
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين   '+t+"  "+data[0].name_org+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\

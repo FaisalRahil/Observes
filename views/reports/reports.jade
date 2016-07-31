@@ -40,8 +40,8 @@ block content
             .col-xs-4.col-lg-4(style="padding-left: 5px;")
               select#obsByTypeN.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
                 option(value="", style='color:grey; display:none;') بيانات المعتمدين (جهات/دولي) 
-                option(value="4") منظمة عالمية
-                option(value="6") ضيف
+                option(value="4") منظمة دولية
+                option(value="6") هيئة دبلوماسية
                 option(value="5") إعلام دولي
 
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
@@ -98,8 +98,8 @@ block content
               br
               select#obsByTypeNzip.form-control.selectpicker(name="obsByType", data-live-search="true", data-size=5, data-style="btn-warning")
                 option(value="", style='color:grey; display:none;') اعداد المعتمدين (جهات/دولي)
-                option(value="4") منظمة عالمية
-                option(value="6") ضيف
+                option(value="4") منظمة دولية
+                option(value="6") هيئة دبلوماسية
                 option(value="5") إعلام دولي
 
             .col-xs-2.col-lg-2(style="padding-right: 5px;")
@@ -132,12 +132,12 @@ block content
             a.btn.btn-info.btn-block(href="/reports/observerstype/6", target="_blank") بيانات تفصيلية / الضيوف
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-danger.btn-block(href="reports/statisticsOfficesByTypeGender", target="_blank") تقرير يومي شامل حسب النوع
+            a.btn.btn-danger.btn-block(href="reports/statisticsOfficesByTypeGender", target="_blank") تقرير يومي شامل حسب النوع (محلي / دولي)
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             a.btn.btn-primary.btn-block(href="/reports/observers", target="_blank") بيانات تفصيلية
         .row
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
-            a.btn.btn-danger.btn-block(href="/reports/statisticsOfficesByType", target="_blank") تقرير يومي شامل
+            a.btn.btn-danger.btn-block(href="/reports/statisticsOfficesByType", target="_blank") تقرير يومي شامل (محلي / دولي)
           .col-xs-6.col-lg-6(style="padding-top: 20px;")
             a.btn.btn-success.btn-block(href="/reports/noOfInternationalObs", target="_blank") احصائية الجهات المعتمدة (دولي,محلي)
 

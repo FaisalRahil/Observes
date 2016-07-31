@@ -331,7 +331,7 @@ var json2csv = require('json2csv');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين",date:nowdate}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين",date:nowdate,typeo:" الـمـراقـب"}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -341,6 +341,7 @@ var json2csv = require('json2csv');
     var title=['بيانات تفصيلية / الـمـراقـبـيـن','بــيـانـات تـــفـــصــيـــلــــية / الاعلاميين','بيانات تفصيلية / الضيوف'];
     var now = new Date();
     var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
+    var typet=['الـمـراقـب','الاعلامي', 'الضيف'];
     reportMgr.getAllObsAndOrgtype(req.params.type, function(results){
       jsr.render({
         template: { 
@@ -352,7 +353,7 @@ var json2csv = require('json2csv');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-4],date:nowdate}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-4],date:nowdate,typeo:typet[req.params.type-4]}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -636,7 +637,7 @@ var json2csv = require('json2csv');
   //by type
   function obsBytype(allResults){
     var html = '';
-    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة دـولية","إعلامي دولي","الهيئات الدبلوماسية"];
     var typeh=['المترشح','الـمـنـظـمـة','المؤسسة الإعلامية','الـمـنـظـمـة','المؤسسة الإعلامية','الهيئة']
     
     html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> '+type1[allResults[0].type-1]+' </th>\
@@ -885,7 +886,7 @@ function statisticsOfficesByTypeGender(obj,office){
   });
   function obsBytypezip(allResults,offic){
     var html = '';
-    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة عالمية","إعلامي دولي","الهيئات الدبلوماسية"];
+    var type1 = ["وكيل","منظمة محلية","إعلامي محلي","منظمة دـولية","إعلامي دولي","الهيئات الدبلوماسية"];
     // for (var k = 0; k <= type1.length; k++) {
     //   if(allResults[k].type-1 == k ){
     //     typeInTD = type1[k];
