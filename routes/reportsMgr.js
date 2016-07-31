@@ -101,7 +101,7 @@ var userHelpers = require('../app/userHelpers');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين",date:nowdate}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين",date:nowdate,typeo:" الـمـراقـب"}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -111,6 +111,7 @@ var userHelpers = require('../app/userHelpers');
     var now = new Date();
     var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
     var title=['بيانات تفصيلية /الوكلاء','بــيـانـات تـــفـــصــيـــلــــية / الـمـراقـبـيـن','بيانات تفصيلية / الاعلاميين'];
+    var typet=['الوكيل','الـمـراقـب', 'الاعلامي'];
     reportMgr.getAllObsAndOrgtype(req.session.id_office,req.params.type, function(results){
       jsr.render({
         template: { 
@@ -122,7 +123,7 @@ var userHelpers = require('../app/userHelpers');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-1],date:nowdate}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-1],date:nowdate,typeo:typet[req.params.type-1]}
       }).then(function (response) {
         response.result.pipe(res);
       });
@@ -456,17 +457,19 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
   });
   function orgObs(data,offic){
     var html = '';
-    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين في '+data[0].name_org+' </th>\
+    var t="";
+    var typet=['الوكيل','الـمـراقـب', 'الاعلامي'];
+    if(data[0].type==1){
+      t=" المــــــتــــــــرشــــــــح";
+    }
+    html+= '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين في  '+t+"  "+data[0].name_org+' </th>\
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم '+typet[data[0].type-1]+' </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>';
-                if(data[0].type>3){
-                  html+='<th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>';    
-                }
-                
+
                 
                 html+='<th class="text-center"  style="background-color:#B2E6FF !important;"> رقم البطاقة  </th>\
               </tr>\
@@ -481,13 +484,7 @@ router.get('/statisticsOfficesByType', userHelpers.Login,function(req, res, next
           '<td style="background-color:#FFFFC2 !important;"> '+data[i].name+' </td> \
           <td style="background-color:#FFFFC2 !important;"> '+data[i].phone_obs+' </td> \
           <td style="background-color:#FFFFC2 !important;"> '+data[i].email_obs+' </td> ';
-          if(data[0].type>3){
-            if(data[i].office_obs<0){
-            html+='<td style="background-color:#FFFFC2 !important;"> '+offic[0].office_name_ar+'<br>'+offic[0].office_name+' </td> ';  
-            }else{
-              html+='<td style="background-color:#FFFFC2 !important;"> '+offic[data[i].office_obs].office_name_ar+' </td> ';  
-            }
-          }
+
           html+='<td style="background-color:#FFFFC2 !important;"> '+data[i].ob_num+'</td>';
 
      }

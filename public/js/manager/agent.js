@@ -25,7 +25,7 @@ $(document).ready(function() {
       }, {
           field: 'name_org',
           sortable:true,
-          title: 'اسم المنظمة'
+          title: 'اسم المترشح'
       }, {
           field: 'phone_obs',
           sortable:true,
