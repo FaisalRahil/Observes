@@ -88,6 +88,8 @@ var userHelpers = require('../app/userHelpers');
 
 
   router.get('/observers', userHelpers.Login,function(req, res, next) {
+    var now = new Date();
+    var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
     reportMgr.getAllObsAndOrg(req.session.id_office,function(results){
       jsr.render({
         template: { 
@@ -99,13 +101,15 @@ var userHelpers = require('../app/userHelpers');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين"}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:"بــيـانـات تفصيلية لجميع المعتمدين",date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });
     }); 
   });
   router.get('/observerstype/:type', userHelpers.Login,function(req, res, next) {
+    var now = new Date();
+    var nowdate =now.getDate()+' / '+parseFloat(now.getMonth()+1)+' / '+now.getFullYear();
     var title=['بيانات تفصيلية /الوكلاء','بــيـانـات تـــفـــصــيـــلــــية / الـمـراقـبـيـن','بيانات تفصيلية / الاعلاميين'];
     reportMgr.getAllObsAndOrgtype(req.session.id_office,req.params.type, function(results){
       jsr.render({
@@ -118,7 +122,7 @@ var userHelpers = require('../app/userHelpers');
           recipe: "phantom-pdf",
           helpers:drawAllResults.toString()
         },
-        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-1]}
+        data:{allResults:results,national:nationality,officePar:office,typeOfOrg:type,title:title[req.params.type-1],date:nowdate}
       }).then(function (response) {
         response.result.pipe(res);
       });
