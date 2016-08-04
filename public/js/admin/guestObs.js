@@ -30,7 +30,7 @@ $(document).ready(function() {
     }, {
         field: 'name_org',
         sortable:true,
-        title: 'أسم المنظمة'
+        title: 'أسم الهيئة'
     }, {
         field: 'nationality',
         sortable:true,

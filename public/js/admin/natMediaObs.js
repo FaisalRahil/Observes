@@ -31,7 +31,7 @@ $(document).ready(function() {
     }, {
         field: 'name_org',
         sortable:true,
-        title: 'أسم المنظمة'
+        title: 'أسم المؤسسة'
     }, {
         field: 'nationality',
         sortable:true,
