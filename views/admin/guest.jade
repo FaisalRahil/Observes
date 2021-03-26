@@ -18,8 +18,8 @@ block content
           a(href='/admin/obs') المراقبين
         li(class='active')
           a(href='/reports') التقارير
-        li
-          a(href='/admin/moveOrg') تصحيح
+        //- li
+        //-   a(href='/admin/moveOrg') تصحيح
         li
           a(href='/logout') خروج
 
@@ -47,9 +47,13 @@ block content
           .form-group
             input.form-control#name_org(name='name_org', placeholder='أسم الهيئة', type='text')
           .form-group
+            input.form-control#name_director(name='name_director', placeholder='اسم مدير الهيئة', type='text')
+          .form-group
               input.form-control#phone(name='phone', placeholder='رقم الهاتف', type='text')
           .form-group
             input.form-control#address(name='address', placeholder='العنوان', type='text')
+          .form-group
+            input.form-control#registration_no(name='registration_no', placeholder='رقم الاشهار', type='text')
           .form-group
             input.form-control#email(name='email', placeholder='البريد الالكتروني', type='email')
           input#type(name='type', type='hidden',value='6')
