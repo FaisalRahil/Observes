@@ -20,7 +20,6 @@ var util = require("util");
 exports.mysqlMgr = {
   connect: function (callback) {
     pool.getConnection(function (err, connection) {
-      console.log(err);
       callback(connection);
     });
   },

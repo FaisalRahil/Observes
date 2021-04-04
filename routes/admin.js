@@ -32,7 +32,6 @@ router.get("/nationality", function (req, res) {
 ///////////////////////////////////////////
 
 router.post("/addOrg", userHelpers.isRoot, function (req, res) {
-  console.log("ssss");
   req.body.id_office = req.session.id_office;
 
   orgMgr.addOrg(req.body, function (err, results) {
