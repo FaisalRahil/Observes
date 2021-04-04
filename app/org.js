@@ -1,11 +1,11 @@
 var mysqlMgr = require("./mysql").mysqlMgr,
   util = require("util");
 exports.orgMgr = {
-  getOrg: function (type, id, cb) {
+  getOrg: function (type, cb) {
     mysqlMgr.connect(function (conn) {
       conn.query(
-        "SELECT * FROM `organisaition`  WHERE  `status` = 1 AND `type`= ? AND `id_office`= ?",
-        [type, id],
+        "SELECT * FROM `organisaition`  WHERE  `status` = 1 AND `type`= ? ",
+        [type],
         function (err, result) {
           conn.release();
           if (err) {
@@ -196,6 +196,8 @@ exports.orgMgr = {
   },
   addOrg: function (body, cb) {
     mysqlMgr.connect(function (conn) {
+      console.log(" im in");
+      console.log(body);
       body["id_org"] = new Date().getTime();
       conn.query(
         "INSERT INTO `organisaition` SET ?",

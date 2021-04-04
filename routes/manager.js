@@ -356,6 +356,7 @@ router.post("/addObs", userHelpers.Login, function (req, res) {
 });
 
 router.post("/addOrg", userHelpers.Login, function (req, res) {
+  console.log("im in maneger org");
   req.body.id_office = req.session.id_office;
   orgMgr.addOrg(req.body, function (results) {
     if (req.body["type"] == 1) {
