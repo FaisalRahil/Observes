@@ -277,20 +277,20 @@ router.get("/checkOrg/:id", userHelpers.Login, function (req, res) {
     }
   });
 });
-router.get("/getObsIdOrg/:id", function (req, res) {
+router.get("/getObsIdOrg/:id", userHelpers.Login, function (req, res) {
   obsMgr.getOrgObs(req.params.id, function (result) {
     res.send(result);
   });
 });
 
 /* GET home page. */
-router.get("/getOb", function (req, res) {
+router.get("/getOb", userHelpers.Login, function (req, res) {
   obsMgr.getAllObsAndNameOrgByType(3, req.session.id_office, function (result) {
     res.send(result);
   });
 });
 
-router.get("/getAllObsAndNameOrg", function (req, res) {
+router.get("/getAllObsAndNameOrg", userHelpers.Login, function (req, res) {
   obsMgr.getAllObsAndNameOrg(
     [1, 2, 3],
     req.session.id_office,
@@ -300,63 +300,67 @@ router.get("/getAllObsAndNameOrg", function (req, res) {
   );
 });
 /* GET home page. */
-router.get("/getOb4", function (req, res) {
+router.get("/getOb4", userHelpers.Login, function (req, res) {
   obsMgr.getAllObsAndNameOrgByType(2, req.session.id_office, function (result) {
     res.send(result);
   });
 });
 
-router.get("/getOb6", function (req, res) {
+router.get("/getOb6", userHelpers.Login, function (req, res) {
   obsMgr.getAllObsAndNameOrgByType(1, req.session.id_office, function (result) {
     res.send(result);
   });
 });
-router.get("/getOrg6", function (req, res) {
+router.get("/getOrg6", userHelpers.Login, function (req, res) {
   orgMgr.getOrg(1, req.session.id_office, function (result) {
     res.send(result);
   });
 });
-router.get("/getOrg5", function (req, res) {
+router.get("/getOrg5", userHelpers.Login, function (req, res) {
   orgMgr.getOrg(3, req.session.id_office, function (result) {
     res.send(result);
   });
 });
-router.get("/getOrg4", function (req, res) {
+router.get("/getOrg4", userHelpers.Login, function (req, res) {
   orgMgr.getOrg(2, req.session.id_office, function (result) {
     res.send(result);
   });
 });
-router.post("/addObs", userHelpers.Login, function (req, res) {
-  type = req.body["Type"];
-  delete req.body["Type"];
-  req.body.id_office = req.session.id_office;
-  req.body["nationality"] = 113;
-  if (req.body["gender"]) {
-    req.body["gender"] = 0;
-  } else {
-    req.body["gender"] = 1;
-  }
-  if (req.body["director"]) {
-    req.body["director"] = 1;
-  } else {
-    req.body["director"] = 0;
-  }
+router.post(
+  "/addObs",
+  userHelpers.Login,
+  userHelpers.Login,
+  function (req, res) {
+    type = req.body["Type"];
+    delete req.body["Type"];
+    req.body.id_office = req.session.id_office;
+    req.body["nationality"] = 113;
+    if (req.body["gender"]) {
+      req.body["gender"] = 0;
+    } else {
+      req.body["gender"] = 1;
+    }
+    if (req.body["director"]) {
+      req.body["director"] = 1;
+    } else {
+      req.body["director"] = 0;
+    }
 
-  obsMgr.addOb(req.body, req.session.id_office, function (err, result) {
-    if (type == 2) {
-      res.redirect("/manager/obs/locOrg");
-    }
-    if (type == 3) {
-      res.redirect("/manager/obs/locMedia");
-    }
-    if (type == 1) {
-      res.redirect("/manager/obs/agent");
-    }
-  });
-});
+    obsMgr.addOb(req.body, req.session.id_office, function (err, result) {
+      if (type == 2) {
+        res.redirect("/manager/obs/locOrg");
+      }
+      if (type == 3) {
+        res.redirect("/manager/obs/locMedia");
+      }
+      if (type == 1) {
+        res.redirect("/manager/obs/agent");
+      }
+    });
+  }
+);
 
 router.post("/addOrg", userHelpers.Login, function (req, res) {
-  console.log("im in maneger org");
   req.body.id_office = req.session.id_office;
   orgMgr.addOrg(req.body, function (results) {
     if (req.body["type"] == 1) {

@@ -33,7 +33,9 @@ router.get("/nationality", function (req, res) {
 
 router.post("/addOrg", userHelpers.isRoot, function (req, res) {
   req.body.id_office = req.session.id_office;
-
+  if (req.body["type"] == 4) {
+    req.body["registration_no"] = "";
+  }
   orgMgr.addOrg(req.body, function (err, results) {
     logMgr.insertLog(
       req.session.id_user,
@@ -99,26 +101,26 @@ router.get("/getOrgObs/:id", function (req, res) {
 
 //*************************************************
 //
-router.get("/getObs", function (req, res) {
-  obsMgr.getAllObsAndNameOrgByType(5, function (result) {
+router.get("/getObs", userHelpers.Login, function (req, res) {
+  obsMgr.getAllObsAndNameOrgByType(5, req.session.id_office, function (result) {
     res.send(result);
   });
 });
 
-router.get("/getNatOrg", function (req, res) {
-  orgMgr.getOrg(4, function (result) {
+router.get("/getNatOrg", userHelpers.Login, function (req, res) {
+  orgMgr.getOrg(4, req.session.id_office, function (result) {
     res.send(result);
   });
 });
 //
-router.get("/getGuest", function (req, res) {
-  orgMgr.getOrg(6, function (result) {
+router.get("/getGuest", userHelpers.Login, function (req, res) {
+  orgMgr.getOrg(6, req.session.id_office, function (result) {
     res.send(result);
   });
 });
 //
-router.get("/getNatMedia", function (req, res) {
-  orgMgr.getOrg(5, function (result) {
+router.get("/getNatMedia", userHelpers.Login, function (req, res) {
+  orgMgr.getOrg(5, req.session.id_office, function (result) {
     res.send(result);
   });
 });
@@ -184,10 +186,14 @@ router.get("/getAllObs", function (req, res) {
   });
 });
 ///////////////////////////////////////////////////////////////////////////
-router.get("/getAllObsAndNameOrg", function (req, res) {
-  obsMgr.getAllObsAndNameOrg([4, 5, 6], function (result) {
-    res.send(result);
-  });
+router.get("/getAllObsAndNameOrg", userHelpers.Login, function (req, res) {
+  obsMgr.getAllObsAndNameOrg(
+    [4, 5, 6],
+    req.session.id_office,
+    function (result) {
+      res.send(result);
+    }
+  );
 });
 
 /* GET home page. */
@@ -234,7 +240,7 @@ router.get("/obs/guest", userHelpers.isRoot, function (req, res) {
 
 /* GET home page. */
 router.get("/obs/natOrgObs", userHelpers.isRoot, function (req, res) {
-  orgMgr.getOrg(4, function (result) {
+  orgMgr.getOrg(4, req.session.id_office, function (result) {
     orgMgr.getCountOb(4, function (result1) {
       res.render("admin/natOrgObs", {
         title: "مراقبين المنظمات العالمية",
@@ -249,7 +255,7 @@ router.get("/obs/natOrgObs", userHelpers.isRoot, function (req, res) {
 
 /* GET home page. */
 router.get("/obs/guestObs", userHelpers.isRoot, function (req, res) {
-  orgMgr.getOrg(6, function (result) {
+  orgMgr.getOrg(6, req.session.id_office, function (result) {
     orgMgr.getCountOb(6, function (result1) {
       res.render("admin/guestObs", {
         title: "مراقبين المنظمات العالمية",
@@ -264,7 +270,7 @@ router.get("/obs/guestObs", userHelpers.isRoot, function (req, res) {
 
 /* GET home page. */
 router.get("/obs/natMediaObs", userHelpers.isRoot, function (req, res) {
-  orgMgr.getOrg(5, function (result) {
+  orgMgr.getOrg(5, req.session.id_office, function (result) {
     orgMgr.getCountOb(5, function (result1) {
       res.render("admin/natMediaObs", {
         title: "مراقبين المنظمات العالمية",
@@ -710,20 +716,20 @@ router.get("/delOrg/:id", userHelpers.isRoot, function (req, res) {
 ////////////////////////////////////////////////////////
 // start
 
-router.get("/getNatOrgObs", function (req, res) {
-  obsMgr.getAllObsAndNameOrgByType(4, function (result) {
+router.get("/getNatOrgObs", userHelpers.Login, function (req, res) {
+  obsMgr.getAllObsAndNameOrgByType(4, req.session.id_office, function (result) {
     res.send(result);
   });
 });
 
-router.get("/getGuestObs", function (req, res) {
-  obsMgr.getAllObsAndNameOrgByType(6, function (result) {
+router.get("/getGuestObs", userHelpers.Login, function (req, res) {
+  obsMgr.getAllObsAndNameOrgByType(6, req.session.id_office, function (result) {
     res.send(result);
   });
 });
 
-router.get("/getNatMediaObs", function (req, res) {
-  obsMgr.getAllObsAndNameOrgByType(5, function (result) {
+router.get("/getNatMediaObs", userHelpers.Login, function (req, res) {
+  obsMgr.getAllObsAndNameOrgByType(5, req.session.id_office, function (result) {
     res.send(result);
   });
 });

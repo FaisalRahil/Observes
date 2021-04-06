@@ -1,12 +1,12 @@
 var mysqlMgr = require("./mysql").mysqlMgr,
   util = require("util");
 exports.obsMgr = {
-  getAllObsAndNameOrg: function (id, cb) {
+  getAllObsAndNameOrg: function (id, office, cb) {
     //sort by organisaition type
     mysqlMgr.connect(function (conn) {
       conn.query(
-        "SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` in (?) AND obs.`registration_org` = org.`id_org`",
-        [id],
+        "SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` in (?) AND obs.`id_office`=? AND obs.`registration_org` = org.`id_org`",
+        [id, office],
         function (err, result) {
           conn.release();
           if (err) {
@@ -19,12 +19,12 @@ exports.obsMgr = {
     });
   },
 
-  getAllObsAndNameOrgByType: function (type, cb) {
+  getAllObsAndNameOrgByType: function (type, office, cb) {
     //sort by organisaition type
     mysqlMgr.connect(function (conn) {
       conn.query(
-        "SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` = ? AND obs.`registration_org` = org.`id_org`",
-        [type],
+        "SELECT * FROM  `observers` obs, `organisaition` org WHERE org.`status` =1 AND obs.`status` =1 AND org.`type` = ? AND obs.`id_office`=? AND obs.`registration_org` = org.`id_org`",
+        [type, office],
         function (err, result) {
           conn.release();
           if (err) {
