@@ -11,6 +11,8 @@ var nationality = require("../Nationality");
 var office = require("../office");
 var type = require("../type");
 var userHelpers = require("../app/userHelpers");
+var pdf = require("pdf-creator-node");
+const Handlebars = require("handlebars");
 
 router.get("/", userHelpers.Login, function (req, res) {
   reportMgr.getOrgsRport(req.session.id_office, function (Morg) {
@@ -37,20 +39,43 @@ router.get("/obsByType/:type", userHelpers.Login, function (req, res, next) {
           parseFloat(now.getMonth() + 1) +
           " / " +
           now.getFullYear();
-        jsr
-          .render({
-            template: {
-              content: fs.readFileSync(
-                path.join(__dirname, "../views/reportsMgr/obsByType.html"),
-                "utf8"
-              ),
-              recipe: "phantom-pdf",
-              helpers: obsBytype.toString(),
-            },
-            data: { allResults: results, date: nowdate },
+
+        var templateHtml = fs.readFileSync(
+          path.join(__dirname, "../views/reportsMgr/obsByType.html"),
+          "utf8"
+        );
+        var pathl = "./pdf/obsByType" + req.session.id_user + ".pdf";
+
+        var template = Handlebars.compile(templateHtml);
+        var options = {
+          format: "A4",
+          orientation: "landscape",
+          border: "5mm",
+        };
+        var html = template({
+          allResults: results,
+          date: nowdate,
+        });
+        var document = {
+          html: html,
+          data: {
+            allResults: results,
+            date: nowdate,
+          },
+          path: pathl,
+          type: "",
+        };
+        pdf
+          .create(document, options)
+          .then((resw) => {
+            // res.send(res.filename);
+            fs.readFile(resw.filename, function (err, data) {
+              res.contentType("application/pdf");
+              res.send(data);
+            });
           })
-          .then(function (response) {
-            response.result.pipe(res);
+          .catch((error) => {
+            console.error(error);
           });
       } else {
         res.redirect("/reportsMgr?msg=1");
@@ -77,24 +102,43 @@ router.get(
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(
-                __dirname,
-                "../views/reportsMgr/noOfInternationalObs.html"
-              ),
-              "utf8"
-            ),
-            phantom: {},
-            recipe: "phantom-pdf",
-            helpers: resultsNoOfInternationalObs.toString(),
-          },
-          data: { resultt: obj, date: nowdate },
+
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reportsMgr/noOfInternationalObs.html"),
+        "utf8"
+      );
+      var pathl = "./pdf/noOfInternationalObs" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({
+        resultt: obj,
+        date: nowdate,
+      });
+      var document = {
+        html: html,
+        data: {
+          resultt: obj,
+          date: nowdate,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     });
   }
@@ -102,27 +146,63 @@ router.get(
 
 router.post("/printloc", userHelpers.Login, function (req, res) {
   obsMgr.getprint(req.body.id_print, function (result) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reports/test2.html"),
-            "utf8"
-          ),
-          phantom: {
-            // width: "6047.244095",
-            // height: "9070.866142",
-            format: "A4",
-          },
-          recipe: "phantom-pdf",
-          helpers: printloc.toString(),
-        },
-        data: { allResults: result },
-        // data:obj
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reports/test2.html"),
+      "utf8"
+    );
+    var pathl = "./pdf/test2" + req.session.id_user + ".pdf";
+
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A4",
+      orientation: "portrait",
+      border: "5mm",
+    };
+    var html = template({
+      allResults: result,
+    });
+    var document = {
+      html: html,
+      data: {
+        allResults: result,
+      },
+      path: pathl,
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
+
+    // jsr
+    //   .render({
+    //     template: {
+    //       content: fs.readFileSync(
+    //         path.join(__dirname, "../views/reports/test2.html"),
+    //         "utf8"
+    //       ),
+    //       phantom: {
+    //         // width: "6047.244095",
+    //         // height: "9070.866142",
+    //         format: "A4",
+    //       },
+    //       recipe: "phantom-pdf",
+    //       helpers: printloc.toString(),
+    //     },
+    //     data: { allResults: result },
+    //     // data:obj
+    //   })
+    //   .then(function (response) {
+    //     response.result.pipe(res);
+    //   });
   });
 });
 
@@ -135,32 +215,52 @@ router.get("/observers", userHelpers.Login, function (req, res, next) {
     " / " +
     now.getFullYear();
   reportMgr.getAllObsAndOrg(req.session.id_office, function (results) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reportsMgr/observers.html"),
-            "utf8"
-          ),
-          phantom: {
-            format: "A3",
-            orientation: "landscape",
-          },
-          recipe: "phantom-pdf",
-          helpers: drawAllResults.toString(),
-        },
-        data: {
-          allResults: results,
-          national: nationality,
-          officePar: office,
-          typeOfOrg: type,
-          title: "بــيـانـات تفصيلية لجميع المعتمدين",
-          date: nowdate,
-          typeo: " الـمـراقـب",
-        },
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reportsMgr/observers.html"),
+      "utf8"
+    );
+    var pathl = "./pdf/observers" + req.session.id_user + ".pdf";
+
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A3",
+      orientation: "landscape",
+      border: "5mm",
+    };
+    var html = template({
+      allResults: results,
+      national: nationality,
+      officePar: office,
+      typeOfOrg: type,
+      title: "بــيـانـات تفصيلية لجميع المعتمدين",
+      date: nowdate,
+      typeo: " الـمـراقـب",
+    });
+    var document = {
+      html: html,
+      data: {
+        allResults: results,
+        national: nationality,
+        officePar: office,
+        typeOfOrg: type,
+        title: "بــيـانـات تفصيلية لجميع المعتمدين",
+        date: nowdate,
+        typeo: " الـمـراقـب",
+      },
+      path: pathl,
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
   });
 });
@@ -185,32 +285,52 @@ router.get(
       req.session.id_office,
       req.params.type,
       function (results) {
-        jsr
-          .render({
-            template: {
-              content: fs.readFileSync(
-                path.join(__dirname, "../views/reportsMgr/observers.html"),
-                "utf8"
-              ),
-              phantom: {
-                format: "A3",
-                orientation: "landscape",
-              },
-              recipe: "phantom-pdf",
-              helpers: drawAllResults.toString(),
-            },
-            data: {
-              allResults: results,
-              national: nationality,
-              officePar: office,
-              typeOfOrg: type,
-              title: title[req.params.type - 1],
-              date: nowdate,
-              typeo: typet[req.params.type - 1],
-            },
+        var templateHtml = fs.readFileSync(
+          path.join(__dirname, "../views/reportsMgr/observers.html"),
+          "utf8"
+        );
+        var pathl = "./pdf/observers" + req.session.id_user + ".pdf";
+
+        var template = Handlebars.compile(templateHtml);
+        var options = {
+          format: "A3",
+          orientation: "landscape",
+          border: "5mm",
+        };
+        var html = template({
+          allResults: results,
+          national: nationality,
+          officePar: office,
+          typeOfOrg: type,
+          title: title[req.params.type - 1],
+          date: nowdate,
+          typeo: typet[req.params.type - 1],
+        });
+        var document = {
+          html: html,
+          data: {
+            allResults: results,
+            national: nationality,
+            officePar: office,
+            typeOfOrg: type,
+            title: title[req.params.type - 1],
+            date: nowdate,
+            typeo: typet[req.params.type - 1],
+          },
+          path: pathl,
+          type: "",
+        };
+        pdf
+          .create(document, options)
+          .then((resw) => {
+            // res.send(res.filename);
+            fs.readFile(resw.filename, function (err, data) {
+              res.contentType("application/pdf");
+              res.send(data);
+            });
           })
-          .then(function (response) {
-            response.result.pipe(res);
+          .catch((error) => {
+            console.error(error);
           });
       }
     );
@@ -249,25 +369,49 @@ router.get(
           parseFloat(now.getMonth() + 1) +
           " / " +
           now.getFullYear();
-        jsr
-          .render({
-            template: {
-              content: fs.readFileSync(
-                path.join(
-                  __dirname,
-                  "../views/reportsMgr/statisticsOfficesByTypeGender.html"
-                ),
-                "utf8"
-              ),
-              recipe: "phantom-pdf",
 
-              helpers: statisticsOfficesByTypeGender.toString(),
-            },
-            engine: "jsrender",
-            data: { office: office, obj: obj, date: nowdate },
+        var templateHtml = fs.readFileSync(
+          path.join(
+            __dirname,
+            "../views/reportsMgr/statisticsOfficesByTypeGender.html"
+          ),
+          "utf8"
+        );
+        var pathl =
+          "./pdf/statisticsOfficesByTypeGender" + req.session.id_user + ".pdf";
+
+        var template = Handlebars.compile(templateHtml);
+        var options = {
+          format: "A4",
+          orientation: "portrait",
+          border: "5mm",
+        };
+        var html = template({
+          office: office,
+          obj: obj,
+          date: nowdate,
+        });
+        var document = {
+          html: html,
+          data: {
+            office: office,
+            obj: obj,
+            date: nowdate,
+          },
+          path: pathl,
+          type: "",
+        };
+        pdf
+          .create(document, options)
+          .then((resw) => {
+            // res.send(res.filename);
+            fs.readFile(resw.filename, function (err, data) {
+              res.contentType("application/pdf");
+              res.send(data);
+            });
           })
-          .then(function (response) {
-            response.result.pipe(res);
+          .catch((error) => {
+            console.error(error);
           });
       }
     );
@@ -295,24 +439,49 @@ router.get(
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(
-                __dirname,
-                "../views/reportsMgr/statisticsOfficesByType.html"
-              ),
-              "utf8"
-            ),
 
-            recipe: "phantom-pdf",
-            helpers: statisticsOfficesByType.toString(),
-          },
-          data: { offic: office, result: obj, date: nowdate },
+      var templateHtml = fs.readFileSync(
+        path.join(
+          __dirname,
+          "../views/reportsMgr/statisticsOfficesByType.html"
+        ),
+        "utf8"
+      );
+      var pathl =
+        "./pdf/statisticsOfficesByType" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({
+        offic: office,
+        result: obj,
+        date: nowdate,
+      });
+      var document = {
+        html: html,
+        data: {
+          offic: office,
+          result: obj,
+          date: nowdate,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     });
   }
@@ -682,27 +851,52 @@ router.get("/orgObs/:id", userHelpers.Login, function (req, res, next) {
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(__dirname, "../views/reports/orgObs.html"),
-              "utf8"
-            ),
-            recipe: "phantom-pdf",
-            helpers: orgObs.toString(),
-          },
-          data: { allResults: results, date: nowdate, office: office },
+
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reportsMgr/orgObs.html"),
+        "utf8"
+      );
+      var pathl = "./pdf/obsByType" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({
+        allResults: results,
+        date: nowdate,
+        office: office,
+      });
+      var document = {
+        html: html,
+        data: {
+          allResults: results,
+          date: nowdate,
+          office: office,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     } else {
-      res.redirect("/reports?msg=1");
+      res.redirect("/reportsMgr?msg=1");
     }
   });
 });
-function orgObs(data, offic) {
+Handlebars.registerHelper("orgObsMgr", function (data, offic) {
   var html = "";
   var t = "في";
   var typet = ["الوكيل", "الـمـراقـب", "الاعلامي"];
@@ -753,10 +947,10 @@ function orgObs(data, offic) {
       data[i].ob_num +
       "</td>";
   }
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 ///////////////////////////////////////////////////////////////////
-function obsBytype(allResults) {
+Handlebars.registerHelper("obsBytypeM", function (allResults) {
   var html = "";
   var type1 = [
     "وكـــيـــل",
@@ -817,11 +1011,14 @@ function obsBytype(allResults) {
       allResults[i].ObsCount +
       " </td>";
   }
-  return html;
-}
-function resultsNoOfInternationalObs(resultt) {
-  html =
-    '<div class="col-xs-12 col-xs-offset-4">\
+  return new Handlebars.SafeString(html);
+});
+Handlebars.registerHelper(
+  "resultsNoOfInternationalObs",
+
+  function (resultt) {
+    html =
+      '<div class="col-xs-12 col-xs-offset-4">\
           <div class="col-xs-5 text-center">\
             <div class="text-center fontSize"> \
               إحصائـــيـــة الجهات المحلية المعتـــمدة \
@@ -837,206 +1034,214 @@ function resultsNoOfInternationalObs(resultt) {
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;"><tr>';
-  for (var i = 1; i < 4; i++) {
-    if (resultt[i] == undefined) {
-      html += ' <td style="background-color:#FFFFC2 !important;"> - </td>';
-    } else {
-      html +=
-        ' <td style="background-color:#FFFFC2 !important;"> ' +
-        resultt[i] +
-        " </td>";
+    for (var i = 1; i < 4; i++) {
+      if (resultt[i] == undefined) {
+        html += ' <td style="background-color:#FFFFC2 !important;"> - </td>';
+      } else {
+        html +=
+          ' <td style="background-color:#FFFFC2 !important;"> ' +
+          resultt[i] +
+          " </td>";
+      }
     }
+    html += "</tr></tbody></table></div>";
+    return new Handlebars.SafeString(html);
   }
-  html += "</tr></tbody></table></div>";
-  return html;
-}
-function drawAllResults(allResults, national, officePar, typeOfOrg) {
-  var html = "";
-  var gender1;
-  var nat = "";
-  var typeInTD = "";
-  var office1 = "";
-  for (i in allResults) {
-    for (var l = 0; l < officePar.length; l++) {
-      if (allResults[i].id_office == officePar[l].idoffice) {
-        office1 = officePar[l].office_name_ar;
-        break;
+);
+Handlebars.registerHelper(
+  "drawAllResults",
+  function (allResults, national, officePar, typeOfOrg) {
+    var html = "";
+    var gender1;
+    var nat = "";
+    var typeInTD = "";
+    var office1 = "";
+    for (i in allResults) {
+      for (var l = 0; l < officePar.length; l++) {
+        if (allResults[i].id_office == officePar[l].idoffice) {
+          office1 = officePar[l].office_name_ar;
+          break;
+        }
       }
-    }
-    for (var k = 0; k < typeOfOrg.length; k++) {
-      if (allResults[i].type == typeOfOrg[k].type_id) {
-        typeInTD = typeOfOrg[k].type_name;
-        break;
+      for (var k = 0; k < typeOfOrg.length; k++) {
+        if (allResults[i].type == typeOfOrg[k].type_id) {
+          typeInTD = typeOfOrg[k].type_name;
+          break;
+        }
       }
-    }
-    for (var j = 0; j < national.length; j++) {
-      if (allResults[i].nationality == national[j].id) {
-        nat = national[j].name;
-        break;
+      for (var j = 0; j < national.length; j++) {
+        if (allResults[i].nationality == national[j].id) {
+          nat = national[j].name;
+          break;
+        }
       }
+      if (allResults[i].gender == 0) {
+        gender1 = "أنـثـى";
+      } else {
+        gender1 = "ذكـر";
+      }
+      html +=
+        '<tr>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].name_org +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].registration_no +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].name_director +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        typeInTD +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].phone +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].email_org +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].address +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].name +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        nat +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].pass_nid +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        gender1 +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].email_obs +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].phone_obs +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        office1 +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].ob_num +
+        " </td>\
+              </tr>";
     }
-    if (allResults[i].gender == 0) {
-      gender1 = "أنـثـى";
-    } else {
-      gender1 = "ذكـر";
+    return new Handlebars.SafeString(html);
+  }
+);
+Handlebars.registerHelper(
+  "statisticsOfficesByTypeGender",
+  function (obj, office) {
+    var sumAll = 0;
+    var sumAllM = 0;
+    var sumAllF = 0;
+
+    var sumgF = [0, 0, 0];
+    var sumgM = [0, 0, 0];
+    var html = "";
+    for (i in office) {
+      if (i != 0) {
+        var sum = 0;
+        var sumM = 0;
+        var sumF = 0;
+
+        if (obj[office[i].office_id] != undefined) {
+          html +=
+            '<tr><td colspan="2" style="height:1px; background-color:#FFFFC2 !important;"> ' +
+            office[i].office_name_ar +
+            " </td>";
+          for (k = 1; k < 4; k++) {
+            if (
+              obj[office[i].office_id][k] != undefined ||
+              obj[office[i].office_id][k] != null
+            ) {
+              if (obj[office[i].office_id][k][1] != null) {
+                sum += parseInt(obj[office[i].office_id][k][1]);
+                sumM += parseInt(obj[office[i].office_id][k][1]);
+                sumgM[k - 1] += parseInt(obj[office[i].office_id][k][1]);
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
+                  obj[office[i].office_id][k][1] +
+                  " </td>";
+              } else {
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
+              }
+              if (obj[office[i].office_id][k][0] != null) {
+                sum += parseInt(obj[office[i].office_id][k][0]);
+                sumF += parseInt(obj[office[i].office_id][k][0]);
+                sumgF[k - 1] += parseInt(obj[office[i].office_id][k][0]);
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
+                  obj[office[i].office_id][k][0] +
+                  " </td>";
+              } else {
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
+              }
+            } else {
+              html +=
+                '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
+            }
+          }
+          html +=
+            '<td style="height:1px;background-color:#F0F0EF !important;"> ' +
+            sumM +
+            ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
+            sumF +
+            ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
+            sum +
+            " </td>";
+        }
+        html += "</tr>";
+
+        sumAll += sum;
+        sumAllF += sumF;
+        sumAllM += sumM;
+      }
     }
     html +=
-      '<tr>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].name_org +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].registration_no +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].name_director +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      typeInTD +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].phone +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].email_org +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].address +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].name +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      nat +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].pass_nid +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      gender1 +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].email_obs +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].phone_obs +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      office1 +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].ob_num +
-      " </td>\
-              </tr>";
-  }
-  return html;
-}
-function statisticsOfficesByTypeGender(obj, office) {
-  var sumAll = 0;
-  var sumAllM = 0;
-  var sumAllF = 0;
-
-  var sumgF = [0, 0, 0];
-  var sumgM = [0, 0, 0];
-  var html = "";
-  for (i in office) {
-    if (i != 0) {
-      var sum = 0;
-      var sumM = 0;
-      var sumF = 0;
-
-      if (obj[office[i].office_id] != undefined) {
-        html +=
-          '<tr><td colspan="2" style="height:1px; background-color:#FFFFC2 !important;"> ' +
-          office[i].office_name_ar +
-          " </td>";
-        for (k = 1; k < 4; k++) {
-          if (
-            obj[office[i].office_id][k] != undefined ||
-            obj[office[i].office_id][k] != null
-          ) {
-            if (obj[office[i].office_id][k][1] != null) {
-              sum += parseInt(obj[office[i].office_id][k][1]);
-              sumM += parseInt(obj[office[i].office_id][k][1]);
-              sumgM[k - 1] += parseInt(obj[office[i].office_id][k][1]);
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
-                obj[office[i].office_id][k][1] +
-                " </td>";
-            } else {
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
-            }
-            if (obj[office[i].office_id][k][0] != null) {
-              sum += parseInt(obj[office[i].office_id][k][0]);
-              sumF += parseInt(obj[office[i].office_id][k][0]);
-              sumgF[k - 1] += parseInt(obj[office[i].office_id][k][0]);
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
-                obj[office[i].office_id][k][0] +
-                " </td>";
-            } else {
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
-            }
-          } else {
-            html +=
-              '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
-          }
-        }
-        html +=
-          '<td style="height:1px;background-color:#F0F0EF !important;"> ' +
-          sumM +
-          ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
-          sumF +
-          ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
-          sum +
-          " </td>";
-      }
-      html += "</tr>";
-
-      sumAll += sum;
-      sumAllF += sumF;
-      sumAllM += sumM;
-    }
-  }
-  html +=
-    '</tbody ><tbody >\
+      '</tbody ><tbody >\
           <tr>\
             <td colspan="2" style="background-color:#F0F0EF !important;border: 1px solid;"> المــجــموع </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgM[0] +
-    ' </td>\
+      sumgM[0] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgF[0] +
-    ' </td>\
+      sumgF[0] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgM[1] +
-    ' </td>\
+      sumgM[1] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgF[1] +
-    ' </td>\
+      sumgF[1] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgM[2] +
-    ' </td>\
+      sumgM[2] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgF[2] +
-    ' </td>\
+      sumgF[2] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumAllM +
-    ' </td>\
+      sumAllM +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumAllF +
-    ' </td>\
+      sumAllF +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumAll +
-    " </td>\
+      sumAll +
+      " </td>\
           </tr>\
         </tbody></table>";
 
-  return html;
-}
-function statisticsOfficesByType(office, obj) {
+    return new Handlebars.SafeString(html);
+  }
+);
+
+Handlebars.registerHelper("statisticsOfficesByType", function (office, obj) {
   // html='';
   html =
     '<table class="table condensed">\
@@ -1106,8 +1311,8 @@ function statisticsOfficesByType(office, obj) {
 
   sumAll += sum;
 
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 router.get("/obsByTypezip/:type", userHelpers.Login, function (req, res, next) {
   reportMgr.obsBytype(
     req.session.id_office,
@@ -1121,28 +1326,51 @@ router.get("/obsByTypezip/:type", userHelpers.Login, function (req, res, next) {
           parseFloat(now.getMonth() + 1) +
           " / " +
           now.getFullYear();
-        jsr
-          .render({
-            template: {
-              content: fs.readFileSync(
-                path.join(__dirname, "../views/reportsMgr/obsByTypezip.html"),
-                "utf8"
-              ),
-              recipe: "phantom-pdf",
-              helpers: obsBytypezip.toString(),
-            },
-            data: { allResults: results, date: nowdate },
+        var templateHtml = fs.readFileSync(
+          path.join(__dirname, "../views/reportsMgr/obsByTypezip.html"),
+          "utf8"
+        );
+        var pathl = "./pdf/obsByTypezip" + req.session.id_user + ".pdf";
+
+        var template = Handlebars.compile(templateHtml);
+        var options = {
+          format: "A4",
+          orientation: "portrait",
+          border: "5mm",
+        };
+        var html = template({
+          allResults: results,
+          date: nowdate,
+        });
+        var document = {
+          html: html,
+          data: {
+            allResults: results,
+            date: nowdate,
+          },
+          path: pathl,
+          type: "",
+        };
+        pdf
+          .create(document, options)
+          .then((resw) => {
+            // res.send(res.filename);
+            fs.readFile(resw.filename, function (err, data) {
+              res.contentType("application/pdf");
+              res.send(data);
+            });
           })
-          .then(function (response) {
-            response.result.pipe(res);
+          .catch((error) => {
+            console.error(error);
           });
       } else {
-        res.redirect("/reports?msg=1");
+        res.redirect("/reportsMgr?msg=1");
       }
     }
   );
 });
-function obsBytypezip(allResults) {
+
+Handlebars.registerHelper("obsBytypezip", function (allResults) {
   var html = "";
   var type1 = [
     "وكـــيـــل",
@@ -1197,9 +1425,10 @@ function obsBytypezip(allResults) {
       allResults[i].ObsCount +
       " </td>";
   }
-  return html;
-}
-function printloc(result) {
+  return new Handlebars.SafeString(html);
+});
+
+Handlebars.registerHelper("printloc", function (result) {
   var typear = [
     "وكيل",
     "مراقب محلي",
@@ -1394,6 +1623,6 @@ function printloc(result) {
     // ';
   }
   html += "</div>";
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 module.exports = router;

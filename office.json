@@ -17,5 +17,18 @@
   {"idoffice": 14,"office_id": 14,"office_name": "Al Baida","office_name_ar": "البيضاء"},
   {"idoffice": 15,"office_id": 15,"office_name": "Benghazi","office_name_ar": "بنغازي"},
   {"idoffice": 16,"office_id": 16,"office_name": "Ajdabia","office_name_ar": "اجدابيا"}, 
-  {"idoffice": 17,"office_id": 17,"office_name": "Al Kufra","office_name_ar": "الكفره"}
+  {"idoffice": 17,"office_id": 17,"office_name": "Al Kufra","office_name_ar": "الكفره"},
+  {"idoffice": 18,"office_id": 18,"office_name": "","office_name_ar": "زليتن"},
+  {"idoffice": 19,"office_id": 19,"office_name": "","office_name_ar": "بني وليد"},
+
+  {"idoffice": 20,"office_id": 20,"office_name": "","office_name_ar": "ترهونة و مسلاتة"},
+
+  {"idoffice": 21,"office_id": 21,"office_name": "","office_name_ar": "النواحي الاربعة"},
+
+
+  {"idoffice": 22,"office_id": 22,"office_name": "","office_name_ar": "الساحل الغربي"},
+  {"idoffice": 23,"office_id": 23,"office_name": "","office_name_ar": "الشاطئ"},
+  {"idoffice": 24,"office_id": 24,"office_name": "","office_name_ar": "المرج"},
+  {"idoffice": 25,"office_id": 25,"office_name": "","office_name_ar": "القبة"}
+
 ]

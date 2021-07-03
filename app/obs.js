@@ -115,7 +115,7 @@ exports.obsMgr = {
         body["registration_org"],
         function (err, result) {
           if (id_u < 0) {
-            num += "18";
+            num += "99";
           } else if (id_u > 0 && id_u < 10) {
             num += "0" + id_u;
           } else if (id_u > 9) {
@@ -124,7 +124,7 @@ exports.obsMgr = {
           var idstring = body["id_ob"].toString();
           var nu = idstring.substring(idstring.length - 6, idstring.length);
           num += "." + result[0].type + "." + nu;
-          //body['ob_num']=num;
+          body["ob_num"] = num;
           conn.query(
             "INSERT INTO `observers` SET ?",
             body,

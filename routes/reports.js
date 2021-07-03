@@ -12,6 +12,8 @@ var office = require("../office");
 var type = require("../type");
 var userHelpers = require("../app/userHelpers");
 var json2csv = require("json2csv");
+var pdf = require("pdf-creator-node");
+const Handlebars = require("handlebars");
 
 router.get("/", userHelpers.isRoot, function (req, res) {
   orgMgr.getOrgs(function (Morg) {
@@ -120,109 +122,117 @@ router.get("/csv", function (req, res, next) {
   });
 });
 // ////////////////////////////////////////////////////////////////////////
-function resultsNoOfLocaleObs(
-  office,
-  arr1,
-  arr2,
-  arr3,
-  arr4,
-  arr5,
-  arr6,
-  officePar
-) {
-  var html = "";
-  var type1 = [
-    "وكيل",
-    "منظمة محلية",
-    "إعلامي محلي",
-    "منظمة عالمية",
-    "إعلامي دولي",
-    "الهيئات الدبلوماسية",
-  ];
-  for (i in arr1) {
-    html +=
-      '<tr>\
+Handlebars.registerHelper(
+  "resultsNoOfLocaleObs",
+  function (office, arr1, arr2, arr3, arr4, arr5, arr6, officePar) {
+    var html = "";
+    var type1 = [
+      "وكيل",
+      "منظمة محلية",
+      "إعلامي محلي",
+      "منظمة عالمية",
+      "إعلامي دولي",
+      "الهيئات الدبلوماسية",
+    ];
+    console.log(office);
+
+    for (i in arr1) {
+      var na = arr1[i].id_office > 0 ? arr1[i].id_office : 0;
+
+      html +=
+        '<tr>\
                 <td style="background-color:#E7FFE7 !important;"> ' +
-      office[arr1[i].id_office].office_name_ar +
-      ' </td>\
+        office[na].office_name_ar +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 1 </td>\
                 <td style="background-color:#FFFFC2 !important;"> ' +
-      arr1[i].number +
-      ' </td>\
+        arr1[i].number +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-  }
-  for (i in arr2) {
-    html +=
-      '<tr>\
+    }
+    for (i in arr2) {
+      var n2 = arr2[i].id_office > 0 ? arr2[i].id_office : 0;
+
+      html +=
+        '<tr>\
                 <td style="background-color:#E7FFE7 !important;"> ' +
-      office[arr2[i].id_office].office_name_ar +
-      ' </td>\
+        office[n2].office_name_ar +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 2 </td>\
                 <td style="background-color:#FFFFC2 !important;"> ' +
-      arr2[i].number +
-      ' </td>\
+        arr2[i].number +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-  }
-  for (i in arr3) {
-    html +=
-      '<tr>\
+    }
+    for (i in arr3) {
+      var n3 = arr3[i].id_office > 0 ? arr3[i].id_office : 0;
+
+      html +=
+        '<tr>\
                 <td style="background-color:#E7FFE7 !important;"> ' +
-      office[arr3[i].id_office].office_name_ar +
-      ' </td>\
+        office[n3].office_name_ar +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 3 </td>\
                 <td style="background-color:#FFFFC2 !important;"> ' +
-      arr3[i].number +
-      ' </td>\
+        arr3[i].number +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-  }
-  for (i in arr4) {
-    html +=
-      '<tr>\
+    }
+    for (i in arr4) {
+      var n4 = arr4[i].id_office > 0 ? arr4[i].id_office : 0;
+
+      html +=
+        '<tr>\
                 <td style="background-color:#E7FFE7 !important;"> ' +
-      office[arr4[i].id_office].office_name_ar +
-      ' </td>\
+        office[n4].office_name_ar +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 4 </td>\
                 <td style="background-color:#FFFFC2 !important;"> ' +
-      arr4[i].number +
-      ' </td>\
+        arr4[i].number +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-  }
-  for (i in arr5) {
-    html +=
-      '<tr>\
+    }
+    for (i in arr5) {
+      var n5 = arr5[i].id_office > 0 ? arr5[i].id_office : 0;
+
+      html +=
+        '<tr>\
                 <td style="background-color:#E7FFE7 !important;"> ' +
-      office[arr5[i].id_office].office_name_ar +
-      ' </td>\
+        office[n5].office_name_ar +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 5 </td>\
                 <td style="background-color:#FFFFC2 !important;"> ' +
-      arr5[i].number +
-      ' </td>\
+        arr5[i].number +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
-  }
-  for (i in arr6) {
-    html +=
-      '<tr>\
+    }
+    for (i in arr6) {
+      var n6 = arr6[i].id_office > 0 ? arr6[i].id_office : 0;
+
+      html +=
+        '<tr>\
                 <td style="background-color:#E7FFE7 !important;"> ' +
-      office[arr6[i].id_office].office_name_ar +
-      ' </td>\
+        office[n6].office_name_ar +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;"> 6 </td>\
                 <td style="background-color:#FFFFC2 !important;"> ' +
-      arr6[i].number +
-      ' </td>\
+        arr6[i].number +
+        ' </td>\
                 <td style="background-color:#FFFFC2 !important;">  </td>\
               </tr>';
+    }
+    return new Handlebars.SafeString(html);
   }
-  return html;
-}
+);
 // ////////////////////////////////////////////////////////////////////////
 
 // ////////////////////////////////////////////////////////////////////////
-function resultsNoOfInternationalObs(resultt) {
+Handlebars.registerHelper("resultsNoOfInternationalObs", function (resultt) {
   var html =
     ' <div class="col-xs-12">\
         <div class="towSpaces"></div><table class="table condensed">\
@@ -272,94 +282,94 @@ function resultsNoOfInternationalObs(resultt) {
     }
   }
   html += "</tr></tbody></table></div>";
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 // ////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////
-function drawAllResults(allResults, national, officePar, typeOfOrg) {
-  var html = "";
-  var gender1;
-  var nat = "";
-  var typeInTD = "";
-  var office1 = "";
-  for (i in allResults) {
-    for (var l = 0; l < officePar.length; l++) {
-      if (allResults[i].id_office == officePar[l].idoffice) {
-        office1 = officePar[l].office_name_ar;
-        break;
-      }
-    }
-    for (var k = 0; k < typeOfOrg.length; k++) {
-      if (allResults[i].type == typeOfOrg[k].type_id) {
-        typeInTD = typeOfOrg[k].type_name;
-        break;
-      }
-    }
-    for (var j = 0; j < national.length; j++) {
-      if (allResults[i].nationality == national[j].id) {
-        nat = national[j].name;
-        break;
-      }
-    }
-    if (allResults[i].gender == 0) {
-      gender1 = "أنـثـى";
-    } else {
-      gender1 = "ذكـر";
-    }
-    html +=
-      '<tr>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].name_org +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].registration_no +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].name_director +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      typeInTD +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].phone +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].email_org +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].address +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].name +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      nat +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].pass_nid +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      gender1 +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].email_obs +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].phone_obs +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      office1 +
-      ' </td>\
-                <td style="background-color:#FFFFC2 !important;"> ' +
-      allResults[i].ob_num +
-      " </td>\
-              </tr>";
-  }
-  return html;
-}
+// function drawAllResults(allResults, national, officePar, typeOfOrg) {
+//   var html = "";
+//   var gender1;
+//   var nat = "";
+//   var typeInTD = "";
+//   var office1 = "";
+//   for (i in allResults) {
+//     for (var l = 0; l < officePar.length; l++) {
+//       if (allResults[i].id_office == officePar[l].idoffice) {
+//         office1 = officePar[l].office_name_ar;
+//         break;
+//       }
+//     }
+//     for (var k = 0; k < typeOfOrg.length; k++) {
+//       if (allResults[i].type == typeOfOrg[k].type_id) {
+//         typeInTD = typeOfOrg[k].type_name;
+//         break;
+//       }
+//     }
+//     for (var j = 0; j < national.length; j++) {
+//       if (allResults[i].nationality == national[j].id) {
+//         nat = national[j].name;
+//         break;
+//       }
+//     }
+//     if (allResults[i].gender == 0) {
+//       gender1 = "أنـثـى";
+//     } else {
+//       gender1 = "ذكـر";
+//     }
+//     html +=
+//       '<tr>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].name_org +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].registration_no +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].name_director +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       typeInTD +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].phone +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].email_org +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].address +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].name +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       nat +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].pass_nid +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       gender1 +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].email_obs +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].phone_obs +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       office1 +
+//       ' </td>\
+//                 <td style="background-color:#FFFFC2 !important;"> ' +
+//       allResults[i].ob_num +
+//       " </td>\
+//               </tr>";
+//   }
+//   return html;
+// }
 /////////////////////////////////////////////////////////////////////////////
-function statisticsOfficesByType(office, obj) {
+Handlebars.registerHelper("statisticsOfficesByType", function (office, obj) {
   // html='';
   html =
     '<table class="table condensed">\
@@ -487,11 +497,111 @@ function statisticsOfficesByType(office, obj) {
           </tr>\
         </tbody>\
       </table>";
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 ////////////////////////////////////////////////////////////////////////////
+Handlebars.registerHelper(
+  "drawAllResults",
+  function (allResults, national, officePar, typeOfOrg) {
+    var html = "";
+    var gender1;
+    var nat = "";
+    var typeInTD = "";
+    var office1 = "";
+    for (i in allResults) {
+      for (var l = 0; l < officePar.length; l++) {
+        if (allResults[i].id_office == officePar[l].idoffice) {
+          office1 = officePar[l].office_name_ar;
+          break;
+        }
+      }
+      for (var k = 0; k < typeOfOrg.length; k++) {
+        if (allResults[i].type == typeOfOrg[k].type_id) {
+          typeInTD = typeOfOrg[k].type_name;
+          break;
+        }
+      }
+      for (var j = 0; j < national.length; j++) {
+        if (allResults[i].nationality == national[j].id) {
+          nat = national[j].name;
+          break;
+        }
+      }
+      if (allResults[i].gender == 0) {
+        gender1 = "أنـثـى";
+      } else {
+        gender1 = "ذكـر";
+      }
+      html +=
+        '<tr>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].name_org +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].registration_no +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].name_director +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        typeInTD +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].phone +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].email_org +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].address +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].name +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        nat +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].pass_nid +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        gender1 +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].email_obs +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].phone_obs +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        office1 +
+        ' </td>\
+                <td style="background-color:#FFFFC2 !important;"> ' +
+        allResults[i].ob_num +
+        " </td>\
+              </tr>";
+    }
+    return new Handlebars.SafeString(html);
+  }
+);
 
+/////////////////////////////
 router.get("/observers", userHelpers.isRoot, function (req, res, next) {
+  var templateHtml = fs.readFileSync(
+    path.join(__dirname, "../views/reports/observers.html"),
+    "utf8"
+  );
+  var template = Handlebars.compile(templateHtml);
+
+  // var html = fs.readFileSync(
+  //   path.join(__dirname, "../views/reports/observers.html"),
+  //   "utf8"
+  // );
+  var options = {
+    format: "A3",
+    orientation: "landscape",
+    border: "5mm",
+  };
   var now = new Date();
   var nowdate =
     now.getDate() +
@@ -500,33 +610,68 @@ router.get("/observers", userHelpers.isRoot, function (req, res, next) {
     " / " +
     now.getFullYear();
   reportMgr.getAllObsAndOrg(function (results) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reports/observers.html"),
-            "utf8"
-          ),
-          phantom: {
-            format: "A3",
-            orientation: "landscape",
-          },
-          recipe: "phantom-pdf",
-          helpers: drawAllResults.toString(),
-        },
-        data: {
-          allResults: results,
-          national: nationality,
-          officePar: office,
-          typeOfOrg: type,
-          title: "بــيـانـات تفصيلية لجميع المعتمدين",
-          date: nowdate,
-          typeo: " الـمـراقـب",
-        },
+    // jsr
+    var html = template({
+      allResults: results,
+      national: nationality,
+      officePar: office,
+      typeOfOrg: type,
+      title: "بيانات تفصيلية لجميع المعتمدين",
+      date: nowdate,
+      typeo: "المراقب",
+    });
+    var document = {
+      html: html,
+      data: {
+        allResults: results,
+        national: nationality,
+        officePar: office,
+        typeOfOrg: type,
+        title: "بــيـانـات تفصيلية لجميع المعتمدين",
+        date: nowdate,
+        typeo: " الـمـراقـب",
+      },
+      path: "./output.pdf",
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
+    //   .render({
+    //     template: {
+    //       content: fs.readFileSync(
+    //         path.join(__dirname, "../views/reports/observers.html"),
+    //         "utf8"
+    //       ),
+    //       phantom: {
+    //         format: "A3",
+    //         orientation: "landscape",
+    //       },
+    //       recipe: "phantom-pdf",
+    //       helpers: drawAllResults.toString(),
+    //     },
+    //     data: {
+    //       allResults: results,
+    //       national: nationality,
+    //       officePar: office,
+    //       typeOfOrg: type,
+    //       title: "بــيـانـات تفصيلية لجميع المعتمدين",
+    //       date: nowdate,
+    //       typeo: " الـمـراقـب",
+    //     },
+    //   })
+    //   .then(function (response) {
+    //     response.result.pipe(res);
+    //   });
   });
 });
 router.get(
@@ -547,20 +692,37 @@ router.get(
       now.getFullYear();
     var typet = ["الـمـراقـب", "الاعلامي", "الضيف"];
     reportMgr.getAllObsAndOrgtype(req.params.type, function (results) {
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(__dirname, "../views/reports/observers.html"),
-              "utf8"
-            ),
-            phantom: {
-              format: "A3",
-              orientation: "landscape",
-            },
-            recipe: "phantom-pdf",
-            helpers: drawAllResults.toString(),
-          },
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reports/observers.html"),
+        "utf8"
+      );
+      var template = Handlebars.compile(templateHtml);
+
+      var options = {
+        format: "A3",
+        orientation: "landscape",
+        border: "5mm",
+      };
+      var now = new Date();
+      var nowdate =
+        now.getDate() +
+        " / " +
+        parseFloat(now.getMonth() + 1) +
+        " / " +
+        now.getFullYear();
+      reportMgr.getAllObsAndOrg(function (results) {
+        // jsr
+        var html = template({
+          allResults: results,
+          national: nationality,
+          officePar: office,
+          typeOfOrg: type,
+          title: title[req.params.type - 4],
+          date: nowdate,
+          typeo: typet[req.params.type - 4],
+        });
+        var document = {
+          html: html,
           data: {
             allResults: results,
             national: nationality,
@@ -570,43 +732,102 @@ router.get(
             date: nowdate,
             typeo: typet[req.params.type - 4],
           },
-        })
-        .then(function (response) {
-          response.result.pipe(res);
-        });
+          path: "./output.pdf",
+          type: "",
+        };
+        pdf
+          .create(document, options)
+          .then((resw) => {
+            // res.send(res.filename);
+            fs.readFile(resw.filename, function (err, data) {
+              res.contentType("application/pdf");
+              res.send(data);
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      });
     });
   }
 );
 // this noOfLocaleObs // widght A4
 router.get("/noOfLocaleObs", userHelpers.isRoot, function (req, res, next) {
   reportMgr.getAllNoOfLocaleObs(function (arr1, arr2, arr3, arr4, arr5, arr6) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reports/noOfLocaleObs.html"),
-            "utf8"
-          ),
-          phantom: {
-            orientation: "landscape",
-          },
-          recipe: "phantom-pdf",
-          helpers: resultsNoOfLocaleObs.toString(),
-        },
-        data: {
-          office: office,
-          arr1: arr1,
-          arr2: arr2,
-          arr3: arr3,
-          arr4: arr4,
-          arr5: arr5,
-          arr6: arr6,
-          officePar: office,
-        },
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reports/noOfLocaleObs.html"),
+      "utf8"
+    );
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A3",
+      orientation: "portrait",
+      border: "5mm",
+    };
+    var html = template({
+      office: office,
+      arr1: arr1,
+      arr2: arr2,
+      arr3: arr3,
+      arr4: arr4,
+      arr5: arr5,
+      arr6: arr6,
+      officePar: office,
+    });
+    var document = {
+      html: html,
+      data: {
+        office: office,
+        arr1: arr1,
+        arr2: arr2,
+        arr3: arr3,
+        arr4: arr4,
+        arr5: arr5,
+        arr6: arr6,
+        officePar: office,
+      },
+      path: "./noOfLocaleObs.pdf",
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
+    // jsr
+    //   .render({
+    //     template: {
+    //       content: fs.readFileSync(
+    //         path.join(__dirname, "../views/reports/noOfLocaleObs.html"),
+    //         "utf8"
+    //       ),
+    //       phantom: {
+    //         orientation: "landscape",
+    //       },
+    //       recipe: "phantom-pdf",
+    //       helpers: resultsNoOfLocaleObs.toString(),
+    //     },
+    //     data: {
+    //       office: office,
+    //       arr1: arr1,
+    //       arr2: arr2,
+    //       arr3: arr3,
+    //       arr4: arr4,
+    //       arr5: arr5,
+    //       arr6: arr6,
+    //       officePar: office,
+    //     },
+    //   })
+    //   .then(function (response) {
+    //     response.result.pipe(res);
+    //   });
   });
 });
 
@@ -630,24 +851,40 @@ router.get(
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(
-                __dirname,
-                "../views/reports/noOfInternationalObs.html"
-              ),
-              "utf8"
-            ),
-            phantom: {},
-            recipe: "phantom-pdf",
-            helpers: resultsNoOfInternationalObs.toString(),
-          },
-          data: { resultt: obj, date: nowdate },
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reports/noOfInternationalObs.html"),
+        "utf8"
+      );
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A3",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({
+        resultt: obj,
+        date: nowdate,
+      });
+      var document = {
+        html: html,
+        data: {
+          resultt: obj,
+          date: nowdate,
+        },
+        path: "./noOfInternationalObs.pdf",
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     });
   }
@@ -659,53 +896,74 @@ router.get(
   userHelpers.isRoot,
   function (req, res, next) {
     reportMgr.obsByNationality(req.params.nat, function (results) {
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(__dirname, "../views/reports/obsByNationality.html"),
-              "utf8"
-            ),
-            phantom: {
-              format: "A4",
-              orientation: "landscape",
-            },
-            recipe: "phantom-pdf",
-            helpers: obsByNat.toString(),
-          },
-          data: { allResults: results, national: nationality },
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reports/obsByNationality.html"),
+        "utf8"
+      );
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var path = "./pdf/obsByNationality" + req.session.id_user + ".pdf";
+      var html = template({});
+      var document = {
+        html: html,
+        data: {},
+        path: path,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     });
   }
 );
 
-// this noOfInternationalObsEn // widght A4
+// this noOfInternationalObsEn // widght A4 need test
 router.get(
   "/noOfInternationalObsEn",
   userHelpers.isRoot,
   function (req, res, next) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(
-              __dirname,
-              "../views/reports/noOfInternationalObsEn.html"
-            ),
-            "utf8"
-          ),
-          phantom: {
-            orientation: "landscape",
-          },
-          recipe: "phantom-pdf",
-        },
-        data: { allResults: results, national: nationality },
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reports/noOfInternationalObsEn.html"),
+      "utf8"
+    );
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A4",
+      orientation: "portrait",
+      border: "5mm",
+    };
+    var pathl = "./pdf/noOfInternationalObsEn" + req.session.id_user + ".pdf";
+    var html = template({ allResults: results, national: nationality });
+    var document = {
+      html: html,
+      data: { allResults: results, national: nationality },
+      path: pathl,
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
   }
 );
@@ -721,20 +979,39 @@ router.get("/obsByType/:type", userHelpers.isRoot, function (req, res, next) {
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(__dirname, "../views/reports/obsByType.html"),
-              "utf8"
-            ),
-            recipe: "phantom-pdf",
-            helpers: obsBytype.toString(),
-          },
-          data: { allResults: results, date: nowdate },
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reports/obsByType.html"),
+        "utf8"
+      );
+      var pathl = "./pdf/obsByType" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A3",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({ allResults: results, date: nowdate });
+      var document = {
+        html: html,
+        data: {
+          allResults: results,
+          date: nowdate,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     } else {
       res.redirect("/reports?msg=1");
@@ -742,25 +1019,42 @@ router.get("/obsByType/:type", userHelpers.isRoot, function (req, res, next) {
   });
 });
 
-// this noOfLocaleObsEn // widght A4
+// this noOfLocaleObsEn // widght A4 html is static
 router.get("/noOfLocaleObsEn", userHelpers.isRoot, function (req, res, next) {
   reportMgr.getAllObsAndOrg(function (results) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reports/noOfLocaleObsEn.html"),
-            "utf8"
-          ),
-          phantom: {
-            orientation: "landscape",
-          },
-          recipe: "phantom-pdf",
-        },
-        data: results,
+    console.log(results);
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reports/noOfLocaleObsEn.html"),
+      "utf8"
+    );
+    var pathl = "./pdf/noOfLocaleObsEn" + req.session.id_user + ".pdf";
+
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A3",
+      orientation: "landscape",
+      border: "5mm",
+    };
+    var html = template({ results });
+    var document = {
+      html: html,
+      data: {
+        results,
+      },
+      path: pathl,
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
   });
 });
@@ -788,24 +1082,46 @@ router.get(
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(
-                __dirname,
-                "../views/reports/statisticsOfficesByType.html"
-              ),
-              "utf8"
-            ),
 
-            recipe: "phantom-pdf",
-            helpers: statisticsOfficesByType.toString(),
-          },
-          data: { offic: office, result: obj, date: nowdate },
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reports/statisticsOfficesByType.html"),
+        "utf8"
+      );
+      var pathl =
+        "./pdf/statisticsOfficesByType" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A3",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({
+        offic: office,
+        result: obj,
+        date: nowdate,
+      });
+      var document = {
+        html: html,
+        data: {
+          offic: office,
+          result: obj,
+          date: nowdate,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     });
   }
@@ -814,50 +1130,80 @@ router.get(
 // this noOfWomenAndMen // normale A4
 router.get("/noOfWomenAndMen", userHelpers.isRoot, function (req, res, next) {
   reportMgr.noOfWomenAndMen(function (results) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reports/noOfWomenAndMen.html"),
-            "utf8"
-          ),
-          phantom: {
-            format: "A4",
-            orientation: "landscape",
-          },
-          recipe: "phantom-pdf",
-          helpers: noOfWomenAndMen.toString(),
-        },
-        data: { allResults: results },
-        // data:obj
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reports/noOfWomenAndMen.html"),
+      "utf8"
+    );
+    var pathl = "./pdf/noOfWomenAndMen" + req.session.id_user + ".pdf";
+
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A4",
+      orientation: "landscape",
+      border: "5mm",
+    };
+    var html = template({
+      allResults: results,
+    });
+    var document = {
+      html: html,
+      data: {
+        allResults: results,
+      },
+      path: pathl,
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
   });
 });
 // this noOfWomenAndMen // normale A4
 router.get("/noOfWomenAndMenEn", userHelpers.isRoot, function (req, res, next) {
   reportMgr.noOfWomenAndMen(function (results) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reports/noOfWomenAndMenEn.html"),
-            "utf8"
-          ),
-          phantom: {
-            format: "A4",
-            orientation: "landscape",
-          },
-          recipe: "phantom-pdf",
-          helpers: noOfWomenAndMen.toString(),
-        },
-        data: { allResults: results },
-        // data:obj
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reports/noOfWomenAndMenEn.html"),
+      "utf8"
+    );
+    var pathl = "./pdf/noOfWomenAndMenEn" + req.session.id_user + ".pdf";
+
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A4",
+      orientation: "landscape",
+      border: "5mm",
+    };
+    var html = template({
+      allResults: results,
+    });
+    var document = {
+      html: html,
+      data: {
+        allResults: results,
+      },
+      path: pathl,
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
   });
 });
@@ -893,31 +1239,55 @@ router.get(
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(
-                __dirname,
-                "../views/reports/statisticsOfficesByTypeGender.html"
-              ),
-              "utf8"
-            ),
-            recipe: "phantom-pdf",
 
-            helpers: statisticsOfficesByTypeGender.toString(),
-          },
-          engine: "jsrender",
-          data: { office: office, obj: obj, date: nowdate },
+      var templateHtml = fs.readFileSync(
+        path.join(
+          __dirname,
+          "../views/reports/statisticsOfficesByTypeGender.html"
+        ),
+        "utf8"
+      );
+      var pathl =
+        "./pdf/statisticsOfficesByTypeGender" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({
+        office: office,
+        obj: obj,
+        date: nowdate,
+      });
+      var document = {
+        html: html,
+        data: {
+          office: office,
+          obj: obj,
+          date: nowdate,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     });
   }
 );
 //draw observers counts by gender  /noOfWomenAndMen
-function noOfWomenAndMen(allResults) {
+Handlebars.registerHelper("noOfWomenAndMen", function (allResults) {
   var html = "";
   html +=
     '<tr>\
@@ -928,8 +1298,8 @@ function noOfWomenAndMen(allResults) {
     allResults[1][0].woman +
     " </td>\
               </tr>";
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 
 //draw observers counts by gender  /noOfWomenAndMen
 function obsByNat(allResults, national) {
@@ -987,7 +1357,7 @@ function obsByNat(allResults, national) {
 }
 
 //by type
-function obsBytype(allResults) {
+Handlebars.registerHelper("obsBytype", function (allResults) {
   var html = "";
   var type1 = [
     "وكيل",
@@ -1048,72 +1418,74 @@ function obsBytype(allResults) {
       allResults[i].ObsCount +
       " </td>";
   }
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 
-function statisticsOfficesByTypeGender(obj, office) {
-  var sumAll = 0;
-  var sumAllM = 0;
-  var sumAllF = 0;
+Handlebars.registerHelper(
+  "statisticsOfficesByTypeGender",
+  function (obj, office) {
+    var sumAll = 0;
+    var sumAllM = 0;
+    var sumAllF = 0;
 
-  var sumgF = [0, 0, 0];
-  var sumgM = [0, 0, 0];
-  var html = "";
-  for (i in office) {
-    if (i != 0) {
-      var sum = 0;
-      var sumM = 0;
-      var sumF = 0;
-      html +=
-        '<tr><td colspan="2" style="height:1px; background-color:#FFFFC2 !important;"> ' +
-        office[i].office_name_ar +
-        " </td>";
-      if (obj[office[i].office_id] != undefined) {
-        for (k = 1; k < 4; k++) {
-          if (
-            obj[office[i].office_id][k] != undefined ||
-            obj[office[i].office_id][k] != null
-          ) {
-            if (obj[office[i].office_id][k][1] != null) {
-              sum += parseInt(obj[office[i].office_id][k][1]);
-              sumM += parseInt(obj[office[i].office_id][k][1]);
-              sumgM[k - 1] += parseInt(obj[office[i].office_id][k][1]);
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
-                obj[office[i].office_id][k][1] +
-                " </td>";
-            } else {
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
-            }
-            if (obj[office[i].office_id][k][0] != null) {
-              sum += parseInt(obj[office[i].office_id][k][0]);
-              sumF += parseInt(obj[office[i].office_id][k][0]);
-              sumgF[k - 1] += parseInt(obj[office[i].office_id][k][0]);
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
-                obj[office[i].office_id][k][0] +
-                " </td>";
-            } else {
-              html +=
-                '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
-            }
-          } else {
-            html +=
-              '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
-          }
-        }
+    var sumgF = [0, 0, 0];
+    var sumgM = [0, 0, 0];
+    var html = "";
+    for (i in office) {
+      if (i != 0) {
+        var sum = 0;
+        var sumM = 0;
+        var sumF = 0;
         html +=
-          '<td style="height:1px;background-color:#F0F0EF !important;"> ' +
-          sumM +
-          ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
-          sumF +
-          ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
-          sum +
+          '<tr><td colspan="2" style="height:1px; background-color:#FFFFC2 !important;"> ' +
+          office[i].office_name_ar +
           " </td>";
-      } else {
-        html +=
-          '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
+        if (obj[office[i].office_id] != undefined) {
+          for (k = 1; k < 4; k++) {
+            if (
+              obj[office[i].office_id][k] != undefined ||
+              obj[office[i].office_id][k] != null
+            ) {
+              if (obj[office[i].office_id][k][1] != null) {
+                sum += parseInt(obj[office[i].office_id][k][1]);
+                sumM += parseInt(obj[office[i].office_id][k][1]);
+                sumgM[k - 1] += parseInt(obj[office[i].office_id][k][1]);
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
+                  obj[office[i].office_id][k][1] +
+                  " </td>";
+              } else {
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
+              }
+              if (obj[office[i].office_id][k][0] != null) {
+                sum += parseInt(obj[office[i].office_id][k][0]);
+                sumF += parseInt(obj[office[i].office_id][k][0]);
+                sumgF[k - 1] += parseInt(obj[office[i].office_id][k][0]);
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> ' +
+                  obj[office[i].office_id][k][0] +
+                  " </td>";
+              } else {
+                html +=
+                  '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>';
+              }
+            } else {
+              html +=
+                '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
+            }
+          }
+          html +=
+            '<td style="height:1px;background-color:#F0F0EF !important;"> ' +
+            sumM +
+            ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
+            sumF +
+            ' </td><td style="height:1px;background-color:#F0F0EF !important;"> ' +
+            sum +
+            " </td>";
+        } else {
+          html +=
+            '<td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
         <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
         <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
         <td style="height:1px;background-color:#FFFFC2 !important;"> - </td>\
@@ -1122,51 +1494,51 @@ function statisticsOfficesByTypeGender(obj, office) {
         <td style="height:1px;background-color:#F0F0EF !important;"> - </td>\
         <td style="height:1px;background-color:#F0F0EF !important;"> - </td>\
         <td style="height:1px;background-color:#F0F0EF !important;"> - </td>';
-      }
-      html += "</tr>";
+        }
+        html += "</tr>";
 
-      sumAll += sum;
-      sumAllF += sumF;
-      sumAllM += sumM;
+        sumAll += sum;
+        sumAllF += sumF;
+        sumAllM += sumM;
+      }
     }
-  }
-  html +=
-    '</tbody ><tbody >\
+    html +=
+      '</tbody ><tbody >\
           <tr>\
             <td colspan="2" style="background-color:#F0F0EF !important;border: 1px solid;">  </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgM[0] +
-    ' </td>\
+      sumgM[0] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgF[0] +
-    ' </td>\
+      sumgF[0] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgM[1] +
-    ' </td>\
+      sumgM[1] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgF[1] +
-    ' </td>\
+      sumgF[1] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgM[2] +
-    ' </td>\
+      sumgM[2] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumgF[2] +
-    ' </td>\
+      sumgF[2] +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumAllM +
-    ' </td>\
+      sumAllM +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumAllF +
-    ' </td>\
+      sumAllF +
+      ' </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
-    sumAll +
-    " </td>\
+      sumAll +
+      " </td>\
           </tr>\
         </tbody></table>";
 
-  html += '<table class="table condensed"><thead>';
-  html +=
-    '<tr height="1%" style="border-top-style: solid; border-top-width: 1px;" >\
+    html += '<table class="table condensed"><thead>';
+    html +=
+      '<tr height="1%" style="border-top-style: solid; border-top-width: 1px;" >\
               <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
               <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
               <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
@@ -1187,66 +1559,67 @@ function statisticsOfficesByTypeGender(obj, office) {
             </tr>\
           </thead>\
       <tbody style="border: 1px solid #000;" >';
-  sum = 0;
-  sumM = 0;
-  sumF = 0;
-  html +=
-    '<tr><td colspan="2" style="background-color:#FFFFC2 !important;"> ' +
-    office[0].office_name_ar +
-    " </td>";
-  i = 0;
-  if (obj[office[i].office_id] != undefined) {
-    for (k = 4; k < 7; k++) {
-      if (
-        obj[office[i].office_id][k] != undefined ||
-        obj[office[i].office_id][k] != null
-      ) {
-        if (obj[office[i].office_id][k][1] != null) {
-          sum += parseInt(obj[office[i].office_id][k][1]);
-          sumM += parseInt(obj[office[i].office_id][k][1]);
-          html +=
-            '<td style="background-color:#FFFFC2 !important;"> ' +
-            obj[office[i].office_id][k][1] +
-            " </td>";
+    sum = 0;
+    sumM = 0;
+    sumF = 0;
+    html +=
+      '<tr><td colspan="2" style="background-color:#FFFFC2 !important;"> ' +
+      office[0].office_name_ar +
+      " </td>";
+    i = 0;
+    if (obj[office[i].office_id] != undefined) {
+      for (k = 4; k < 7; k++) {
+        if (
+          obj[office[i].office_id][k] != undefined ||
+          obj[office[i].office_id][k] != null
+        ) {
+          if (obj[office[i].office_id][k][1] != null) {
+            sum += parseInt(obj[office[i].office_id][k][1]);
+            sumM += parseInt(obj[office[i].office_id][k][1]);
+            html +=
+              '<td style="background-color:#FFFFC2 !important;"> ' +
+              obj[office[i].office_id][k][1] +
+              " </td>";
+          } else {
+            html += '<td style="background-color:#FFFFC2 !important;"> - </td>';
+          }
+          if (obj[office[i].office_id][k][0] != null) {
+            sum += parseInt(obj[office[i].office_id][k][0]);
+            sumF += parseInt(obj[office[i].office_id][k][0]);
+            html +=
+              '<td style="background-color:#FFFFC2 !important;"> ' +
+              obj[office[i].office_id][k][0] +
+              " </td>";
+          } else {
+            html += '<td style="background-color:#FFFFC2 !important;"> - </td>';
+          }
         } else {
-          html += '<td style="background-color:#FFFFC2 !important;"> - </td>';
-        }
-        if (obj[office[i].office_id][k][0] != null) {
-          sum += parseInt(obj[office[i].office_id][k][0]);
-          sumF += parseInt(obj[office[i].office_id][k][0]);
           html +=
-            '<td style="background-color:#FFFFC2 !important;"> ' +
-            obj[office[i].office_id][k][0] +
-            " </td>";
-        } else {
-          html += '<td style="background-color:#FFFFC2 !important;"> - </td>';
+            '<td style="background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
         }
-      } else {
-        html +=
-          '<td style="background-color:#FFFFC2 !important;"> - </td><td style="background-color:#FFFFC2 !important;"> - </td>';
       }
-    }
-    html +=
-      '<td style="background-color:#F0F0EF !important;"> ' +
-      sumM +
-      ' </td><td style="background-color:#F0F0EF !important;"> ' +
-      sumF +
-      ' </td><td style="background-color:#F0F0EF !important;"> ' +
-      sum +
-      " </td></tr>";
-  } else {
-    html +=
-      '<td style="background-color:#FFFFC2 !important;"> - </td>\
+      html +=
+        '<td style="background-color:#F0F0EF !important;"> ' +
+        sumM +
+        ' </td><td style="background-color:#F0F0EF !important;"> ' +
+        sumF +
+        ' </td><td style="background-color:#F0F0EF !important;"> ' +
+        sum +
+        " </td></tr>";
+    } else {
+      html +=
+        '<td style="background-color:#FFFFC2 !important;"> - </td>\
         <td style="background-color:#FFFFC2 !important;"> - </td>\
         <td style="background-color:#FFFFC2 !important;"> - </td>\
         <td style="background-color:#FFFFC2 !important;"> - </td>\
         <td style="background-color:#FFFFC2 !important;"> - </td>\
         <td style="background-color:#FFFFC2 !important;"> - </td>\
         <td style="background-color:#F0F0EF !important;"> - </td><td style="background-color:#F0F0EF !important;"> - </td><td style="background-color:#F0F0EF !important;"> - </td></tr>';
+    }
+    html += "</tbody></table>";
+    return new Handlebars.SafeString(html);
   }
-  html += "</tbody></table>";
-  return html;
-}
+);
 router.get("/orgObs/:id", userHelpers.isRoot, function (req, res, next) {
   obsMgr.getOrgObs(req.params.id, function (results) {
     if (results.length > 0) {
@@ -1257,27 +1630,52 @@ router.get("/orgObs/:id", userHelpers.isRoot, function (req, res, next) {
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(__dirname, "../views/reports/orgObs.html"),
-              "utf8"
-            ),
-            recipe: "phantom-pdf",
-            helpers: orgObs.toString(),
-          },
-          data: { allResults: results, date: nowdate, office: office },
+
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reports/orgObs.html"),
+        "utf8"
+      );
+      var pathl = "./pdf/orgObs" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A4",
+        orientation: "landscape",
+        border: "5mm",
+      };
+      var html = template({
+        allResults: results,
+        date: nowdate,
+        office: office,
+      });
+      var document = {
+        html: html,
+        data: {
+          allResults: results,
+          date: nowdate,
+          office: office,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     } else {
       res.redirect("/reports?msg=1");
     }
   });
 });
-function orgObs(data, offic) {
+Handlebars.registerHelper("orgObs", function (data, offic) {
   var html = "";
   html +=
     '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين في ' +
@@ -1286,7 +1684,7 @@ function orgObs(data, offic) {
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;">  اسم المراقب </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>';
   if (data[0].type > 3) {
@@ -1337,8 +1735,8 @@ function orgObs(data, offic) {
       data[i].ob_num +
       " </td>";
   }
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 router.get(
   "/obsByTypezip/:type",
   userHelpers.isRoot,
@@ -1352,20 +1750,45 @@ router.get(
           parseFloat(now.getMonth() + 1) +
           " / " +
           now.getFullYear();
-        jsr
-          .render({
-            template: {
-              content: fs.readFileSync(
-                path.join(__dirname, "../views/reports/obsByTypezip.html"),
-                "utf8"
-              ),
-              recipe: "phantom-pdf",
-              helpers: obsBytypezip.toString(),
-            },
-            data: { allResults: results, date: nowdate, offic: office },
+
+        var templateHtml = fs.readFileSync(
+          path.join(__dirname, "../views/reports/obsByTypezip.html"),
+          "utf8"
+        );
+        var pathl = "./pdf/obsByTypezip" + req.session.id_user + ".pdf";
+
+        var template = Handlebars.compile(templateHtml);
+        var options = {
+          format: "A4",
+          orientation: "portrait",
+          border: "5mm",
+        };
+        var html = template({
+          allResults: results,
+          date: nowdate,
+          offic: office,
+        });
+        var document = {
+          html: html,
+          data: {
+            allResults: results,
+            date: nowdate,
+            offic: office,
+          },
+          path: pathl,
+          type: "",
+        };
+        pdf
+          .create(document, options)
+          .then((resw) => {
+            // res.send(res.filename);
+            fs.readFile(resw.filename, function (err, data) {
+              res.contentType("application/pdf");
+              res.send(data);
+            });
           })
-          .then(function (response) {
-            response.result.pipe(res);
+          .catch((error) => {
+            console.error(error);
           });
       } else {
         res.redirect("/reports?msg=1");
@@ -1373,7 +1796,7 @@ router.get(
     });
   }
 );
-function obsBytypezip(allResults, offic) {
+Handlebars.registerHelper("obsBytypezip", function (allResults, offic) {
   var html = "";
   var type1 = [
     "وكيل",
@@ -1422,8 +1845,8 @@ function obsBytypezip(allResults, offic) {
     //   html+='<td style="background-color:#FFFFC2 !important;"> '+offic[allResults[i].id_office].office_name_ar+' </td> ';
     // }
   }
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 router.get("/orgObszip/:id", userHelpers.isRoot, function (req, res, next) {
   reportMgr.getOrgObszip(req.params.id, function (results) {
     if (results.length > 0) {
@@ -1434,20 +1857,45 @@ router.get("/orgObszip/:id", userHelpers.isRoot, function (req, res, next) {
         parseFloat(now.getMonth() + 1) +
         " / " +
         now.getFullYear();
-      jsr
-        .render({
-          template: {
-            content: fs.readFileSync(
-              path.join(__dirname, "../views/reports/orgObszip.html"),
-              "utf8"
-            ),
-            recipe: "phantom-pdf",
-            helpers: orgObszip.toString(),
-          },
-          data: { allResults: results, date: nowdate, office: office },
+
+      var templateHtml = fs.readFileSync(
+        path.join(__dirname, "../views/reports/orgObszip.html"),
+        "utf8"
+      );
+      var pathl = "./pdf/orgObszip" + req.session.id_user + ".pdf";
+
+      var template = Handlebars.compile(templateHtml);
+      var options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "5mm",
+      };
+      var html = template({
+        allResults: results,
+        date: nowdate,
+        office: office,
+      });
+      var document = {
+        html: html,
+        data: {
+          allResults: results,
+          date: nowdate,
+          office: office,
+        },
+        path: pathl,
+        type: "",
+      };
+      pdf
+        .create(document, options)
+        .then((resw) => {
+          // res.send(res.filename);
+          fs.readFile(resw.filename, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+          });
         })
-        .then(function (response) {
-          response.result.pipe(res);
+        .catch((error) => {
+          console.error(error);
         });
     } else {
       res.redirect("/reports?msg=1");
@@ -1504,7 +1952,7 @@ router.get("/svg", function (req, res, next) {
       });
   });
 });
-function orgObszip(data, offic) {
+Handlebars.registerHelper("orgObszip", function (data, offic) {
   var html = "";
   html =
     '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين في ' +
@@ -1541,34 +1989,48 @@ function orgObszip(data, offic) {
       data[i].num +
       " </td> ";
   }
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 router.post("/printloc", userHelpers.Login, function (req, res) {
   obsMgr.getprint(req.body.id_print, function (result) {
-    jsr
-      .render({
-        template: {
-          content: fs.readFileSync(
-            path.join(__dirname, "../views/reports/test2.html"),
-            "utf8"
-          ),
-          phantom: {
-            // width: "6047.244095",
-            // height: "9070.866142",
-            format: "A4",
-          },
-          recipe: "phantom-pdf",
-          helpers: printloc.toString(),
-        },
-        data: { allResults: result },
-        // data:obj
+    var templateHtml = fs.readFileSync(
+      path.join(__dirname, "../views/reports/test2.html"),
+      "utf8"
+    );
+    var pathl = "./pdf/test2" + req.session.id_user + ".pdf";
+
+    var template = Handlebars.compile(templateHtml);
+    var options = {
+      format: "A4",
+      orientation: "portrait",
+      border: "5mm",
+    };
+    var html = template({
+      allResults: result,
+    });
+    var document = {
+      html: html,
+      data: {
+        allResults: result,
+      },
+      path: pathl,
+      type: "",
+    };
+    pdf
+      .create(document, options)
+      .then((resw) => {
+        // res.send(res.filename);
+        fs.readFile(resw.filename, function (err, data) {
+          res.contentType("application/pdf");
+          res.send(data);
+        });
       })
-      .then(function (response) {
-        response.result.pipe(res);
+      .catch((error) => {
+        console.error(error);
       });
   });
 });
-function printloc(result) {
+Handlebars.registerHelper("printloc", function (result) {
   var typear = [
     "وكيل",
     "مراقب محلي",
@@ -1763,6 +2225,6 @@ function printloc(result) {
     // ';
   }
   html += "</div>";
-  return html;
-}
+  return new Handlebars.SafeString(html);
+});
 module.exports = router;
