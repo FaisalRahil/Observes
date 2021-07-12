@@ -1367,12 +1367,12 @@ Handlebars.registerHelper("obsBytype", function (allResults) {
     "الهيئات الدبلوماسية",
   ];
   var typeh = [
-    "المترشح",
-    "الـمـنـظـمـة",
-    "المؤسسة الإعلامية",
-    "الـمـنـظـمـة",
-    "المؤسسة الإعلامية",
-    "الهيئة",
+    "اسـم المترشح",
+    "اسـم الـمـنـظـمـة",
+    "اسـم المؤسسة الإعلامية",
+    "اسـم الـمـنـظـمـة",
+    "اسـم المؤسسة الإعلامية",
+    "اسـم الهيئة",
   ];
 
   html +=
@@ -1382,7 +1382,7 @@ Handlebars.registerHelper("obsBytype", function (allResults) {
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم ' +
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> ' +
     typeh[allResults[0].type - 1] +
     ' </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسم المدير  </th>\
