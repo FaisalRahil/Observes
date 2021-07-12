@@ -1485,7 +1485,7 @@ Handlebars.registerHelper("printloc", function (result) {
       result[1].name_org +
       //typear[result[0].type - 1] +
       '</div>\
-    <div class="id-2">' +
+    <div class="id">' +
       result[1].ob_num +
       //result[0].name +
       "</div>\
@@ -1501,7 +1501,7 @@ Handlebars.registerHelper("printloc", function (result) {
       result[2].name_org +
       //typear[result[0].type - 1] +
       '</div>\
-    <div class="id">' +
+    <div class="id-2">' +
       result[2].ob_num +
       //result[0].name +
       "</div>\
