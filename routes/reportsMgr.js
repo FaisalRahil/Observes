@@ -4,7 +4,6 @@ var obsMgr = require("../app/obs").obsMgr;
 var orgMgr = require("../app/org").orgMgr;
 var reportMgr = require("../app/reportMgr").reportMgr;
 var app = require("express")();
-var jsr = require("jsreport");
 var fs = require("fs");
 var path = require("path");
 var nationality = require("../Nationality");
@@ -156,7 +155,7 @@ router.post("/printloc", userHelpers.Login, function (req, res) {
     var options = {
       format: "A4",
       orientation: "portrait",
-      border: "5mm",
+      border: "",
     };
     var html = template({
       allResults: result,
