@@ -1246,11 +1246,11 @@ Handlebars.registerHelper("statisticsOfficesByType", function (office, obj) {
     '<table class="table condensed">\
       <thead>\
         <tr style="border-top-style: solid; border-top-width: 1px;" >\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إسم اللجنة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مراقب محلي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعلام محلي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكيل </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العدد الكلي </th>\
         </tr>\
       </thead>\
       <tbody style="border: 1px solid #000;">';
@@ -1291,7 +1291,7 @@ Handlebars.registerHelper("statisticsOfficesByType", function (office, obj) {
     '</tbody>\
         <tbody >\
           <tr>\
-            <td style="background-color:#F0F0EF !important;border: 1px solid;"> المــجــموع</td>\
+            <td style="background-color:#F0F0EF !important;border: 1px solid;"> المجموع</td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
     sumT[0] +
     ' </td>\
@@ -1372,18 +1372,18 @@ router.get("/obsByTypezip/:type", userHelpers.Login, function (req, res, next) {
 Handlebars.registerHelper("obsBytypezip", function (allResults) {
   var html = "";
   var type1 = [
-    "وكـــيـــل",
-    "منظمة مــحـــلية",
-    "إعلامي مــحـــلي",
+    "وكيل",
+    "منظمة محلية",
+    "إعلامي محلي",
     "منظمة عالمية",
     "إعلامي دولي",
     "الهيئات الدبلوماسية",
   ];
   var typeh = [
-    "المــــــتــــــــرشــــــــح",
-    "الـمـنـظـمـة",
+    "المترشح",
+    "المنظمة",
     "المؤسسة الإعلامية",
-    "الـمـنـظـمـة",
+    "المنظمة",
     "المؤسسة الإعلامية",
     "الهيئة",
   ];
@@ -1401,10 +1401,10 @@ Handlebars.registerHelper("obsBytypezip", function (allResults) {
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;width:30px;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم ' +
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> إسم ' +
     typeh[allResults[0].type - 1] +
     ' </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> عدد المراقبين </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';

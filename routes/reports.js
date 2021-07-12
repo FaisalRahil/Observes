@@ -1369,11 +1369,20 @@ Handlebars.registerHelper("obsBytype", function (allResults) {
   var typeh = [
     "اسـم المترشح",
     "اسـم الـمـنـظـمـة",
-    "اسـم المؤسسة الإعلامية",
+    " الإعلامية",
     "اسـم الـمـنـظـمـة",
     "اسـم المؤسسة الإعلامية",
     "اسـم الهيئة",
   ];
+
+  var nameList=[
+    'المترشح',
+    'المنظمة',
+    'الإعلامية',
+    'المنظمة',
+    'المؤسسة الإعلامية',
+    'الهيئة',
+  ]
 
   html +=
     '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> ' +
@@ -1382,13 +1391,13 @@ Handlebars.registerHelper("obsBytype", function (allResults) {
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> ' +
-    typeh[allResults[0].type - 1] +
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> إسم ' +
+                nameList[allResults[0].type - 1] +
     ' </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسم المدير  </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;">عدد المراقبين</th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -1538,11 +1547,11 @@ Handlebars.registerHelper(
     html += '<table class="table condensed"><thead>';
     html +=
       '<tr height="1%" style="border-top-style: solid; border-top-width: 1px;" >\
-              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
-              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
-              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
-              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
-              <th height="1%" colspan="3" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> اسم اللجنة </th>\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> مراقب دولي </th>\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> إعلام دولي </th>\
+              <th height="1%" colspan="2" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> ضيف </th>\
+              <th height="1%" colspan="3" class="text-center" width="3%" style="background-color:#B2E6FF !important;"> العدد الكلي </th>\
             </tr>\
               <tr height="1%" style="border-top-style: solid; border-top-width: 1px;" >\
               <th height="1%" colspan="2" class="text-center" width="1%" style="background-color:#B2E6FF !important;"></th>\
@@ -1688,7 +1697,7 @@ Handlebars.registerHelper("orgObs", function (data, offic) {
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>';
   if (data[0].type > 3) {
     html +=
-      '<th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>';
+      '<th class="text-center"  style="background-color:#B2E6FF !important;">اللجنة</th>';
   }
 
   html +=
@@ -1818,8 +1827,8 @@ Handlebars.registerHelper("obsBytypezip", function (allResults, offic) {
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم الـمـنـظـمـة </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> إسم المنظمة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> عدد المراقبين </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -1961,8 +1970,8 @@ Handlebars.registerHelper("orgObszip", function (data, offic) {
     ' </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> الـلـجـنـة </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> العـدد </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> اللجنة </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> العدد </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
