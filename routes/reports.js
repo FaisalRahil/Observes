@@ -18,7 +18,7 @@ router.get("/", userHelpers.isRoot, function (req, res) {
   orgMgr.getOrgs(function (Morg) {
     orgMgr.getOrgsAdmin(function (Norg) {
       res.render("reports/reports", {
-        title: "الـتـقـاريـر",
+        title: "التقارير",
         nationalities: nationality,
         offi: office,
         user: req.session.id_user,
@@ -237,9 +237,9 @@ Handlebars.registerHelper("resultsNoOfInternationalObs", function (resultt) {
         <div class="towSpaces"></div><table class="table condensed">\
             <thead>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي International observers</th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي International media</th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف Guest</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مراقب دولي International observers</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعلام دولي International media</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضيف Guest</th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;"><tr>';
@@ -257,7 +257,7 @@ Handlebars.registerHelper("resultsNoOfInternationalObs", function (resultt) {
     '</tr></tbody></table></div><div class="towSpaces" height="5%"> </div><div class="col-xs-12 col-xs-offset-4">\
           <div class="col-xs-5 text-center">\
             <div class="text-center fontSize"> \
-              إحصائـــيـــة الجهات المعتـــمدة المحلية\
+              إحصائية الجهات المعتمدة المحلية\
             </div>\
           </div>\
         </div><div class="col-xs-12">\
@@ -265,8 +265,8 @@ Handlebars.registerHelper("resultsNoOfInternationalObs", function (resultt) {
             <thead>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  وكيل agent</th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي Local observers </th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعـلام مـحـلـي Local media</th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مراقب محلي Local observers </th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعلام محلي Local media</th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;"><tr>';
@@ -374,11 +374,11 @@ Handlebars.registerHelper("statisticsOfficesByType", function (office, obj) {
     '<table class="table condensed">\
       <thead>\
         <tr style="border-top-style: solid; border-top-width: 1px;" >\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام مـحـلـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكـيـل </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إسم اللجنة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مراقب محلي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعلام محلي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> وكيل </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العدد الكلي </th>\
         </tr>\
       </thead>\
       <tbody style="border: 1px solid #000;">';
@@ -446,11 +446,11 @@ Handlebars.registerHelper("statisticsOfficesByType", function (office, obj) {
     '<table class="table condensed">\
       <thead>\
         <tr style="border-top-style: solid; border-top-width: 1px;" >\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> اسـم الـلـجـنـة </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب دـولـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضـيـف </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعـلام دـولـي </th>\
-          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العـدد الـكـلـي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إسم اللجنة </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مراقب دولي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> ضيف </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> إعلام دولي </th>\
+          <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> العدد الكلي </th>\
         </tr>\
       </thead>\
       <tbody style="border: 1px solid #000;">';
@@ -527,9 +527,9 @@ Handlebars.registerHelper(
         }
       }
       if (allResults[i].gender == 0) {
-        gender1 = "أنـثـى";
+        gender1 = "أنثى";
       } else {
-        gender1 = "ذكـر";
+        gender1 = "ذكر";
       }
       html +=
         '<tr>\
@@ -626,9 +626,9 @@ router.get("/observers", userHelpers.isRoot, function (req, res, next) {
         national: nationality,
         officePar: office,
         typeOfOrg: type,
-        title: "بــيـانـات تفصيلية لجميع المعتمدين",
+        title: "بيانات تفصيلية لجميع المعتمدين",
         date: nowdate,
-        typeo: " الـمـراقـب",
+        typeo: " المراقب",
       },
       path: "./output.pdf",
       type: "",
@@ -678,8 +678,8 @@ router.get(
   userHelpers.Login,
   function (req, res, next) {
     var title = [
-      "بيانات تفصيلية / الـمـراقـبـيـن",
-      "بــيـانـات تـــفـــصــيـــلــــية / الاعلاميين",
+      "بيانات تفصيلية / المراقبين",
+      "بيانات تفصيلية / الاعلاميين",
       "بيانات تفصيلية / الضيوف",
     ];
     var now = new Date();
@@ -689,7 +689,7 @@ router.get(
       parseFloat(now.getMonth() + 1) +
       " / " +
       now.getFullYear();
-    var typet = ["الـمـراقـب", "الاعلامي", "الضيف"];
+    var typet = ["المراقب", "الاعلامي", "الضيف"];
     reportMgr.getAllObsAndOrgtype(req.params.type, function (results) {
       var templateHtml = fs.readFileSync(
         path.join(__dirname, "../views/reports/observers.html"),
@@ -1328,8 +1328,8 @@ function obsByNat(allResults, national) {
     '  </th>\
             </tr>\
             <tr style="border-top-style: solid; border-top-width: 1px;" >\
-              <th class="text-center" style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>\
-              <th class="text-center"  style="background-color:#B2E6FF !important;"> نـوع الـمـنـظـمـة </th>\
+              <th class="text-center" style="background-color:#B2E6FF !important;"> اسم المراقب </th>\
+              <th class="text-center"  style="background-color:#B2E6FF !important;"> نوع المنظمة </th>\
             </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -1362,17 +1362,17 @@ Handlebars.registerHelper("obsBytype", function (allResults) {
     "وكيل",
     "منظمة محلية",
     "إعلامي محلي",
-    "منظمة دـولية",
+    "منظمة دولية",
     "إعلامي دولي",
     "الهيئات الدبلوماسية",
   ];
   var typeh = [
-    "اسـم المترشح",
-    "اسـم الـمـنـظـمـة",
+    "إسم المترشح",
+    "إسم المنظمة",
     " الإعلامية",
-    "اسـم الـمـنـظـمـة",
-    "اسـم المؤسسة الإعلامية",
-    "اسـم الهيئة",
+    "إسم المنظمة",
+    "إسم المؤسسة الإعلامية",
+    "إسم الهيئة",
   ];
 
   var nameList=[
@@ -1810,7 +1810,7 @@ Handlebars.registerHelper("obsBytypezip", function (allResults, offic) {
     "وكيل",
     "منظمة محلية",
     "إعلامي محلي",
-    "منظمة دـولية",
+    "منظمة دولية",
     "إعلامي دولي",
     "الهيئات الدبلوماسية",
   ];

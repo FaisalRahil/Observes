@@ -16,7 +16,7 @@ const Handlebars = require("handlebars");
 router.get("/", userHelpers.Login, function (req, res) {
   reportMgr.getOrgsRport(req.session.id_office, function (Morg) {
     res.render("reportsMgr/reports", {
-      title: "الـتـقـاريـر",
+      title: "التقارير",
       nationalities: nationality,
       offi: office,
       user: req.session.id_user,
@@ -231,9 +231,9 @@ router.get("/observers", userHelpers.Login, function (req, res, next) {
       national: nationality,
       officePar: office,
       typeOfOrg: type,
-      title: "بــيـانـات تفصيلية لجميع المعتمدين",
+      title: "بيانات تفصيلية لجميع المعتمدين",
       date: nowdate,
-      typeo: " الـمـراقـب",
+      typeo: " المراقب",
     });
     var document = {
       html: html,
@@ -242,9 +242,9 @@ router.get("/observers", userHelpers.Login, function (req, res, next) {
         national: nationality,
         officePar: office,
         typeOfOrg: type,
-        title: "بــيـانـات تفصيلية لجميع المعتمدين",
+        title: "بيانات تفصيلية لجميع المعتمدين",
         date: nowdate,
-        typeo: " الـمـراقـب",
+        typeo: " المراقب",
       },
       path: pathl,
       type: "",
@@ -276,10 +276,10 @@ router.get(
       now.getFullYear();
     var title = [
       "بيانات تفصيلية /الوكلاء",
-      "بــيـانـات تـــفـــصــيـــلــــية / الـمـراقـبـيـن",
+      "بيانات تفصيلية / المراقبين",
       "بيانات تفصيلية / الاعلاميين",
     ];
-    var typet = ["الوكيل", "الـمـراقـب", "الاعلامي"];
+    var typet = ["الوكيل", "المراقب", "الاعلامي"];
     reportMgr.getAllObsAndOrgtype(
       req.session.id_office,
       req.params.type,
@@ -811,8 +811,8 @@ function obsByNat(allResults, national) {
     '  </th>\
             </tr>\
             <tr style="border-top-style: solid; border-top-width: 1px;" >\
-              <th class="text-center" style="background-color:#B2E6FF !important;"> اسـم الـمـراقـب </th>\
-              <th class="text-center"  style="background-color:#B2E6FF !important;"> نـوع الـمـنـظـمـة </th>\
+              <th class="text-center" style="background-color:#B2E6FF !important;"> إسم المراقب </th>\
+              <th class="text-center"  style="background-color:#B2E6FF !important;"> نوع المنظمة </th>\
             </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -898,9 +898,9 @@ router.get("/orgObs/:id", userHelpers.Login, function (req, res, next) {
 Handlebars.registerHelper("orgObsMgr", function (data, offic) {
   var html = "";
   var t = "في";
-  var typet = ["الوكيل", "الـمـراقـب", "الاعلامي"];
+  var typet = ["الوكيل", "المراقب", "الاعلامي"];
   if (data[0].type == 1) {
-    t = " &nbsp;<span>لـــــــــــــلمــــــتــــــــرشــــــــح</span>";
+    t = " &nbsp;<span>للمترشح</span>";
   }
   html +=
     '<th colspan="6" class="text-center" width="13%" style="background-color:#B2E6FF !important;"> بيانات المعتمدين   ' +
@@ -911,7 +911,7 @@ Handlebars.registerHelper("orgObsMgr", function (data, offic) {
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> اسـم ' +
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> إسم ' +
     typet[data[0].type - 1] +
     ' </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
@@ -952,18 +952,18 @@ Handlebars.registerHelper("orgObsMgr", function (data, offic) {
 Handlebars.registerHelper("obsBytypeM", function (allResults) {
   var html = "";
   var type1 = [
-    "وكـــيـــل",
-    "منظمة مــحـــلية",
-    "إعلامي مــحـــلي",
+    "وكيل",
+    "منظمة محلية",
+    "إعلامي محلي",
     "منظمة عالمية",
     "إعلامي دولي",
     "الهيئات الدبلوماسية",
   ];
   var typeh = [
-    "المــــــتــــــــرشــــــــح",
-    "الـمـنـظـمـة",
+    "المترشح",
+    "المنظمة",
     "المؤسسة الإعلامية",
-    "الـمـنـظـمـة",
+    "المنظمة",
     "المؤسسة الإعلامية",
     "الهيئة",
   ];
@@ -975,13 +975,13 @@ Handlebars.registerHelper("obsBytypeM", function (allResults) {
               </tr>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> رقم </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"><span> اسـم ' +
+                <th class="text-center"  style="background-color:#B2E6FF !important;"><span> إسم ' +
     typeh[allResults[0].type - 1] +
     '</span> </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> اسم المدير  </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> الهاتف </th>\
                 <th class="text-center"  style="background-color:#B2E6FF !important;"> البريد الالكتروني </th>\
-                <th class="text-center"  style="background-color:#B2E6FF !important;"> عـدد الـمـراقـبـيـن </th>\
+                <th class="text-center"  style="background-color:#B2E6FF !important;"> عدد المراقبين </th>\
               </tr>\
             </thead>\
             <tbody style="border: 1px solid #000;">';
@@ -1020,15 +1020,15 @@ Handlebars.registerHelper(
       '<div class="col-xs-12 col-xs-offset-4">\
           <div class="col-xs-5 text-center">\
             <div class="text-center fontSize"> \
-              إحصائـــيـــة الجهات المحلية المعتـــمدة \
+              إحصائية الجهات المحلية المعتمدة \
             </div>\
           </div>\
         </div><div class="col-xs-12">\
         <div class="towSpaces"></div><table class="table condensed">\
             <thead>\
               <tr style="border-top-style: solid; border-top-width: 1px;" >\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مـراقـب مـحـلـي  </th>\
-                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعـلام مـحـلـي  </th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;"> مراقب محلي  </th>\
+                <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  إعلام محلي  </th>\
                 <th class="text-center" width="7%" style="background-color:#B2E6FF !important;">  وكيل </th>\
               </tr>\
             </thead>\
@@ -1075,9 +1075,9 @@ Handlebars.registerHelper(
         }
       }
       if (allResults[i].gender == 0) {
-        gender1 = "أنـثـى";
+        gender1 = "أنثى";
       } else {
-        gender1 = "ذكـر";
+        gender1 = "ذكر";
       }
       html +=
         '<tr>\
@@ -1205,7 +1205,7 @@ Handlebars.registerHelper(
     html +=
       '</tbody ><tbody >\
           <tr>\
-            <td colspan="2" style="background-color:#F0F0EF !important;border: 1px solid;"> المــجــموع </td>\
+            <td colspan="2" style="background-color:#F0F0EF !important;border: 1px solid;"> المجموع </td>\
             <td style="background-color:#F0F0EF !important;border: 1px solid;"> ' +
       sumgM[0] +
       ' </td>\
