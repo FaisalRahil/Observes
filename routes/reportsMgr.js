@@ -1440,108 +1440,43 @@ Handlebars.registerHelper("printloc", function (result) {
   var html = "";
   if (result[0] != undefined) {
     html +=
-      '<div class="one-right"><div class="name">' +
+      '<div class="one-card-box"><div class="name-one-card-one">' +
       result[0].name +
-      //result[0].ob_num +
-      '</div>\
-      <div class="org">' +
+      '</div><div class="line-in-card"></div><div class="org-one-card-one">' +
       result[0].name_org +
-      //typear[result[0].type - 1] +
-      '</div>\
-      <div class="id">' +
+      '</div><div class="line-in-card"></div><div class="no-one-card-one">' +
       result[0].ob_num +
-      //result[0].name +
-      "</div>\
-      </div>";
-
-    //   html+='<span class="vertical-text" style="padding-right:180px;padding-top:120px; !important">'+
-    //     result[0].ob_num+
-    //   '</span>\
-    //   <div class="col-xs-7">\
-    //     <div class="row">\
-    //       <div class="col-xs-12 "style=" padding-top: 225px; !important;">\
-    //         <p class="text-center"><span class="font-size">'+typear[result[0].type-1]+'</span></p>\
-    //       </div>\
-    //     </div>\
-    //     <div class="row">\
-    //       <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-    //         <p class="text-center"><span class="font-size">'+result[0].name+'</span></p>\
-    //       </div>\
-    //     </div>\
-    //     <div class="row">\
-    //       <div class="col-xs-12   "style="padding-top: 45px; !important;">\
-    //         <p class="text-center"><span class="font-size">'+result[0].name_org+'</span></p>\
-    //       </div>\
-    //     </div>\
-    //   </div>';
+      "</div></div>";  
   }
   if (result[1] != undefined) {
     html +=
-      '<div class="one-left"><div class="name">' +
+      '<div class="two-card-box"><div class="name-two-card-two">' +
       result[1].name +
-      //result[0].ob_num +
-      '</div>\
-    <div class="org">' +
+      '</div><div class="line-in-card"></div><div class="org-two-card-two">' +
       result[1].name_org +
-      //typear[result[0].type - 1] +
-      '</div>\
-    <div class="id">' +
+      '</div><div class="line-in-card"></div><div class="no-two-card-two">' +
       result[1].ob_num +
-      //result[0].name +
-      "</div>\
-    </div>";
+      "</div></div>"; 
   }
   if (result[2] != undefined) {
     html +=
-      '<div class="two-right"><div class="name-2">' +
+      '<div class="three-card-box"><div class="name-three-card-three">' +
       result[2].name +
-      //result[0].ob_num +
-      '</div>\
-    <div class="org-2">' +
+      '</div><div class="line-in-card"></div><div class="org-three-card-three">' +
       result[2].name_org +
-      //typear[result[0].type - 1] +
-      '</div>\
-    <div class="id-2">' +
+      '</div><div class="line-in-card"></div><div class="no-three-card-three">' +
       result[2].ob_num +
-      //result[0].name +
-      "</div>\
-    </div>";
-    // html+='<span class="vertical-text" style="padding-right:245px;padding-top:160px; !important">'+
-    //   result[2].ob_num+
-    //   '</span>\
-    //   <div class="col-xs-7">\
-    //     <div class="row">\
-    //       <div class="col-xs-12 "style=" padding-top: 300px; !important;">\
-    //         <p class="text-center">'+typear[result[2].type-1]+'</p>\
-    //       </div>\
-    //     </div>\
-    //     <div class="row">\
-    //       <div class="col-xs-12 "style=" padding-top: 35px; !important;">\
-    //         <p class="text-center">'+result[2].name+'</p>\
-    //       </div>\
-    //     </div>\
-    //     <div class="row">\
-    //       <div class="col-xs-12   "style="padding-top: 25px; !important;">\
-    //         <p class="text-center">'+result[2].name_org+'</p>\
-    //       </div>\
-    //     </div>\
-    //   </div>';
+      "</div></div>"; 
   }
   if (result[3] != undefined) {
     html +=
-      '<div class="two-left"><div class="name-2">' +
+      '<div class="four-card-box"><div class="name-four-card-four">' +
       result[3].name +
-      //result[0].ob_num +
-      '</div>\
-    <div class="org-2">' +
+      '</div><div class="line-in-card"></div><div class="org-four-card-four">' +
       result[3].name_org +
-      //typear[result[0].type - 1] +
-      '</div>\
-    <div class="id-2">' +
+      '</div><div class="line-in-card"></div><div class="no-four-card-four">' +
       result[3].ob_num +
-      //result[0].name +
-      "</div>\
-    </div>";
+      "</div></div>"; 
   }
   return new Handlebars.SafeString(html);
 });
